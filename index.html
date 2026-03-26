@@ -571,7 +571,8 @@ nav.sc {
    PRODUCT / 9 FUNCTIONS
 ============================================================ */
 #product { background: var(--off-black); }
-.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; direction: rtl; }
+.prod-grid > * { direction: ltr; }
 .prod-frame {
   max-width: min(30vw, 350px);
   width: min(30vw, 350px);
@@ -792,6 +793,8 @@ nav.sc {
 .ing-item.open .ing-chevron { transform: rotate(180deg); }
 .ing-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
 .ing-item.open .ing-panel { max-height: 400px; }
+.ing-item:hover .ing-panel { max-height: 400px; }
+.ing-item:hover .ing-chevron { transform: rotate(180deg); }
 .ing-panel-in { padding-bottom: 16px; }
 .ing-feature { display: flex; gap: 10px; margin-bottom: 10px; }
 .ing-feature-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
@@ -1269,10 +1272,10 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
         <p class="lbl">The Formula</p>
         <div class="rule"></div>
         <h2 class="h-section">
-          One cream.<br>Nine functions.<br><em>Nothing else.</em>
+          One cream.<br>Nine functions.
         </h2>
         <p class="body-lg" style="margin-top:18px;">
-          NeolabCare replaces your entire skincare routine. Not by compromising &mdash; but by engineering a single formula that does the work of nine, without the additives, the steps, or the guesswork.
+          NeolabCare cream is the entire skincare routine. Not by compromising &mdash; but by engineering a single formula that does the work of nine, without the additives, the steps, or the guesswork.
         </p>
         <div class="fn-grid">
           <div class="fn-chip"><span class="fn-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14l-2 7H7L5 3z"/><path d="M7 10v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-8"/><line x1="9" y1="14" x2="15" y2="14"/></svg></span><div><span class="fn-lbl">Post-Shave Recovery</span><span class="fn-sep">—</span><span class="fn-sub">Barrier repair · redness reduction</span></div></div>
@@ -1717,7 +1720,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
     </div>
     <div class="perks-grid">
       <!-- Tier 01 -->
-      <div class="perk rv d1">
+      <div class="perk rv d1" style="display:none;">
         <div class="perk-tier">Tier 01</div>
         <div class="perk-name">Your Skin, Decoded</div>
         <div class="perk-price">$10</div>
@@ -1732,7 +1735,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
         <button class="perk-btn">Get Your Report</button>
       </div>
       <!-- Tier 02 -->
-      <div class="perk rv d2">
+      <div class="perk rv d2" style="display:none;">
         <div class="perk-tier">Tier 02</div>
         <div class="perk-name">The Traveller</div>
         <div class="perk-price">$59</div>
@@ -1747,7 +1750,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
         <button class="perk-btn">Get The Traveller</button>
       </div>
       <!-- Tier 03 -->
-      <div class="perk rv d3">
+      <div class="perk rv d3" style="display:none;">
         <div class="perk-tier">Tier 03 &middot; First 50 Only</div>
         <div class="perk-name">Super Early Bird</div>
         <div class="perk-retail">Retail <s>$349</s><span class="perk-save">Save $100</span></div>
@@ -1762,7 +1765,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
         <button class="perk-btn">Claim Super Early Bird</button>
       </div>
       <!-- Tier 04 -->
-      <div class="perk rv d1">
+      <div class="perk rv d1" style="display:none;">
         <div class="perk-tier">Tier 04 &middot; Next 100 Only</div>
         <div class="perk-name">Early Bird</div>
         <div class="perk-retail">Retail <s>$349</s><span class="perk-save">Save $70</span></div>
@@ -1792,7 +1795,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
         <button class="perk-btn">Claim Your Bottle</button>
       </div>
       <!-- Tier 06 -->
-      <div class="perk rv d3">
+      <div class="perk rv d3" style="display:none;">
         <div class="perk-tier">Tier 06 &middot; Founding Member</div>
         <div class="perk-name">Seasonal Founding Member</div>
         <div class="perk-retail">4 bottles at retail <s>$1,396</s><span class="perk-save">Save $397</span></div>
