@@ -1,0 +1,7 @@
+services:
+  - type: static
+    name: neolab-landing
+    env: static
+    buildCommand: ""
+    publishPath: "."
+    autoDeploy: true
