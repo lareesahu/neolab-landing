@@ -5,4 +5,6 @@ services:
   name: neolabcare
   runtime: static
   repo: https://github.com/lareesahu/neolab-landing
+  branch: master
+  autoDeploy: true
   staticPublishPath: .
