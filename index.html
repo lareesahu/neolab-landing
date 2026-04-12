@@ -1346,88 +1346,80 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 
     /* ─── HOW TO USE ─────────────────────────────────────────────── */
     .htu-steps {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 0;
-      max-width: 860px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      max-width: 960px;
       margin: 0 auto;
+      border: 1px solid var(--border);
     }
     .htu-step {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
-      flex: 1;
-      min-width: 0;
-      padding: 0 8px;
+      align-items: flex-start;
+      padding: 36px 32px 32px;
+      position: relative;
+      border-right: 1px solid var(--border);
     }
-    .htu-icon {
-      width: 72px;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
+    .htu-step:last-child { border-right: none; }
+    .htu-numeral {
+      font-family: var(--f-head);
+      font-size: clamp(64px, 8vw, 96px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--accent);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: 20px;
+      user-select: none;
+    }
+    .htu-rule {
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
       margin-bottom: 16px;
     }
-    .htu-icon svg {
-      width: 72px;
-      height: 72px;
+    .htu-action {
+      font-family: var(--f-body);
+      font-size: clamp(13px, 1.4vw, 16px);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 6px;
     }
-    .htu-label {
+    .htu-tag {
       font-family: var(--f-body);
       font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.20em;
+      font-weight: 400;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 8px;
+      opacity: 0.8;
+      margin-bottom: 14px;
     }
     .htu-desc {
       font-family: var(--f-body);
       font-size: var(--t-sm);
       color: var(--muted);
-      line-height: 1.6;
-      max-width: 130px;
+      line-height: 1.7;
     }
-    .htu-connector {
-      flex-shrink: 0;
-      width: 32px;
-      height: 1px;
-      background: var(--border-2);
-      margin-top: 36px;   /* aligns with center of icon */
-      align-self: flex-start;
-    }
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       .htu-steps {
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
+        grid-template-columns: 1fr 1fr;
       }
-      .htu-step {
-        width: 100%;
-        flex-direction: row;
-        text-align: left;
-        align-items: flex-start;
-        padding: 16px 0;
-        border-bottom: 1px solid var(--border);
-        gap: 20px;
-      }
+      .htu-step:nth-child(2) { border-right: none; }
+      .htu-step:nth-child(3) { border-top: 1px solid var(--border); }
+      .htu-step:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+    }
+    @media (max-width: 400px) {
+      .htu-steps { grid-template-columns: 1fr; }
+      .htu-step { border-right: none; border-bottom: 1px solid var(--border); }
       .htu-step:last-child { border-bottom: none; }
-      .htu-icon {
-        flex-shrink: 0;
-        margin-bottom: 0;
-        width: 52px;
-        height: 52px;
-      }
-      .htu-icon svg { width: 52px; height: 52px; }
-      .htu-desc { max-width: none; }
-      .htu-connector {
-        width: 1px;
-        height: 0;
-        display: none;
-      }
+      .htu-step:nth-child(2) { border-right: none; }
+      .htu-step:nth-child(3),
+      .htu-step:nth-child(4) { border-top: none; }
     }
     /* ─── PEAK POTENCY PROTECTION ──────────────────────────────── */
     .ppp-layout {
@@ -1807,92 +1799,36 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 
     <div class="htu-steps">
 
-      <!-- Step 1: Pump -->
       <div class="htu-step rv">
-        <div class="htu-icon">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Bottle body -->
-            <rect x="28" y="38" width="24" height="30" rx="3" stroke="currentColor" stroke-width="1.2"/>
-            <!-- Pump neck -->
-            <rect x="35" y="22" width="10" height="16" rx="2" stroke="currentColor" stroke-width="1.2"/>
-            <!-- Pump head -->
-            <rect x="30" y="16" width="20" height="8" rx="2" stroke="currentColor" stroke-width="1.2"/>
-            <!-- Nozzle -->
-            <line x1="40" y1="16" x2="40" y2="10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-            <!-- Drop -->
-            <path d="M40 8 C40 8 37 5 37 3.5 C37 2 38.3 1 40 1 C41.7 1 43 2 43 3.5 C43 5 40 8 40 8Z" stroke="currentColor" stroke-width="1" fill="none"/>
-            <!-- Arrow down on pump -->
-            <line x1="40" y1="22" x2="40" y2="19" stroke="var(--accent)" stroke-width="1.2" stroke-linecap="round"/>
-            <polyline points="37,21 40,24 43,21" stroke="var(--accent)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="htu-label">Dispense</div>
-        <div class="htu-desc">Press the pump once into your palm.</div>
+        <div class="htu-numeral">1</div>
+        <div class="htu-rule"></div>
+        <div class="htu-action">Press</div>
+        <div class="htu-tag">Once</div>
+        <div class="htu-desc">Dispense one pump into your palm.</div>
       </div>
 
-      <!-- Connector -->
-      <div class="htu-connector" aria-hidden="true"></div>
-
-      <!-- Step 2: Spread on palms -->
       <div class="htu-step rv d1">
-        <div class="htu-icon">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Left palm -->
-            <path d="M18 52 C18 52 14 48 14 40 L14 28 C14 26.3 15.3 25 17 25 C18.7 25 20 26.3 20 28 L20 38" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-            <path d="M20 38 L20 24 C20 22.3 21.3 21 23 21 C24.7 21 26 22.3 26 24 L26 36" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-            <path d="M26 36 L26 23 C26 21.3 27.3 20 29 20 C30.7 20 32 21.3 32 23 L32 36" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-            <path d="M32 36 L32 26 C32 24.3 33.3 23 35 23 C36.7 23 38 24.3 38 26 L38 40 C38 40 38 50 32 54 L22 56 C20 56 18 54 18 52Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- Dot of cream -->
-            <circle cx="28" cy="44" r="3" stroke="var(--accent)" stroke-width="1" fill="none"/>
-          </svg>
-        </div>
-        <div class="htu-label">Spread</div>
+        <div class="htu-numeral">2</div>
+        <div class="htu-rule"></div>
+        <div class="htu-action">Spread</div>
+        <div class="htu-tag">Both palms</div>
         <div class="htu-desc">Rub between both palms to warm the formula.</div>
       </div>
 
-      <!-- Connector -->
-      <div class="htu-connector" aria-hidden="true"></div>
-
-      <!-- Step 3: Apply to face -->
       <div class="htu-step rv d2">
-        <div class="htu-icon">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Face outline -->
-            <ellipse cx="40" cy="36" rx="18" ry="22" stroke="currentColor" stroke-width="1.2"/>
-            <!-- Eyes -->
-            <circle cx="33" cy="32" r="2" stroke="currentColor" stroke-width="1"/>
-            <circle cx="47" cy="32" r="2" stroke="currentColor" stroke-width="1"/>
-            <!-- Mouth -->
-            <path d="M34 44 Q40 48 46 44" stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none"/>
-            <!-- Application arcs (hands on cheeks) -->
-            <path d="M18 30 Q12 36 18 44" stroke="var(--accent)" stroke-width="1" stroke-linecap="round" fill="none" stroke-dasharray="2 2"/>
-            <path d="M62 30 Q68 36 62 44" stroke="var(--accent)" stroke-width="1" stroke-linecap="round" fill="none" stroke-dasharray="2 2"/>
-          </svg>
-        </div>
-        <div class="htu-label">Apply</div>
+        <div class="htu-numeral">3</div>
+        <div class="htu-rule"></div>
+        <div class="htu-action">Apply</div>
+        <div class="htu-tag">Full face</div>
         <div class="htu-desc">Press evenly across the face. Avoid the eye area.</div>
       </div>
 
-      <!-- Connector -->
-      <div class="htu-connector" aria-hidden="true"></div>
-
-      <!-- Step 4: Neck / hands -->
       <div class="htu-step rv d3">
-        <div class="htu-icon">
-          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Neck -->
-            <path d="M32 58 L32 46 Q40 42 48 46 L48 58" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- Shoulders -->
-            <path d="M20 70 Q26 58 32 58 L48 58 Q54 58 60 70" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- Head circle -->
-            <circle cx="40" cy="34" r="12" stroke="currentColor" stroke-width="1.2"/>
-            <!-- Upward arrows on neck -->
-            <line x1="40" y1="54" x2="40" y2="48" stroke="var(--accent)" stroke-width="1" stroke-linecap="round"/>
-            <polyline points="37,50 40,47 43,50" stroke="var(--accent)" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="htu-label">Finish</div>
-        <div class="htu-desc">Any residue on hands goes on the neck or the back of hands.</div>
+        <div class="htu-numeral">4</div>
+        <div class="htu-rule"></div>
+        <div class="htu-action">Finish</div>
+        <div class="htu-tag">Neck &amp; hands</div>
+        <div class="htu-desc">Any residue on hands goes on the neck or back of hands.</div>
       </div>
 
     </div><!-- /htu-steps -->
