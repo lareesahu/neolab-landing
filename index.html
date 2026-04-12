@@ -113,19 +113,152 @@
     }
 
     /* ─── NAV ────────────────────────────────────────────────── */
-    /* Exact match: centered wordmark, fixed, transparent, 68px tall */
     .navbar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: var(--nav-h);
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: center;
+      padding: 0 clamp(24px, 4vw, 60px);
       z-index: 200;
       background: transparent;
+      transition: background 0.4s var(--ease), border-color 0.4s var(--ease), padding 0.3s var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    .navbar.sc {
+      background: rgba(10,10,10,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: var(--border);
+      --nav-h: 58px;
+    }
+    /* Left zone — nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 3vw, 40px);
+    }
+    .nav-link {
+      font-family: var(--f-body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-link:hover { color: var(--text); }
+    /* Center zone — wordmark */
+    .nav-center {
+      display: flex;
+      justify-content: center;
+    }
+    /* Right zone — CTA */
+    .nav-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-cta {
+      font-family: var(--f-body);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border-2);
+      padding: 9px 18px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-cta:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+    /* Hamburger — mobile only */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--text);
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+    .navbar.open .nav-hamburger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .navbar.open .nav-hamburger span:nth-child(2) { opacity: 0; }
+    .navbar.open .nav-hamburger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    /* Mobile drawer */
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 32px clamp(24px, 5vw, 40px) 40px;
+      z-index: 199;
+      flex-direction: column;
+      gap: 0;
+      transform: translateY(-8px);
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
       pointer-events: none;
+    }
+    .nav-drawer.open {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+    .nav-drawer-link {
+      font-family: var(--f-body);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s ease;
+    }
+    .nav-drawer-link:last-child { border-bottom: none; }
+    .nav-drawer-link:hover { color: var(--text); }
+    .nav-drawer-cta {
+      margin-top: 24px;
+      display: block;
+      text-align: center;
+      font-family: var(--f-body);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #000;
+      background: var(--accent);
+      padding: 14px 24px;
+      border-radius: 2px;
+      text-decoration: none;
     }
 
         /* ─── NAV WORDMARK ─────────────────────────────────────────
@@ -205,9 +338,9 @@
       top: 0;
       left: 0;
       right: 0;
-      bottom: -80px;          /* extends 80px below viewport — hides badge */
       width: 100%;
-      height: calc(100vh + 80px); /* taller than viewport */
+      height: 110vh;           /* always 110vh — Spline logo clipped below viewport */
+      overflow: hidden;
       z-index: 1;
       will-change: opacity;
       opacity: 1;
@@ -235,7 +368,7 @@
       top: 0;
       left: 0;
       right: 0;
-      bottom: -80px;
+      height: 110vh;
       z-index: 2;            /* above scene (z:1), below content (z:3) */
       pointer-events: none;
       will-change: opacity;
@@ -428,9 +561,9 @@
         The result: bottle is vertically centered and fully in view.
       */
       .spline-scene {
-        bottom: 0;
-        height: calc(100vh + 20px);
-        /* -40% left shift (was -30%) + slight shrink to reveal hills */
+        height: 110vh;
+        overflow: hidden;
+        /* -40% left shift + slight shrink to reveal hills */
         transform: translateY(-4%) translateX(-40%) scale(1.0);
         transform-origin: center top;
         width: 170%;   /* wider than viewport so translateX has room */
@@ -1039,6 +1172,8 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 @media (max-width: 900px) {
   .wrap { padding: 0 24px; }
   .sec { padding: 80px 0; }
+  /* Navbar tablet: hide some links to avoid crowding */
+  .nav-links .nav-link:nth-child(n+4) { display: none; }
   nav { padding: 16px 24px; }
   nav.sc { padding: 12px 24px; }
   nav .btn { padding: 10px 16px; font-size: 10px; }
@@ -1084,9 +1219,12 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
   .chart-legend { gap: 14px; }
 }
 @media (max-width: 600px) {
-  /* Nav — prevent logo overlapping body text */
+  /* Nav — mobile: hide links, show hamburger */
   nav { padding: 12px 16px; }
   nav.sc { padding: 10px 16px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
   /* fn-chip emoji don't overflow */
   .fn-ico { font-size: 0.9rem; }
   .fn-lbl { font-size: 0.72rem; }
@@ -1343,12 +1481,39 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 </head>
 <body>
 
-  <!-- ─── NAV ─────────────────────────────────────────────────── -->
-  <nav class="navbar" aria-label="Main navigation">
-    <a href="/" class="nav-wordmark" aria-label="neolab.care home">
-      <span class="neolab">neolab</span><span class="sep">.</span><span class="care">care</span>
-    </a>
+  <!-- ─── NAV ────────────────────────────────────────────────── -->
+  <nav class="navbar" id="nav" aria-label="Main navigation">
+    <!-- Left: section links -->
+    <div class="nav-links">
+      <a href="#product" class="nav-link">Formula</a>
+      <a href="#freshness" class="nav-link">Freshness</a>
+      <a href="#science" class="nav-link">Science</a>
+      <a href="#perks" class="nav-link">Subscribe</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+    </div>
+    <!-- Center: wordmark -->
+    <div class="nav-center">
+      <a href="/" class="nav-wordmark" aria-label="neolab.care home">
+        <span class="neolab">neolab</span><span class="sep">.</span><span class="care">care</span>
+      </a>
+    </div>
+    <!-- Right: CTA + hamburger -->
+    <div class="nav-right">
+      <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="nav-cta" target="_blank" rel="noopener">Back the Campaign</a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="navDrawer" aria-hidden="true">
+    <a href="#product" class="nav-drawer-link">The Formula</a>
+    <a href="#freshness" class="nav-drawer-link">Freshness Cycle</a>
+    <a href="#science" class="nav-drawer-link">The Science</a>
+    <a href="#perks" class="nav-drawer-link">Subscribe</a>
+    <a href="#faq" class="nav-drawer-link">FAQ</a>
+    <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="nav-drawer-cta" target="_blank" rel="noopener">Back the Campaign</a>
+  </div>
 
   <!-- ─── SPLINE SCENE (fixed, full-screen, fades on scroll) ─── -->
   <div class="spline-scene" id="splineScene" aria-hidden="true">
@@ -2263,6 +2428,27 @@ function cookieChoice(accepted) {
 // Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('sc', window.scrollY > 60));
+
+// Hamburger menu toggle
+const hamburger = document.getElementById('navHamburger');
+const drawer = document.getElementById('navDrawer');
+if (hamburger && drawer) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    drawer.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    drawer.setAttribute('aria-hidden', !isOpen);
+  });
+  // Close drawer when a link is clicked
+  drawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      drawer.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+    });
+  });
+}
 
 // Hero entrance
 window.addEventListener('load', () => document.getElementById('hero').classList.add('ld'));
