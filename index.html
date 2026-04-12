@@ -1410,14 +1410,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     from the bottom of the hero section downward.
     Fade starts when hero bottom enters viewport, completes 200px later.
   -->
-  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
   <script>
-    // Initialize Plyr
-    const player = new Plyr('#player', {
-      quality: { default: 1080, options: [1080, 720, 480] },
-      youtube: { noCookie: true, modestbranding: 1, showinfo: 0, rel: 0 }
-    });
-
     (function () {
       const scene   = document.getElementById('splineScene');
       const overlay = document.getElementById('splineOverlay');
@@ -1455,15 +1448,14 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 <section id="product" class="sec"><span class="sec-num" aria-hidden="true">01</span>
   <div class="wrap">
     <!-- VIDEO BLOCK MOVED HERE -->
-    <div class="video-container rv d1" style="margin-bottom: 80px; border: 1px solid var(--border-2); background: #000;">
-      <div class="plyr__video-embed" id="player">
-        <iframe
-          src="https://www.youtube.com/embed/n-0viAyv1wU?origin=https://neolab.care&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
-          allowfullscreen
-          allowtransparency
-          allow="autoplay"
-        ></iframe>
-      </div>
+    <div class="video-container rv d1" style="margin-bottom: 80px; border: 1px solid var(--border-2); background: #000; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe
+        src="https://www.youtube.com/embed/n-0viAyv1wU?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+        allowfullscreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        loading="lazy"
+      ></iframe>
     </div>
 
     <div class="prod-grid">
@@ -1584,10 +1576,10 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       </div>
       <div class="ft-node rv d4">
         <div class="ft-dot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
-        <div style="width: 100%; max-width: 140px; margin: 0 auto;">
+        <div>
           <div class="ft-day">Your Cadence</div>
           <div class="ft-title">Auto-Replenishment</div>
-          <div class="ft-desc" style="max-width: none;">Subscribers choose their delivery rhythm. We plan the next batch around that schedule.</div>
+          <div class="ft-desc">Subscribers choose their delivery rhythm. We plan the next batch around that schedule.</div>
         </div>
       </div>
       <div class="ft-node rv d5">
@@ -2010,7 +2002,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Personalised skin profile PDF</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Delivered within 24 hours</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Get Your Report</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn">Get Your Report</a>
       </div>
       <!-- Tier 02 -->
       <div class="perk rv d2" style="display:none;">
@@ -2025,7 +2017,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Carry-on compliant</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>10&ndash;15 applications</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Get The Traveller</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn">Get The Traveller</a>
       </div>
       <!-- Tier 03 -->
       <div class="perk rv d3" style="display:none;">
@@ -2040,7 +2032,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 2ml travel ampoules</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Claim Super Early Bird</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn">Claim Super Early Bird</a>
       </div>
       <!-- Tier 04 -->
       <div class="perk rv d1" style="display:none;">
@@ -2055,7 +2047,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 2ml travel ampoules</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Claim Early Bird</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn">Claim Early Bird</a>
       </div>
       <!-- Tier 05 -->
       <div class="perk rv d2">
@@ -2070,7 +2062,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 2ml travel ampoules</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Claim Your Bottle</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn">Claim Your Bottle</a>
       </div>
       <!-- Tier 06 -->
       <div class="perk hot rv d3">
@@ -2087,7 +2079,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Each batch auto-shipped fresh every 3 months</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Member engraving</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Become a Founding Member</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn">Become a Founding Member</a>
       </div>
       <!-- Tier 07 -->
       <div class="perk rv d1">
@@ -2104,7 +2096,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Member engraving</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Priority formula access</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Subscribe Bi-Monthly</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn">Subscribe Bi-Monthly</a>
       </div>
       <!-- Tier 08 -->
       <div class="perk rv d2" style="display:none;border-color:rgba(200,184,154,0.35);">
@@ -2121,7 +2113,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Personalised skin report</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Name in the Founding Edition credits</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Enquire</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn">Enquire</a>
       </div>
     </div>
     <div class="addon-bar rv">
