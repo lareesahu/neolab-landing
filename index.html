@@ -397,7 +397,7 @@
     .below-hero {
       position: relative;
       z-index: 10;
-      background: var(--bg);
+      background: #000;
       padding: clamp(80px, 10vh, 140px) var(--pad-x);
     }
 
@@ -549,10 +549,10 @@ nav.sc {
   padding: 12px 22px; border-radius: 2px; cursor: pointer;
   transition: all 0.25s ease; display: inline-block;
 }
-.btn-fill { background: var(--accent); color: var(--black); border: 1px solid var(--accent); }
-.btn-fill:hover { background: var(--off-white); border-color: var(--off-white); }
-.btn-outline { background: transparent; color: var(--off-white); border: 1px solid rgba(245,245,240,0.3); }
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+	.btn-fill { background: var(--accent); color: #000; border: 1px solid var(--accent); }
+	.btn-fill:hover { background: var(--accent-2); border-color: var(--accent-2); color: #000; }
+	.btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--border-2); }
+	.btn-outline:hover { border-color: var(--accent); background: var(--accent); color: #000; }
 
 /* ============================================================
    HERO
@@ -617,9 +617,8 @@ nav.sc {
 /* ============================================================
    PRODUCT / 9 FUNCTIONS
 ============================================================ */
-#product { background: var(--off-black); }
-.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; direction: rtl; }
-.prod-grid > * { direction: ltr; }
+#product { background: #000; }
+.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 .prod-frame {
   max-width: min(30vw, 350px);
   width: min(30vw, 350px);
@@ -799,7 +798,7 @@ nav.sc {
 /* ============================================================
    SCIENCE
 ============================================================ */
-#science { background: var(--off-black); }
+#science { background: #000; }
 .sci-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 .sci-img-side { position: sticky; top: 100px; }
 .sci-frame {
@@ -881,14 +880,14 @@ nav.sc {
    THE PROMISE
 ============================================================ */
 #promise { position: relative; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
-.promise-text { display: flex; flex-direction: column; justify-content: center; padding: 80px 60px 80px 80px; background: var(--off-black); position: relative; z-index: 2; }
+.promise-text { display: flex; flex-direction: column; justify-content: center; padding: 80px 60px 80px 80px; background: #000; position: relative; z-index: 2; }
 .promise-img { position: relative; overflow: hidden; background: var(--black); }
 .promise-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: brightness(0.7) contrast(1.1); }
 
 /* ============================================================
    REWARD TIERS
 ============================================================ */
-#perks { background: var(--off-black); }
+#perks { background: #000; }
 .perks-hd { text-align: center; margin-bottom: 44px; }
 .perks-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
 .perk {
@@ -914,18 +913,18 @@ nav.sc {
 .perk-inc { flex: 1; }
 .perk-ln { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-family: var(--f-body); font-size: 0.8rem; color: var(--light); }
 .perk-ck { color: var(--accent); font-size: 0.75rem; margin-top: 2px; flex-shrink: 0; }
-.perk-btn {
-  margin-top: 14px;
-  font-family: var(--f-body); font-size: 11px; font-weight: 400;
-  letter-spacing: 2px; text-transform: uppercase;
-  background: transparent; border: 1px solid var(--border);
-  color: var(--off-white); padding: 11px;
-  text-align: center; cursor: pointer; border-radius: 2px;
-  transition: all 0.25s ease; display: block; width: 100%;
-}
-.perk-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--black); }
-.perk.hot .perk-btn { background: var(--accent); border-color: var(--accent); color: var(--black); }
-.perk.hot .perk-btn:hover { background: var(--off-white); border-color: var(--off-white); }
+	.perk-btn {
+	  margin-top: 14px;
+	  font-family: var(--f-body); font-size: 11px; font-weight: 400;
+	  letter-spacing: 2px; text-transform: uppercase;
+	  background: transparent; border: 1px solid var(--border);
+	  color: var(--accent); padding: 11px;
+	  text-align: center; cursor: pointer; border-radius: 2px;
+	  transition: all 0.25s ease; display: block; width: 100%;
+	}
+	.perk-btn:hover { background: var(--accent); border-color: var(--accent); color: #000; }
+	.perk.hot .perk-btn { background: var(--accent); border-color: var(--accent); color: #000; }
+	.perk.hot .perk-btn:hover { background: var(--accent-2); border-color: var(--accent-2); color: #000; }
 .perk-retail { font-family: var(--f-body); font-size: 0.78rem; color: var(--muted); margin-bottom: 2px; }
 .perk-retail s { color: var(--muted); text-decoration: line-through; }
 .perk-save { display: inline-block; font-family: var(--f-body); font-size: 0.65rem; font-weight: 600;
@@ -956,7 +955,7 @@ nav.sc {
 /* ============================================================
    FAQ
 ============================================================ */
-#faq { background: var(--off-black); }
+#faq { background: #000; }
 .faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
 .faq-side { position: sticky; top: 100px; }
 .faq-item { border-bottom: 1px solid var(--border); overflow: hidden; }
@@ -1003,7 +1002,7 @@ nav.sc {
 /* ============================================================
    FOOTER
 ============================================================ */
-footer { background: var(--off-black); border-top: 1px solid var(--border); padding: 56px 0 32px; }
+footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 32px; }
 .ft-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; margin-bottom: 44px; }
 .ft-logo { margin-bottom: 10px; }
 .ft-logo img { height: auto; min-width: 200px; width: 200px; opacity: 0.7; }
@@ -1214,7 +1213,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
       margin-bottom: 0;
     }
     .sub-step {
-      background: var(--layer);
+      background: #000;
       border: 1px solid var(--border);
       padding: 32px 24px;
       display: flex;
@@ -1252,7 +1251,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
     }
     .sub-cta-strip {
       margin-top: 2px;
-      background: var(--layer);
+      background: #000;
       border: 1px solid var(--border-2);
       padding: clamp(28px,4vw,44px) clamp(24px,5vw,56px);
       display: flex;
@@ -1393,7 +1392,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
       </div>
 
       <div class="hero-acts">
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="btn-primary" style="background:var(--accent);color:var(--bg);border-color:var(--accent);">Early Access</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="btn-primary" style="background:var(--accent);color:#000;border-color:var(--accent);">Early Access</a>
         <a href="#product" class="btn-ghost">See the Formula</a>
       </div>
 
@@ -1467,9 +1466,8 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
       </div>
     </div>
 
-    <div class="prod-grid" style="direction: ltr;">
+    <div class="prod-grid">
       <div class="rvl">
-
         <p class="lbl">The Formula</p>
         <div class="rule"></div>
         <h2 class="h-section">
@@ -1478,9 +1476,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
         <p class="body-lg" style="margin-top:18px;">
           NeolabCare cream is the entire skincare routine. Not by compromising &mdash; but by engineering a single formula that does the work of nine, without the additives, the steps, or the guesswork.
         </p>
-        <div class="prod-frame" style="margin-top: 40px; max-width: 280px;">
-          <img src="assets/image_2.svg" alt="NeolabCare bottle">
-        </div>
+
         <div class="no-irr" style="margin-top: 40px;">
           No retinol. No AHAs. No sun-sensitising ingredients. Safe for morning and evening use, year-round.
         </div>
@@ -1588,10 +1584,10 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
       </div>
       <div class="ft-node rv d4">
         <div class="ft-dot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
-        <div>
+        <div style="width: 100%; max-width: 140px; margin: 0 auto;">
           <div class="ft-day">Your Cadence</div>
           <div class="ft-title">Auto-Replenishment</div>
-          <div class="ft-desc">Subscribers choose their delivery rhythm. We plan the next batch around that schedule.</div>
+          <div class="ft-desc" style="max-width: none;">Subscribers choose their delivery rhythm. We plan the next batch around that schedule.</div>
         </div>
       </div>
       <div class="ft-node rv d5">
@@ -2014,7 +2010,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Personalised skin profile PDF</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Delivered within 24 hours</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: var(--bg);">Get Your Report</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Get Your Report</a>
       </div>
       <!-- Tier 02 -->
       <div class="perk rv d2" style="display:none;">
@@ -2029,7 +2025,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Carry-on compliant</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>10&ndash;15 applications</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: var(--bg);">Get The Traveller</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Get The Traveller</a>
       </div>
       <!-- Tier 03 -->
       <div class="perk rv d3" style="display:none;">
@@ -2044,7 +2040,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 2ml travel ampoules</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: var(--bg);">Claim Super Early Bird</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Claim Super Early Bird</a>
       </div>
       <!-- Tier 04 -->
       <div class="perk rv d1" style="display:none;">
@@ -2059,7 +2055,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 2ml travel ampoules</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: var(--bg);">Claim Early Bird</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Claim Early Bird</a>
       </div>
       <!-- Tier 05 -->
       <div class="perk rv d2">
@@ -2074,7 +2070,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 2ml travel ampoules</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: var(--bg);">Claim Your Bottle</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Claim Your Bottle</a>
       </div>
       <!-- Tier 06 -->
       <div class="perk hot rv d3">
@@ -2091,7 +2087,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Each batch auto-shipped fresh every 3 months</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Member engraving</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: var(--bg);">Become a Founding Member</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Become a Founding Member</a>
       </div>
       <!-- Tier 07 -->
       <div class="perk rv d1">
@@ -2108,7 +2104,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Member engraving</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Priority formula access</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: var(--bg);">Subscribe Bi-Monthly</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Subscribe Bi-Monthly</a>
       </div>
       <!-- Tier 08 -->
       <div class="perk rv d2" style="display:none;border-color:rgba(200,184,154,0.35);">
@@ -2125,7 +2121,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Personalised skin report</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Name in the Founding Edition credits</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: var(--bg);">Enquire</a>
+        <a href="https://www.indiegogo.com/projects/neolabcare/forskin" class="perk-btn" style="display: block; text-align: center; text-decoration: none; color: #000;">Enquire</a>
       </div>
     </div>
     <div class="addon-bar rv">
