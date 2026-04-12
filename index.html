@@ -1385,21 +1385,7 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
     </div>
   </section>
 
-  <!-- ─── VIDEO SECTION ────────────────────────────────────────── -->
-  <section id="video" class="sec" style="padding-top: 0; background: var(--bg);">
-    <div class="wrap">
-      <div class="video-container rv d1" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border: 1px solid var(--border-2);">
-        <iframe 
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-          src="https://www.youtube.com/embed/n-0viAyv1wU" 
-          title="NeolabCare Video" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          allowfullscreen>
-        </iframe>
-      </div>
-    </div>
-  </section>
+
 
 
 
@@ -1447,11 +1433,21 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
 <!-- 9 FUNCTIONS -->
 <section id="product" class="sec"><span class="sec-num" aria-hidden="true">01</span>
   <div class="wrap">
-    <div class="prod-grid">
-      <div class="prod-frame rvl">
-        <img src="assets/image_2.svg" alt="NeolabCare bottle">
-      </div>
-      <div class="rvr">
+    <!-- VIDEO BLOCK MOVED HERE -->
+    <div class="video-container rv d1" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border: 1px solid var(--border-2); margin-bottom: 80px;">
+      <iframe 
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+        src="https://www.youtube.com/embed/n-0viAyv1wU" 
+        title="NeolabCare Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="prod-grid" style="direction: ltr;">
+      <div class="rvl">
+        <div class="ft-logo" style="margin-bottom: 24px;"><img src="assets/logo.svg" alt="neolab.care" style="height: 24px; width: auto; opacity: 0.9;"></div>
         <p class="lbl">The Formula</p>
         <div class="rule"></div>
         <h2 class="h-section">
@@ -1460,6 +1456,14 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
         <p class="body-lg" style="margin-top:18px;">
           NeolabCare cream is the entire skincare routine. Not by compromising &mdash; but by engineering a single formula that does the work of nine, without the additives, the steps, or the guesswork.
         </p>
+        <div class="prod-frame" style="margin-top: 40px; max-width: 280px;">
+          <img src="assets/image_2.svg" alt="NeolabCare bottle">
+        </div>
+        <div class="no-irr" style="margin-top: 40px;">
+          No retinol. No AHAs. No sun-sensitising ingredients. Safe for morning and evening use, year-round.
+        </div>
+      </div>
+      <div class="rvr">
         <div class="fn-grid">
           <div class="fn-chip"><span class="fn-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14l-2 7H7L5 3z"/><path d="M7 10v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-8"/><line x1="9" y1="14" x2="15" y2="14"/></svg></span><div><span class="fn-lbl">Post-Shave Recovery</span><span class="fn-sep">—</span><span class="fn-sub">Barrier repair · redness reduction</span></div></div>
           <div class="fn-chip"><span class="fn-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 4-4 6-4 10a4 4 0 0 0 8 0c0-4-4-6-4-10z"/><path d="M12 12c0 2-1.5 3-1.5 4.5a1.5 1.5 0 0 0 3 0C13.5 15 12 14 12 12z"/></svg></span><div><span class="fn-lbl">Anti-Inflammation</span><span class="fn-sep">—</span><span class="fn-sub">Centella Asiatica · Portulaca</span></div></div>
@@ -1470,9 +1474,6 @@ footer { background: var(--off-black); border-top: 1px solid var(--border); padd
           <div class="fn-chip"><span class="fn-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="4"/><circle cx="16" cy="15" r="3"/><circle cx="7" cy="17" r="2"/></svg></span><div><span class="fn-lbl">Oil Regulation</span><span class="fn-sep">—</span><span class="fn-sub">Niacinamide · Squalane</span></div></div>
           <div class="fn-chip"><span class="fn-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(-45 12 12)"/><line x1="10" y1="10" x2="10" y2="14"/><line x1="14" y1="10" x2="14" y2="14"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span><div><span class="fn-lbl">Acne &amp; Scar Recovery</span><span class="fn-sep">—</span><span class="fn-sub">Tranexamic Acid · Panthenol</span></div></div>
           <div class="fn-chip"><span class="fn-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg></span><div><span class="fn-lbl">Overnight Cellular Restoration</span><span class="fn-sep">—</span><span class="fn-sub">NMN · Ergothioneine · Copper Peptide</span></div></div>
-        </div>
-        <div class="no-irr">
-          No retinol. No AHAs. No sun-sensitising ingredients. Safe for morning and evening use, year-round.
         </div>
       </div>
     </div>
