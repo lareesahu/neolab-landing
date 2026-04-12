@@ -42,7 +42,7 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "Can I use NeolabCare morning and night?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The formula excludes retinol, AHAs, and sun-sensitising ingredients, making it safe for both morning and evening use year-round." } },
+      { "@type": "Question", "name": "Can I use NeolabCare morning and night?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The formula is safe for both morning and evening use year-round. The bottle is designed for one pump per day, giving you a 90-day supply. If you prefer to use it twice daily, we recommend moving to a more frequent subscription cadence so you never run short." } },
       { "@type": "Question", "name": "Is NeolabCare suitable for post-shave use?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Post-shave recovery is a core design principle. Centella asiatica, GHK-Cu, and panthenol provide soothing and barrier-repair properties effective immediately after shaving." } },
       { "@type": "Question", "name": "What is liposomal NMN?", "acceptedAnswer": { "@type": "Answer", "text": "NMN is a NAD+ precursor that supports cellular energy. Liposomal delivery encapsulates NMN in a lipid shell that bypasses enzymatic degradation at the skin surface, enabling deeper penetration." } },
       { "@type": "Question", "name": "When will my order ship?", "acceptedAnswer": { "@type": "Answer", "text": "Orders are dispatched within 7 days of production. Delivery is typically 5-10 business days for Asia and 10-21 days internationally." } },
@@ -141,16 +141,16 @@
     }
     .nav-link {
       font-family: var(--f-body);
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 400;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.20em;
       text-transform: uppercase;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s ease;
       white-space: nowrap;
     }
-    .nav-link:hover { color: var(--text); }
+    .nav-link:hover { color: var(--accent); }
     /* Center zone — wordmark */
     .nav-center {
       display: flex;
@@ -273,7 +273,7 @@
       align-items: baseline;
       gap: 0;
       font-family: var(--f-body);
-      font-size: 15px;
+      font-size: 18px;           /* +20% from 15px */
       letter-spacing: -0.01em;
       color: var(--text);
       text-decoration: none;
@@ -284,14 +284,14 @@
       color: var(--text);
     }
     .nav-wordmark .sep {
-      font-size: 15px;
+      font-size: 18px;
       font-weight: 500;
       color: var(--accent);
       line-height: 1;
       margin: 0 0.5px;
     }
     .nav-wordmark .care {
-      font-size: 9px;
+      font-size: 10.5px;         /* scaled proportionally */
       font-weight: 300;
       letter-spacing: 0.14em;
       color: var(--muted);
@@ -1172,7 +1172,9 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 @media (max-width: 900px) {
   .wrap { padding: 0 24px; }
   .sec { padding: 80px 0; }
-  /* Navbar tablet: hide some links to avoid crowding */
+  /* Navbar tablet: tighten gap, hide last two links */
+  .navbar { padding: 0 24px; }
+  .nav-links { gap: 16px; }
   .nav-links .nav-link:nth-child(n+4) { display: none; }
   nav { padding: 16px 24px; }
   nav.sc { padding: 12px 24px; }
@@ -1220,11 +1222,12 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 }
 @media (max-width: 600px) {
   /* Nav — mobile: hide links, show hamburger */
+  .navbar { padding: 0 16px; }
   nav { padding: 12px 16px; }
   nav.sc { padding: 10px 16px; }
-  .nav-links { display: none; }
-  .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
+  .nav-links { display: none !important; }
+  .nav-cta { display: none !important; }
+  .nav-hamburger { display: flex !important; }
   /* fn-chip emoji don't overflow */
   .fn-ico { font-size: 0.9rem; }
   .fn-lbl { font-size: 0.72rem; }
@@ -1341,7 +1344,146 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       border-radius: 50%; opacity: 0.6; margin-left: 6px;
     }
 
-    /* ─── SUBSCRIPTION SECTION ──────────────────────────────── */
+    /* ─── HOW TO USE ─────────────────────────────────────────────── */
+    .htu-steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .htu-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+      min-width: 0;
+      padding: 0 8px;
+    }
+    .htu-icon {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .htu-icon svg {
+      width: 72px;
+      height: 72px;
+    }
+    .htu-label {
+      font-family: var(--f-body);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .htu-desc {
+      font-family: var(--f-body);
+      font-size: var(--t-sm);
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 130px;
+    }
+    .htu-connector {
+      flex-shrink: 0;
+      width: 32px;
+      height: 1px;
+      background: var(--border-2);
+      margin-top: 36px;   /* aligns with center of icon */
+      align-self: flex-start;
+    }
+    @media (max-width: 600px) {
+      .htu-steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+      }
+      .htu-step {
+        width: 100%;
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border);
+        gap: 20px;
+      }
+      .htu-step:last-child { border-bottom: none; }
+      .htu-icon {
+        flex-shrink: 0;
+        margin-bottom: 0;
+        width: 52px;
+        height: 52px;
+      }
+      .htu-icon svg { width: 52px; height: 52px; }
+      .htu-desc { max-width: none; }
+      .htu-connector {
+        width: 1px;
+        height: 0;
+        display: none;
+      }
+    }
+    /* ─── PEAK POTENCY PROTECTION ──────────────────────────────── */
+    .ppp-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .ppp-img-frame {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: var(--layer);
+    }
+    .ppp-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .ppp-pillar {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .ppp-pillar-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ppp-pillar-icon svg { width: 40px; height: 40px; }
+    .ppp-pillar-title {
+      font-family: var(--f-body);
+      font-size: var(--t-sm);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .ppp-pillar-desc {
+      font-family: var(--f-body);
+      font-size: var(--t-sm);
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    @media (max-width: 900px) {
+      .ppp-layout { grid-template-columns: 1fr; gap: 48px; }
+      .ppp-img-frame { max-width: 400px; margin: 0 auto; aspect-ratio: 3/4; }
+    }
+
+    /* ─── SUBSCRIPTION SECTION ─────────────────────────────────────── */
     #subscription { background: var(--bg); }
     .sub-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
     .sub-steps {
@@ -1635,7 +1777,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         </p>
 
         <div class="no-irr" style="margin-top: 40px;">
-          No retinol. No AHAs. No sun-sensitising ingredients. Safe for morning and evening use, year-round.
+          No retinol. No AHAs. No sun-sensitising ingredients. One pump a day &mdash; morning or night, your choice. Safe year-round.
         </div>
       </div>
       <div class="rvr">
@@ -1655,6 +1797,111 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
   </div>
 </section>
 
+<!-- HOW TO USE -->
+<section id="how-to-use" class="sec" style="background:var(--bg-2);">
+  <div class="wrap">
+    <p class="lbl rv" style="text-align:center;">Application</p>
+    <div class="rule rule-c rv d1"></div>
+    <h2 class="h-section rv d2" style="text-align:center;margin-bottom:8px;">One pump.<br>Thirty seconds.</h2>
+    <p class="body-sm rv d3" style="text-align:center;max-width:480px;margin:0 auto 56px;color:var(--muted);">After shaving or before bed. Once a day. That is the entire ritual.</p>
+
+    <div class="htu-steps">
+
+      <!-- Step 1: Pump -->
+      <div class="htu-step rv">
+        <div class="htu-icon">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Bottle body -->
+            <rect x="28" y="38" width="24" height="30" rx="3" stroke="currentColor" stroke-width="1.2"/>
+            <!-- Pump neck -->
+            <rect x="35" y="22" width="10" height="16" rx="2" stroke="currentColor" stroke-width="1.2"/>
+            <!-- Pump head -->
+            <rect x="30" y="16" width="20" height="8" rx="2" stroke="currentColor" stroke-width="1.2"/>
+            <!-- Nozzle -->
+            <line x1="40" y1="16" x2="40" y2="10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <!-- Drop -->
+            <path d="M40 8 C40 8 37 5 37 3.5 C37 2 38.3 1 40 1 C41.7 1 43 2 43 3.5 C43 5 40 8 40 8Z" stroke="currentColor" stroke-width="1" fill="none"/>
+            <!-- Arrow down on pump -->
+            <line x1="40" y1="22" x2="40" y2="19" stroke="var(--accent)" stroke-width="1.2" stroke-linecap="round"/>
+            <polyline points="37,21 40,24 43,21" stroke="var(--accent)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="htu-label">Dispense</div>
+        <div class="htu-desc">Press the pump once into your palm.</div>
+      </div>
+
+      <!-- Connector -->
+      <div class="htu-connector" aria-hidden="true"></div>
+
+      <!-- Step 2: Spread on palms -->
+      <div class="htu-step rv d1">
+        <div class="htu-icon">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Left palm -->
+            <path d="M18 52 C18 52 14 48 14 40 L14 28 C14 26.3 15.3 25 17 25 C18.7 25 20 26.3 20 28 L20 38" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M20 38 L20 24 C20 22.3 21.3 21 23 21 C24.7 21 26 22.3 26 24 L26 36" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M26 36 L26 23 C26 21.3 27.3 20 29 20 C30.7 20 32 21.3 32 23 L32 36" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M32 36 L32 26 C32 24.3 33.3 23 35 23 C36.7 23 38 24.3 38 26 L38 40 C38 40 38 50 32 54 L22 56 C20 56 18 54 18 52Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Dot of cream -->
+            <circle cx="28" cy="44" r="3" stroke="var(--accent)" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+        <div class="htu-label">Spread</div>
+        <div class="htu-desc">Rub between both palms to warm the formula.</div>
+      </div>
+
+      <!-- Connector -->
+      <div class="htu-connector" aria-hidden="true"></div>
+
+      <!-- Step 3: Apply to face -->
+      <div class="htu-step rv d2">
+        <div class="htu-icon">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Face outline -->
+            <ellipse cx="40" cy="36" rx="18" ry="22" stroke="currentColor" stroke-width="1.2"/>
+            <!-- Eyes -->
+            <circle cx="33" cy="32" r="2" stroke="currentColor" stroke-width="1"/>
+            <circle cx="47" cy="32" r="2" stroke="currentColor" stroke-width="1"/>
+            <!-- Mouth -->
+            <path d="M34 44 Q40 48 46 44" stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none"/>
+            <!-- Application arcs (hands on cheeks) -->
+            <path d="M18 30 Q12 36 18 44" stroke="var(--accent)" stroke-width="1" stroke-linecap="round" fill="none" stroke-dasharray="2 2"/>
+            <path d="M62 30 Q68 36 62 44" stroke="var(--accent)" stroke-width="1" stroke-linecap="round" fill="none" stroke-dasharray="2 2"/>
+          </svg>
+        </div>
+        <div class="htu-label">Apply</div>
+        <div class="htu-desc">Press evenly across the face. Avoid the eye area.</div>
+      </div>
+
+      <!-- Connector -->
+      <div class="htu-connector" aria-hidden="true"></div>
+
+      <!-- Step 4: Neck / hands -->
+      <div class="htu-step rv d3">
+        <div class="htu-icon">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Neck -->
+            <path d="M32 58 L32 46 Q40 42 48 46 L48 58" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Shoulders -->
+            <path d="M20 70 Q26 58 32 58 L48 58 Q54 58 60 70" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Head circle -->
+            <circle cx="40" cy="34" r="12" stroke="currentColor" stroke-width="1.2"/>
+            <!-- Upward arrows on neck -->
+            <line x1="40" y1="54" x2="40" y2="48" stroke="var(--accent)" stroke-width="1" stroke-linecap="round"/>
+            <polyline points="37,50 40,47 43,50" stroke="var(--accent)" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="htu-label">Finish</div>
+        <div class="htu-desc">Any residue on hands goes on the neck or the back of hands.</div>
+      </div>
+
+    </div><!-- /htu-steps -->
+
+    <p class="rv" style="text-align:center;margin-top:40px;font-size:var(--t-xs);letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);">Avoid contact with eyes</p>
+
+  </div>
+</section>
+
 <!-- EVERY CONTEXT -->
 <section id="context" class="sec"><span class="sec-num" aria-hidden="true">02</span>
   <div class="wrap">
@@ -1668,7 +1915,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     </p>
     <div class="ctx-grid">
       <div class="ctx-card rv d1">
-        <img src="assets/image_4.jpeg" alt="The Pocket Ritual">
+        <img src="assets/image_4.webp" alt="NeolabCare Pocket Ritual — travel ampoule carry-on compliant">
         <div class="ctx-card-content">
           <div class="ctx-num">01</div>
           <div class="ctx-title">The Pocket Ritual</div>
@@ -1676,7 +1923,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         </div>
       </div>
       <div class="ctx-card rv d2">
-        <img src="assets/image_5.jpeg" alt="The First-Class Lavatory">
+        <img src="assets/image_5.webp" alt="NeolabCare First-Class Lavatory — premium skincare on the go">
         <div class="ctx-card-content">
           <div class="ctx-num">02</div>
           <div class="ctx-title">The First-Class Lavatory</div>
@@ -1684,7 +1931,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         </div>
       </div>
       <div class="ctx-card rv d3">
-        <img src="assets/image_6.png" alt="The Gift">
+        <img src="assets/image_6.webp" alt="NeolabCare Gift — Founding Edition engraving">
         <div class="ctx-card-content">
           <div class="ctx-num">03</div>
           <div class="ctx-title">The Gift</div>
@@ -1692,7 +1939,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         </div>
       </div>
       <div class="ctx-card rv d4">
-        <img src="assets/image_8.png" alt="The Night Protocol">
+        <img src="assets/image_8.webp" alt="NeolabCare Night Protocol — bedtime skincare ritual">
         <div class="ctx-card-content">
           <div class="ctx-num">04</div>
           <div class="ctx-title">The Night Protocol</div>
@@ -1836,6 +2083,102 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         <a href="#subscription" class="btn-primary" style="white-space:nowrap;font-size:var(--t-xs);background:var(--accent);color:var(--black);border-color:var(--accent);">How subscription works</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- PEAK POTENCY PROTECTION -->
+<section id="protection" class="sec">
+  <div class="wrap">
+    <div class="ppp-layout">
+
+      <!-- Left: image -->
+      <div class="ppp-img-col rvl">
+        <div class="ppp-img-frame">
+          <img
+            src="assets/bottle_exploded.webp"
+            alt="NeolabCare vacuum pump bottle exploded view — cap, pump head, vacuum base"
+            width="480" height="600"
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover;display:block;"
+          />
+        </div>
+      </div>
+
+      <!-- Right: content -->
+      <div class="ppp-content-col rvr">
+        <p class="lbl">Peak Potency Guarantee</p>
+        <div class="rule rv d1"></div>
+        <h2 class="h-section rv d1">Three layers.<br>Zero compromise.</h2>
+        <p class="body-lg rv d2" style="margin-top:14px;margin-bottom:40px;">
+          Most skincare is exposed to air, light, and heat from the moment it leaves the factory. We engineered the bottle itself to fight all three.
+        </p>
+
+        <div class="ppp-pillars">
+
+          <div class="ppp-pillar rv d2">
+            <div class="ppp-pillar-icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Vacuum pump icon -->
+                <rect x="13" y="18" width="14" height="16" rx="2" stroke="currentColor" stroke-width="1"/>
+                <rect x="17" y="10" width="6" height="8" rx="1" stroke="currentColor" stroke-width="1"/>
+                <rect x="14" y="7" width="12" height="5" rx="1" stroke="currentColor" stroke-width="1"/>
+                <!-- X marks for no air -->
+                <line x1="6" y1="22" x2="10" y2="26" stroke="var(--accent)" stroke-width="0.8" stroke-linecap="round"/>
+                <line x1="10" y1="22" x2="6" y2="26" stroke="var(--accent)" stroke-width="0.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="ppp-pillar-title">No Air</div>
+              <div class="ppp-pillar-desc">The vacuum pump base rises as you dispense, preventing air from re-entering the bottle. Zero oxidation from first pump to last.</div>
+            </div>
+          </div>
+
+          <div class="ppp-pillar rv d3">
+            <div class="ppp-pillar-icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Sun rays blocked -->
+                <circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1"/>
+                <line x1="20" y1="8" x2="20" y2="5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <line x1="20" y1="35" x2="20" y2="32" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <line x1="8" y1="20" x2="5" y2="20" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <line x1="35" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <line x1="11" y1="11" x2="9" y2="9" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <line x1="31" y1="31" x2="29" y2="29" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <line x1="29" y1="11" x2="31" y2="9" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <line x1="9" y1="31" x2="11" y2="29" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <!-- Block line -->
+                <line x1="6" y1="34" x2="34" y2="6" stroke="var(--accent)" stroke-width="1" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="ppp-pillar-title">No Light</div>
+              <div class="ppp-pillar-desc">The all-black bottle is fully opaque. Light accelerates the breakdown of active compounds — our packaging blocks it entirely.</div>
+            </div>
+          </div>
+
+          <div class="ppp-pillar rv d4">
+            <div class="ppp-pillar-icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Snowflake / cold icon -->
+                <line x1="20" y1="8" x2="20" y2="32" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <line x1="8" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <line x1="11" y1="11" x2="29" y2="29" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <line x1="29" y1="11" x2="11" y2="29" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                <!-- Tips -->
+                <polyline points="17,11 20,8 23,11" stroke="var(--accent)" stroke-width="0.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="17,29 20,32 23,29" stroke="var(--accent)" stroke-width="0.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="ppp-pillar-title">No Heat &mdash; VVIP Exclusive</div>
+              <div class="ppp-pillar-desc">Our top-tier members receive a surprise gift designed to keep the bottle cool. Cold storage extends active potency beyond the standard 90-day window. The exact gift is still a mystery &mdash; but it will keep things fresh.</div>
+            </div>
+          </div>
+
+        </div><!-- /ppp-pillars -->
+      </div>
+
+    </div><!-- /ppp-layout -->
   </div>
 </section>
 
@@ -2014,7 +2357,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       <div class="sci-img-side rvr">
         <div class="mol-wrap" style="position:relative;">
           <!-- SKIN PENETRATION ILLUSTRATION -->
-          <img src="assets/skin_penetration.png" alt="Liposomal NMN skin penetration cross-section" style="width:100%;height:auto;display:block;">
+          <img src="assets/skin_penetration.webp" alt="Liposomal NMN skin penetration cross-section diagram" style="width:100%;height:auto;display:block;">
           <div class="sci-stat-bar">
             <div style="text-align:center;"><div class="sstat-n">3<span class="sstat-u">×</span></div><div class="sstat-l">Deeper penetration</div></div>
             <div style="text-align:center;"><div class="sstat-n">90<span class="sstat-u">d</span></div><div class="sstat-l">Active stability</div></div>
@@ -2138,7 +2481,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     </p>
   </div>
   <div class="promise-img rvr">
-    <img src="assets/image_7.jpeg" alt="NeolabCare &mdash; precision materials">
+    <img src="assets/image_7.webp" alt="NeolabCare precision materials — matte black bottle close-up">
   </div>
 </section>
 
@@ -2220,7 +2563,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         <div class="perk-name">The Full Ritual</div>
         <div class="perk-retail">Retail <s>$349</s><span class="perk-save">Save $50</span></div>
         <div class="perk-price">$299</div>
-        <div class="perk-note">30ml bottle &middot; 60&ndash;90 day supply</div>
+        <div class="perk-note">30ml bottle &middot; 90-day supply &middot; one pump per day</div>
         <div class="perk-hr"></div>
         <div class="perk-inc">
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>1 &times; 30ml NeolabCare bottle</span></div>
@@ -2314,7 +2657,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       </p>
     </div>
     <div class="story-img rvr">
-      <img src="assets/image_8.png" alt="NeolabCare &mdash; holding the bottle">
+      <img src="assets/image_8.webp" alt="NeolabCare Night Protocol — bedtime skincare ritual">
     </div>
   </div>
 </section>
@@ -2330,7 +2673,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         <p class="body-sm rv d2" style="margin-top:14px;">If your question isn&rsquo;t here, email us directly. We answer every message personally.</p>
       </div>
       <div>
-        <div class="faq-item rv"><div class="faq-q" onclick="faq(this)">Can I use it morning and night?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">Yes. We deliberately excluded retinol, AHAs, and other sun-sensitising ingredients, so the formula is safe for both morning and evening use year-round. Apply after cleansing. One product, twice a day, 30 seconds. That is the entire routine.</div></div></div>
+        <div class="faq-item rv"><div class="faq-q" onclick="faq(this)">Can I use it morning and night?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">Yes. The formula is safe for both morning and evening use year-round &mdash; no retinol, no AHAs, no sun-sensitising ingredients. The bottle is designed for one pump per day, giving you a 90-day supply. If you prefer to use it twice daily, we recommend choosing a more frequent subscription cadence so your next batch arrives before you run out.</div></div></div>
         <div class="faq-item rv d1"><div class="faq-q" onclick="faq(this)">Is it suitable for post-shave use?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">Yes &mdash; post-shave recovery is a core design principle of this formula. The centella asiatica, GHK-Cu, and panthenol provide soothing, barrier-repair, and micro-wound recovery properties that make it highly effective immediately after shaving. Apply directly after shaving. It absorbs quickly, reduces redness, and does not sting on freshly shaved skin.</div></div></div>
         <div class="faq-item rv d2"><div class="faq-q" onclick="faq(this)">What is liposomal NMN and why does it matter?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">NMN (Nicotinamide Mononucleotide) is a NAD+ precursor &mdash; a compound that supports cellular energy production and is associated with skin aging research. Standard topical NMN is largely degraded by enzymes in the skin&rsquo;s surface layer before it can penetrate. Liposomal delivery encapsulates the NMN in a lipid shell that bypasses this enzymatic degradation, allowing deeper penetration. This is why we specified liposomal form specifically, at an effective concentration of 2&ndash;2.5%.</div></div></div>
         <div class="faq-item rv d3"><div class="faq-q" onclick="faq(this)">When will my order ship?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">Your order will be produced after the campaign closes. We dispatch within 7 days of production completion &mdash; this is our commitment. Delivery timelines vary by destination: typically 5&ndash;10 business days for most of Asia, 10&ndash;21 days for international destinations. You will receive your production date and tracking number by email.</div></div></div>
