@@ -114,289 +114,30 @@ a { color: inherit; text-decoration: none; }
     <div class="dash-tag">Internal — Private</div>
     <h1 class="dash-title">Tester Feedback<br><em>Dashboard.</em></h1>
     <div class="rule"></div>
-    <p class="dash-sub">Live data from the NeolabCare private tester programme. Auto-refreshes every 5 minutes.</p>
+    <p class="dash-sub">All feedback is stored securely in Web3Forms. Log in to your Web3Forms account to view, search, and export all tester responses.</p>
   </div>
 
-  <div id="last-updated" class="last-updated"></div>
-  <div id="dashboard-content">
-    <div class="loading">Loading feedback data…</div>
+  <div style="text-align: center; padding: 60px 0;">
+    <a href="https://web3forms.com/submissions" target="_blank" rel="noopener" style="display: inline-block; background: linear-gradient(135deg, #C8B89A 0%, #DDD0B8 100%); color: #0A0A0A; padding: 14px 32px; border-radius: 4px; font-weight: 600; font-size: 14px; letter-spacing: 0.5px; transition: all 0.3s ease; text-decoration: none;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 24px rgba(200,184,154,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+      View All Submissions on Web3Forms
+    </a>
+    <div style="margin-top: 40px; background: rgba(200, 184, 154, 0.05); border-left: 2px solid rgba(200, 184, 154, 0.3); padding: 24px 28px; border-radius: 4px; font-size: 12px; color: #aaa; line-height: 1.8; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto;">
+      <strong style="color: #C8B89A;">How to access your feedback:</strong><br><br>
+      1. Visit <a href="https://web3forms.com" target="_blank" rel="noopener" style="color: #C8B89A; text-decoration: underline;">web3forms.com</a> and log in<br>
+      2. Go to the <strong>Submissions</strong> tab<br>
+      3. You'll see all NeolabCare feedback submissions<br>
+      4. Click any submission to view full details<br>
+      5. Export as CSV for further analysis<br><br>
+      <strong style="color: #C8B89A;">Form Access Key:</strong><br>
+      <code style="background: rgba(0,0,0,0.3); padding: 6px 10px; border-radius: 2px; font-family: monospace; font-size: 11px;">fe35df41-5c1c-4519-9513-f9a227fcffe4</code>
+    </div>
   </div>
 </div>
 
 <script>
-// ─── CONFIG ──────────────────────────────────────────────────────────────────
-const SHEET_ID = '1sBoEdScXkdI4mzO422qB1viAqnuemh7XeRJDuOF8ZnA';
-const API_KEY  = 'AIzaSyDashboardReadOnly_REPLACE_ME'; // Public read-only API key — see setup notes
-const RANGE    = 'Responses!A:S';
-
-// Column indices (0-based, matching header row)
-const COL = {
-  timestamp:    0,
-  name:         1,
-  age:          2,
-  skinType:     3,
-  routine:      4,
-  concerns:     5,
-  firstImpression: 6,
-  fineLines:    7,
-  firmness:     8,
-  hydration:    9,
-  smoothness:   10,
-  oilControl:   11,
-  gentle:       12,
-  postShave:    13,
-  noticed:      14,
-  recommend:    15,
-  overall:      16,
-  testimonial:  17,
-  email:        18,
-};
-
-const RATING_LABELS = [
-  { key: 'fineLines',  label: 'Fine lines & wrinkle reduction', col: COL.fineLines },
-  { key: 'firmness',   label: 'Firmness & lifting',             col: COL.firmness },
-  { key: 'hydration',  label: 'Hydration',                      col: COL.hydration },
-  { key: 'smoothness', label: 'Smoothness & texture',           col: COL.smoothness },
-  { key: 'oilControl', label: 'Oil control',                    col: COL.oilControl },
-  { key: 'gentle',     label: 'Skin tolerance (no irritation)', col: COL.gentle },
-  { key: 'postShave',  label: 'Post-shave recovery',            col: COL.postShave },
-];
-
-// ─── FETCH DATA ───────────────────────────────────────────────────────────────
-async function fetchSheetData() {
-  // Use the public Sheets CSV export (no API key needed for publicly shared sheets)
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Responses`;
-  try {
-    const res = await fetch(url);
-    const text = await res.text();
-    // Strip the JSONP wrapper: google.visualization.Query.setResponse({...})
-    const json = JSON.parse(text.replace(/^[^(]+\(/, '').replace(/\);?\s*$/, ''));
-    return parseGVizTable(json);
-  } catch (e) {
-    console.error('Sheet fetch error:', e);
-    return null;
-  }
-}
-
-function parseGVizTable(json) {
-  const cols = json.table.cols.map(c => c.label);
-  const rows = (json.table.rows || []).map(r =>
-    r.c.map(cell => (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v) : '')
-  );
-  // Skip header row if first row matches column labels
-  const data = rows.filter((r, i) => i > 0 || !r[0].toLowerCase().includes('timestamp'));
-  return data;
-}
-
-// ─── ANALYTICS ───────────────────────────────────────────────────────────────
-function avg(arr) {
-  const nums = arr.map(Number).filter(n => !isNaN(n) && n > 0);
-  return nums.length ? (nums.reduce((a, b) => a + b, 0) / nums.length) : 0;
-}
-
-function countValues(arr) {
-  const counts = {};
-  arr.forEach(v => {
-    if (!v) return;
-    v.split(',').forEach(s => {
-      const k = s.trim();
-      if (k) counts[k] = (counts[k] || 0) + 1;
-    });
-  });
-  return counts;
-}
-
-function buildDashboard(rows) {
-  if (!rows || rows.length === 0) {
-    document.getElementById('dashboard-content').innerHTML =
-      '<div class="empty">No responses yet. Be the first tester!</div>';
-    return;
-  }
-
-  const n = rows.length;
-  const overallAvg = avg(rows.map(r => r[COL.overall]));
-  const recommendYes = rows.filter(r => (r[COL.recommend] || '').toLowerCase().includes('yes') || (r[COL.recommend] || '').toLowerCase().includes('absolutely')).length;
-  const recommendPct = n > 0 ? Math.round(recommendYes / n * 100) : 0;
-  const avgAge = avg(rows.map(r => r[COL.age]));
-
-  // Rating averages
-  const ratingAvgs = RATING_LABELS.map(rl => ({
-    ...rl,
-    avg: avg(rows.map(r => r[rl.col]))
-  }));
-
-  // Skin type distribution
-  const skinTypes = countValues(rows.map(r => r[COL.skinType]));
-
-  // Concerns
-  const concerns = countValues(rows.map(r => r[COL.concerns]));
-
-  // First impressions
-  const impressions = countValues(rows.map(r => r[COL.firstImpression]));
-
-  // Testimonials
-  const testimonials = rows.filter(r => r[COL.testimonial] && r[COL.testimonial].length > 20);
-
-  // ── Render ────────────────────────────────────────────────────────────────
-  const html = `
-    <!-- STAT CARDS -->
-    <div class="stat-row">
-      <div class="stat-card">
-        <div class="stat-card-n">${n}</div>
-        <div class="stat-card-l">Responses</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card-n">${overallAvg.toFixed(1)}<span style="font-size:1.2rem;color:var(--muted)">/5</span></div>
-        <div class="stat-card-l">Avg Overall Score</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card-n">${recommendPct}%</div>
-        <div class="stat-card-l">Would Recommend</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card-n">${avgAge > 0 ? Math.round(avgAge) : '—'}</div>
-        <div class="stat-card-l">Avg Tester Age</div>
-      </div>
-    </div>
-
-    <!-- CHARTS ROW -->
-    <div class="chart-grid">
-
-      <!-- Rating Bars -->
-      <div class="chart-card">
-        <div class="chart-title">Performance Ratings (avg / 5)</div>
-        <div class="rating-bars" id="rating-bars">
-          ${ratingAvgs.map(rl => `
-            <div class="rb-row">
-              <div class="rb-label">${rl.label}</div>
-              <div class="rb-track"><div class="rb-fill" data-val="${rl.avg}" style="width:0%"></div></div>
-              <div class="rb-val">${rl.avg > 0 ? rl.avg.toFixed(1) : '—'}</div>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-
-      <!-- Skin Type Donut -->
-      <div class="chart-card">
-        <div class="chart-title">Skin Type Breakdown</div>
-        <div class="chart-wrap"><canvas id="skinTypeChart"></canvas></div>
-      </div>
-
-      <!-- First Impressions Bar -->
-      <div class="chart-card">
-        <div class="chart-title">First Impressions</div>
-        <div class="chart-wrap"><canvas id="impressionsChart"></canvas></div>
-      </div>
-
-      <!-- Concerns -->
-      <div class="chart-card">
-        <div class="chart-title">Skin Concerns (Before)</div>
-        <div class="tag-cloud" id="concern-tags">
-          ${Object.entries(concerns).sort((a,b)=>b[1]-a[1]).map(([k,v]) =>
-            `<span class="tag ${v >= Math.max(...Object.values(concerns)) ? 'hot' : ''}">${k} (${v})</span>`
-          ).join('')}
-        </div>
-      </div>
-
-    </div>
-
-    <!-- TESTIMONIALS -->
-    ${testimonials.length > 0 ? `
-    <div class="chart-card" style="background:var(--layer);border:1px solid var(--border);padding:28px 24px;margin-bottom:2px;">
-      <div class="chart-title">Tester Testimonials</div>
-      <div class="testimonials" style="margin-top:0;">
-        ${testimonials.map(r => `
-          <div class="testimonial-card" style="background:var(--bg-2);border:1px solid var(--border);padding:24px 24px;margin-bottom:0;">
-            <div class="testimonial-text">${escHtml(r[COL.testimonial])}</div>
-            <div class="testimonial-meta">
-              <div class="testimonial-tag">Name: <span>${escHtml(r[COL.name] || 'Anonymous')}</span></div>
-              <div class="testimonial-tag">Age: <span>${escHtml(r[COL.age] || '—')}</span></div>
-              <div class="testimonial-tag">Skin: <span>${escHtml(r[COL.skinType] || '—')}</span></div>
-              <div class="testimonial-tag">Overall: <span>${escHtml(r[COL.overall] || '—')}/5</span></div>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-    ` : ''}
-  `;
-
-  document.getElementById('dashboard-content').innerHTML = html;
-
-  // Animate rating bars
-  setTimeout(() => {
-    document.querySelectorAll('.rb-fill').forEach(el => {
-      const val = parseFloat(el.dataset.val) || 0;
-      el.style.width = (val / 5 * 100) + '%';
-    });
-  }, 100);
-
-  // Skin type donut
-  const stLabels = Object.keys(skinTypes);
-  const stData   = Object.values(skinTypes);
-  if (stLabels.length > 0) {
-    new Chart(document.getElementById('skinTypeChart'), {
-      type: 'doughnut',
-      data: {
-        labels: stLabels,
-        datasets: [{
-          data: stData,
-          backgroundColor: ['#C8B89A','#8B9E7A','#7A8B9E','#E8A87C','#9E8B7A'],
-          borderColor: '#141414',
-          borderWidth: 2,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: { position: 'bottom', labels: { color: '#999', font: { family: 'Poppins', size: 11 }, padding: 14 } }
-        }
-      }
-    });
-  }
-
-  // First impressions bar
-  const impLabels = Object.keys(impressions);
-  const impData   = Object.values(impressions);
-  if (impLabels.length > 0) {
-    new Chart(document.getElementById('impressionsChart'), {
-      type: 'bar',
-      data: {
-        labels: impLabels,
-        datasets: [{
-          data: impData,
-          backgroundColor: 'rgba(200,184,154,0.25)',
-          borderColor: '#C8B89A',
-          borderWidth: 1,
-          borderRadius: 2,
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { color: 'rgba(46,46,46,0.6)' }, ticks: { color: '#666', font: { family: 'Poppins', size: 11 } } },
-          y: { grid: { display: false }, ticks: { color: '#999', font: { family: 'Poppins', size: 11 } } }
-        }
-      }
-    });
-  }
-}
-
-function escHtml(str) {
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-async function init() {
-  const data = await fetchSheetData();
-  buildDashboard(data);
-  document.getElementById('last-updated').textContent =
-    'Last updated: ' + new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
-}
-
-init();
-setInterval(init, 5 * 60 * 1000); // Refresh every 5 minutes
+// This dashboard now points to Web3Forms submissions.
+// No complex backend setup required — just log into Web3Forms to view all feedback.
+console.log('Dashboard: All feedback is stored in Web3Forms. Visit https://web3forms.com/submissions to view.');
 </script>
 </body>
 </html>
