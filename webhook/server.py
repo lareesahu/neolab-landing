@@ -7,7 +7,7 @@ import os, json, time, datetime, urllib.request, urllib.parse
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 SHEET_ID = os.environ.get("SHEET_ID", "1sBoEdScXkdI4mzO422qB1viAqnuemh7XeRJDuOF8ZnA")
-SHEET_RANGE = "Responses!A:S"
+SHEET_RANGE = "Responses!A:T"
 GOOGLE_SA_KEY = os.environ.get("GOOGLE_SA_KEY", "")   # JSON string of service-account key
 WEB3FORMS_KEY = os.environ.get("WEB3FORMS_KEY", "fe35df41-5c1c-4519-9513-f9a227fcffe4")
 PORT = int(os.environ.get("PORT", 8080))
@@ -87,6 +87,7 @@ def append_to_sheet(data: dict):
         data.get("replaceRoutine", ""),
         data.get("overallQuality", ""),
         data.get("testimonial", ""),
+        data.get("interview", ""),
         data.get("email", ""),
     ]
 
@@ -173,8 +174,10 @@ class Handler(BaseHTTPRequestHandler):
         sheet_ok = append_to_sheet(data)
         w3f_ok   = forward_to_web3forms(data)
 
+        # Only return success if at least one destination succeeded
+        success = sheet_ok or w3f_ok
         resp = json.dumps({
-            "success": True,
+            "success": success,
             "sheet": sheet_ok,
             "email": w3f_ok
         }).encode()
