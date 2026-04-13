@@ -582,7 +582,8 @@ document.getElementById('feedbackForm').addEventListener('submit', async e => {
         })
       });
     }
-    if (!res.ok) throw new Error('Network error');
+    const result = await res.json();
+    if (!result.success) throw new Error(result.message || 'Submission failed');
     // ─────────────────────────────────────────────────────────────────────────
     status.textContent = 'Feedback received. Thank you — this means everything.';
     status.className = 'status success show';
