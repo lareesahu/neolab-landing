@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeolabCare | Tester Feedback Dashboard</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Serif+Display:ital,wght@1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root {
+  --f-body: 'Poppins', sans-serif;
+  --f-serif: 'Noto Serif Display', serif;
+  --bg: #0A0A0A;
+  --bg-2: #0D0D0D;
+  --layer: #141414;
+  --text: rgba(245,245,240,.94);
+  --muted: rgba(245,245,240,.52);
+  --accent: #C8B89A;
+  --accent-2: #DDD0B8;
+  --border: rgba(200,184,154,.10);
+  --border-2: rgba(200,184,154,.18);
+  --surf: rgba(245,245,240,.025);
+  --pad-x: clamp(24px, 5vw, 80px);
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--text); font-family: var(--f-body); line-height: 1.5; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+.top-nav { display: flex; align-items: center; justify-content: space-between; padding: 20px var(--pad-x); border-bottom: 1px solid var(--border); }
+.top-nav-logo { font-size: 13px; font-weight: 500; letter-spacing: 0.12em; color: var(--text); }
+.top-nav-back { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+.top-nav-back:hover { color: var(--accent); }
+
+/* LAYOUT */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 60px var(--pad-x) 90px; }
+
+/* HEADER */
+.dash-header { margin-bottom: 52px; }
+.dash-tag { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.dash-title { font-size: clamp(28px, 5vw, 44px); font-weight: 500; line-height: 1.1; }
+.dash-title em { font-family: var(--f-serif); font-style: italic; font-weight: 400; }
+.dash-sub { font-size: 14px; color: var(--muted); margin-top: 10px; }
+.rule { width: 32px; height: 1px; background: var(--accent); margin: 14px 0; opacity: 0.5; }
+
+/* STAT CARDS */
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 2px; }
+.stat-card { background: var(--layer); border: 1px solid var(--border); padding: 28px 24px; }
+.stat-card-n { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--accent); line-height: 1; }
+.stat-card-l { font-size: 11px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+/* CHART GRID */
+.chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 2px; }
+.chart-card { background: var(--layer); border: 1px solid var(--border); padding: 28px 24px; }
+.chart-card.full { grid-column: 1 / -1; }
+.chart-title { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.chart-wrap { position: relative; height: 240px; }
+.chart-wrap.tall { height: 320px; }
+
+/* RATING BARS */
+.rating-bars { display: flex; flex-direction: column; gap: 14px; }
+.rb-row { display: flex; align-items: center; gap: 14px; }
+.rb-label { font-size: 12px; color: var(--muted); width: 180px; flex-shrink: 0; }
+.rb-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.rb-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 1.2s cubic-bezier(0.16,1,0.3,1); width: 0; }
+.rb-val { font-size: 12px; font-weight: 600; color: var(--text); width: 28px; text-align: right; flex-shrink: 0; }
+
+/* TESTIMONIALS */
+.testimonials { display: flex; flex-direction: column; gap: 2px; margin-bottom: 2px; }
+.testimonial-card { background: var(--layer); border: 1px solid var(--border); padding: 28px 28px; }
+.testimonial-text { font-size: 14px; line-height: 1.75; color: var(--text); font-style: italic; border-left: 2px solid var(--accent); padding-left: 18px; }
+.testimonial-meta { display: flex; gap: 20px; margin-top: 14px; flex-wrap: wrap; }
+.testimonial-tag { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.testimonial-tag span { color: var(--accent); }
+
+/* CONCERN TAGS */
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.tag { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; padding: 5px 12px; border: 1px solid var(--border-2); border-radius: 2px; color: var(--muted); }
+.tag.hot { border-color: var(--accent); color: var(--accent); }
+
+/* LOADING */
+.loading { text-align: center; padding: 80px 0; color: var(--muted); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* EMPTY STATE */
+.empty { text-align: center; padding: 60px 0; color: var(--muted); font-size: 13px; }
+
+/* LAST UPDATED */
+.last-updated { font-size: 11px; color: var(--muted); text-align: right; margin-bottom: 28px; letter-spacing: 1px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .stat-row { grid-template-columns: repeat(2, 1fr); }
+  .chart-grid { grid-template-columns: 1fr; }
+  .rb-label { width: 130px; font-size: 11px; }
+}
+@media (max-width: 480px) {
+  .stat-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/" class="top-nav-logo">neolab<span style="color:var(--accent)">.</span>care</a>
+  <a href="/" class="top-nav-back">← Back to site</a>
+</nav>
+
+<div class="wrap">
+  <div class="dash-header">
+    <div class="dash-tag">Internal — Private</div>
+    <h1 class="dash-title">Tester Feedback<br><em>Dashboard.</em></h1>
+    <div class="rule"></div>
+    <p class="dash-sub">Live data from the NeolabCare private tester programme. Auto-refreshes every 5 minutes.</p>
+  </div>
+
+  <div id="last-updated" class="last-updated"></div>
+  <div id="dashboard-content">
+    <div class="loading">Loading feedback data…</div>
+  </div>
+</div>
+
+<script>
+// ─── CONFIG ──────────────────────────────────────────────────────────────────
+const SHEET_ID = '1sBoEdScXkdI4mzO422qB1viAqnuemh7XeRJDuOF8ZnA';
+const API_KEY  = 'AIzaSyDashboardReadOnly_REPLACE_ME'; // Public read-only API key — see setup notes
+const RANGE    = 'Responses!A:S';
+
+// Column indices (0-based, matching header row)
+const COL = {
+  timestamp:    0,
+  name:         1,
+  age:          2,
+  skinType:     3,
+  routine:      4,
+  concerns:     5,
+  firstImpression: 6,
+  fineLines:    7,
+  firmness:     8,
+  hydration:    9,
+  smoothness:   10,
+  oilControl:   11,
+  gentle:       12,
+  postShave:    13,
+  noticed:      14,
+  recommend:    15,
+  overall:      16,
+  testimonial:  17,
+  email:        18,
+};
+
+const RATING_LABELS = [
+  { key: 'fineLines',  label: 'Fine lines & wrinkle reduction', col: COL.fineLines },
+  { key: 'firmness',   label: 'Firmness & lifting',             col: COL.firmness },
+  { key: 'hydration',  label: 'Hydration',                      col: COL.hydration },
+  { key: 'smoothness', label: 'Smoothness & texture',           col: COL.smoothness },
+  { key: 'oilControl', label: 'Oil control',                    col: COL.oilControl },
+  { key: 'gentle',     label: 'Skin tolerance (no irritation)', col: COL.gentle },
+  { key: 'postShave',  label: 'Post-shave recovery',            col: COL.postShave },
+];
+
+// ─── FETCH DATA ───────────────────────────────────────────────────────────────
+async function fetchSheetData() {
+  // Use the public Sheets CSV export (no API key needed for publicly shared sheets)
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Responses`;
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+    // Strip the JSONP wrapper: google.visualization.Query.setResponse({...})
+    const json = JSON.parse(text.replace(/^[^(]+\(/, '').replace(/\);?\s*$/, ''));
+    return parseGVizTable(json);
+  } catch (e) {
+    console.error('Sheet fetch error:', e);
+    return null;
+  }
+}
+
+function parseGVizTable(json) {
+  const cols = json.table.cols.map(c => c.label);
+  const rows = (json.table.rows || []).map(r =>
+    r.c.map(cell => (cell && cell.v !== null && cell.v !== undefined) ? String(cell.v) : '')
+  );
+  // Skip header row if first row matches column labels
+  const data = rows.filter((r, i) => i > 0 || !r[0].toLowerCase().includes('timestamp'));
+  return data;
+}
+
+// ─── ANALYTICS ───────────────────────────────────────────────────────────────
+function avg(arr) {
+  const nums = arr.map(Number).filter(n => !isNaN(n) && n > 0);
+  return nums.length ? (nums.reduce((a, b) => a + b, 0) / nums.length) : 0;
+}
+
+function countValues(arr) {
+  const counts = {};
+  arr.forEach(v => {
+    if (!v) return;
+    v.split(',').forEach(s => {
+      const k = s.trim();
+      if (k) counts[k] = (counts[k] || 0) + 1;
+    });
+  });
+  return counts;
+}
+
+function buildDashboard(rows) {
+  if (!rows || rows.length === 0) {
+    document.getElementById('dashboard-content').innerHTML =
+      '<div class="empty">No responses yet. Be the first tester!</div>';
+    return;
+  }
+
+  const n = rows.length;
+  const overallAvg = avg(rows.map(r => r[COL.overall]));
+  const recommendYes = rows.filter(r => (r[COL.recommend] || '').toLowerCase().includes('yes') || (r[COL.recommend] || '').toLowerCase().includes('absolutely')).length;
+  const recommendPct = n > 0 ? Math.round(recommendYes / n * 100) : 0;
+  const avgAge = avg(rows.map(r => r[COL.age]));
+
+  // Rating averages
+  const ratingAvgs = RATING_LABELS.map(rl => ({
+    ...rl,
+    avg: avg(rows.map(r => r[rl.col]))
+  }));
+
+  // Skin type distribution
+  const skinTypes = countValues(rows.map(r => r[COL.skinType]));
+
+  // Concerns
+  const concerns = countValues(rows.map(r => r[COL.concerns]));
+
+  // First impressions
+  const impressions = countValues(rows.map(r => r[COL.firstImpression]));
+
+  // Testimonials
+  const testimonials = rows.filter(r => r[COL.testimonial] && r[COL.testimonial].length > 20);
+
+  // ── Render ────────────────────────────────────────────────────────────────
+  const html = `
+    <!-- STAT CARDS -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-card-n">${n}</div>
+        <div class="stat-card-l">Responses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-n">${overallAvg.toFixed(1)}<span style="font-size:1.2rem;color:var(--muted)">/5</span></div>
+        <div class="stat-card-l">Avg Overall Score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-n">${recommendPct}%</div>
+        <div class="stat-card-l">Would Recommend</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-n">${avgAge > 0 ? Math.round(avgAge) : '—'}</div>
+        <div class="stat-card-l">Avg Tester Age</div>
+      </div>
+    </div>
+
+    <!-- CHARTS ROW -->
+    <div class="chart-grid">
+
+      <!-- Rating Bars -->
+      <div class="chart-card">
+        <div class="chart-title">Performance Ratings (avg / 5)</div>
+        <div class="rating-bars" id="rating-bars">
+          ${ratingAvgs.map(rl => `
+            <div class="rb-row">
+              <div class="rb-label">${rl.label}</div>
+              <div class="rb-track"><div class="rb-fill" data-val="${rl.avg}" style="width:0%"></div></div>
+              <div class="rb-val">${rl.avg > 0 ? rl.avg.toFixed(1) : '—'}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- Skin Type Donut -->
+      <div class="chart-card">
+        <div class="chart-title">Skin Type Breakdown</div>
+        <div class="chart-wrap"><canvas id="skinTypeChart"></canvas></div>
+      </div>
+
+      <!-- First Impressions Bar -->
+      <div class="chart-card">
+        <div class="chart-title">First Impressions</div>
+        <div class="chart-wrap"><canvas id="impressionsChart"></canvas></div>
+      </div>
+
+      <!-- Concerns -->
+      <div class="chart-card">
+        <div class="chart-title">Skin Concerns (Before)</div>
+        <div class="tag-cloud" id="concern-tags">
+          ${Object.entries(concerns).sort((a,b)=>b[1]-a[1]).map(([k,v]) =>
+            `<span class="tag ${v >= Math.max(...Object.values(concerns)) ? 'hot' : ''}">${k} (${v})</span>`
+          ).join('')}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TESTIMONIALS -->
+    ${testimonials.length > 0 ? `
+    <div class="chart-card" style="background:var(--layer);border:1px solid var(--border);padding:28px 24px;margin-bottom:2px;">
+      <div class="chart-title">Tester Testimonials</div>
+      <div class="testimonials" style="margin-top:0;">
+        ${testimonials.map(r => `
+          <div class="testimonial-card" style="background:var(--bg-2);border:1px solid var(--border);padding:24px 24px;margin-bottom:0;">
+            <div class="testimonial-text">${escHtml(r[COL.testimonial])}</div>
+            <div class="testimonial-meta">
+              <div class="testimonial-tag">Name: <span>${escHtml(r[COL.name] || 'Anonymous')}</span></div>
+              <div class="testimonial-tag">Age: <span>${escHtml(r[COL.age] || '—')}</span></div>
+              <div class="testimonial-tag">Skin: <span>${escHtml(r[COL.skinType] || '—')}</span></div>
+              <div class="testimonial-tag">Overall: <span>${escHtml(r[COL.overall] || '—')}/5</span></div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    ` : ''}
+  `;
+
+  document.getElementById('dashboard-content').innerHTML = html;
+
+  // Animate rating bars
+  setTimeout(() => {
+    document.querySelectorAll('.rb-fill').forEach(el => {
+      const val = parseFloat(el.dataset.val) || 0;
+      el.style.width = (val / 5 * 100) + '%';
+    });
+  }, 100);
+
+  // Skin type donut
+  const stLabels = Object.keys(skinTypes);
+  const stData   = Object.values(skinTypes);
+  if (stLabels.length > 0) {
+    new Chart(document.getElementById('skinTypeChart'), {
+      type: 'doughnut',
+      data: {
+        labels: stLabels,
+        datasets: [{
+          data: stData,
+          backgroundColor: ['#C8B89A','#8B9E7A','#7A8B9E','#E8A87C','#9E8B7A'],
+          borderColor: '#141414',
+          borderWidth: 2,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#999', font: { family: 'Poppins', size: 11 }, padding: 14 } }
+        }
+      }
+    });
+  }
+
+  // First impressions bar
+  const impLabels = Object.keys(impressions);
+  const impData   = Object.values(impressions);
+  if (impLabels.length > 0) {
+    new Chart(document.getElementById('impressionsChart'), {
+      type: 'bar',
+      data: {
+        labels: impLabels,
+        datasets: [{
+          data: impData,
+          backgroundColor: 'rgba(200,184,154,0.25)',
+          borderColor: '#C8B89A',
+          borderWidth: 1,
+          borderRadius: 2,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: 'rgba(46,46,46,0.6)' }, ticks: { color: '#666', font: { family: 'Poppins', size: 11 } } },
+          y: { grid: { display: false }, ticks: { color: '#999', font: { family: 'Poppins', size: 11 } } }
+        }
+      }
+    });
+  }
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+async function init() {
+  const data = await fetchSheetData();
+  buildDashboard(data);
+  document.getElementById('last-updated').textContent =
+    'Last updated: ' + new Date().toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+}
+
+init();
+setInterval(init, 5 * 60 * 1000); // Refresh every 5 minutes
+</script>
+</body>
+</html>

@@ -1,6 +1,8 @@
-# Exported from Render on 2026-04-12T04:01:48Z
+# Exported from Render on 2026-04-12T04:01:48Z — updated 2026-04-13
 version: "1"
 services:
+
+# ── Static landing page ──────────────────────────────────────────────────────
 - type: web
   name: neolabcare
   runtime: static
@@ -8,3 +10,22 @@ services:
   branch: master
   autoDeploy: true
   staticPublishPath: .
+
+# ── Feedback webhook (Python) ────────────────────────────────────────────────
+# Receives form submissions, logs to Google Sheets, forwards to Web3Forms
+- type: web
+  name: neolabcare-webhook
+  runtime: python
+  repo: https://github.com/lareesahu/neolab-landing
+  branch: master
+  autoDeploy: true
+  rootDir: webhook
+  buildCommand: pip install -r requirements.txt
+  startCommand: python server.py
+  envVars:
+  - key: SHEET_ID
+    value: 1sBoEdScXkdI4mzO422qB1viAqnuemh7XeRJDuOF8ZnA
+  - key: WEB3FORMS_KEY
+    value: fe35df41-5c1c-4519-9513-f9a227fcffe4
+  - key: GOOGLE_SA_KEY
+    sync: false   # Set this manually in Render dashboard — paste the service account JSON
