@@ -557,19 +557,33 @@ document.getElementById('feedbackForm').addEventListener('submit', async e => {
     data['_subject'] = 'NeolabCare Tester Feedback — ' + (data['name'] || 'Anonymous');
     data['_replyto'] = data['email'] || '';
 
-    // ── Web3Forms submission ──────────────────────────────────────
-    const res = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        access_key: 'fe35df41-5c1c-4519-9513-f9a227fcffe4',
-        subject: 'NeolabCare Tester Feedback — ' + (data['name'] || 'Anonymous'),
-        from_name: 'NeolabCare Feedback Form',
-        ...data
-      })
-    });
+    // ── Webhook → Google Sheets + Web3Forms (with CC to lareesa@neolab.care) ──
+    // Try the self-hosted webhook first (logs to Sheets + sends email with CC)
+    // Falls back to direct Web3Forms if webhook is unavailable
+    const WEBHOOK_URL = window.NEOLAB_WEBHOOK_URL || 'https://neolabcare-webhook.onrender.com/submit';
+    let res;
+    try {
+      res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    } catch (_) {
+      // Fallback: submit directly to Web3Forms
+      res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: 'fe35df41-5c1c-4519-9513-f9a227fcffe4',
+          subject: 'NeolabCare Tester Feedback — ' + (data['name'] || 'Anonymous'),
+          from_name: 'NeolabCare Feedback Form',
+          ccemail: 'lareesa@neolab.care',
+          ...data
+        })
+      });
+    }
     if (!res.ok) throw new Error('Network error');
-    // ─────────────────────────────────────────────────────────────
+    // ─────────────────────────────────────────────────────────────────────────
     status.textContent = 'Feedback received. Thank you — this means everything.';
     status.className = 'status success show';
     btn.textContent = 'Submitted';
