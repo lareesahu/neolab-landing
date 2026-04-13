@@ -117,7 +117,10 @@ body::before {
 .textarea { width: 100%; min-height: 110px; background: var(--surf); border: 1px solid var(--border-2); border-radius: 2px; padding: 13px 16px; font-size: var(--t-md); color: var(--text); outline: none; resize: vertical; transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease); font-family: var(--f-body); }
 .textarea:focus { border-color: var(--accent); background: rgba(200,184,154,0.03); }
 
-.form-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
+.form-nav { display: flex; align-items: center; justify-content: flex-end; gap: 24px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
+.btn-back { background: none; border: none; padding: 0; font-size: var(--t-xs); font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; font-family: var(--f-body); transition: color var(--dur) var(--ease); text-decoration: none; }
+.btn-back:hover { color: var(--accent); }
+.btn-back.hidden { display: none; }
 .btn { border: none; border-radius: 2px; padding: 14px 28px; font-size: var(--t-xs); font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; transition: all var(--dur) var(--ease); font-family: var(--f-body); }
 .btn-outline { background: transparent; color: var(--muted); border: 1px solid var(--border-2); }
 .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
@@ -148,8 +151,7 @@ body::before {
 @media (max-width: 480px) {
   .wrap { padding: 40px 20px 60px; }
   .form-body { padding: 24px 20px; }
-  .form-nav { flex-direction: column; gap: 8px; }
-  .btn { width: 100%; text-align: center; }
+  .btn { width: auto; text-align: center; }
 }
 </style>
 </head>
@@ -200,7 +202,7 @@ body::before {
           </div>
         </div>
         <div class="form-nav">
-          <button type="button" class="btn btn-outline" disabled>Back</button>
+          <button type="button" class="btn-back hidden prev">Back</button>
           <button type="button" class="btn btn-solid next">Next</button>
         </div>
       </div>
@@ -436,7 +438,7 @@ body::before {
         </div>
 
         <div class="form-nav">
-          <button type="button" class="btn btn-outline prev">Back</button>
+          <button type="button" class="btn-back prev">Back</button>
           <button type="button" class="btn btn-solid next">Next</button>
         </div>
       </div>
@@ -466,7 +468,7 @@ body::before {
         </div>
 
         <div class="form-nav">
-          <button type="button" class="btn btn-outline prev">Back</button>
+          <button type="button" class="btn-back prev">Back</button>
           <button type="submit" class="btn btn-solid" id="submitBtn">Submit Feedback</button>
         </div>
 
