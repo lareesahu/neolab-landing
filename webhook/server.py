@@ -7,7 +7,7 @@ import os, json, time, datetime, urllib.request, urllib.parse
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 SHEET_ID = os.environ.get("SHEET_ID", "1sBoEdScXkdI4mzO422qB1viAqnuemh7XeRJDuOF8ZnA")
-SHEET_RANGE = "Responses!A:T"
+SHEET_RANGE = "Responses!A:U"
 GOOGLE_SA_KEY = os.environ.get("GOOGLE_SA_KEY", "")   # JSON string of service-account key
 WEB3FORMS_KEY = os.environ.get("WEB3FORMS_KEY", "fe35df41-5c1c-4519-9513-f9a227fcffe4")
 PORT = int(os.environ.get("PORT", 8080))
@@ -72,6 +72,7 @@ def append_to_sheet(data: dict):
         datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
         data.get("name", ""),
         data.get("age", ""),
+        data.get("gender", ""),
         data.get("skinType", ""),
         data.get("routine", ""),
         data.get("concern", ""),

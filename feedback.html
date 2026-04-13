@@ -188,13 +188,20 @@ body::before {
         <div class="grid grid-2">
           <div class="rv d1"><span class="label">Your Name</span><input type="text" name="name" class="input" placeholder="First name is fine"></div>
           <div class="rv d2"><span class="label">Your Age</span><input type="number" name="age" min="1" max="120" class="input" placeholder="e.g. 32"></div>
-          <div class="rv d3"><span class="label">Skin Type</span>
+          <div class="rv d3"><span class="label">Gender <span class="accent-text">*</span></span>
+            <select name="gender" class="select" required>
+              <option value="">Select…</option>
+              <option>Male</option><option>Female</option><option>Non-binary</option><option>Prefer not to say</option>
+            </select>
+          </div>
+          <div class="rv d4"><span class="label">Email Address <span class="accent-text">*</span></span><input type="email" name="email" class="input" placeholder="For your tester profile" required></div>
+          <div class="rv d5"><span class="label">Skin Type</span>
             <select name="skinType" class="select">
               <option value="">Select…</option>
               <option>Oily</option><option>Dry</option><option>Combination</option><option>Sensitive</option><option>Normal</option>
             </select>
           </div>
-          <div class="rv d4"><span class="label">Your Usual Routine</span>
+          <div class="rv d6"><span class="label">Your Usual Routine</span>
             <select name="routine" class="select">
               <option value="">Select…</option>
               <option>1–2 products</option><option>3–5 products</option><option>6+ products</option>
@@ -501,7 +508,30 @@ function showStep(i) {
   document.querySelectorAll('.rv:not(.in)').forEach(el => obs.observe(el));
 }
 
-document.querySelectorAll('.next').forEach(btn => btn.addEventListener('click', () => showStep(current + 1)));
+document.querySelectorAll('.next').forEach(btn => btn.addEventListener('click', () => {
+  // Simple validation for required fields in current step
+  const currentStep = steps[current];
+  const requiredFields = currentStep.querySelectorAll('[required]');
+  let valid = true;
+  requiredFields.forEach(field => {
+    if (!field.value) {
+      field.style.borderColor = '#ff6666';
+      valid = false;
+    } else {
+      field.style.borderColor = '';
+    }
+  });
+
+  if (valid) {
+    showStep(current + 1);
+  } else {
+    // Optional: show a small hint or just highlight the fields
+    const status = document.getElementById('status');
+    status.textContent = 'Please fill in all required fields.';
+    status.className = 'status error show';
+    setTimeout(() => { status.className = 'status'; }, 3000);
+  }
+}));
 document.querySelectorAll('.prev').forEach(btn => btn.addEventListener('click', () => showStep(current - 1)));
 
 // Rating track interaction
