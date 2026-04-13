@@ -557,19 +557,19 @@ document.getElementById('feedbackForm').addEventListener('submit', async e => {
     data['_subject'] = 'NeolabCare Tester Feedback — ' + (data['name'] || 'Anonymous');
     data['_replyto'] = data['email'] || '';
 
-    // ── BACKEND ENDPOINT ──────────────────────────────────────────
-    // Replace the URL below with your Web3Forms / Formspree endpoint
-    // when ready. For now the form shows a success message client-side.
-    // const res = await fetch('https://api.web3forms.com/submit', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ access_key: 'YOUR_KEY_HERE', ...data })
-    // });
-    // if (!res.ok) throw new Error('Network error');
+    // ── Web3Forms submission ──────────────────────────────────────
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'fe35df41-5c1c-4519-9513-f9a227fcffe4',
+        subject: 'NeolabCare Tester Feedback — ' + (data['name'] || 'Anonymous'),
+        from_name: 'NeolabCare Feedback Form',
+        ...data
+      })
+    });
+    if (!res.ok) throw new Error('Network error');
     // ─────────────────────────────────────────────────────────────
-
-    // Simulated success (remove once backend is wired)
-    await new Promise(r => setTimeout(r, 600));
     status.textContent = 'Feedback received. Thank you — this means everything.';
     status.className = 'status success show';
     btn.textContent = 'Submitted';
