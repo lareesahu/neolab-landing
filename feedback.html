@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeolabCare | Private Tester Feedback</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Serif+Display:ital,wght@1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --f-body: 'Poppins', sans-serif;
+  --f-serif: 'Noto Serif Display', serif;
+  --bg: #0A0A0A;
+  --bg-2: #0D0D0D;
+  --layer: #141414;
+  --text: rgba(245,245,240,.94);
+  --muted: rgba(245,245,240,.52);
+  --accent: #C8B89A;
+  --accent-2: #DDD0B8;
+  --border: rgba(200,184,154,.10);
+  --border-2: rgba(200,184,154,.18);
+  --surf: rgba(245,245,240,.025);
+  --t-xs: clamp(10px, .75vw, 12px);
+  --t-sm: clamp(12px, .9vw, 14px);
+  --t-md: clamp(14px, 1.05vw, 16px);
+  --t-lg: clamp(17px, 1.4vw, 22px);
+  --t-xl: clamp(24px, 2vw, 32px);
+  --pad-x: clamp(24px, 5vw, 80px);
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --dur: 320ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--text); font-family: var(--f-body); line-height: 1.5; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028; mix-blend-mode: overlay;
+}
+
+/* NAV */
+.top-nav { display: flex; align-items: center; justify-content: space-between; padding: 20px var(--pad-x); border-bottom: 1px solid var(--border); position: relative; z-index: 10; }
+.top-nav-logo { font-size: 13px; font-weight: 500; letter-spacing: 0.12em; color: var(--text); text-decoration: none; }
+.top-nav-back { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color var(--dur) var(--ease); }
+.top-nav-back:hover { color: var(--accent); }
+
+/* REVEAL */
+.rv { opacity: 0; transform: translateY(20px); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
+.rv.in { opacity: 1; transform: none; }
+.d1 { transition-delay: 0s; }
+.d2 { transition-delay: 0.15s; }
+.d3 { transition-delay: 0.3s; }
+.d4 { transition-delay: 0.45s; }
+
+.wrap { max-width: 780px; margin: 0 auto; padding: 60px var(--pad-x) 90px; position: relative; z-index: 10; }
+.hero { margin-bottom: 44px; }
+.hero-tag { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.hero-title { font-family: var(--f-body); font-size: clamp(32px, 6vw, 46px); font-weight: 500; line-height: 1.03; margin-bottom: 16px; }
+.hero-title em { font-family: var(--f-serif); font-style: italic; font-weight: 400; }
+.hero-desc { font-size: var(--t-md); color: var(--muted); max-width: 480px; line-height: 1.6; }
+
+.form-card { background: var(--surf); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
+.form-top { display: flex; align-items: center; justify-content: space-between; padding: 18px 26px; background: var(--layer); border-bottom: 1px solid var(--border); gap: 16px; }
+.form-top-label { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+.progress-bar { flex: 1; max-width: 280px; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; width: 33%; background: var(--accent); transition: width var(--dur) var(--ease); }
+
+.form-body { padding: 32px 26px; }
+.step { display: none; }
+.step.active { display: block; animation: fade 0.26s ease forwards; }
+@keyframes fade { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+
+.step-head { margin-bottom: 28px; }
+.step-tag { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.step-title { font-family: var(--f-body); font-size: clamp(24px, 4vw, 32px); font-weight: 500; line-height: 1.15; }
+.step-title em { font-family: var(--f-serif); font-style: italic; font-weight: 400; }
+.rule { width: 32px; height: 1px; background: var(--accent); margin: 14px 0; opacity: 0.5; }
+
+.group-title { font-size: var(--t-lg); font-weight: 500; margin: 26px 0 12px; line-height: 1.4; }
+.group-title em { font-family: var(--f-serif); font-style: italic; font-weight: 400; }
+.group-desc { font-size: var(--t-sm); color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+.accent-text { color: var(--accent); font-weight: 500; }
+
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+.label { font-size: var(--t-md); font-weight: 500; margin-bottom: 8px; display: block; }
+.input, .select { width: 100%; background: var(--surf); border: 1px solid var(--border-2); border-radius: 2px; padding: 13px 16px; font-size: var(--t-md); color: var(--text); outline: none; transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease); font-family: var(--f-body); }
+.input:focus, .select:focus { border-color: var(--accent); background: rgba(200,184,154,0.03); }
+.select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C8B89A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; background-color: var(--bg); }
+.select option { background: var(--layer); color: var(--text); }
+
+.choice-group { display: grid; gap: 8px; }
+.choice { position: relative; }
+.choice-input { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+.choice-label { display: flex; align-items: center; padding: 13px 16px; background: var(--surf); border: 1px solid var(--border-2); border-radius: 2px; font-size: var(--t-md); cursor: pointer; transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease); }
+.choice-input:checked + .choice-label { background: rgba(200,184,154,0.05); border-color: var(--accent); }
+.choice-label:hover { border-color: rgba(200,184,154,0.25); }
+
+/* RATING */
+.rating-group { margin: 10px 0 24px; }
+.rating-row { margin-bottom: 28px; }
+.rating-label { font-size: var(--t-md); font-weight: 500; margin-bottom: 14px; display: block; }
+.rating-track { position: relative; width: 100%; height: 4px; background: var(--border); border-radius: 2px; cursor: pointer; }
+.rating-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.2s ease; width: 0%; pointer-events: none; }
+.rating-segments { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); display: flex; justify-content: space-between; }
+.rating-segment { width: 20%; height: 28px; position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; }
+.rating-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-2); border: 1px solid var(--border-2); transition: background var(--dur) var(--ease), transform 0.15s ease; pointer-events: none; }
+.rating-segment:hover .rating-dot { background: var(--accent-2); transform: scale(1.3); }
+.rating-input { position: absolute; opacity: 0; pointer-events: none; }
+.rating-input:checked ~ .rating-dot { background: var(--accent); border-color: var(--accent); transform: scale(1.4); }
+.rating-labels { display: flex; justify-content: space-between; margin-top: 10px; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.textarea { width: 100%; min-height: 110px; background: var(--surf); border: 1px solid var(--border-2); border-radius: 2px; padding: 13px 16px; font-size: var(--t-md); color: var(--text); outline: none; resize: vertical; transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease); font-family: var(--f-body); }
+.textarea:focus { border-color: var(--accent); background: rgba(200,184,154,0.03); }
+
+.form-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
+.btn { border: none; border-radius: 2px; padding: 14px 28px; font-size: var(--t-xs); font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; transition: all var(--dur) var(--ease); font-family: var(--f-body); }
+.btn-outline { background: transparent; color: var(--muted); border: 1px solid var(--border-2); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-solid { background: var(--accent); color: var(--bg); border: 1px solid var(--accent); }
+.btn-solid:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.thank-card { background: var(--layer); border: 1px solid var(--border-2); border-radius: 2px; padding: 20px 22px; margin: 20px 0; font-size: var(--t-md); line-height: 1.7; color: var(--muted); }
+.site-link { display: block; text-align: center; margin-top: 22px; color: var(--accent); font-weight: 400; font-size: var(--t-sm); text-decoration: none; letter-spacing: 0.08em; }
+.site-link:hover { text-decoration: underline; }
+
+.status { margin-top: 16px; padding: 12px 16px; border-radius: 2px; font-size: var(--t-sm); display: none; text-align: center; }
+.status.show { display: block; }
+.status.success { background: rgba(200,184,154,0.08); border: 1px solid rgba(200,184,154,0.16); color: var(--accent); }
+.status.error { background: rgba(255,70,70,0.07); border: 1px solid rgba(255,70,70,0.14); color: #ff6666; }
+
+/* ONE-PUMP CALLOUT */
+.ritual-note { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; background: rgba(200,184,154,0.04); border: 1px solid var(--border-2); border-radius: 2px; margin: 20px 0; }
+.ritual-note-icon { color: var(--accent); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+.ritual-note-text { font-size: var(--t-sm); color: var(--muted); line-height: 1.6; }
+.ritual-note-text strong { color: var(--text); font-weight: 500; }
+
+@media (max-width: 660px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .form-top { flex-direction: column; align-items: flex-start; }
+  .progress-bar { max-width: 100%; width: 100%; }
+}
+@media (max-width: 480px) {
+  .wrap { padding: 40px 20px 60px; }
+  .form-body { padding: 24px 20px; }
+  .form-nav { flex-direction: column; gap: 8px; }
+  .btn { width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/" class="top-nav-logo">neolab.care</a>
+  <a href="/" class="top-nav-back">← Back to site</a>
+</nav>
+
+<div class="wrap">
+  <div class="hero rv d1">
+    <div class="hero-tag">Private Testing Feedback</div>
+    <h1 class="hero-title">Your Thoughts<br><em>Shape the Formula.</em></h1>
+    <p class="hero-desc">Thank you for being part of this journey. Your honest input will help us perfect the 9-in-1 skincare — delivered at peak potency.</p>
+  </div>
+
+  <div class="form-card rv d2">
+    <div class="form-top">
+      <div class="form-top-label">Feedback Form</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+    </div>
+
+    <form class="form-body" id="feedbackForm">
+
+      <!-- STEP 1 -->
+      <div class="step active" data-step="1">
+        <div class="step-head">
+          <div class="step-tag">Step 1 of 3</div>
+          <h2 class="step-title">A Little<br><em>About You.</em></h2>
+          <div class="rule"></div>
+        </div>
+        <p class="group-desc">A few quick details to help us understand your skin better.</p>
+        <div class="grid grid-2">
+          <div class="rv d1"><span class="label">Your Name</span><input type="text" name="name" class="input" placeholder="First name is fine"></div>
+          <div class="rv d2"><span class="label">Your Age</span><input type="number" name="age" min="1" max="120" class="input" placeholder="e.g. 32"></div>
+          <div class="rv d3"><span class="label">Skin Type</span>
+            <select name="skinType" class="select">
+              <option value="">Select…</option>
+              <option>Oily</option><option>Dry</option><option>Combination</option><option>Sensitive</option><option>Normal</option>
+            </select>
+          </div>
+          <div class="rv d4"><span class="label">Your Usual Routine</span>
+            <select name="routine" class="select">
+              <option value="">Select…</option>
+              <option>1–2 products</option><option>3–5 products</option><option>6+ products</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-nav">
+          <button type="button" class="btn btn-outline" disabled>Back</button>
+          <button type="button" class="btn btn-solid next">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step" data-step="2">
+        <div class="step-head">
+          <div class="step-tag">Step 2 of 3</div>
+          <h2 class="step-title">Your Experience<br><em>With the 9-in-1 Cream.</em></h2>
+          <div class="rule"></div>
+        </div>
+
+        <div class="ritual-note rv d1">
+          <div class="ritual-note-icon">◆</div>
+          <div class="ritual-note-text"><strong>Designed for one pump per day</strong> — morning after shaving, or at night before bed. One 30ml bottle = 90 days of use.</div>
+        </div>
+
+        <div class="group-title rv d1">Before using NeolabCare…</div>
+        <p class="group-desc rv d1">What were your main skin struggles? <span class="accent-text">Pick all that apply.</span></p>
+        <div class="choice-group rv d1">
+          <label class="choice"><input type="checkbox" name="concern" value="Fine lines/wrinkles" class="choice-input"><span class="choice-label">Fine lines / Wrinkles</span></label>
+          <label class="choice"><input type="checkbox" name="concern" value="Dryness" class="choice-input"><span class="choice-label">Dryness / Tightness</span></label>
+          <label class="choice"><input type="checkbox" name="concern" value="Oiliness" class="choice-input"><span class="choice-label">Oiliness / Shine</span></label>
+          <label class="choice"><input type="checkbox" name="concern" value="Sensitivity" class="choice-input"><span class="choice-label">Sensitivity / Irritation</span></label>
+          <label class="choice"><input type="checkbox" name="concern" value="Dullness" class="choice-input"><span class="choice-label">Dull / Lackluster skin</span></label>
+          <label class="choice"><input type="checkbox" name="concern" value="Breakouts" class="choice-input"><span class="choice-label">Breakouts / Bumps</span></label>
+        </div>
+
+        <div class="group-title rv d2">First impression</div>
+        <p class="group-desc rv d2">What stood out right away? <span class="accent-text">Pick all that apply.</span></p>
+        <div class="choice-group rv d2">
+          <label class="choice"><input type="checkbox" name="firstImpression" value="Luxurious & lightweight" class="choice-input"><span class="choice-label">Luxurious &amp; lightweight</span></label>
+          <label class="choice"><input type="checkbox" name="firstImpression" value="Gentle & non-stinging" class="choice-input"><span class="choice-label">Gentle &amp; non-stinging</span></label>
+          <label class="choice"><input type="checkbox" name="firstImpression" value="Fast-absorbing" class="choice-input"><span class="choice-label">Fast-absorbing (no residue)</span></label>
+          <label class="choice"><input type="checkbox" name="firstImpression" value="Nourishing" class="choice-input"><span class="choice-label">Nourishing without heaviness</span></label>
+          <label class="choice"><input type="checkbox" name="firstImpression" value="Healthy glow" class="choice-input"><span class="choice-label">Gave an instant healthy glow</span></label>
+        </div>
+
+        <div class="group-title rv d3">How well did it work for you?<br><em>Rate each area.</em></div>
+        <p class="group-desc rv d3"><span class="accent-text">Tap anywhere on the bar</span> to rate improvement from 1 (none) to 5 (total game-changer).</p>
+
+        <div class="rating-group rv d3">
+          <!-- Rating rows -->
+          <div class="rating-row">
+            <span class="rating-label">Fine line &amp; wrinkle reduction</span>
+            <div class="rating-track">
+              <div class="rating-segments">
+                <label class="rating-segment"><input type="radio" name="fineLines" value="1" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="fineLines" value="2" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="fineLines" value="3" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="fineLines" value="4" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="fineLines" value="5" class="rating-input"><span class="rating-dot"></span></label>
+              </div>
+              <div class="rating-fill"></div>
+            </div>
+            <div class="rating-labels"><span>No improvement</span><span>Total game-changer</span></div>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">Firmness &amp; lifting</span>
+            <div class="rating-track">
+              <div class="rating-segments">
+                <label class="rating-segment"><input type="radio" name="firmness" value="1" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="firmness" value="2" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="firmness" value="3" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="firmness" value="4" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="firmness" value="5" class="rating-input"><span class="rating-dot"></span></label>
+              </div>
+              <div class="rating-fill"></div>
+            </div>
+            <div class="rating-labels"><span>No improvement</span><span>Total game-changer</span></div>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">Hydration</span>
+            <div class="rating-track">
+              <div class="rating-segments">
+                <label class="rating-segment"><input type="radio" name="hydration" value="1" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="hydration" value="2" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="hydration" value="3" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="hydration" value="4" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="hydration" value="5" class="rating-input"><span class="rating-dot"></span></label>
+              </div>
+              <div class="rating-fill"></div>
+            </div>
+            <div class="rating-labels"><span>No improvement</span><span>Total game-changer</span></div>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">Smoothness &amp; texture</span>
+            <div class="rating-track">
+              <div class="rating-segments">
+                <label class="rating-segment"><input type="radio" name="smoothness" value="1" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="smoothness" value="2" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="smoothness" value="3" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="smoothness" value="4" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="smoothness" value="5" class="rating-input"><span class="rating-dot"></span></label>
+              </div>
+              <div class="rating-fill"></div>
+            </div>
+            <div class="rating-labels"><span>No improvement</span><span>Total game-changer</span></div>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">Oil control</span>
+            <div class="rating-track">
+              <div class="rating-segments">
+                <label class="rating-segment"><input type="radio" name="oilControl" value="1" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="oilControl" value="2" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="oilControl" value="3" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="oilControl" value="4" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="oilControl" value="5" class="rating-input"><span class="rating-dot"></span></label>
+              </div>
+              <div class="rating-fill"></div>
+            </div>
+            <div class="rating-labels"><span>No improvement</span><span>Total game-changer</span></div>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">Skin tolerance — zero irritation</span>
+            <div class="rating-track">
+              <div class="rating-segments">
+                <label class="rating-segment"><input type="radio" name="gentle" value="1" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="gentle" value="2" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="gentle" value="3" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="gentle" value="4" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="gentle" value="5" class="rating-input"><span class="rating-dot"></span></label>
+              </div>
+              <div class="rating-fill"></div>
+            </div>
+            <div class="rating-labels"><span>Caused irritation</span><span>Completely gentle</span></div>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">Post-shave recovery</span>
+            <div class="rating-track">
+              <div class="rating-segments">
+                <label class="rating-segment"><input type="radio" name="postShave" value="1" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="postShave" value="2" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="postShave" value="3" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="postShave" value="4" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="postShave" value="5" class="rating-input"><span class="rating-dot"></span></label>
+              </div>
+              <div class="rating-fill"></div>
+            </div>
+            <div class="rating-labels"><span>No improvement</span><span>Total game-changer</span></div>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">Skin feel the morning after first use</span>
+            <div class="rating-track">
+              <div class="rating-segments">
+                <label class="rating-segment"><input type="radio" name="morningFeel" value="1" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="morningFeel" value="2" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="morningFeel" value="3" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="morningFeel" value="4" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="morningFeel" value="5" class="rating-input"><span class="rating-dot"></span></label>
+              </div>
+              <div class="rating-fill"></div>
+            </div>
+            <div class="rating-labels"><span>No difference</span><span>Noticeably better</span></div>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">Overall skin quality improvement</span>
+            <div class="rating-track">
+              <div class="rating-segments">
+                <label class="rating-segment"><input type="radio" name="overallQuality" value="1" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="overallQuality" value="2" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="overallQuality" value="3" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="overallQuality" value="4" class="rating-input"><span class="rating-dot"></span></label>
+                <label class="rating-segment"><input type="radio" name="overallQuality" value="5" class="rating-input"><span class="rating-dot"></span></label>
+              </div>
+              <div class="rating-fill"></div>
+            </div>
+            <div class="rating-labels"><span>No improvement</span><span>Total game-changer</span></div>
+          </div>
+        </div>
+
+        <div class="group-title rv d4">What did you notice most?</div>
+        <p class="group-desc rv d4"><span class="accent-text">Pick all changes you observed.</span></p>
+        <div class="choice-group rv d4">
+          <label class="choice"><input type="checkbox" name="noticed" value="Fewer fine lines" class="choice-input"><span class="choice-label">Fewer fine lines / wrinkles</span></label>
+          <label class="choice"><input type="checkbox" name="noticed" value="Firmer skin" class="choice-input"><span class="choice-label">Firmer, more lifted skin</span></label>
+          <label class="choice"><input type="checkbox" name="noticed" value="More hydration" class="choice-input"><span class="choice-label">Way more hydration</span></label>
+          <label class="choice"><input type="checkbox" name="noticed" value="Brighter skin" class="choice-input"><span class="choice-label">Brighter, glowing skin</span></label>
+          <label class="choice"><input type="checkbox" name="noticed" value="Less irritation" class="choice-input"><span class="choice-label">Less redness / irritation</span></label>
+          <label class="choice"><input type="checkbox" name="noticed" value="Less oil" class="choice-input"><span class="choice-label">Less oil / breakouts</span></label>
+          <label class="choice"><input type="checkbox" name="noticed" value="Post-shave healing" class="choice-input"><span class="choice-label">Faster post-shave healing</span></label>
+          <label class="choice"><input type="checkbox" name="noticed" value="Better morning skin" class="choice-input"><span class="choice-label">Better skin when I wake up</span></label>
+          <label class="choice"><input type="checkbox" name="noticed" value="No difference" class="choice-input"><span class="choice-label">No noticeable difference</span></label>
+        </div>
+
+        <div class="group-title rv d1">How does it compare to your old routine?</div>
+        <div class="choice-group rv d1">
+          <label class="choice"><input type="radio" name="compareOld" value="So much better" class="choice-input"><span class="choice-label">So much better</span></label>
+          <label class="choice"><input type="radio" name="compareOld" value="A little better" class="choice-input"><span class="choice-label">A little better</span></label>
+          <label class="choice"><input type="radio" name="compareOld" value="About the same" class="choice-input"><span class="choice-label">About the same</span></label>
+          <label class="choice"><input type="radio" name="compareOld" value="Not as good" class="choice-input"><span class="choice-label">Not as good</span></label>
+        </div>
+
+        <div class="group-title rv d2">Did you simplify your routine?</div>
+        <p class="group-desc rv d2">Were you able to use fewer products?</p>
+        <div class="choice-group rv d2">
+          <label class="choice"><input type="radio" name="reducedProducts" value="Yes, cut a lot" class="choice-input"><span class="choice-label">Yes — cut a lot of steps</span></label>
+          <label class="choice"><input type="radio" name="reducedProducts" value="Yes, cut a few" class="choice-input"><span class="choice-label">Yes — cut a few products</span></label>
+          <label class="choice"><input type="radio" name="reducedProducts" value="No changes" class="choice-input"><span class="choice-label">No changes</span></label>
+        </div>
+
+        <div class="group-title rv d3">Will this replace your full routine?</div>
+        <div class="choice-group rv d3">
+          <label class="choice"><input type="radio" name="replaceRoutine" value="Absolutely yes" class="choice-input"><span class="choice-label">Absolutely yes</span></label>
+          <label class="choice"><input type="radio" name="replaceRoutine" value="Probably yes" class="choice-input"><span class="choice-label">Probably yes</span></label>
+          <label class="choice"><input type="radio" name="replaceRoutine" value="Not sure yet" class="choice-input"><span class="choice-label">Not sure yet</span></label>
+          <label class="choice"><input type="radio" name="replaceRoutine" value="No" class="choice-input"><span class="choice-label">No, I won't</span></label>
+        </div>
+
+        <div class="group-title rv d4">How did the one-pump-a-day ritual fit into your life?</div>
+        <div class="choice-group rv d4">
+          <label class="choice"><input type="radio" name="onePumpRitual" value="Effortless" class="choice-input"><span class="choice-label">Effortless — barely noticed it</span></label>
+          <label class="choice"><input type="radio" name="onePumpRitual" value="Took some getting used to" class="choice-input"><span class="choice-label">Took some getting used to</span></label>
+          <label class="choice"><input type="radio" name="onePumpRitual" value="Wanted to use more" class="choice-input"><span class="choice-label">I wanted to use more than one pump</span></label>
+          <label class="choice"><input type="radio" name="onePumpRitual" value="Forgot some days" class="choice-input"><span class="choice-label">I forgot some days</span></label>
+        </div>
+
+        <div class="group-title rv d1">How much does freshness matter to you?</div>
+        <p class="group-desc rv d1">How important is lab-fresh, made-to-order skincare to you?</p>
+        <div class="choice-group rv d1">
+          <label class="choice"><input type="radio" name="freshnessMatter" value="Extremely important" class="choice-input"><span class="choice-label">Extremely important</span></label>
+          <label class="choice"><input type="radio" name="freshnessMatter" value="Very important" class="choice-input"><span class="choice-label">Very important</span></label>
+          <label class="choice"><input type="radio" name="freshnessMatter" value="Somewhat important" class="choice-input"><span class="choice-label">Somewhat important</span></label>
+          <label class="choice"><input type="radio" name="freshnessMatter" value="Not very important" class="choice-input"><span class="choice-label">Not very important</span></label>
+        </div>
+
+        <div class="form-nav">
+          <button type="button" class="btn btn-outline prev">Back</button>
+          <button type="button" class="btn btn-solid next">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step" data-step="3">
+        <div class="step-head">
+          <div class="step-tag">Step 3 of 3</div>
+          <h2 class="step-title">Thank You,<br><em>Truly.</em></h2>
+          <div class="rule"></div>
+        </div>
+
+        <div class="thank-card rv d1">
+          You are part of the inner circle — the first people to experience NeolabCare before anyone else. Your honest feedback shapes everything that comes next. It means more than you know.
+        </div>
+
+        <div class="group-title rv d2">A quick testimonial</div>
+        <p class="group-desc rv d2">We would love to share your words on the site — only with your permission.</p>
+        <textarea name="testimonial" class="textarea rv d2" placeholder="What did you love most about NeolabCare? Keep it short and honest."></textarea>
+
+        <div class="group-title rv d3" style="margin-top:26px">Would you be open to a casual 10-minute chat?</div>
+        <div class="choice-group rv d3">
+          <label class="choice"><input type="radio" name="interview" value="No, thank you" class="choice-input"><span class="choice-label">No, thank you</span></label>
+          <label class="choice"><input type="radio" name="interview" value="Yes, Zoom" class="choice-input"><span class="choice-label">Yes — Zoom works</span></label>
+          <label class="choice"><input type="radio" name="interview" value="Yes, in person" class="choice-input"><span class="choice-label">Yes — in person</span></label>
+          <label class="choice"><input type="radio" name="interview" value="Yes, self-recorded" class="choice-input"><span class="choice-label">Yes — I'll self-record</span></label>
+        </div>
+
+        <div class="form-nav">
+          <button type="button" class="btn btn-outline prev">Back</button>
+          <button type="submit" class="btn btn-solid" id="submitBtn">Submit Feedback</button>
+        </div>
+
+        <div id="status" class="status"></div>
+        <a href="https://neolabcare.onrender.com" target="_blank" class="site-link rv d4">neolabcare.onrender.com</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<script>
+// Reveal animation
+const obs = new IntersectionObserver(e => {
+  e.forEach(i => i.isIntersecting && (i.target.classList.add('in'), obs.unobserve(i.target)));
+}, { threshold: 0.06, rootMargin: '0px 0px -32px 0px' });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// Step navigation
+const steps = document.querySelectorAll('.step');
+const progress = document.getElementById('progress');
+let current = 0;
+
+function showStep(i) {
+  steps.forEach((el, idx) => el.classList.toggle('active', idx === i));
+  current = i;
+  progress.style.width = ((i + 1) / steps.length * 100) + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Re-observe new step elements
+  document.querySelectorAll('.rv:not(.in)').forEach(el => obs.observe(el));
+}
+
+document.querySelectorAll('.next').forEach(btn => btn.addEventListener('click', () => showStep(current + 1)));
+document.querySelectorAll('.prev').forEach(btn => btn.addEventListener('click', () => showStep(current - 1)));
+
+// Rating track interaction
+document.querySelectorAll('.rating-track').forEach(track => {
+  const segments = track.querySelectorAll('.rating-segment');
+  const fill = track.querySelector('.rating-fill');
+
+  function updateFill(val) {
+    fill.style.width = (val * 20) + '%';
+  }
+
+  segments.forEach((segment, index) => {
+    const input = segment.querySelector('input');
+    segment.addEventListener('mouseenter', () => updateFill(index + 1));
+    segment.addEventListener('click', () => {
+      input.checked = true;
+      updateFill(index + 1);
+    });
+  });
+
+  track.addEventListener('mouseleave', () => {
+    const checked = track.querySelector('input:checked');
+    updateFill(checked ? parseInt(checked.value) : 0);
+  });
+});
+
+// Form submission — ready for backend wiring
+document.getElementById('feedbackForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  const status = document.getElementById('status');
+  status.className = 'status';
+
+  try {
+    // Collect all form data
+    const formData = new FormData(e.target);
+    const data = {};
+
+    // Handle checkboxes (multi-value fields)
+    ['concern', 'firstImpression', 'noticed'].forEach(field => {
+      data[field] = Array.from(document.querySelectorAll(`input[name="${field}"]:checked`)).map(c => c.value).join(', ');
+    });
+
+    // All other fields
+    formData.forEach((value, key) => {
+      if (!['concern', 'firstImpression', 'noticed'].includes(key)) {
+        data[key] = value;
+      }
+    });
+
+    data['_subject'] = 'NeolabCare Tester Feedback — ' + (data['name'] || 'Anonymous');
+    data['_replyto'] = data['email'] || '';
+
+    // ── BACKEND ENDPOINT ──────────────────────────────────────────
+    // Replace the URL below with your Web3Forms / Formspree endpoint
+    // when ready. For now the form shows a success message client-side.
+    // const res = await fetch('https://api.web3forms.com/submit', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ access_key: 'YOUR_KEY_HERE', ...data })
+    // });
+    // if (!res.ok) throw new Error('Network error');
+    // ─────────────────────────────────────────────────────────────
+
+    // Simulated success (remove once backend is wired)
+    await new Promise(r => setTimeout(r, 600));
+    status.textContent = 'Feedback received. Thank you — this means everything.';
+    status.className = 'status success show';
+    btn.textContent = 'Submitted';
+  } catch (err) {
+    status.textContent = 'Something went wrong. Please try again.';
+    status.className = 'status error show';
+    btn.disabled = false;
+    btn.textContent = 'Submit Feedback';
+  }
+});
+</script>
+</body>
+</html>
