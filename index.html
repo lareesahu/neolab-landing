@@ -43,7 +43,7 @@
     "@type": "Organization",
     "name": "NeolabCare",
     "url": "https://neolab.care",
-    "logo": "https://neolab.care/assets/logo.svg",
+    "logo": "https://neolab.care/assets/logo_uploaded.png",
     "description": "NeolabCare produces the world's first lab-fresh, 9-in-1 skin treatment. Made to order and dispatched within 7 days for peak potency.",
     "sameAs": []
   }
@@ -742,8 +742,9 @@ nav.sc {
   border-bottom: 1px solid var(--border);
   padding: 14px 40px;
 }
-.nav-logo-link { display: flex; align-items: center; justify-content: center; }
-.nav-logo { height: 28px; width: auto; max-width: 160px; display: block; }
+  .nav-logo-link { display: flex; align-items: center; justify-content: center; }
+  .nav-logo { height: 40px; width: auto; max-width: 132px; display: block; object-fit: contain; }
+
 .btn {
   font-family: var(--f-body); font-size: 11px; font-weight: 500;
   letter-spacing: 2px; text-transform: uppercase;
@@ -819,6 +820,24 @@ nav.sc {
    PRODUCT / 9 FUNCTIONS
 ============================================================ */
 #product { background: #000; }
+.video-container {
+  margin-top: 40px;
+  margin-bottom: 80px;
+  border: 1px solid var(--border-2);
+  background: #000;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+.product-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+  object-fit: cover;
+  background: #000;
+}
 .prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 .prod-frame {
   max-width: min(30vw, 350px);
@@ -1221,20 +1240,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
    SECTION NUMBERS
 ============================================================ */
 .sec-num {
-  font-family: var(--f-body);
-  font-size: clamp(3rem, 10vw, 11rem);
-  font-weight: 700;
-  color: rgba(200,184,154,0.05);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  pointer-events: none;
-  overflow: hidden;
-  max-width: 50%;
-  user-select: none;
-  z-index: 0;
+  display: none !important;
 }
 #product, #freshness, #science, #perks, #faq, #context, #potency, #badstuff { position: relative; }
 
@@ -1710,7 +1716,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <!-- Center: logo -->
     <div class="nav-center">
       <a href="/" class="nav-logo-link" aria-label="neolab.care home">
-        <img src="assets/logo.svg" alt="neolab.care" class="nav-logo">
+        <img src="assets/logo_uploaded.png" alt="neolab.care" class="nav-logo">
       </a>
     </div>
     <!-- Right: CTA + hamburger -->
@@ -1829,13 +1835,12 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 <!-- 9 FUNCTIONS -->
 <section id="product" class="sec"><span class="sec-num" aria-hidden="true" style="top: -20px; z-index: 0;">01</span>
     <div class="wrap">
-       <div class="video-container rv d1" style="margin-top: 40px; margin-bottom: 80px; border: 1px solid var(--border-2); background: #000; position: relative; width: 100%; overflow: hidden;">
+       <div class="video-container rv d1">
          <video 
+           class="product-video"
            controls 
            playsinline 
-           preload="metadata" 
-           poster="assets/video_poster.jpg"
-           style="width: 100%; display: block; outline: none;"
+           preload="metadata"
          >
            <source src="assets/product_video.mp4" type="video/mp4">
            Your browser does not support the video tag.
@@ -2796,7 +2801,7 @@ function cookieChoice(accepted) {
   <div class="wrap">
     <div class="ft-grid">
       <div>
-        <div class="ft-logo"><a href="/" aria-label="neolab.care home"><img src="assets/logo.svg" alt="neolab.care"></a></div>
+        <div class="ft-logo"><a href="/" aria-label="neolab.care home"><img src="assets/logo_uploaded.png" alt="neolab.care"></a></div>
         <div class="ft-tag">9-in-1 skincare. One pump a day.<br>Freshly made to order, delivered at peak potency.</div>
       </div>
       <div>
