@@ -102,6 +102,16 @@
       --pad-x:  clamp(24px, 5vw, 80px);
       --ease:   cubic-bezier(.22, 1, .36, 1);
       --dur:    320ms;
+
+    /* TESTIMONIALS */
+    .feedback-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; background: var(--border); border: 1px solid var(--border); }
+    .testimonial-card { background: var(--layer); padding: 32px; display: flex; flex-direction: column; justify-content: space-between; }
+    .testimonial-text { font-size: 14px; line-height: 1.8; color: var(--text); font-style: italic; border-left: 2px solid var(--accent); padding-left: 20px; margin-bottom: 24px; }
+    .testimonial-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .testimonial-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+    .testimonial-tag span { color: var(--accent); margin-right: 4px; }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border: 1px solid var(--border-2); border-radius: 2px; color: var(--muted); background: rgba(245,245,240,.02); }
     }
 
     /* ─── BASE ───────────────────────────────────────────────── */
@@ -2437,8 +2447,69 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
   </div>
 </section>
 
+<!-- TESTER FEEDBACK -->
+<section id="feedback" class="sec" style="background:var(--bg-2);"><span class="sec-num" aria-hidden="true">12</span>
+  <div class="wrap">
+    <p class="lbl rv" style="text-align:center;">The Beta Program</p>
+    <div class="rule rule-c rv d1"></div>
+    <h2 class="h-section rv d1" style="text-align:center;">
+      Real results.<br><em>From the first batch.</em>
+    </h2>
+    <p class="body-lg rv d2" style="max-width:560px;margin:14px auto 48px;text-align:center;">
+      We invited a select group of early testers to experience the NeolabCare protocol. Here is how they rated the results after their first 30 days.
+    </p>
+
+    <div class="feedback-grid">
+      <!-- Murray -->
+      <div class="testimonial-card rv d1">
+        <div class="testimonial-text">"Cool and refreshing, rejuvenating."</div>
+        <div class="testimonial-meta">
+          <div class="testimonial-tag"><span>Tester:</span> Murray, 40</div>
+          <div class="testimonial-tag"><span>Routine:</span> Simplified</div>
+          <div class="testimonial-tag"><span>Overall:</span> 5/5</div>
+        </div>
+        <div class="tag-cloud" style="margin-top:16px;">
+          <div class="tag">Fewer fine lines</div>
+          <div class="tag">Firmer skin</div>
+          <div class="tag">Brighter skin</div>
+        </div>
+      </div>
+
+      <!-- Daniel -->
+      <div class="testimonial-card rv d2">
+        <div class="testimonial-text">"I really liked the one pump—it measures out the quantity easily every time. It’s not greasy like some other creams I’ve tried. My skin felt smoother, and the area around my eyes looked a little less dark."</div>
+        <div class="testimonial-meta">
+          <div class="testimonial-tag"><span>Tester:</span> Daniel, 45</div>
+          <div class="testimonial-tag"><span>Routine:</span> 1 Pump Ritual</div>
+          <div class="testimonial-tag"><span>Overall:</span> 5/5</div>
+        </div>
+        <div class="tag-cloud" style="margin-top:16px;">
+          <div class="tag">Less irritation</div>
+          <div class="tag">Smooth texture</div>
+          <div class="tag">Effortless</div>
+        </div>
+      </div>
+
+      <!-- Cong Huang -->
+      <div class="testimonial-card rv d3">
+        <div class="testimonial-text">"Gentle and non-stinging, nourishing. Noticed more hydration and brighter skin with less oil control issues than my previous routine."</div>
+        <div class="testimonial-meta">
+          <div class="testimonial-tag"><span>Tester:</span> Cong Huang, 42</div>
+          <div class="testimonial-tag"><span>Routine:</span> 1-2 products</div>
+          <div class="testimonial-tag"><span>Overall:</span> 5/5</div>
+        </div>
+        <div class="tag-cloud" style="margin-top:16px;">
+          <div class="tag">More hydration</div>
+          <div class="tag">Less oil</div>
+          <div class="tag">Skin tolerance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- REWARD TIERS -->
-<section id="perks" class="sec"><span class="sec-num" aria-hidden="true">12</span>
+<section id="perks" class="sec"><span class="sec-num" aria-hidden="true">13</span>
   <div class="wrap">
     <div class="perks-hd">
       <p class="lbl rv">Founding Campaign</p>
