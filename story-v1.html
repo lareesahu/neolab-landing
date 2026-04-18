@@ -3,431 +3,395 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NeoLabCare — Project Origin</title>
+  <title>NeolabCare — Project Origin</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Serif+Display:ital,wght@1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    img, svg { display: block; }
+    a { color: inherit; text-decoration: none; }
 
     :root {
-      --ivory:   #F5F1EB;
-      --stone:   #EDE8E0;
-      --warm:    #D9D0C4;
-      --ink:     #1C1A17;
-      --ink-2:   #3A3630;
-      --muted:   #7A7268;
-      --accent:  #9B8B6E;
-      --rule:    #C8BFB0;
-      --serif:   'Cormorant Garamond', Georgia, serif;
-      --sans:    'Inter', system-ui, sans-serif;
+      --f-body:   'Poppins', sans-serif;
+      --f-serif:  'Noto Serif Display', serif;
+      --bg:       #0A0A0A;
+      --bg-2:     #0D0D0D;
+      --layer:    #141414;
+      --text:     rgba(245,245,240,.94);
+      --muted:    rgba(245,245,240,.52);
+      --faint:    rgba(245,245,240,.26);
+      --accent:   #C8B89A;
+      --accent-2: #DDD0B8;
+      --border:   rgba(200,184,154,.10);
+      --border-2: rgba(200,184,154,.18);
+      --surf:     rgba(245,245,240,.025);
+      --pad-x:    clamp(24px, 5vw, 80px);
     }
 
     html, body {
-      background: var(--ivory);
-      color: var(--ink);
-      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--f-body);
+      font-size: 16px;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── CANVAS ── */
-    .canvas {
-      width: 1400px;
-      min-height: 2000px;
-      margin: 0 auto;
-      background: var(--ivory);
+    /* ── SHARED TYPOGRAPHY ── */
+    .lbl {
+      font-family: var(--f-body);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--accent);
+    }
+    .h-section {
+      font-family: var(--f-body);
+      font-size: clamp(1.6rem, 3.8vw, 3.2rem);
+      font-weight: 600; line-height: 1.15; letter-spacing: -0.01em;
+    }
+    .h-section em { font-family: var(--f-serif); font-style: italic; font-weight: 500; color: var(--accent); }
+    .body-lg { font-size: 1rem; font-weight: 400; line-height: 1.7; color: var(--muted); }
+    .rule { width: 32px; height: 1px; background: var(--accent); margin: 14px 0; opacity: 0.5; }
+
+    /* ── LAYOUT ── */
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 var(--pad-x); }
+    .sec  { padding: 120px 0; position: relative; }
+    .divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { height: 36px; width: auto; display: block; }
+
+    /* ── HERO ── */
+    #hero {
       position: relative;
+      min-height: 80vh;
+      display: flex; align-items: flex-end;
       overflow: hidden;
+      padding-top: 68px;
     }
-
-    /* Subtle paper grain overlay */
-    .canvas::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url(assets/image_0.jpeg);
+      background-size: cover; background-position: center 30%;
     }
-
-    /* Soft vertical gradient wash */
-    .canvas::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(245,241,235,0) 0%, rgba(237,232,224,0.35) 50%, rgba(245,241,235,0) 100%);
-      pointer-events: none;
-      z-index: 0;
+    .hero-ov {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,
+        rgba(10,10,10,0.97) 0%,
+        rgba(10,10,10,0.75) 40%,
+        rgba(10,10,10,0.25) 80%,
+        rgba(10,10,10,0.05) 100%);
     }
-
-    .inner {
-      position: relative;
-      z-index: 1;
-      padding: 96px 120px 100px;
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 680px;
+      padding: 0 var(--pad-x) 100px;
     }
-
-    /* ── TOP BAND ── */
-    .top-band {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 72px;
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(200,184,154,0.25);
+      padding: 7px 14px; border-radius: 2px; margin-bottom: 28px;
+      background: rgba(200,184,154,0.05);
     }
-
-    .logo-mark {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: breathe 3.5s cubic-bezier(0.45,0,0.55,1) infinite;
     }
-
-    .logo-mark img {
-      height: 22px;
-      opacity: 0.85;
+    @keyframes breathe {
+      0%,100% { opacity: 0.45; transform: scale(1); }
+      50%      { opacity: 1;    transform: scale(1.12); }
     }
-
-    .micro-label {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .top-rule {
-      width: 100%;
-      height: 1px;
-      background: var(--rule);
-      margin-bottom: 72px;
-    }
-
-    /* ── HEADLINE BLOCK ── */
-    .headline-block {
-      max-width: 760px;
-      margin-bottom: 56px;
-    }
-
-    .section-label {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-
-    .main-headline {
-      font-family: var(--serif);
-      font-size: 72px;
-      font-weight: 300;
-      line-height: 1.08;
-      color: var(--ink);
-      letter-spacing: -0.01em;
+    .hero-headline {
+      font-family: var(--f-body);
+      font-size: clamp(2.4rem, 5.5vw, 4.8rem);
+      font-weight: 600; line-height: 1.08; letter-spacing: -0.02em;
       margin-bottom: 20px;
     }
-
-    .main-headline em {
-      font-style: italic;
-      font-weight: 300;
+    .hero-headline em {
+      font-family: var(--f-serif); font-style: italic; font-weight: 400; color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 14px; font-weight: 300; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
     }
 
-    .sub-headline {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    /* ── ORIGIN STORY SECTION ── */
+    #origin { background: var(--bg-2); }
+
+    .origin-grid {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 80px;
+      align-items: start;
+      margin-top: 56px;
+    }
+
+    /* Left: numbered story blocks */
+    .story-blocks { display: flex; flex-direction: column; gap: 48px; }
+
+    .story-block {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .story-num {
+      font-family: var(--f-body);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent); padding-top: 4px;
+    }
+    .story-content {}
+    .story-title {
+      font-family: var(--f-body);
+      font-size: 15px; font-weight: 600;
+      color: var(--text); margin-bottom: 10px;
+      letter-spacing: 0.01em;
+    }
+    .story-body {
+      font-size: 14px; font-weight: 300; line-height: 1.8;
       color: var(--muted);
     }
 
-    /* ── INTRO DECK ── */
-    .intro-deck {
-      max-width: 680px;
-      margin-bottom: 72px;
-    }
-
-    .intro-deck p {
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 300;
-      line-height: 1.6;
-      color: var(--ink-2);
-      font-style: italic;
-    }
-
-    .mid-rule {
-      width: 48px;
-      height: 1px;
-      background: var(--accent);
-      margin: 32px 0;
-    }
-
-    /* ── TWO COLUMN BLOCK ── */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 80px;
-      align-items: start;
-    }
-
-    /* LEFT: body story */
-    .body-story {
-      padding-top: 4px;
-    }
-
-    .story-para {
-      margin-bottom: 36px;
-    }
-
-    .story-para p {
-      font-family: var(--sans);
-      font-size: 15px;
-      font-weight: 300;
-      line-height: 1.85;
-      color: var(--ink-2);
-      max-width: 560px;
-    }
-
-    .para-num {
-      font-family: var(--sans);
-      font-size: 9px;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    /* RIGHT: principle blocks */
-    .principles {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
+    /* Right: principle cards */
+    .principle-stack { display: flex; flex-direction: column; gap: 0; }
     .principle-card {
-      padding: 28px 32px;
-      border: 1px solid var(--rule);
-      background: rgba(255,255,255,0.45);
-      position: relative;
+      background: var(--layer);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent);
+      padding: 28px 28px 28px 26px;
     }
-
-    .principle-card + .principle-card {
-      border-top: none;
-    }
-
-    .principle-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--accent);
-    }
-
+    .principle-card + .principle-card { border-top: none; }
     .principle-tag {
-      font-family: var(--sans);
-      font-size: 9px;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px;
     }
-
     .principle-title {
-      font-family: var(--serif);
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 1.3;
-      color: var(--ink);
-      margin-bottom: 8px;
+      font-family: var(--f-body);
+      font-size: 15px; font-weight: 600;
+      color: var(--text); line-height: 1.3; margin-bottom: 8px;
     }
-
     .principle-body {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 300;
-      line-height: 1.7;
+      font-size: 13px; font-weight: 300; line-height: 1.7;
       color: var(--muted);
     }
 
     /* ── IMAGE STRIP ── */
-    .image-strip {
-      margin-top: 72px;
+    #imagery { background: var(--bg); padding: 0; }
+    .img-strip {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 2px;
-      height: 420px;
+      height: 480px;
+    }
+    .img-strip img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .img-strip-right {
+      display: grid; grid-template-rows: 1fr 1fr; gap: 2px;
     }
 
-    .image-strip img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    /* ── PHILOSOPHY SECTION ── */
+    #philosophy { background: var(--bg-2); }
+    .philosophy-inner {
+      max-width: 760px; margin: 0 auto; text-align: center;
     }
-
-    .image-strip-right {
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      gap: 2px;
+    .philosophy-quote {
+      font-family: var(--f-serif);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-style: italic; font-weight: 300;
+      line-height: 1.5; color: var(--text);
+      margin: 40px 0 32px;
     }
-
-    /* ── BOTTOM SIGNATURE ── */
-    .bottom-sig {
-      margin-top: 72px;
-      padding-top: 48px;
-      border-top: 1px solid var(--rule);
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
+    .philosophy-quote strong {
+      font-family: var(--f-serif);
+      font-style: italic; color: var(--accent);
     }
-
-    .sig-text {
-      max-width: 580px;
-    }
-
-    .sig-line {
-      font-family: var(--serif);
-      font-size: 20px;
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.5;
-      color: var(--ink-2);
-      margin-bottom: 16px;
-    }
-
-    .sig-attr {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.12em;
+    .philosophy-attr {
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 2px; text-transform: uppercase;
       color: var(--muted);
     }
 
-    .sig-mark {
-      text-align: right;
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 40px var(--pad-x);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ft-logo { height: 28px; opacity: 0.6; }
+    .ft-copy {
+      font-size: 11px; font-weight: 300;
+      letter-spacing: 1px; color: var(--muted);
+    }
+    .ft-back {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent); opacity: 0.7;
     }
 
-    .sig-mark img {
-      height: 32px;
-      opacity: 0.5;
-    }
-
-    .sig-year {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      color: var(--warm);
-      margin-top: 8px;
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .origin-grid { grid-template-columns: 1fr; gap: 48px; }
+      .img-strip { grid-template-columns: 1fr; height: auto; }
+      .img-strip > img { height: 300px; }
+      .img-strip-right { grid-template-rows: auto; grid-template-columns: 1fr 1fr; }
+      .img-strip-right img { height: 200px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
     }
   </style>
 </head>
 <body>
-<div class="canvas">
-  <div class="inner">
 
-    <!-- TOP BAND -->
-    <div class="top-band">
-      <div class="logo-mark">
-        <img src="assets/logo.svg" alt="NeoLabCare">
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo-link">
+      <img src="assets/logo.svg" alt="NeolabCare" class="nav-logo">
+    </a>
+    <span class="lbl" style="font-size:10px;">Project Origin</span>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-ov"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <span class="lbl" style="font-size:10px;">Project Origin</span>
       </div>
-      <div class="micro-label">Project Origin &nbsp;&middot;&nbsp; NeoLabCare for Skin</div>
+      <h1 class="hero-headline">Self-care,<br><em>in the flow.</em></h1>
+      <p class="hero-sub">The philosophy behind NeolabCare</p>
     </div>
-    <div class="top-rule"></div>
+  </section>
 
-    <!-- HEADLINE BLOCK -->
-    <div class="headline-block">
-      <div class="section-label">Project Origin</div>
-      <h1 class="main-headline">Self-care,<br><em>in the flow.</em></h1>
-      <div class="sub-headline">The philosophy behind NeoLabCare</div>
+  <div class="divider"></div>
+
+  <!-- ORIGIN STORY -->
+  <section id="origin" class="sec">
+    <div class="wrap">
+      <div class="lbl">The Story</div>
+      <div class="rule" style="margin-top:14px;"></div>
+      <h2 class="h-section" style="margin-top:20px; max-width:640px;">
+        Built around a<br><em>simple frustration.</em>
+      </h2>
+      <p class="body-lg" style="max-width:560px; margin-top:20px;">
+        A premium all-in-one skincare concept created in response to one observation: most routines ask too much, and most products compromise too early.
+      </p>
+
+      <div class="origin-grid">
+
+        <!-- Left: story blocks -->
+        <div class="story-blocks">
+
+          <div class="story-block">
+            <div class="story-num">01</div>
+            <div class="story-content">
+              <div class="story-title">The Frustration</div>
+              <p class="story-body">The desire was simple: a skincare routine that performed at a high level without demanding time, attention, or a shelf full of products. Something that could fit into a real day — not a curated one.</p>
+            </div>
+          </div>
+
+          <div class="story-block">
+            <div class="story-num">02</div>
+            <div class="story-content">
+              <div class="story-title">The Research</div>
+              <p class="story-body">The more we looked, the clearer the pattern became. Better results almost always meant more steps. More actives meant more products. More products meant more decisions, more friction, and more room for inconsistency.</p>
+            </div>
+          </div>
+
+          <div class="story-block">
+            <div class="story-num">03</div>
+            <div class="story-content">
+              <div class="story-title">The Realization</div>
+              <p class="story-body">The market is not optimized for your skin. It is optimized for shelf life, retail margins, and routine expansion. Products are formulated to survive distribution, not to arrive at peak potency. The system works against the outcome it promises.</p>
+            </div>
+          </div>
+
+          <div class="story-block">
+            <div class="story-num">04</div>
+            <div class="story-content">
+              <div class="story-title">The Response</div>
+              <p class="story-body">NeolabCare was built as a direct answer to that tension. One premium all-in-one cream, produced fresh to order, formulated around what the skin actually needs — not what a retail shelf can accommodate. Fewer steps. Higher intention. Simpler by design.</p>
+            </div>
+          </div>
+
+        </div><!-- /story-blocks -->
+
+        <!-- Right: principle cards -->
+        <div class="principle-stack">
+          <div class="principle-card">
+            <div class="principle-tag">The Problem</div>
+            <div class="principle-title">Too many steps.<br>Too much friction.</div>
+            <p class="principle-body">Most routines ask more than they give. The complexity becomes the barrier to consistency.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-tag">The Response</div>
+            <div class="principle-title">One premium cream<br>designed to do more.</div>
+            <p class="principle-body">A single all-in-one formulation that consolidates the routine without compromising the result.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-tag">The Philosophy</div>
+            <div class="principle-title">Maximum dedication.<br>Ultimate simplicity.</div>
+            <p class="principle-body">Achieving more by doing less. The product earns its place by asking nothing extra of you.</p>
+          </div>
+        </div>
+
+      </div><!-- /origin-grid -->
     </div>
+  </section>
 
-    <!-- INTRO DECK -->
-    <div class="intro-deck">
-      <p>A premium all-in-one skincare concept created in response to a simple frustration: most routines ask too much, and most products compromise too early.</p>
-      <div class="mid-rule"></div>
-    </div>
+  <div class="divider"></div>
 
-    <!-- TWO COLUMN -->
-    <div class="two-col">
-
-      <!-- LEFT: Body Story -->
-      <div class="body-story">
-
-        <div class="story-para">
-          <div class="para-num">01 &nbsp;/&nbsp; The Frustration</div>
-          <p>The desire was simple: a skincare routine that performed at a high level without demanding time, attention, or a shelf full of products. Something that could fit into a real day — not a curated one.</p>
-        </div>
-
-        <div class="story-para">
-          <div class="para-num">02 &nbsp;/&nbsp; The Research</div>
-          <p>The more we looked, the clearer the pattern became. Better results almost always meant more steps. More actives meant more products. More products meant more decisions, more friction, and more room for inconsistency.</p>
-        </div>
-
-        <div class="story-para">
-          <div class="para-num">03 &nbsp;/&nbsp; The Realization</div>
-          <p>The market is not optimized for your skin. It is optimized for shelf life, retail margins, and routine expansion. Products are formulated to survive distribution, not to arrive at peak potency. The system works against the outcome it promises.</p>
-        </div>
-
-        <div class="story-para">
-          <div class="para-num">04 &nbsp;/&nbsp; The Response</div>
-          <p>NeoLabCare was built as a direct answer to that tension. One premium all-in-one cream, produced fresh to order, formulated around what the skin actually needs — not what a retail shelf can accommodate. Fewer steps. Higher intention. Simpler by design.</p>
-        </div>
-
-      </div>
-
-      <!-- RIGHT: Principles -->
-      <div class="principles">
-
-        <div class="principle-card">
-          <div class="principle-tag">The Problem</div>
-          <div class="principle-title">Too many steps.<br>Too much friction.</div>
-          <div class="principle-body">Most routines ask more than they give. The complexity becomes the barrier to consistency.</div>
-        </div>
-
-        <div class="principle-card">
-          <div class="principle-tag">The Response</div>
-          <div class="principle-title">One premium cream<br>designed to do more.</div>
-          <div class="principle-body">A single all-in-one formulation that consolidates the routine without compromising the result.</div>
-        </div>
-
-        <div class="principle-card">
-          <div class="principle-tag">The Philosophy</div>
-          <div class="principle-title">Maximum dedication.<br>Ultimate simplicity.</div>
-          <div class="principle-body">Achieving more by doing less. The product earns its place by asking nothing extra of you.</div>
-        </div>
-
-      </div>
-
-    </div><!-- /two-col -->
-
-    <!-- IMAGE STRIP -->
-    <div class="image-strip">
-      <img src="assets/image_0.jpeg" alt="NeoLabCare — product in stone environment">
-      <div class="image-strip-right">
-        <img src="assets/image_3.jpeg" alt="NeoLabCare — monochrome portal">
-        <img src="assets/ctx_night_protocol.webp" alt="NeoLabCare — night protocol">
+  <!-- IMAGE STRIP -->
+  <section id="imagery">
+    <div class="img-strip">
+      <img src="assets/image_0.jpeg" alt="NeolabCare — stone environment">
+      <div class="img-strip-right">
+        <img src="assets/image_3.jpeg" alt="NeolabCare — monochrome portal">
+        <img src="assets/ctx_night_protocol.webp" alt="NeolabCare — night protocol">
       </div>
     </div>
+  </section>
 
-    <!-- BOTTOM SIGNATURE -->
-    <div class="bottom-sig">
-      <div class="sig-text">
-        <div class="sig-line">"A formula-first approach to skincare, created around simplicity, freshness, and modern use."</div>
-        <div class="sig-attr">— Lareesa Hu &nbsp;&middot;&nbsp; Founder, NeoLabCare</div>
-      </div>
-      <div class="sig-mark">
-        <img src="assets/logo.svg" alt="NeoLabCare">
-        <div class="sig-year">Est. 2025</div>
+  <div class="divider"></div>
+
+  <!-- PHILOSOPHY -->
+  <section id="philosophy" class="sec">
+    <div class="wrap">
+      <div class="philosophy-inner">
+        <div class="lbl">The Founding Philosophy</div>
+        <blockquote class="philosophy-quote">
+          "A formula-first approach to skincare,<br>created around <strong>simplicity, freshness,</strong><br>and modern use."
+        </blockquote>
+        <div class="rule rule-c" style="margin: 0 auto 24px;"></div>
+        <p class="philosophy-attr">— Lareesa Hu &nbsp;&middot;&nbsp; Founder, NeolabCare</p>
       </div>
     </div>
+  </section>
 
-  </div><!-- /inner -->
-</div><!-- /canvas -->
+  <div class="divider"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="assets/logo.svg" alt="NeolabCare" class="ft-logo">
+    <span class="ft-copy">NeolabCare &nbsp;&middot;&nbsp; Project Origin &nbsp;&middot;&nbsp; Est. 2025</span>
+    <a href="index.html" class="ft-back">← Back to Home</a>
+  </footer>
+
 </body>
 </html>
