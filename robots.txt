@@ -1,0 +1,116 @@
+# robots.txt — neolab.care
+# Last updated: 2026-04-19
+
+# ─── STANDARD SEARCH ENGINES ────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Disallow: /investors.html
+
+User-agent: Bingbot
+Allow: /
+Disallow: /investors.html
+
+User-agent: Slurp
+Allow: /
+Disallow: /investors.html
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /investors.html
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /investors.html
+
+User-agent: YandexBot
+Allow: /
+Disallow: /investors.html
+
+# ─── AI LANGUAGE MODEL CRAWLERS ─────────────────────────────
+# Explicitly welcoming all major AI crawlers for GEO (Generative Engine Optimisation)
+
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Allow: /
+Disallow: /investors.html
+
+# OpenAI SearchGPT / web browsing
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /investors.html
+
+# Anthropic / Claude
+User-agent: anthropic-ai
+Allow: /
+Disallow: /investors.html
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /investors.html
+
+# Google Gemini / Bard
+User-agent: Google-Extended
+Allow: /
+Disallow: /investors.html
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+Disallow: /investors.html
+
+# Meta AI (Llama)
+User-agent: FacebookBot
+Allow: /
+Disallow: /investors.html
+
+# Apple (Siri / Apple Intelligence)
+User-agent: Applebot
+Allow: /
+Disallow: /investors.html
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /investors.html
+
+# Amazon Alexa / Rufus
+User-agent: Amazonbot
+Allow: /
+Disallow: /investors.html
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+Disallow: /investors.html
+
+# You.com
+User-agent: YouBot
+Allow: /
+Disallow: /investors.html
+
+# Brave Search AI
+User-agent: BraveBot
+Allow: /
+Disallow: /investors.html
+
+# Common Crawl (used to train many LLMs)
+User-agent: CCBot
+Allow: /
+Disallow: /investors.html
+
+# Diffbot (AI knowledge graph)
+User-agent: Diffbot
+Allow: /
+Disallow: /investors.html
+
+# Bytedance / Doubao AI
+User-agent: Bytespider
+Allow: /
+Disallow: /investors.html
+
+# ─── CATCH-ALL ───────────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /investors.html
+
+# ─── SITEMAP ─────────────────────────────────────────────────
+Sitemap: https://neolab.care/sitemap.xml
