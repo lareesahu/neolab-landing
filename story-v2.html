@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeoLabCare — A Note from the Founder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #F7F3ED;
+      --warm-2:  #EEE8DF;
+      --ink:     #1C1A17;
+      --ink-2:   #3A3630;
+      --muted:   #7A7268;
+      --accent:  #9B8B6E;
+      --rule:    #C8BFB0;
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'Inter', system-ui, sans-serif;
+    }
+
+    html, body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── CANVAS ── */
+    .canvas {
+      width: 1400px;
+      min-height: 2200px;
+      margin: 0 auto;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Paper grain */
+    .canvas::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Warm editorial wash */
+    .canvas::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(200,175,140,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .inner {
+      position: relative;
+      z-index: 1;
+      padding: 96px 220px 100px;
+    }
+
+    /* ── TOP BAND ── */
+    .top-band {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 64px;
+    }
+
+    .logo-mark img {
+      height: 20px;
+      opacity: 0.7;
+    }
+
+    .micro-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .top-rule {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: 80px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .main-headline {
+      font-family: var(--serif);
+      font-size: 68px;
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+    }
+
+    .main-headline em {
+      font-style: italic;
+    }
+
+    .sub-headline {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── NARROW COLUMN ── */
+    .letter-col {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ── INTRO PARA ── */
+    .intro-para {
+      margin-bottom: 52px;
+    }
+
+    .intro-para p {
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--ink-2);
+      text-align: center;
+    }
+
+    .center-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 36px auto;
+    }
+
+    /* ── BODY BLOCKS ── */
+    .body-block {
+      margin-bottom: 40px;
+    }
+
+    .body-block p {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--ink-2);
+      text-align: left;
+    }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      margin: 52px 0;
+      padding: 0 0 0 0;
+      text-align: center;
+    }
+
+    .pull-quote-text {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .pull-quote-rule {
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+      margin: 24px auto 0;
+    }
+
+    /* ── IMAGE INSET ── */
+    .image-inset {
+      margin: 56px 0;
+      position: relative;
+    }
+
+    .image-inset img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-caption {
+      margin-top: 12px;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* ── SIGN-OFF ── */
+    .sign-off {
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--rule);
+      text-align: center;
+    }
+
+    .sign-off-line {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--ink-2);
+      margin-bottom: 28px;
+    }
+
+    .sign-off-attr {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .sign-off-logo img {
+      height: 24px;
+      opacity: 0.45;
+    }
+
+    /* ── OUTER FRAME DECORATION ── */
+    .frame-tl, .frame-tr, .frame-bl, .frame-br {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+    }
+    .frame-tl { top: 32px; left: 32px; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+    .frame-tr { top: 32px; right: 32px; border-top: 1px solid var(--rule); border-right: 1px solid var(--rule); }
+    .frame-bl { bottom: 32px; left: 32px; border-bottom: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+    .frame-br { bottom: 32px; right: 32px; border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); }
+  </style>
+</head>
+<body>
+<div class="canvas">
+  <!-- Corner frame marks -->
+  <div class="frame-tl"></div>
+  <div class="frame-tr"></div>
+  <div class="frame-bl"></div>
+  <div class="frame-br"></div>
+
+  <div class="inner">
+
+    <!-- TOP BAND -->
+    <div class="top-band">
+      <div class="logo-mark">
+        <img src="assets/logo.svg" alt="NeoLabCare">
+      </div>
+      <div class="micro-label">A Note from the Founder</div>
+    </div>
+    <div class="top-rule"></div>
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="section-label">A Note from the Founder</div>
+      <h1 class="main-headline">A note<br>from <em>Lareesa.</em></h1>
+      <div class="sub-headline">Why NeoLabCare was created</div>
+    </div>
+
+    <!-- LETTER COLUMN -->
+    <div class="letter-col">
+
+      <!-- Intro -->
+      <div class="intro-para">
+        <p>I wanted something high-performance, easy to stay consistent with, and gentle enough for sensitive skin. I looked for a long time. I could not find it.</p>
+      </div>
+      <div class="center-rule"></div>
+
+      <!-- Block 1 -->
+      <div class="body-block">
+        <p>The frustration started simply. I wanted a skincare routine that worked at a serious level without asking for a serious amount of time. Something I could use every morning without thinking, and trust that it was doing what it needed to do. Not a ritual. Not a project. Just a product that fit into a real life.</p>
+      </div>
+
+      <!-- Pull Quote 1 -->
+      <div class="pull-quote">
+        <div class="pull-quote-text">"I kept looking for a product that could do more while asking less."</div>
+        <div class="pull-quote-rule"></div>
+      </div>
+
+      <!-- Block 2 -->
+      <div class="body-block">
+        <p>The more I researched, the clearer the pattern became. Effectiveness almost always meant complexity. Better actives meant more products. More products meant more decisions, more friction, more room for inconsistency. The better the routine, the harder it was to maintain.</p>
+      </div>
+
+      <!-- Block 3 -->
+      <div class="body-block">
+        <p>I also started to understand something about how the industry works. Products are not formulated for your skin. They are formulated for shelf survival — for the months they spend in warehouses, distribution centres, and retail stockrooms before they reach you. The system is optimized around logistics, not outcomes.</p>
+      </div>
+
+      <!-- Image Inset -->
+      <div class="image-inset">
+        <img src="assets/image_8.png" alt="NeoLabCare — architectural product study">
+        <div class="image-caption">NeoLabCare for Skin &nbsp;&middot;&nbsp; 30ml &nbsp;&middot;&nbsp; Produced to Order</div>
+      </div>
+
+      <!-- Pull Quote 2 -->
+      <div class="pull-quote">
+        <div class="pull-quote-text">"When I could not find one that met that standard,<br>I decided to build it."</div>
+        <div class="pull-quote-rule"></div>
+      </div>
+
+      <!-- Block 4 -->
+      <div class="body-block">
+        <p>I spent years working inside one of France's most respected clinical skincare brands in China. I learned exactly how products are formulated for retail shelf life. I learned what gets left out, and why. That experience gave me a very clear picture of what a different set of constraints could produce.</p>
+      </div>
+
+      <!-- Block 5 -->
+      <div class="body-block">
+        <p>NeoLabCare is what I built when I chose a different set of constraints. One premium all-in-one cream. Fresh-made to order. Formulated around what the skin actually needs. Simpler than anything else on the market — not because we cut corners, but because we made different decisions about what mattered.</p>
+      </div>
+
+      <!-- Sign-off -->
+      <div class="sign-off">
+        <div class="sign-off-line">Maximum dedication. Ultimate simplicity.<br>Achieving more by doing less.</div>
+        <div class="sign-off-attr">— Lareesa Hu &nbsp;&middot;&nbsp; Founder, NeoLabCare</div>
+        <div class="sign-off-logo">
+          <img src="assets/logo.svg" alt="NeoLabCare">
+        </div>
+      </div>
+
+    </div><!-- /letter-col -->
+
+  </div><!-- /inner -->
+</div><!-- /canvas -->
+</body>
+</html>
