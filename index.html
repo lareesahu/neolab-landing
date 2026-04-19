@@ -1590,11 +1590,16 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
   .story-img { min-height: 280px; order: -1; }
   .faq-layout { grid-template-columns: 1fr; gap: 40px; }
   .faq-side { position: static; }
+  .faq-q { padding: 18px 0; font-size: 0.85rem; }
+  .faq-a-in { font-size: 0.82rem; }
   .ctx-grid { grid-template-columns: repeat(2,1fr); }
   .bs-grid { grid-template-columns: repeat(2,1fr); }
   .ft-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .chart-canvas-wrap { padding: 20px 16px; }
   .chart-legend { gap: 14px; }
+  #degradationChart { height: 220px !important; }
+  .chart-legend-item { font-size: 0.68rem; }
+  .chart-note { font-size: 0.65rem; }
 }
 @media (max-width: 600px) {
   /* Nav — mobile: tighten padding, hide all links, logo left, menu right */
@@ -1626,6 +1631,9 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
   .ing-name { font-size: 0.78rem; }
   /* Perks cards */
   .perk-card { padding: 24px 16px; }
+  .perk-price { font-size: 1.6rem; }
+  .perk-name { font-size: 0.88rem; }
+  .perk-ln { font-size: 0.75rem; }
   /* Promise / story sections */
   .promise-img { min-height: 220px; }
   .story-img { min-height: 220px; }
@@ -1857,6 +1865,13 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       .ppp-layout { grid-template-columns: 1fr; gap: 48px; }
       .ppp-img-frame { max-width: 400px; margin: 0 auto; aspect-ratio: 3/4; }
     }
+    @media (max-width: 480px) {
+      .ppp-img-frame { max-width: 100%; aspect-ratio: 4/3; }
+      .ppp-pillars { gap: 20px; }
+      .ppp-pillar { gap: 14px; }
+      .ppp-pillar-icon { width: 28px; height: 28px; }
+      .ppp-pillar-icon svg { width: 28px; height: 28px; }
+    }
 
     /* ─── SUBSCRIPTION SECTION ─────────────────────────────────────── */
     #subscription { background: var(--bg); }
@@ -1939,6 +1954,27 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       .sub-steps { grid-template-columns: 1fr; }
       .sub-cta-strip { flex-direction: column; align-items: flex-start; }
     }
+    /* ─── FOOTER MOBILE ──────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .ft-grid { grid-template-columns: 1fr !important; gap: 32px; }
+      .ft-logo img { min-width: 140px; width: 140px; }
+      .ft-btm { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+    /* ─── ACCORDION MOBILE ───────────────────────────────────── */
+    @media (max-width: 480px) {
+      .omit-tag { font-size: 8px; padding: 2px 6px; }
+      .omit-name { font-size: 0.72rem; }
+      .omit-body { padding: 0 0 16px 24px !important; }
+      .omit-item.open .omit-body { padding: 0 0 16px 24px !important; }
+      .ctx-slide-title { font-size: 0.9rem; }
+      .ctx-slide-desc { font-size: 10px; }
+      .ctx-slide { flex: 0 0 85vw; }
+    }
+    /* ─── CMP SPLIT MOBILE ───────────────────────────────────── */
+    @media (max-width: 480px) {
+      .cmp-stat-value { font-size: 1.1rem; }
+      .cmp-half { padding: 28px 20px 32px; }
+    }
 
     /* ─── COOKIE BANNER ──────────────────────────────────────── */
     #cookie-banner {
@@ -1978,6 +2014,10 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     .cookie-btn:hover { border-color: var(--accent); color: var(--accent); }
     .cookie-btn.accept { background: var(--accent); color: #0A0A0A; border-color: var(--accent); }
     .cookie-btn.accept:hover { background: var(--accent-2); border-color: var(--accent-2); }
+    @media (max-width: 480px) {
+      #cookie-banner { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
+      .cookie-btns { width: 100%; justify-content: flex-end; }
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
