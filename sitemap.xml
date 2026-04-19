@@ -32,6 +32,14 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Freshness chapter page -->
+  <url>
+    <loc>https://neolab.care/freshness.html</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Feedback -->
   <url>
     <loc>https://neolab.care/feedback.html</loc>
