@@ -1407,7 +1407,7 @@ nav.sc {
 ============================================================ */
 #perks { background: #000; }
 .perks-hd { text-align: center; margin-bottom: 44px; }
-.perks-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.perks-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; min-width: 0; }
 .perk {
   background: var(--charcoal); border: 1px solid var(--border);
   padding: 28px 22px; position: relative;
@@ -2015,8 +2015,9 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     .cookie-btn.accept { background: var(--accent); color: #0A0A0A; border-color: var(--accent); }
     .cookie-btn.accept:hover { background: var(--accent-2); border-color: var(--accent-2); }
     @media (max-width: 480px) {
-      #cookie-banner { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
-      .cookie-btns { width: 100%; justify-content: flex-end; }
+      #cookie-banner { flex-direction: column; align-items: stretch; gap: 12px; padding: 16px 16px 20px; }
+      .cookie-btns { width: 100%; justify-content: stretch; flex-direction: column; gap: 8px; }
+      .cookie-btns .btn { width: 100%; text-align: center; padding: 12px; }
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -2033,6 +2034,95 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     .plyr--video .plyr__controls {
       background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
       color: var(--text);
+    }
+
+    /* ─── ORIGIN TIMELINE ─────────────────────────────────────────────────── */
+    .origin-timeline {
+      position: relative;
+      display: flex;
+      gap: 0;
+      margin-bottom: 56px;
+      overflow: hidden;
+    }
+    .otl-track {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      height: 1px;
+      background: var(--border);
+    }
+    .otl-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0 2px;
+      position: relative;
+    }
+    .otl-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 1px solid var(--muted);
+      margin-bottom: 20px;
+      margin-left: 10px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .otl-dot-accent {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(200,184,154,0.2);
+    }
+    .otl-card {
+      background: var(--layer);
+      border: 1px solid var(--border);
+      padding: 20px 18px;
+      width: 100%;
+      flex: 1;
+      transition: border-color 0.25s ease;
+    }
+    .otl-card-accent {
+      border-color: var(--accent);
+      border-left: 2px solid var(--accent);
+    }
+    .otl-item:not(:first-child) .otl-card {
+      border-left: none;
+    }
+    .otl-item:not(:first-child) .otl-dot {
+      margin-left: 10px;
+    }
+    @media (max-width: 700px) {
+      .origin-timeline { flex-direction: column; gap: 2px; }
+      .otl-track { display: none; }
+      .otl-dot { display: none; }
+      .otl-item { padding: 0; }
+      .otl-item:not(:first-child) .otl-card { border-left: 1px solid var(--border); border-top: none; }
+      .otl-card-accent { border-left: 2px solid var(--accent) !important; }
+    }
+
+    /* ─── SUBSCRIBE CARD STACKING ─────────────────────────────────────────── */
+    .sub-stack {
+      position: relative;
+    }
+    .sub-stack .sub-step {
+      transition: transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.4s ease, box-shadow 0.4s ease;
+    }
+    .sub-stack .sub-step.stack-behind {
+      transform: scale(0.97) translateY(-6px);
+      opacity: 0.6;
+      z-index: 0;
+    }
+    .sub-stack .sub-step.stack-active {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      z-index: 2;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+      border-color: rgba(200,184,154,0.3);
     }
   </style>
 </head>
@@ -2285,41 +2375,36 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <p class="body-lg rv d2" style="max-width:520px;margin:14px auto 0;text-align:center;">
       From the morning shave to the overnight protocol. One cream adapts to every context in your day.
     </p>
-    <div class="ctx-strip" id="ctxStrip">
-      <div class="ctx-slide rv d1">
+    <div class="ctx-grid">
+      <div class="ctx-card rv d1">
         <img src="assets/image_4.webp" alt="NeolabCare Gym Bag Ritual — travel ampoule">
-        <div class="ctx-slide-content">
-          <div class="ctx-slide-num">01 &nbsp;/&nbsp; The Gym Bag</div>
-          <div class="ctx-slide-title">Post-workout recovery.</div>
-          <div class="ctx-slide-desc">Travel ampoule. 30 seconds to calm redness and rehydrate after training.</div>
+        <div class="ctx-card-content">
+          <p class="lbl" style="margin-bottom:6px;">The Gym Bag</p>
+          <p class="body-sm">Post-workout recovery. Travel ampoule. 30 seconds to calm redness and rehydrate after training.</p>
         </div>
       </div>
-      <div class="ctx-slide rv d2">
+      <div class="ctx-card rv d2">
         <img src="assets/lavatory_ritual.jpg" alt="NeolabCare Long-Haul Flight — man applying skincare in aircraft bathroom">
-        <div class="ctx-slide-content">
-          <div class="ctx-slide-num">02 &nbsp;/&nbsp; The Long-Haul Flight</div>
-          <div class="ctx-slide-title">Barrier restored mid-flight.</div>
-          <div class="ctx-slide-desc">Pressurised cabin air strips moisture. One application. No sink full of products.</div>
+        <div class="ctx-card-content">
+          <p class="lbl" style="margin-bottom:6px;">The Long-Haul Flight</p>
+          <p class="body-sm">Barrier restored mid-flight. Pressurised cabin air strips moisture. One application.</p>
         </div>
       </div>
-      <div class="ctx-slide rv d3">
+      <div class="ctx-card rv d3">
         <img src="assets/image_6.webp" alt="NeolabCare Gift — Founding Edition engraving">
-        <div class="ctx-slide-content">
-          <div class="ctx-slide-num">03 &nbsp;/&nbsp; The Gift</div>
-          <div class="ctx-slide-title">Quiet excellence, engraved.</div>
-          <div class="ctx-slide-desc">Engraved bottle. Gift box. For someone who values substance over noise.</div>
+        <div class="ctx-card-content">
+          <p class="lbl" style="margin-bottom:6px;">The Gift</p>
+          <p class="body-sm">Quiet excellence, engraved. For someone who values substance over noise.</p>
         </div>
       </div>
-      <div class="ctx-slide rv d4">
+      <div class="ctx-card rv d4">
         <img src="assets/image_8.webp" alt="NeolabCare Night Protocol — bedtime skincare ritual">
-        <div class="ctx-slide-content">
-          <div class="ctx-slide-num">04 &nbsp;/&nbsp; The Night Protocol</div>
-          <div class="ctx-slide-title">Recovery while you sleep.</div>
-          <div class="ctx-slide-desc">Apply before bed. NMN, copper peptide, and ergothioneine work through the night.</div>
+        <div class="ctx-card-content">
+          <p class="lbl" style="margin-bottom:6px;">The Night Protocol</p>
+          <p class="body-sm">Recovery while you sleep. NMN, copper peptide, and ergothioneine work through the night.</p>
         </div>
       </div>
     </div>
-    <p class="ctx-scroll-hint rv d5">&#8592; Drag to explore &nbsp;&rarr;</p>
   </div>
 </section>
 
@@ -2778,84 +2863,30 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <p class="body-lg rv d2" style="text-align:center;max-width:540px;margin:0 auto 16px;">
       Zero synthetic fragrance. Zero drying alcohol. Zero retinol. Zero AHAs. Every omission was deliberate &mdash; each one excluded because it did not align with our philosophy of barrier-safe, high-tolerance skincare.
     </p>
-    <div class="omit-list">
-      <div class="omit-item rv d1">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c0 0-4 3-4 7a4 4 0 0 0 8 0c0-4-4-7-4-7z"/><path d="M12 10v4"/><path d="M9 20h6"/><path d="M12 14v6"/></svg></span>
-          <span class="omit-name">Synthetic Fragrance</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Added to mask the smell of cheaper base ingredients. Common cause of contact dermatitis and long-term skin sensitisation.</p></div>
+    <div class="bs-grid">
+      <div class="rv d1" style="background:var(--layer);border:1px solid var(--border);padding:28px 24px;">
+        <p class="lbl" style="margin-bottom:10px;color:var(--muted);">Excluded</p>
+        <p style="font-size:0.88rem;font-weight:500;color:var(--off-white);margin-bottom:8px;">Synthetic Fragrance</p>
+        <p style="font-size:0.78rem;color:var(--light);line-height:1.65;">Added to mask the smell of cheaper base ingredients. Common cause of contact dermatitis and long-term skin sensitisation.</p>
       </div>
-      <div class="omit-item rv d2">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l2 6H6L8 2z"/><path d="M6 8l2 14h8l2-14"/><path d="M10 12h4"/></svg></span>
-          <span class="omit-name">Drying Alcohol</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Used to create a fast-dry, lightweight feel. Disrupts the skin barrier with repeated use and accelerates transepidermal water loss.</p></div>
+      <div class="rv d2" style="background:var(--layer);border:1px solid var(--border);border-left:none;padding:28px 24px;">
+        <p class="lbl" style="margin-bottom:10px;color:var(--muted);">Excluded</p>
+        <p style="font-size:0.88rem;font-weight:500;color:var(--off-white);margin-bottom:8px;">Drying Alcohols</p>
+        <p style="font-size:0.78rem;color:var(--light);line-height:1.65;">Used as a carrier and to create a fast-drying texture. Disrupts the skin barrier with repeated use and accelerates moisture loss.</p>
       </div>
-      <div class="omit-item rv d3">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></span>
-          <span class="omit-name">Parabens</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Cheap, effective preservatives. Linked to endocrine disruption — they mimic oestrogen and accumulate in tissue with long-term use.</p></div>
+      <div class="rv d3" style="background:var(--layer);border:1px solid var(--border);border-top:none;padding:28px 24px;">
+        <p class="lbl" style="margin-bottom:10px;color:var(--accent);">By Design</p>
+        <p style="font-size:0.88rem;font-weight:500;color:var(--off-white);margin-bottom:8px;">Retinol</p>
+        <p style="font-size:0.78rem;color:var(--light);line-height:1.65;">Proven anti-aging effect — but causes sun sensitivity and peeling. We achieve the anti-aging outcome through NMN and GHK-Cu without the downtime.</p>
       </div>
-      <div class="omit-item rv d4">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L8 8H4l4 4-2 8 6-4 6 4-2-8 4-4h-4L12 2z"/></svg></span>
-          <span class="omit-name">Mineral Oil</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>A low-cost occlusive that locks in moisture by sitting on the skin surface. Clogs pores and prevents actives from penetrating.</p></div>
+      <div class="rv d4" style="background:var(--layer);border:1px solid var(--border);border-top:none;border-left:none;padding:28px 24px;">
+        <p class="lbl" style="margin-bottom:10px;color:var(--muted);">Excluded</p>
+        <p style="font-size:0.88rem;font-weight:500;color:var(--off-white);margin-bottom:8px;">Hormone Disruptors</p>
+        <p style="font-size:0.78rem;color:var(--light);line-height:1.65;">A class of compounds — including some UV filters and preservatives — that interfere with hormonal signalling. Absorbed through the skin.</p>
       </div>
-      <div class="omit-item rv d1">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>
-          <span class="omit-name">Retinol <span style="font-size:9px;color:var(--muted);font-weight:400;">(by design)</span></span>
-          <span class="omit-tag">By Design</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Proven anti-aging effect — but causes sun sensitivity, peeling, and requires SPF. We achieve the anti-aging outcome through NMN and GHK-Cu without the downtime.</p></div>
-      </div>
-      <div class="omit-item rv d2">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></span>
-          <span class="omit-name">AHAs / BHAs</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Effective exfoliants that resurface the skin. Increase photosensitivity and require sun protection — limiting when and how often you can use them.</p></div>
-      </div>
-      <div class="omit-item rv d3">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
-          <span class="omit-name">Heavy Metals</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Trace contaminants found in mass-produced cosmetic ingredients. We source pharmaceutical-grade actives and batch-test for purity.</p></div>
-      </div>
-      <div class="omit-item rv d4">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-          <span class="omit-name">Hormone Disruptors</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>A class of compounds — including some UV filters and preservatives — that interfere with hormonal signalling. Absorbed through the skin and detected in blood and urine after topical use.</p></div>
-      </div>
-    </div>
     </div>
   </div>
 </section>
-
 <!-- PROJECT ORIGIN -->
 <section id="project-origin" class="sec" style="background:var(--bg-2);"><span class="sec-num" aria-hidden="true" style="top:-20px;z-index:0;">10</span>
   <div class="wrap">
@@ -2867,22 +2898,35 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <p class="body-lg rv d2" style="max-width:560px;margin:16px auto 56px;text-align:center;">
       A premium all-in-one skincare concept created in response to one structural observation: most routines ask too much, and most products compromise too early.
     </p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;margin-bottom:56px;">
-      <div style="background:var(--layer);border:1px solid var(--border);border-left:2px solid var(--accent);padding:28px 28px 28px 26px;" class="rv d1">
-        <p class="lbl" style="margin-bottom:10px;">01 &nbsp;/&nbsp; The Frustration</p>
-        <p style="font-size:12px;line-height:1.65;color:var(--light);">The desire was simple: a skincare routine that performed at a high level without demanding time, attention, or a shelf full of products. Something that could fit into a real day &mdash; not a curated one.</p>
+    <div class="origin-timeline">
+      <div class="otl-track" aria-hidden="true"></div>
+      <div class="otl-item rv d1">
+        <div class="otl-dot"></div>
+        <div class="otl-card">
+          <p class="lbl" style="margin-bottom:8px;">The Frustration</p>
+          <p style="font-size:12px;line-height:1.65;color:var(--light);">The desire was simple: a skincare routine that performed at a high level without demanding time, attention, or a shelf full of products. Something that could fit into a real day — not a curated one.</p>
+        </div>
       </div>
-      <div style="background:var(--layer);border:1px solid var(--border);border-left:2px solid var(--accent);border-left-width:2px;padding:28px 28px 28px 26px;" class="rv d2">
-        <p class="lbl" style="margin-bottom:10px;">02 &nbsp;/&nbsp; The Research</p>
-        <p style="font-size:12px;line-height:1.65;color:var(--light);">The more we looked, the clearer the pattern became. Better results almost always meant more steps. More actives meant more products. More products meant more decisions, more friction, and more room for inconsistency.</p>
+      <div class="otl-item rv d2">
+        <div class="otl-dot"></div>
+        <div class="otl-card">
+          <p class="lbl" style="margin-bottom:8px;">The Research</p>
+          <p style="font-size:12px;line-height:1.65;color:var(--light);">The more we looked, the clearer the pattern became. Better results almost always meant more steps. More actives meant more products. More products meant more decisions, more friction, and more room for inconsistency.</p>
+        </div>
       </div>
-      <div style="background:var(--layer);border:1px solid var(--border);border-top:none;border-left:2px solid var(--accent);padding:28px 28px 28px 26px;" class="rv d3">
-        <p class="lbl" style="margin-bottom:10px;">03 &nbsp;/&nbsp; The Realization</p>
-        <p style="font-size:12px;line-height:1.65;color:var(--light);">The market is not optimized for your skin. It is optimized for shelf life, retail margins, and routine expansion. Products are formulated to survive distribution, not to arrive at peak potency. The system works against the outcome it promises.</p>
+      <div class="otl-item rv d3">
+        <div class="otl-dot"></div>
+        <div class="otl-card">
+          <p class="lbl" style="margin-bottom:8px;">The Realization</p>
+          <p style="font-size:12px;line-height:1.65;color:var(--light);">The market is not optimized for your skin. It is optimized for retail shelf life, margin, and category expansion. The system works against the outcome it promises.</p>
+        </div>
       </div>
-      <div style="background:var(--layer);border:1px solid var(--border);border-top:none;border-left:2px solid var(--accent);padding:28px 28px 28px 26px;" class="rv d4">
-        <p class="lbl" style="margin-bottom:10px;">04 &nbsp;/&nbsp; The Response</p>
-        <p style="font-size:12px;line-height:1.65;color:var(--light);">NeolabCare was built as a direct answer to that tension. One premium all-in-one cream, produced fresh to order, formulated around what the skin actually needs &mdash; not what a retail shelf can accommodate. Fewer steps. Higher intention. Simpler by design.</p>
+      <div class="otl-item rv d4">
+        <div class="otl-dot otl-dot-accent"></div>
+        <div class="otl-card otl-card-accent">
+          <p class="lbl" style="margin-bottom:8px;color:var(--accent);">The Response</p>
+          <p style="font-size:12px;line-height:1.65;color:var(--light);">NeolabCare was built as a direct answer to that tension. One premium all-in-one cream, produced fresh to order, formulated around what the skin actually needs — not what a retail shelf can accommodate.</p>
+        </div>
       </div>
     </div>
     <div class="pull-quote rv d5" style="max-width:640px;margin:0 auto;text-align:center;border-left:none;font-style:italic;font-size:1.05rem;line-height:1.7;color:var(--text);">
@@ -2903,7 +2947,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         Because potency changes over time, your reordering should not be guesswork. We monitor your batch timing and plan your next shipment around your selected delivery rhythm, so staying stocked feels simpler for you.
       </p>
     </div>
-    <div class="sub-steps">
+    <div class="sub-steps sub-stack">
         <div class="sub-step rv d1">
         <div class="sub-step-num">Step 01</div>
         <div class="sub-step-ico"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
@@ -3490,6 +3534,26 @@ function omitToggle(btn) {
   }, { threshold: [0, 0.35, 1] });
   io.observe(vc);
 })();
+</script>
+<script>
+  // ── Subscribe card stacking animation ──────────────────────────────────
+  (function() {
+    var steps = document.querySelectorAll('.sub-stack .sub-step');
+    if (!steps.length) return;
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var idx = Array.from(steps).indexOf(entry.target);
+        if (entry.isIntersecting) {
+          steps.forEach(function(s, i) {
+            s.classList.remove('stack-active', 'stack-behind');
+            if (i < idx) s.classList.add('stack-behind');
+            if (i === idx) s.classList.add('stack-active');
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    steps.forEach(function(s) { obs.observe(s); });
+  })();
 </script>
 </body>
 </html>
