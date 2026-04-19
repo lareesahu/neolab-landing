@@ -993,6 +993,79 @@ nav.sc {
    COMPARISON BARS
 ============================================================ */
 .cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 40px; }
+/* Split panel replacement */
+.cmp-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 48px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.cmp-half {
+  padding: 36px 32px 40px;
+  position: relative;
+}
+.cmp-half.them {
+  background: var(--bg-2);
+  border-right: 1px solid var(--border);
+}
+.cmp-half.us {
+  background: var(--layer);
+}
+.cmp-half-label {
+  font-family: var(--f-body);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.cmp-half.them .cmp-half-label { color: var(--muted); }
+.cmp-half.us .cmp-half-label { color: var(--accent); }
+.cmp-stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cmp-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cmp-stat-name {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cmp-stat-value {
+  font-family: var(--f-serif);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  line-height: 1.2;
+}
+.cmp-half.them .cmp-stat-value { color: rgba(245,245,240,0.45); }
+.cmp-half.us .cmp-stat-value { color: var(--text); }
+.cmp-divider-label {
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  transform: translateY(-50%);
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 4px 6px;
+  writing-mode: vertical-rl;
+  text-transform: uppercase;
+  z-index: 2;
+}
+@media (max-width: 600px) {
+  .cmp-split { grid-template-columns: 1fr; }
+  .cmp-half.them { border-right: none; border-bottom: 1px solid var(--border); }
+  .cmp-divider-label { display: none; }
+}
 .cmp-card {
   background: var(--charcoal); padding: 28px 32px;
   border: 1px solid var(--border);
@@ -1071,6 +1144,83 @@ nav.sc {
 }
 .bs-subtitle { font-family: var(--f-body); font-size: 0.9rem; color: var(--muted); text-align: center; margin-top: 8px; max-width: 480px; margin-left: auto; margin-right: auto; }
 .bs-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 36px; }
+/* Accordion list replacement */
+.omit-list {
+  margin-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.omit-item {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.omit-trigger {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 0;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+}
+.omit-trigger:hover .omit-name { color: var(--text); }
+.omit-ico {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  opacity: 0.7;
+}
+.omit-name {
+  flex: 1;
+  font-family: var(--f-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.omit-tag {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(200,184,154,0.08);
+  border: 1px solid rgba(200,184,154,0.15);
+  padding: 3px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.omit-arrow {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  transition: transform 0.3s ease;
+}
+.omit-item.open .omit-arrow { transform: rotate(45deg); }
+.omit-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  padding: 0 0 0 48px;
+}
+.omit-item.open .omit-body {
+  max-height: 120px;
+  padding: 0 0 18px 48px;
+}
+.omit-body p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 560px;
+}
 .bs-item {
   display: flex; flex-direction: column; align-items: center; gap: 12px;
   padding: 24px 16px; background: var(--charcoal); border: 1px solid var(--border);
@@ -1155,6 +1305,73 @@ nav.sc {
 ============================================================ */
 #context { background: var(--black); }
 .ctx-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 40px; }
+/* Horizontal scroll strip replacement */
+.ctx-strip {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 48px;
+  cursor: grab;
+  scrollbar-width: none;
+}
+.ctx-strip::-webkit-scrollbar { display: none; }
+.ctx-strip:active { cursor: grabbing; }
+.ctx-slide {
+  flex: 0 0 72vw;
+  max-width: 480px;
+  min-width: 260px;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--border);
+}
+.ctx-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+  filter: brightness(0.7);
+}
+.ctx-slide:hover img { transform: scale(1.03); filter: brightness(0.85); }
+.ctx-slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 22px;
+  background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, transparent 100%);
+}
+.ctx-slide-num {
+  font-family: var(--f-body);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.ctx-slide-title {
+  font-family: var(--f-serif);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text);
+  margin-bottom: 6px;
+  font-style: italic;
+}
+.ctx-slide-desc {
+  font-size: 11px;
+  line-height: 1.6;
+  color: rgba(245,245,240,0.6);
+}
+.ctx-scroll-hint {
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+  margin-top: 16px;
+  text-transform: uppercase;
+}
 .ctx-card {
   position: relative; overflow: hidden;
   aspect-ratio: 3/4; cursor: default;
@@ -2028,40 +2245,41 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <p class="body-lg rv d2" style="max-width:520px;margin:14px auto 0;text-align:center;">
       From the morning shave to the overnight protocol. One cream adapts to every context in your day.
     </p>
-    <div class="ctx-grid">
-      <div class="ctx-card rv d1">
+    <div class="ctx-strip" id="ctxStrip">
+      <div class="ctx-slide rv d1">
         <img src="assets/image_4.webp" alt="NeolabCare Gym Bag Ritual — travel ampoule">
-        <div class="ctx-card-content">
-          <div class="ctx-num">01</div>
-          <div class="ctx-title">The Gym Bag</div>
-          <div class="ctx-desc">Travel ampoule. Easy to carry. 30 seconds post-workout to calm redness and rehydrate.</div>
+        <div class="ctx-slide-content">
+          <div class="ctx-slide-num">01 &nbsp;/&nbsp; The Gym Bag</div>
+          <div class="ctx-slide-title">Post-workout recovery.</div>
+          <div class="ctx-slide-desc">Travel ampoule. 30 seconds to calm redness and rehydrate after training.</div>
         </div>
       </div>
-      <div class="ctx-card rv d2">
+      <div class="ctx-slide rv d2">
         <img src="assets/lavatory_ritual.jpg" alt="NeolabCare Long-Haul Flight — man applying skincare in aircraft bathroom">
-        <div class="ctx-card-content">
-          <div class="ctx-num">02</div>
-          <div class="ctx-title">The Long-Haul Flight</div>
-          <div class="ctx-desc">Pressurised cabin air strips moisture. One application restores the barrier mid-flight without a sink full of products.</div>
+        <div class="ctx-slide-content">
+          <div class="ctx-slide-num">02 &nbsp;/&nbsp; The Long-Haul Flight</div>
+          <div class="ctx-slide-title">Barrier restored mid-flight.</div>
+          <div class="ctx-slide-desc">Pressurised cabin air strips moisture. One application. No sink full of products.</div>
         </div>
       </div>
-      <div class="ctx-card rv d3">
+      <div class="ctx-slide rv d3">
         <img src="assets/image_6.webp" alt="NeolabCare Gift — Founding Edition engraving">
-        <div class="ctx-card-content">
-          <div class="ctx-num">03</div>
-          <div class="ctx-title">The Gift</div>
-          <div class="ctx-desc">Engraved bottle. Gift box. An elegant gift for someone who values quiet excellence.</div>
+        <div class="ctx-slide-content">
+          <div class="ctx-slide-num">03 &nbsp;/&nbsp; The Gift</div>
+          <div class="ctx-slide-title">Quiet excellence, engraved.</div>
+          <div class="ctx-slide-desc">Engraved bottle. Gift box. For someone who values substance over noise.</div>
         </div>
       </div>
-      <div class="ctx-card rv d4">
+      <div class="ctx-slide rv d4">
         <img src="assets/image_8.webp" alt="NeolabCare Night Protocol — bedtime skincare ritual">
-        <div class="ctx-card-content">
-          <div class="ctx-num">04</div>
-          <div class="ctx-title">The Night Protocol</div>
-          <div class="ctx-desc">Apply before sleep. Let NMN, copper peptide, and ergothioneine work while you recover.</div>
+        <div class="ctx-slide-content">
+          <div class="ctx-slide-num">04 &nbsp;/&nbsp; The Night Protocol</div>
+          <div class="ctx-slide-title">Recovery while you sleep.</div>
+          <div class="ctx-slide-desc">Apply before bed. NMN, copper peptide, and ergothioneine work through the night.</div>
         </div>
       </div>
     </div>
+    <p class="ctx-scroll-hint rv d5">&#8592; Drag to explore &nbsp;&rarr;</p>
   </div>
 </section>
 
@@ -2118,20 +2336,49 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         </div>
       </div>
     </div>
-    <div class="cmp-grid">
-      <div class="cmp-card rv d1">
-        <div class="cmp-lbl them">Standard Skincare</div>
-        <div class="bar-row"><div class="bar-meta"><span>Preservative Load</span><span>High</span></div><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div></div>
-        <div class="bar-row"><div class="bar-meta"><span>Active Concentration</span><span>Low</span></div><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div></div>
-        <div class="bar-row"><div class="bar-meta"><span>Days to Your Door</span><span>180&ndash;540 days</span></div><div class="bar-track"><div class="bar-fill" style="width:95%"></div></div></div>
-        <div class="bar-row"><div class="bar-meta"><span>Potency at Use</span><span>Unknown</span></div><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div></div>
+    <div class="cmp-split rv d3">
+      <div class="cmp-half them">
+        <div class="cmp-half-label">Standard Skincare</div>
+        <div class="cmp-stat-row">
+          <div class="cmp-stat">
+            <div class="cmp-stat-name">Preservative Load</div>
+            <div class="cmp-stat-value">High</div>
+          </div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-name">Active Concentration</div>
+            <div class="cmp-stat-value">Low</div>
+          </div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-name">Days to Your Door</div>
+            <div class="cmp-stat-value">180&ndash;540 days</div>
+          </div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-name">Potency at Use</div>
+            <div class="cmp-stat-value">Unknown</div>
+          </div>
+        </div>
+        <div class="cmp-divider-label">vs</div>
       </div>
-      <div class="cmp-card neo rv d2">
-        <div class="cmp-lbl us">NeolabCare</div>
-        <div class="bar-row"><div class="bar-meta"><span>Preservative Load</span><span>Minimal</span></div><div class="bar-track"><div class="bar-fill a" style="width:20%"></div></div></div>
-        <div class="bar-row"><div class="bar-meta"><span>Active Concentration</span><span>Maximum</span></div><div class="bar-track"><div class="bar-fill a" style="width:95%"></div></div></div>
-        <div class="bar-row"><div class="bar-meta"><span>Days to Dispatch</span><span>3&ndash;7 days</span></div><div class="bar-track"><div class="bar-fill a" style="width:10%"></div></div></div>
-        <div class="bar-row"><div class="bar-meta"><span>Potency at Use</span><span>Day 1 fresh</span></div><div class="bar-track"><div class="bar-fill a" style="width:98%"></div></div></div>
+      <div class="cmp-half us">
+        <div class="cmp-half-label">NeolabCare</div>
+        <div class="cmp-stat-row">
+          <div class="cmp-stat">
+            <div class="cmp-stat-name">Preservative Load</div>
+            <div class="cmp-stat-value">Minimal</div>
+          </div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-name">Active Concentration</div>
+            <div class="cmp-stat-value">Maximum</div>
+          </div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-name">Days to Dispatch</div>
+            <div class="cmp-stat-value">3&ndash;7 days</div>
+          </div>
+          <div class="cmp-stat">
+            <div class="cmp-stat-name">Potency at Use</div>
+            <div class="cmp-stat-value">Day 1 fresh</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2491,41 +2738,80 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <p class="body-lg rv d2" style="text-align:center;max-width:540px;margin:0 auto 16px;">
       Zero synthetic fragrance. Zero drying alcohol. Zero retinol. Zero AHAs. Every omission was deliberate &mdash; each one excluded because it did not align with our philosophy of barrier-safe, high-tolerance skincare.
     </p>
-    <p class="micro rv d3" style="text-align:center;color:var(--faint);letter-spacing:0.1em;margin:0 auto 28px;">Tap <span style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;border:1px solid var(--faint);font-size:9px;font-weight:600;">?</span> on each card to see what it does</p>
-    <div class="bs-grid">
-      <div class="bs-item rv d1">
-        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M12 3c0 0-4 3-4 7a4 4 0 0 0 8 0c0-4-4-7-4-7z"/><path d="M12 10v4"/><path d="M9 20h6"/><path d="M12 14v6"/></svg></div>
-        <div class="bs-name">Synthetic Fragrance <span class="bs-info-icon">?</span><div class="bs-tooltip">Added to mask the smell of cheaper base ingredients. Common cause of contact dermatitis and long-term skin sensitisation.</div></div>
+    <div class="omit-list">
+      <div class="omit-item rv d1">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c0 0-4 3-4 7a4 4 0 0 0 8 0c0-4-4-7-4-7z"/><path d="M12 10v4"/><path d="M9 20h6"/><path d="M12 14v6"/></svg></span>
+          <span class="omit-name">Synthetic Fragrance</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Added to mask the smell of cheaper base ingredients. Common cause of contact dermatitis and long-term skin sensitisation.</p></div>
       </div>
-      <div class="bs-item rv d2">
-        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M8 2h8l2 6H6L8 2z"/><path d="M6 8l2 14h8l2-14"/><path d="M10 12h4"/></svg></div>
-        <div class="bs-name">Drying Alcohol <span class="bs-info-icon">?</span><div class="bs-tooltip">Used to create a fast-dry, lightweight feel. Disrupts the skin barrier with repeated use and accelerates transepidermal water loss.</div></div>
+      <div class="omit-item rv d2">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l2 6H6L8 2z"/><path d="M6 8l2 14h8l2-14"/><path d="M10 12h4"/></svg></span>
+          <span class="omit-name">Drying Alcohol</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Used to create a fast-dry, lightweight feel. Disrupts the skin barrier with repeated use and accelerates transepidermal water loss.</p></div>
       </div>
-      <div class="bs-item rv d3">
-        <div class="bs-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
-        <div class="bs-name">Parabens <span class="bs-info-icon">?</span><div class="bs-tooltip">Cheap, effective preservatives. Linked to endocrine disruption — they mimic oestrogen and accumulate in tissue with long-term use.</div></div>
+      <div class="omit-item rv d3">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></span>
+          <span class="omit-name">Parabens</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Cheap, effective preservatives. Linked to endocrine disruption — they mimic oestrogen and accumulate in tissue with long-term use.</p></div>
       </div>
-      <div class="bs-item rv d4">
-        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M12 2L8 8H4l4 4-2 8 6-4 6 4-2-8 4-4h-4L12 2z"/></svg></div>
-        <div class="bs-name">Mineral Oil <span class="bs-info-icon">?</span><div class="bs-tooltip">A low-cost occlusive that locks in moisture by sitting on the skin surface. Clogs pores and prevents actives from penetrating.</div></div>
+      <div class="omit-item rv d4">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L8 8H4l4 4-2 8 6-4 6 4-2-8 4-4h-4L12 2z"/></svg></span>
+          <span class="omit-name">Mineral Oil</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>A low-cost occlusive that locks in moisture by sitting on the skin surface. Clogs pores and prevents actives from penetrating.</p></div>
       </div>
-      <div class="bs-item rv d1">
-        <div class="bs-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></div>
-        <div class="bs-name">Retinol<br><span style="font-size:0.58rem;color:var(--muted);">by design</span> <span class="bs-info-icon">?</span><div class="bs-tooltip">Proven anti-aging effect — accelerates cell turnover and stimulates collagen. Causes sun sensitivity, peeling, and requires a separate SPF routine. We achieve the anti-aging outcome through NMN and GHK-Cu without the downtime.</div></div>
+      <div class="omit-item rv d1">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>
+          <span class="omit-name">Retinol <span style="font-size:9px;color:var(--muted);font-weight:400;">(by design)</span></span>
+          <span class="omit-tag">By Design</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Proven anti-aging effect — but causes sun sensitivity, peeling, and requires SPF. We achieve the anti-aging outcome through NMN and GHK-Cu without the downtime.</p></div>
       </div>
-      <div class="bs-item rv d2">
-        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
-        <div class="bs-name">AHAs / BHAs <span class="bs-info-icon">?</span><div class="bs-tooltip">Effective exfoliants that resurface the skin. Increase photosensitivity and require sun protection — limiting when and how often you can use them.</div></div>
+      <div class="omit-item rv d2">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></span>
+          <span class="omit-name">AHAs / BHAs</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Effective exfoliants that resurface the skin. Increase photosensitivity and require sun protection — limiting when and how often you can use them.</p></div>
       </div>
-
-      <div class="bs-item rv d3">
-        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <div class="bs-name">Heavy Metals <span class="bs-info-icon">?</span><div class="bs-tooltip">Trace contaminants found in mass-produced cosmetic ingredients — lead, arsenic, cadmium. Accumulate in tissue over time. We source pharmaceutical-grade actives and batch-test for purity.</div></div>
+      <div class="omit-item rv d3">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+          <span class="omit-name">Heavy Metals</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Trace contaminants found in mass-produced cosmetic ingredients. We source pharmaceutical-grade actives and batch-test for purity.</p></div>
       </div>
-      <div class="bs-item rv d4">
-        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="bs-name">Hormone Disruptors <span class="bs-info-icon">?</span><div class="bs-tooltip">A class of compounds — including some UV filters and preservatives — that interfere with hormonal signalling. Absorbed through the skin and detected in blood and urine after topical use.</div></div>
+      <div class="omit-item rv d4">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+          <span class="omit-name">Hormone Disruptors</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>A class of compounds — including some UV filters and preservatives — that interfere with hormonal signalling. Absorbed through the skin and detected in blood and urine after topical use.</p></div>
       </div>
+    </div>
     </div>
   </div>
 </section>
@@ -3120,6 +3406,35 @@ window.addEventListener('load', () => {
 
 
 <script>
+// ── Omit accordion ──
+function omitToggle(btn) {
+  var item = btn.closest('.omit-item');
+  var isOpen = item.classList.contains('open');
+  // close all
+  document.querySelectorAll('.omit-item.open').forEach(function(el) { el.classList.remove('open'); });
+  if (!isOpen) item.classList.add('open');
+}
+
+// ── Drag-to-scroll for ctx-strip ──
+(function() {
+  var strip = document.getElementById('ctxStrip');
+  if (!strip) return;
+  var isDown = false, startX, scrollLeft;
+  strip.addEventListener('mousedown', function(e) {
+    isDown = true; strip.style.cursor = 'grabbing';
+    startX = e.pageX - strip.offsetLeft;
+    scrollLeft = strip.scrollLeft;
+  });
+  strip.addEventListener('mouseleave', function() { isDown = false; strip.style.cursor = 'grab'; });
+  strip.addEventListener('mouseup', function() { isDown = false; strip.style.cursor = 'grab'; });
+  strip.addEventListener('mousemove', function(e) {
+    if (!isDown) return;
+    e.preventDefault();
+    var x = e.pageX - strip.offsetLeft;
+    strip.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+})();
+
 // ── Cinematic video expand on scroll ──
 (function() {
   var vc = document.querySelector('.video-container');
