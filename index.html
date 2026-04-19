@@ -1736,42 +1736,70 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     }
 
     /* ─── HOW TO USE ─────────────────────────────────────────────── */
+    /* ── Application Flowchart ── */
     .htu-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      max-width: 960px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      max-width: 860px;
       margin: 0 auto;
-      border: 1px solid var(--border);
+      position: relative;
     }
     .htu-step {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      padding: 28px 24px 24px;
+      align-items: center;
+      flex: 1;
       position: relative;
-      border-right: 1px solid var(--border);
+      padding: 0 8px;
     }
-    .htu-step:last-child { border-right: none; }
-    .htu-numeral {
-      font-family: var(--f-head);
-      font-size: clamp(48px, 6vw, 80px);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--accent);
-      opacity: 0.15;
-      line-height: 1;
-      margin-bottom: 12px;
-      user-select: none;
-    }
-    .htu-rule {
-      width: 32px;
+    /* Connector line between steps */
+    .htu-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: calc(50% + 28px);
+      right: calc(-50% + 28px);
       height: 1px;
-      background: var(--accent);
-      opacity: 0.4;
-      margin-bottom: 16px;
+      background: var(--border);
     }
-    .htu-action {
+    /* Arrow head at end of connector */
+    .htu-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      right: calc(-50% + 24px);
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 6px solid var(--border);
+    }
+    .htu-numeral { display: none; }
+    .htu-rule { display: none; }
+    .htu-node {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--layer);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+    .htu-node svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+        .htu-action {
       font-family: var(--f-body);
       font-size: clamp(13px, 1.4vw, 16px);
       font-weight: 600;
@@ -1805,12 +1833,14 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       .htu-step:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
     }
     @media (max-width: 400px) {
-      .htu-steps { grid-template-columns: 1fr; }
-      .htu-step { border-right: none; border-bottom: 1px solid var(--border); }
-      .htu-step:last-child { border-bottom: none; }
-      .htu-step:nth-child(2) { border-right: none; }
-      .htu-step:nth-child(3),
-      .htu-step:nth-child(4) { border-top: none; }
+      .htu-steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+      .htu-step { width: 100%; max-width: 280px; }
+      .htu-step:not(:last-child)::after,
+      .htu-step:not(:last-child)::before { display: none; }
     }
     /* ─── PEAK POTENCY PROTECTION ──────────────────────────────── */
     .ppp-layout {
@@ -2106,23 +2136,40 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     }
 
     /* ─── SUBSCRIBE CARD STACKING ─────────────────────────────────────────── */
+    /* ── Sticky Stack Cards ── */
     .sub-stack {
-      position: relative;
+      --card-top: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
     .sub-stack .sub-step {
-      transition: transform 0.4s cubic-bezier(.22,1,.36,1), opacity 0.4s ease, box-shadow 0.4s ease;
+      position: sticky;
+      top: var(--card-top);
+      margin-bottom: 0;
+      /* Each card stacks 12px lower than the previous */
     }
-    .sub-stack .sub-step.stack-behind {
-      transform: scale(0.97) translateY(-6px);
-      opacity: 0.6;
-      z-index: 0;
-    }
-    .sub-stack .sub-step.stack-active {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-      z-index: 2;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-      border-color: rgba(200,184,154,0.3);
+    .sub-stack .sub-step:nth-child(1) { top: calc(var(--card-top) + 0px);  z-index: 1; }
+    .sub-stack .sub-step:nth-child(2) { top: calc(var(--card-top) + 12px); z-index: 2; }
+    .sub-stack .sub-step:nth-child(3) { top: calc(var(--card-top) + 24px); z-index: 3; }
+    .sub-stack .sub-step:nth-child(4) { top: calc(var(--card-top) + 36px); z-index: 4; }
+    /* Scale-down animation for cards that have been scrolled past */
+    @supports (animation-timeline: view()) {
+      .sub-stack {
+        view-timeline-name: --sub-stack-scroll;
+      }
+      .sub-stack .sub-step {
+        --idx0: calc(var(--sub-idx, 0) - 1);
+        --numcards: 4;
+        --reverse: calc(var(--numcards) - var(--idx0));
+      }
+      @keyframes sub-card-scale {
+        to { transform: scale(calc(1.0 - 0.04 * var(--reverse, 1))); }
+      }
+      .sub-stack .sub-step:nth-child(1) { --sub-idx: 1; }
+      .sub-stack .sub-step:nth-child(2) { --sub-idx: 2; }
+      .sub-stack .sub-step:nth-child(3) { --sub-idx: 3; }
+      .sub-stack .sub-step:nth-child(4) { --sub-idx: 4; }
     }
   </style>
 </head>
@@ -2324,39 +2371,38 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <p class="body-sm rv d3" style="text-align:center;max-width:480px;margin:0 auto 56px;color:var(--muted);">After shaving or before bed. Once a day. That is the entire ritual.</p>
 
     <div class="htu-steps">
-
       <div class="htu-step rv">
-        <div class="htu-numeral">1</div>
-        <div class="htu-rule"></div>
+        <div class="htu-node">
+          <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
         <div class="htu-action">Press</div>
         <div class="htu-tag">Once</div>
         <div class="htu-desc">Dispense one pump into your palm.</div>
       </div>
-
       <div class="htu-step rv d1">
-        <div class="htu-numeral">2</div>
-        <div class="htu-rule"></div>
+        <div class="htu-node">
+          <svg viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
+        </div>
         <div class="htu-action">Spread</div>
         <div class="htu-tag">Both palms</div>
         <div class="htu-desc">Rub between both palms to warm the formula.</div>
       </div>
-
       <div class="htu-step rv d2">
-        <div class="htu-numeral">3</div>
-        <div class="htu-rule"></div>
+        <div class="htu-node">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
+        </div>
         <div class="htu-action">Apply</div>
         <div class="htu-tag">Full face</div>
         <div class="htu-desc">Press evenly across the face. Avoid the eye area.</div>
       </div>
-
       <div class="htu-step rv d3">
-        <div class="htu-numeral">4</div>
-        <div class="htu-rule"></div>
+        <div class="htu-node">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
         <div class="htu-action">Finish</div>
         <div class="htu-tag">Neck &amp; hands</div>
         <div class="htu-desc">Any residue on hands goes on the neck or back of hands.</div>
       </div>
-
     </div><!-- /htu-steps -->
 
     <p class="rv" style="text-align:center;margin-top:40px;font-size:var(--t-xs);letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);">Avoid contact with eyes</p>
@@ -2863,26 +2909,78 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <p class="body-lg rv d2" style="text-align:center;max-width:540px;margin:0 auto 16px;">
       Zero synthetic fragrance. Zero drying alcohol. Zero retinol. Zero AHAs. Every omission was deliberate &mdash; each one excluded because it did not align with our philosophy of barrier-safe, high-tolerance skincare.
     </p>
-    <div class="bs-grid">
-      <div class="rv d1" style="background:var(--layer);border:1px solid var(--border);padding:28px 24px;">
-        <p class="lbl" style="margin-bottom:10px;color:var(--muted);">Excluded</p>
-        <p style="font-size:0.88rem;font-weight:500;color:var(--off-white);margin-bottom:8px;">Synthetic Fragrance</p>
-        <p style="font-size:0.78rem;color:var(--light);line-height:1.65;">Added to mask the smell of cheaper base ingredients. Common cause of contact dermatitis and long-term skin sensitisation.</p>
+    <div class="omit-list">
+      <div class="omit-item rv d1">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c0 0-4 3-4 7a4 4 0 0 0 8 0c0-4-4-7-4-7z"/><path d="M12 10v4"/><path d="M9 20h6"/><path d="M12 14v6"/></svg></span>
+          <span class="omit-name">Synthetic Fragrance</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Added to mask the smell of cheaper base ingredients. Common cause of contact dermatitis and long-term skin sensitisation.</p></div>
       </div>
-      <div class="rv d2" style="background:var(--layer);border:1px solid var(--border);border-left:none;padding:28px 24px;">
-        <p class="lbl" style="margin-bottom:10px;color:var(--muted);">Excluded</p>
-        <p style="font-size:0.88rem;font-weight:500;color:var(--off-white);margin-bottom:8px;">Drying Alcohols</p>
-        <p style="font-size:0.78rem;color:var(--light);line-height:1.65;">Used as a carrier and to create a fast-drying texture. Disrupts the skin barrier with repeated use and accelerates moisture loss.</p>
+      <div class="omit-item rv d2">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12h8"/></svg></span>
+          <span class="omit-name">Drying Alcohols</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Used as a carrier and to create a fast-drying texture. Disrupts the skin barrier with repeated use and accelerates transepidermal moisture loss.</p></div>
       </div>
-      <div class="rv d3" style="background:var(--layer);border:1px solid var(--border);border-top:none;padding:28px 24px;">
-        <p class="lbl" style="margin-bottom:10px;color:var(--accent);">By Design</p>
-        <p style="font-size:0.88rem;font-weight:500;color:var(--off-white);margin-bottom:8px;">Retinol</p>
-        <p style="font-size:0.78rem;color:var(--light);line-height:1.65;">Proven anti-aging effect — but causes sun sensitivity and peeling. We achieve the anti-aging outcome through NMN and GHK-Cu without the downtime.</p>
+      <div class="omit-item rv d3">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/></svg></span>
+          <span class="omit-name">Parabens</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Cheap, effective preservatives. Linked to endocrine disruption — they mimic oestrogen and accumulate in tissue with long-term use.</p></div>
       </div>
-      <div class="rv d4" style="background:var(--layer);border:1px solid var(--border);border-top:none;border-left:none;padding:28px 24px;">
-        <p class="lbl" style="margin-bottom:10px;color:var(--muted);">Excluded</p>
-        <p style="font-size:0.88rem;font-weight:500;color:var(--off-white);margin-bottom:8px;">Hormone Disruptors</p>
-        <p style="font-size:0.78rem;color:var(--light);line-height:1.65;">A class of compounds — including some UV filters and preservatives — that interfere with hormonal signalling. Absorbed through the skin.</p>
+      <div class="omit-item rv d4">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L8 8H4l4 4-2 8 6-4 6 4-2-8 4-4h-4L12 2z"/></svg></span>
+          <span class="omit-name">Mineral Oil</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>A low-cost occlusive that locks in moisture by sitting on the skin surface. Clogs pores and prevents actives from penetrating.</p></div>
+      </div>
+      <div class="omit-item rv d1">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>
+          <span class="omit-name">Retinol <span style="font-size:9px;color:var(--muted);font-weight:400;">(by design)</span></span>
+          <span class="omit-tag">By Design</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Proven anti-aging effect — but causes sun sensitivity, peeling, and requires SPF. We achieve the anti-aging outcome through NMN and GHK-Cu without the downtime.</p></div>
+      </div>
+      <div class="omit-item rv d2">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></span>
+          <span class="omit-name">AHAs / BHAs</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Effective exfoliants that resurface the skin. Increase photosensitivity and require sun protection — limiting when and how often you can use them.</p></div>
+      </div>
+      <div class="omit-item rv d3">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+          <span class="omit-name">Heavy Metals</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>Trace contaminants found in mass-produced cosmetic ingredients. We source pharmaceutical-grade actives and batch-test for purity.</p></div>
+      </div>
+      <div class="omit-item rv d4">
+        <button class="omit-trigger" onclick="omitToggle(this)">
+          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+          <span class="omit-name">Hormone Disruptors</span>
+          <span class="omit-tag">Excluded</span>
+          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="omit-body"><p>A class of compounds — including some UV filters and preservatives — that interfere with hormonal signalling. Absorbed through the skin and detected in blood and urine after topical use.</p></div>
       </div>
     </div>
   </div>
@@ -2949,25 +3047,21 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     </div>
     <div class="sub-steps sub-stack">
         <div class="sub-step rv d1">
-        <div class="sub-step-num">Step 01</div>
         <div class="sub-step-ico"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
         <div class="sub-step-title">Produced fresh to confirmed orders</div>
         <div class="sub-step-desc">Your batch is mixed, filled, and sealed for confirmed demand rather than sitting in retail inventory. Unlike standard retail, we don't use stabilizers to extend shelf life for years.</div>
       </div>
       <div class="sub-step rv d2">
-        <div class="sub-step-num">Step 02</div>
         <div class="sub-step-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <div class="sub-step-title">Scheduled around your selected rhythm</div>
         <div class="sub-step-desc">Choose the delivery cadence that fits your usage. We plan future shipments around that schedule to make continuity easier.</div>
       </div>
       <div class="sub-step rv d3">
-        <div class="sub-step-num">Step 03</div>
         <div class="sub-step-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
         <div class="sub-step-title">Less manual tracking</div>
         <div class="sub-step-desc">No need to keep checking batch age, reorder timing, or when to restock. The system is designed to reduce that burden.</div>
       </div>
       <div class="sub-step rv d4">
-        <div class="sub-step-num">Step 04</div>
         <div class="sub-step-ico"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
         <div class="sub-step-title">More consistent continuity</div>
         <div class="sub-step-desc">A smoother way for you to stay stocked, with less friction in your routine.</div>
