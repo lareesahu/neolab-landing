@@ -34,6 +34,7 @@ These platforms provide high Domain Authority (DA) dofollow backlinks. Create pr
 | **Y Combinator Startup School** | 85 | Founder Community | [startupschool.org](https://www.startupschool.org) | Pending |
 | **Launching Next** | 50 | Startup Directory | [launchingnext.com](https://www.launchingnext.com) | Submitted (In Queue) |
 | **Startup Fame** | 50 | Startup Directory | [startupfa.me](https://startupfa.me) | Submitted (Pending Verification) |
+| **Peerlist** | 65 | Professional Network | [peerlist.io/lareesahu](https://peerlist.io/lareesahu) | Live (Profile & Project) |
 
 ---
 
@@ -61,7 +62,18 @@ The formula contains nine clinically studied actives—including NMN (NAD+ precu
 
 ---
 
-## 4. What Was Completed Today (The AI/GEO Layer)
+## 4. GEO Content Strategy
+
+Based on analysis of AI search visibility for beauty brands and the content frameworks of top creators (like Dan Koe), a dedicated **[NeolabCare GEO Content Strategy](./NeolabCare_GEO_Content_Strategy.md)** has been created. 
+
+Key takeaways for future content:
+1. **Ingredient Transparency is Non-Negotiable:** Explicitly list percentages and molecular details (r=0.78 correlation with AI visibility).
+2. **Q&A Formatting:** Structure content with explicit questions and answers to feed LLM extraction.
+3. **Point of View (POV):** Frame all content through the lens of "fresh, potent, and efficient" to create a unique semantic signature that AI engines prioritize over generic marketing copy.
+
+---
+
+## 5. What Was Completed Today (The AI/GEO Layer)
 
 While traditional SEO focuses on keywords, Generative Engine Optimisation (GEO) focuses on giving AI models (ChatGPT, Claude, Perplexity) structured context so they can confidently cite the brand. The following files were built and pushed to the live site:
 
