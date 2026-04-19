@@ -1407,7 +1407,7 @@ nav.sc {
 ============================================================ */
 #perks { background: #000; }
 .perks-hd { text-align: center; margin-bottom: 44px; }
-.perks-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; min-width: 0; }
+.perks-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; min-width: 0; justify-items: stretch; }
 .perk {
   background: var(--charcoal); border: 1px solid var(--border);
   padding: 28px 22px; position: relative;
@@ -1906,9 +1906,24 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     /* ─── SUBSCRIPTION SECTION ─────────────────────────────────────── */
     #subscription { background: var(--bg); }
     .sub-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+    .sub-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      align-items: start;
+    }
+    .sub-left {
+      padding: 40px 48px 40px 0;
+      border-right: 1px solid var(--border);
+    }
+    .sub-left .h-section { text-align: left; }
+    .sub-left .lbl { text-align: left; }
+    .sub-left .rule { margin-left: 0; }
+    .sub-left .body-lg { text-align: left; margin: 14px 0 0; }
+    .sub-left .btn { margin-top: 32px; display: inline-block; }
     .sub-steps {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: 1fr;
       gap: 2px;
       margin-bottom: 0;
     }
@@ -1978,6 +1993,8 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       color: var(--muted);
     }
     @media (max-width: 900px) {
+      .sub-layout { grid-template-columns: 1fr; }
+      .sub-left { padding: 0 0 32px 0; border-right: none; border-bottom: 1px solid var(--border); }
       .sub-steps { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 480px) {
@@ -2315,6 +2332,54 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
   <p>Most skincare sits in warehouses 12 to 24 months before reaching you. Sensitive actives like Retinol and Vitamin C degrade during that time. NeolabCare produces each bottle to order and dispatches within 7 days — so actives arrive at peak potency, not after a year on a shelf.</p>
 </div>
 
+<!-- PROJECT ORIGIN -->
+<section id="project-origin" class="sec" style="background:var(--bg-2);"><span class="sec-num" aria-hidden="true" style="top:-20px;z-index:0;">10</span>
+  <div class="wrap">
+    <p class="lbl rv" style="text-align:center;">Project Origin</p>
+    <div class="rule rule-c rv d1"></div>
+    <h2 class="h-section rv d1" style="text-align:center;max-width:640px;margin:20px auto 0;">
+      Built around a<br><em>simple frustration.</em>
+    </h2>
+    <p class="body-lg rv d2" style="max-width:560px;margin:16px auto 56px;text-align:center;">
+      A premium all-in-one skincare concept created in response to one structural observation: most routines ask too much, and most products compromise too early.
+    </p>
+    <div class="origin-timeline">
+      <div class="otl-track" aria-hidden="true"></div>
+      <div class="otl-item rv d1">
+        <div class="otl-dot"></div>
+        <div class="otl-card">
+          <p class="lbl" style="margin-bottom:8px;">The Frustration</p>
+          <p style="font-size:12px;line-height:1.65;color:var(--light);">The desire was simple: a skincare routine that performed at a high level without demanding time, attention, or a shelf full of products. Something that could fit into a real day — not a curated one.</p>
+        </div>
+      </div>
+      <div class="otl-item rv d2">
+        <div class="otl-dot"></div>
+        <div class="otl-card">
+          <p class="lbl" style="margin-bottom:8px;">The Research</p>
+          <p style="font-size:12px;line-height:1.65;color:var(--light);">The more we looked, the clearer the pattern became. Better results almost always meant more steps. More actives meant more products. More products meant more decisions, more friction, and more room for inconsistency.</p>
+        </div>
+      </div>
+      <div class="otl-item rv d3">
+        <div class="otl-dot"></div>
+        <div class="otl-card">
+          <p class="lbl" style="margin-bottom:8px;">The Realization</p>
+          <p style="font-size:12px;line-height:1.65;color:var(--light);">The market is not optimized for your skin. It is optimized for retail shelf life, margin, and category expansion. The system works against the outcome it promises.</p>
+        </div>
+      </div>
+      <div class="otl-item rv d4">
+        <div class="otl-dot otl-dot-accent"></div>
+        <div class="otl-card otl-card-accent">
+          <p class="lbl" style="margin-bottom:8px;color:var(--accent);">The Response</p>
+          <p style="font-size:12px;line-height:1.65;color:var(--light);">NeolabCare was built as a direct answer to that tension. One premium all-in-one cream, produced fresh to order, formulated around what the skin actually needs — not what a retail shelf can accommodate.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pull-quote rv d5" style="max-width:640px;margin:0 auto;text-align:center;border-left:none;font-style:italic;font-size:1.05rem;line-height:1.7;color:var(--text);">
+      &ldquo;Maximum dedication. Ultimate simplicity. Achieving more by doing less.&rdquo;
+    </div>
+  </div>
+</section>
+
 <!-- 9 FUNCTIONS -->
 <section id="product" class="sec"><span class="sec-num" aria-hidden="true" style="top: -20px; z-index: 0;">01</span>
     <div class="wrap">
@@ -2546,8 +2611,8 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
             <div class="cmp-stat-value">3&ndash;7 days</div>
           </div>
           <div class="cmp-stat">
-            <div class="cmp-stat-name">Potency at Use</div>
-            <div class="cmp-stat-value">Day 1 fresh</div>
+            <div class="cmp-stat-name">Fresh</div>
+            <div class="cmp-stat-value">Peak potency</div>
           </div>
         </div>
       </div>
@@ -2985,67 +3050,22 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     </div>
   </div>
 </section>
-<!-- PROJECT ORIGIN -->
-<section id="project-origin" class="sec" style="background:var(--bg-2);"><span class="sec-num" aria-hidden="true" style="top:-20px;z-index:0;">10</span>
-  <div class="wrap">
-    <p class="lbl rv" style="text-align:center;">Project Origin</p>
-    <div class="rule rule-c rv d1"></div>
-    <h2 class="h-section rv d1" style="text-align:center;max-width:640px;margin:20px auto 0;">
-      Built around a<br><em>simple frustration.</em>
-    </h2>
-    <p class="body-lg rv d2" style="max-width:560px;margin:16px auto 56px;text-align:center;">
-      A premium all-in-one skincare concept created in response to one structural observation: most routines ask too much, and most products compromise too early.
-    </p>
-    <div class="origin-timeline">
-      <div class="otl-track" aria-hidden="true"></div>
-      <div class="otl-item rv d1">
-        <div class="otl-dot"></div>
-        <div class="otl-card">
-          <p class="lbl" style="margin-bottom:8px;">The Frustration</p>
-          <p style="font-size:12px;line-height:1.65;color:var(--light);">The desire was simple: a skincare routine that performed at a high level without demanding time, attention, or a shelf full of products. Something that could fit into a real day — not a curated one.</p>
-        </div>
-      </div>
-      <div class="otl-item rv d2">
-        <div class="otl-dot"></div>
-        <div class="otl-card">
-          <p class="lbl" style="margin-bottom:8px;">The Research</p>
-          <p style="font-size:12px;line-height:1.65;color:var(--light);">The more we looked, the clearer the pattern became. Better results almost always meant more steps. More actives meant more products. More products meant more decisions, more friction, and more room for inconsistency.</p>
-        </div>
-      </div>
-      <div class="otl-item rv d3">
-        <div class="otl-dot"></div>
-        <div class="otl-card">
-          <p class="lbl" style="margin-bottom:8px;">The Realization</p>
-          <p style="font-size:12px;line-height:1.65;color:var(--light);">The market is not optimized for your skin. It is optimized for retail shelf life, margin, and category expansion. The system works against the outcome it promises.</p>
-        </div>
-      </div>
-      <div class="otl-item rv d4">
-        <div class="otl-dot otl-dot-accent"></div>
-        <div class="otl-card otl-card-accent">
-          <p class="lbl" style="margin-bottom:8px;color:var(--accent);">The Response</p>
-          <p style="font-size:12px;line-height:1.65;color:var(--light);">NeolabCare was built as a direct answer to that tension. One premium all-in-one cream, produced fresh to order, formulated around what the skin actually needs — not what a retail shelf can accommodate.</p>
-        </div>
-      </div>
-    </div>
-    <div class="pull-quote rv d5" style="max-width:640px;margin:0 auto;text-align:center;border-left:none;font-style:italic;font-size:1.05rem;line-height:1.7;color:var(--text);">
-      &ldquo;Maximum dedication. Ultimate simplicity. Achieving more by doing less.&rdquo;
-    </div>
-  </div>
-</section>
 <!-- SUBSCRIPTION -->
 <section id="subscription" class="sec"><span class="sec-num" aria-hidden="true">10</span>
   <div class="wrap">
-    <div class="sub-header">
-      <p class="lbl rv" style="text-align:center;">The Subscription</p>
-      <div class="rule rule-c rv d1"></div>
-      <h2 class="h-section rv d1" style="text-align:center;">
-        Subscribe once,<br><em>we'll handle the rest.</em>
-      </h2>
-      <p class="body-lg rv d2" style="margin-top:14px;text-align:center;">
-        Because potency changes over time, your reordering should not be guesswork. We monitor your batch timing and plan your next shipment around your selected delivery rhythm, so staying stocked feels simpler for you.
-      </p>
-    </div>
-    <div class="sub-steps sub-stack">
+    <div class="sub-layout">
+      <div class="sub-left rv">
+        <p class="lbl">The Subscription</p>
+        <div class="rule d1"></div>
+        <h2 class="h-section d1">
+          Subscribe once,<br><em>we'll handle the rest.</em>
+        </h2>
+        <p class="body-lg d2">
+          Because potency changes over time, your reordering should not be guesswork. We monitor your batch timing and plan your next shipment around your selected delivery rhythm, so staying stocked feels simpler for you.
+        </p>
+        <a href="#perks" class="btn btn-outline d3" style="margin-top:32px;display:inline-block;">See Subscription Tiers</a>
+      </div>
+      <div class="sub-steps sub-stack">
         <div class="sub-step rv d1">
         <div class="sub-step-ico"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
         <div class="sub-step-title">Produced fresh to confirmed orders</div>
@@ -3066,7 +3086,8 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         <div class="sub-step-title">More consistent continuity</div>
         <div class="sub-step-desc">A smoother way for you to stay stocked, with less friction in your routine.</div>
       </div>
-    </div>
+      </div>
+    </div><!-- /sub-layout -->
     <div class="sub-cta-strip rv d5">
       <div class="sub-cta-text">
         <h3>A simpler way <em>to stay consistent.</em></h3>
@@ -3230,21 +3251,6 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         </div>
         <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn">Claim Early Bird</a>
       </div>
-      <!-- Tier 05 -->
-      <div class="perk rv d2">
-        <div class="perk-tier">Most Popular</div>
-        <div class="perk-name">The Full Ritual</div>
-        <div class="perk-retail">Retail <s>$349</s><span class="perk-save">Save $50</span></div>
-        <div class="perk-price">$299</div>
-        <div class="perk-note">30ml bottle &middot; 90-day supply &middot; one pump per day</div>
-        <div class="perk-hr"></div>
-        <div class="perk-inc">
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>1 &times; 30ml NeolabCare bottle</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 1.5ml travel ampoules</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
-        </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn">Claim Your Bottle</a>
-      </div>
       <!-- Tier 06 -->
          <div class="perk rv d3" style="border-color:var(--accent);">
         <div class="perk-tier tag-popular">Exclusive Offer</div>
@@ -3261,6 +3267,21 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Member engraving</span></div>
         </div>
         <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn" style="background:var(--accent); color:#000; border-color:var(--accent);">Become a Founding Member</a>
+      </div>
+      <!-- Tier 05 -->
+      <div class="perk rv d2">
+        <div class="perk-tier">Most Popular</div>
+        <div class="perk-name">The Full Ritual</div>
+        <div class="perk-retail">Retail <s>$349</s><span class="perk-save">Save $50</span></div>
+        <div class="perk-price">$299</div>
+        <div class="perk-note">30ml bottle &middot; 90-day supply &middot; one pump per day</div>
+        <div class="perk-hr"></div>
+        <div class="perk-inc">
+          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>1 &times; 30ml NeolabCare bottle</span></div>
+          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 1.5ml travel ampoules</span></div>
+          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
+        </div>
+        <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn">Claim Your Bottle</a>
       </div>
       <!-- Tier 08 -->
       <div class="perk rv d1" style="background:var(--mid);">
