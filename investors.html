@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeolabCare | Investor Relations</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Serif+Display:ital,wght@1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+/* ─── BRAND TOKENS ─── */
+:root {
+  --f-body: 'Poppins', sans-serif;
+  --f-serif: 'Noto Serif Display', serif;
+  --bg: #0A0A0A;
+  --bg-2: #0D0D0D;
+  --layer: #141414;
+  --charcoal: #141414;
+  --text: rgba(245,245,240,.94);
+  --off-white: rgba(245,245,240,.94);
+  --muted: rgba(245,245,240,.52);
+  --faint: rgba(245,245,240,.26);
+  --accent: #C8B89A;
+  --accent-2: #DDD0B8;
+  --border: rgba(200,184,154,.10);
+  --border-2: rgba(200,184,154,.18);
+  --surf: rgba(245,245,240,.025);
+  --black: #0A0A0A;
+  --off-black: #0D0D0D;
+  --t-xs: clamp(10px, .75vw, 12px);
+  --t-sm: clamp(12px, .9vw, 14px);
+  --t-md: clamp(14px, 1.05vw, 16px);
+  --t-lg: clamp(17px, 1.4vw, 22px);
+  --t-xl: clamp(24px, 2vw, 32px);
+  --t-2xl: clamp(36px, 3.5vw, 56px);
+  --t-3xl: clamp(52px, 5.5vw, 84px);
+  --nav-h: 68px;
+  --pad-x: clamp(24px, 5vw, 80px);
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --dur: 320ms;
+}
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img, svg { display: block; }
+a { color: inherit; text-decoration: none; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle noise overlay */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025; mix-blend-mode: overlay;
+}
+
+/* ─── NAV ─── */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 0 clamp(24px, 4vw, 60px);
+  z-index: 200;
+  background: transparent;
+  transition: background 0.4s var(--ease), border-color 0.4s var(--ease), padding 0.3s var(--ease);
+  border-bottom: 1px solid transparent;
+}
+.navbar.sc {
+  background: rgba(10,10,10,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: var(--border);
+}
+.nav-back { font-size: 10px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--muted); transition: color 0.2s ease; }
+.nav-back:hover { color: var(--accent); }
+.nav-wordmark {
+  display: inline-flex; align-items: baseline; gap: 0;
+  font-family: var(--f-body); font-size: 18px;
+  letter-spacing: -0.01em; color: var(--text);
+  justify-self: center;
+}
+.nav-wordmark .neolab { font-weight: 500; color: var(--text); }
+.nav-wordmark .sep { font-size: 18px; font-weight: 500; color: var(--accent); line-height: 1; margin: 0 0.5px; }
+.nav-wordmark .care { font-size: 10.5px; font-weight: 300; letter-spacing: 0.14em; color: var(--muted); text-transform: lowercase; align-self: flex-end; padding-bottom: 1px; }
+.nav-cta {
+  font-family: var(--f-body); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); border: 1px solid var(--border-2);
+  padding: 9px 18px; border-radius: 2px;
+  transition: all 0.2s ease; white-space: nowrap;
+  justify-self: end;
+}
+.nav-cta:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+/* ─── TYPOGRAPHY ─── */
+.lbl { font-family: var(--f-body); font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.rule { width: 32px; height: 1px; background: var(--accent); margin: 14px 0; opacity: 0.6; }
+.rule-c { margin-left: auto; margin-right: auto; }
+.h-hero { font-family: var(--f-body); font-size: var(--t-3xl); font-weight: 500; line-height: 1.03; letter-spacing: -0.02em; color: var(--text); }
+.h-hero em { font-family: var(--f-serif); font-style: italic; font-weight: 500; color: var(--accent); }
+.h-section { font-family: var(--f-body); font-size: var(--t-2xl); font-weight: 500; line-height: 1.08; letter-spacing: -0.01em; color: var(--text); }
+.h-section em { font-family: var(--f-serif); font-style: italic; font-weight: 400; color: var(--accent); }
+.body-lg { font-family: var(--f-body); font-size: var(--t-md); color: var(--muted); line-height: 1.7; font-weight: 400; }
+.body-sm { font-family: var(--f-body); font-size: var(--t-sm); color: var(--muted); line-height: 1.6; }
+
+/* ─── REVEAL ─── */
+.rv, .rvl, .rvr {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+}
+.rvl { transform: translateX(-16px); }
+.rvr { transform: translateX(16px); }
+.rv.in, .rvl.in, .rvr.in { opacity: 1; transform: none; }
+.d1 { transition-delay: 0s; }
+.d2 { transition-delay: 0.15s; }
+.d3 { transition-delay: 0.30s; }
+.d4 { transition-delay: 0.45s; }
+.d5 { transition-delay: 0.60s; }
+
+/* ─── LAYOUT ─── */
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 10; }
+.sec { padding: 120px 0; position: relative; }
+.sec-num { position: absolute; top: 40px; right: 40px; font-family: var(--f-serif); font-style: italic; font-size: 140px; font-weight: 300; color: var(--accent); opacity: 0.06; line-height: 1; pointer-events: none; user-select: none; }
+
+/* ─── BUTTONS ─── */
+.btn {
+  font-family: var(--f-body); font-size: 11px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 14px 24px; border-radius: 2px; cursor: pointer;
+  transition: all 0.25s ease; display: inline-block; border: 1px solid transparent;
+}
+.btn-fill { background: var(--accent); color: #000; border-color: var(--accent); }
+.btn-fill:hover { background: var(--accent-2); border-color: var(--accent-2); color: #000; }
+.btn-outline { background: transparent; color: var(--accent); border-color: var(--border-2); }
+.btn-outline:hover { border-color: var(--accent); background: var(--accent); color: #000; }
+
+/* ─── STAT CARDS ─── */
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); margin-top: 48px; }
+.stat-card { background: var(--layer); padding: 36px 28px; }
+.stat-n { font-family: var(--f-body); font-size: clamp(2.2rem, 4.2vw, 3.2rem); font-weight: 600; color: var(--accent); line-height: 1; letter-spacing: -0.02em; }
+.stat-l { font-family: var(--f-body); font-size: 10px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+.stat-sub { font-size: 11px; color: var(--faint); margin-top: 6px; line-height: 1.5; }
+
+/* ─── CARDS ─── */
+.card { background: var(--layer); border: 1px solid var(--border); padding: 28px; border-radius: 2px; }
+.card h4 { font-family: var(--f-body); font-size: 0.95rem; font-weight: 500; color: var(--text); margin-bottom: 10px; }
+.card p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+/* ─── CHIP GRID ─── */
+.chip-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; margin-top: 32px; }
+.chip {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px; background: var(--layer);
+  border: 1px solid var(--border); border-radius: 2px;
+  transition: border-color 0.2s ease;
+}
+.chip:hover { border-color: rgba(200,184,154,0.3); }
+.chip-ico { font-size: 1.3rem; color: var(--accent); opacity: 0.85; flex-shrink: 0; }
+.chip-lbl { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+.chip-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+/* ─── COMPARISON GRID ─── */
+.cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 40px; }
+.cmp-card { background: var(--layer); padding: 32px; border: 1px solid var(--border); }
+.cmp-card.neo { border-color: rgba(200,184,154,0.22); }
+.cmp-lbl { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 22px; }
+.cmp-lbl.them { color: var(--muted); }
+.cmp-lbl.us { color: var(--accent); }
+.cmp-item { font-size: 0.82rem; color: var(--muted); padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; }
+.cmp-item:last-child { border-bottom: none; }
+.cmp-item .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--muted); margin-top: 8px; flex-shrink: 0; }
+.cmp-card.neo .cmp-item { color: var(--text); }
+.cmp-card.neo .cmp-item .dot { background: var(--accent); }
+
+/* ─── TIMELINE ─── */
+.ft-line { display: flex; align-items: flex-start; gap: 0; margin: 48px 0 40px; position: relative; padding: 0 20px; }
+.ft-line::before { content: ''; position: absolute; top: 22px; left: 20px; right: 20px; height: 1px; background: linear-gradient(to right, transparent, var(--border) 15%, var(--border) 85%, transparent); }
+.ft-node { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; padding: 0 10px; }
+.ft-dot { width: 44px; height: 44px; border-radius: 50%; background: var(--charcoal); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--accent); margin-bottom: 14px; position: relative; z-index: 1; transition: border-color 0.3s ease; }
+.ft-node.in .ft-dot { border-color: rgba(200,184,154,0.4); }
+.ft-day { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.ft-title { font-size: 0.85rem; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.ft-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
+
+/* ─── TESTIMONIALS ─── */
+.t-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; margin-top: 32px; background: var(--border); border: 1px solid var(--border); }
+.t-card { background: var(--layer); padding: 28px; }
+.t-quote { font-size: 0.88rem; color: var(--text); font-style: italic; line-height: 1.75; border-left: 2px solid var(--accent); padding-left: 18px; margin-bottom: 18px; }
+.t-meta { display: flex; gap: 14px; flex-wrap: wrap; }
+.t-tag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+.t-tag span { color: var(--accent); margin-right: 3px; }
+
+/* ─── FOOTER ─── */
+footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); background: var(--bg-2); position: relative; z-index: 10; }
+.foot { max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.foot-txt { font-size: 11px; color: var(--muted); }
+.foot-lnks { display: flex; gap: 24px; flex-wrap: wrap; }
+.foot-lnks a { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+.foot-lnks a:hover { color: var(--accent); }
+
+/* ─── MOBILE ─── */
+@media (max-width: 820px) {
+  .sec { padding: 80px 0; }
+  .wrap { padding: 0 24px; }
+  .stat-grid { grid-template-columns: 1fr; }
+  .cmp-grid { grid-template-columns: 1fr; }
+  .ft-line { flex-direction: column; gap: 28px; padding: 0; }
+  .ft-line::before { display: none; }
+  .ft-node { width: 100%; align-items: flex-start; text-align: left; padding: 0; }
+  .nav-wordmark { font-size: 15px; }
+  .sec-num { font-size: 80px; top: 20px; right: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar" id="nav" aria-label="Investor page navigation">
+  <a href="/" class="nav-back">← neolab.care</a>
+  <a href="/" class="nav-wordmark" aria-label="neolab.care home">
+    <span class="neolab">neolab</span><span class="sep">.</span><span class="care">care</span>
+  </a>
+  <a href="#contact" class="nav-cta">Request Info</a>
+</nav>
+
+<main id="main-content">
+
+<!-- ═══ 01 — HERO ═══ -->
+<section id="hero" class="sec" style="padding-top: 180px; padding-bottom: 100px; min-height: 90vh; display: flex; align-items: center;">
+  <span class="sec-num">01</span>
+  <div class="wrap">
+    <div style="max-width: 820px;">
+      <p class="lbl rv">Investor Relations &middot; Confidential</p>
+      <div class="rule rv d1"></div>
+      <h1 class="h-hero rv d1" style="margin-top: 12px;">
+        The $60B skincare market<br>has a <em>freshness problem.</em>
+      </h1>
+      <p class="body-lg rv d2" style="margin-top: 28px; max-width: 620px; font-size: var(--t-lg);">
+        NeolabCare is the first lab-fresh, all-in-one skin treatment engineered for the subscription era —
+        replacing the 5-step routine with one precision-made formula delivered at peak potency.
+      </p>
+      <div class="stat-grid rv d3">
+        <div class="stat-card">
+          <div class="stat-n">$60B</div>
+          <div class="stat-l">Global Skincare Market</div>
+          <div class="stat-sub">Prestige segment compounding at 6.8% CAGR</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">8.4%</div>
+          <div class="stat-l">Men's Skincare CAGR</div>
+          <div class="stat-sub">Fastest-growing category in personal care</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">$1,000</div>
+          <div class="stat-l">Annual Revenue Per Subscriber</div>
+          <div class="stat-sub">4× 90-day bottles · subscription cadence</div>
+        </div>
+      </div>
+      <div class="rv d4" style="display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap;">
+        <a href="#contact" class="btn btn-fill">Request Investor Deck</a>
+        <a href="#opportunity" class="btn btn-outline">See the Opportunity</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 — THE PROBLEM ═══ -->
+<section id="problem" class="sec" style="background: var(--bg-2);">
+  <span class="sec-num">02</span>
+  <div class="wrap">
+    <div style="max-width: 680px;">
+      <p class="lbl rv">The Problem</p>
+      <div class="rule rv d1"></div>
+      <h2 class="h-section rv d1">
+        The routine is broken.<br><em>So is the supply chain.</em>
+      </h2>
+      <p class="body-lg rv d2" style="margin-top: 18px;">
+        The average premium skincare consumer buys 5–7 separate products to complete a routine. By the time
+        they reach the bathroom shelf, active ingredients have already degraded for months — sometimes years —
+        in warehouses, retailers, and in-transit inventory.
+      </p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; margin-top: 48px; background: var(--border); border: 1px solid var(--border);">
+      <div class="card rv d1" style="border: none;">
+        <h4>Routine Complexity</h4>
+        <p>Consumers manage 5–7 products across serums, toners, moisturizers, eye creams, and SPF. 68% abandon their routine within 3 months.</p>
+      </div>
+      <div class="card rv d2" style="border: none;">
+        <h4>Ingredient Degradation</h4>
+        <p>NMN, peptides, and vitamin derivatives lose up to 40% potency on shelves. Consumers pay premium prices for products that have already expired biologically.</p>
+      </div>
+      <div class="card rv d3" style="border: none;">
+        <h4>No Subscription Intelligence</h4>
+        <p>Existing subscription models ship the same mass-manufactured SKU every month. No freshness guarantee. No batch-aware replenishment. No moat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03 — THE SOLUTION ═══ -->
+<section id="solution" class="sec">
+  <span class="sec-num">03</span>
+  <div class="wrap">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
+      <div class="rvl">
+        <p class="lbl">The Solution</p>
+        <div class="rule"></div>
+        <h2 class="h-section">
+          One cream.<br><em>Nine functions.</em><br>Made to order.
+        </h2>
+        <p class="body-lg" style="margin-top: 18px;">
+          NeolabCare compresses the entire skincare routine into a single precision formula — produced
+          against confirmed orders, sealed in vacuum-pump bottles, and dispatched within 7 days of production.
+          Every active is peer-reviewed. Every batch is lab-fresh.
+        </p>
+        <p class="body-sm" style="margin-top: 20px; padding: 14px 16px; border-left: 2px solid var(--accent); background: rgba(200,184,154,0.04);">
+          <strong style="color: var(--text);">No stabilizers.</strong> No shelf time. No compromise. The product <em>is</em> the moat.
+        </p>
+      </div>
+      <div class="rvr">
+        <div class="chip-grid" style="grid-template-columns: 1fr; margin-top: 0;">
+          <div class="chip"><span class="chip-ico">✦</span><div><div class="chip-lbl">9-in-1 Formula</div><div class="chip-sub">Post-shave · anti-aging · barrier · hydration · brightening</div></div></div>
+          <div class="chip"><span class="chip-ico">◈</span><div><div class="chip-lbl">Made-to-Order Production</div><div class="chip-sub">Zero retail inventory. Zero shelf decay.</div></div></div>
+          <div class="chip"><span class="chip-ico">◉</span><div><div class="chip-lbl">Vacuum Pump Delivery</div><div class="chip-sub">No air · no light · no oxidation</div></div></div>
+          <div class="chip"><span class="chip-ico">✓</span><div><div class="chip-lbl">GMP-Certified Manufacturing</div><div class="chip-sub">Full regulatory compliance, international-ready</div></div></div>
+          <div class="chip"><span class="chip-ico">☆</span><div><div class="chip-lbl">Peer-Reviewed Science</div><div class="chip-sub">Every active selected against published research</div></div></div>
+          <div class="chip"><span class="chip-ico">↻</span><div><div class="chip-lbl">Subscription Intelligence</div><div class="chip-sub">Batch-aware replenishment timing</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04 — MARKET OPPORTUNITY ═══ -->
+<section id="opportunity" class="sec" style="background: var(--bg-2);">
+  <span class="sec-num">04</span>
+  <div class="wrap">
+    <div style="text-align: center; max-width: 680px; margin: 0 auto;">
+      <p class="lbl rv">The Opportunity</p>
+      <div class="rule rule-c rv d1"></div>
+      <h2 class="h-section rv d1">
+        A $60B category.<br><em>Priced for reinvention.</em>
+      </h2>
+      <p class="body-lg rv d2" style="margin-top: 18px;">
+        We're capturing the intersection of three compounding trends: the subscription economy, the rise of
+        male prestige skincare, and consumer demand for evidence-based formulations.
+      </p>
+    </div>
+    <div class="stat-grid rv d3" style="margin-top: 56px;">
+      <div class="stat-card">
+        <div class="stat-l" style="margin-bottom: 14px; margin-top: 0; color: var(--accent);">TAM</div>
+        <div class="stat-n">$60B</div>
+        <div class="stat-sub" style="margin-top: 14px;">Global prestige skincare market. 6.8% CAGR through 2030.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-l" style="margin-bottom: 14px; margin-top: 0; color: var(--accent);">SAM</div>
+        <div class="stat-n">$17B</div>
+        <div class="stat-sub" style="margin-top: 14px;">Men's premium skincare — 8.4% CAGR, fastest growing in personal care.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-l" style="margin-bottom: 14px; margin-top: 0; color: var(--accent);">Y3 ARR Target</div>
+        <div class="stat-n">$1.2M</div>
+        <div class="stat-sub" style="margin-top: 14px;">Year 3 ARR target. 1,200 subscribers × $1,000/year.</div>
+      </div>
+    </div>
+    <div class="rv d4" style="margin-top: 40px; padding: 32px; border: 1px solid var(--border-2); background: rgba(200,184,154,0.03);">
+      <div class="lbl" style="margin-bottom: 14px;">Why Now</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px;">
+        <div><div style="color: var(--text); font-weight: 500; margin-bottom: 6px; font-size: 0.9rem;">Men's skincare awakening</div><div class="body-sm">Post-pandemic category unlock. 78% of men now use skincare vs. 41% in 2019.</div></div>
+        <div><div style="color: var(--text); font-weight: 500; margin-bottom: 6px; font-size: 0.9rem;">Subscription economy maturity</div><div class="body-sm">Consumers now pay 32% more for curated recurring products vs. one-time SKUs.</div></div>
+        <div><div style="color: var(--text); font-weight: 500; margin-bottom: 6px; font-size: 0.9rem;">Asia-Pacific premium boom</div><div class="body-sm">APAC men's grooming forecast to hit $28B by 2030 — our launch region.</div></div>
+        <div><div style="color: var(--text); font-weight: 500; margin-bottom: 6px; font-size: 0.9rem;">Ingredient transparency era</div><div class="body-sm">Consumers demanding peer-reviewed actives and provenance — our native advantage.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05 — TRACTION ═══ -->
+<section id="traction" class="sec">
+  <span class="sec-num">05</span>
+  <div class="wrap">
+    <div style="text-align: center; max-width: 620px; margin: 0 auto;">
+      <p class="lbl rv">Early Traction</p>
+      <div class="rule rule-c rv d1"></div>
+      <h2 class="h-section rv d1">
+        Real results.<br><em>From the first batch.</em>
+      </h2>
+      <p class="body-lg rv d2" style="margin-top: 18px;">
+        We invited a select cohort of beta testers to validate the formula. Every one of them scored
+        it 5/5 after 30 days.
+      </p>
+    </div>
+    <div class="stat-grid rv d3" style="margin-top: 48px;">
+      <div class="stat-card"><div class="stat-n">100%</div><div class="stat-l">5-Star Beta Ratings</div><div class="stat-sub">Every tester scored 5/5 after 30 days</div></div>
+      <div class="stat-card"><div class="stat-n">7 Days</div><div class="stat-l">Lab to Dispatch</div><div class="stat-sub">Industry standard: 6–18 months on shelf</div></div>
+      <div class="stat-card"><div class="stat-n">Live</div><div class="stat-l">Indiegogo Campaign</div><div class="stat-sub">Public proof-of-demand, conversion tracking enabled</div></div>
+    </div>
+    <div class="t-grid rv d4">
+      <div class="t-card">
+        <div class="t-quote">"I really liked the one pump — it measures out the quantity easily every time. It's not greasy like some other creams. My skin felt smoother, and the area around my eyes looked a little less dark."</div>
+        <div class="t-meta"><div class="t-tag"><span>Tester:</span> Daniel, 45</div><div class="t-tag"><span>Rating:</span> 5/5</div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-quote">"Gentle and non-stinging, nourishing. Noticed more hydration and brighter skin with less oil control issues than my previous routine."</div>
+        <div class="t-meta"><div class="t-tag"><span>Tester:</span> Cong Huang, 42</div><div class="t-tag"><span>Rating:</span> 5/5</div></div>
+      </div>
+      <div class="t-card">
+        <div class="t-quote">"Cool and refreshing, rejuvenating. Fewer fine lines, firmer skin, brighter skin."</div>
+        <div class="t-meta"><div class="t-tag"><span>Tester:</span> Murray, 40</div><div class="t-tag"><span>Rating:</span> 5/5</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 06 — BUSINESS MODEL ═══ -->
+<section id="model" class="sec" style="background: var(--bg-2);">
+  <span class="sec-num">06</span>
+  <div class="wrap">
+    <div style="max-width: 620px;">
+      <p class="lbl rv">The Business Model</p>
+      <div class="rule rv d1"></div>
+      <h2 class="h-section rv d1">
+        Subscription economics,<br><em>structurally defensible.</em>
+      </h2>
+      <p class="body-lg rv d2" style="margin-top: 18px;">
+        The freshness mandate is our recurring revenue engine. Every 90-day supply cycle becomes a natural
+        subscription trigger — and the product physically cannot be stockpiled, making churn structurally low.
+      </p>
+    </div>
+    <div class="rv d3" style="margin-top: 48px; background: var(--layer); border: 1px solid var(--border); border-radius: 2px; overflow: hidden;">
+      <div style="padding: 20px 28px; background: rgba(200,184,154,0.04); border-bottom: 1px solid var(--border);">
+        <div class="lbl" style="margin-bottom: 0;">Unit Economics &middot; Subscription Customer</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; background: var(--border);">
+        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">Annual Revenue/Sub</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">$1,000</div><div class="stat-sub">4× 90-day bottles per year</div></div>
+        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">COGS/Year</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">~$260</div><div class="stat-sub">4 bottles × ~$65 at scale</div></div>
+        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">Gross Margin</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">74%</div><div class="stat-sub">Target at 1,200 subscribers</div></div>
+        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">LTV (3yr)</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">$3,000</div><div class="stat-sub">$1,000 × 3 subscription years</div></div>
+        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">Target CAC</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">&lt;$80</div><div class="stat-sub">D2C digital + creator</div></div>
+        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">LTV / CAC</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">37×</div><div class="stat-sub">Well above 3× VC benchmark</div></div>
+      </div>
+    </div>
+
+    <!-- 3-Year Revenue Projection -->
+    <div class="rv d4" style="margin-top: 2px; background: var(--layer); border: 1px solid var(--border-2); overflow: hidden;">
+      <div style="padding: 18px 28px; border-bottom: 1px solid var(--border); background: rgba(200,184,154,0.04);">
+        <div class="lbl" style="margin-bottom: 0;">3-Year Revenue Projection &middot; $2M Target</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; background: var(--border); gap: 2px;">
+        <div style="background: var(--layer); padding: 22px 20px;">
+          <div class="stat-l" style="margin-top: 0; color: var(--muted);">Year</div>
+          <div style="font-size: 0.85rem; color: var(--muted); margin-top: 10px; font-weight: 600; letter-spacing: 1px;">Y1</div>
+          <div style="font-size: 0.85rem; color: var(--muted); margin-top: 10px; font-weight: 600; letter-spacing: 1px;">Y2</div>
+          <div style="font-size: 0.85rem; color: var(--accent); margin-top: 10px; font-weight: 600; letter-spacing: 1px;">Y3</div>
+        </div>
+        <div style="background: var(--layer); padding: 22px 20px;">
+          <div class="stat-l" style="margin-top: 0; color: var(--muted);">Subscribers</div>
+          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 10px; font-weight: 600;">100</div>
+          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 10px; font-weight: 600;">800</div>
+          <div style="font-size: 1.05rem; color: var(--accent); margin-top: 10px; font-weight: 600;">1,200</div>
+        </div>
+        <div style="background: var(--layer); padding: 22px 20px;">
+          <div class="stat-l" style="margin-top: 0; color: var(--muted);">Revenue</div>
+          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 10px; font-weight: 600;">$100K</div>
+          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 10px; font-weight: 600;">$800K</div>
+          <div style="font-size: 1.05rem; color: var(--accent); margin-top: 10px; font-weight: 600;">$1.2M</div>
+        </div>
+        <div style="background: var(--layer); padding: 22px 20px;">
+          <div class="stat-l" style="margin-top: 0; color: var(--muted);">Gross Profit</div>
+          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 10px; font-weight: 600;">$74K</div>
+          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 10px; font-weight: 600;">$592K</div>
+          <div style="font-size: 1.05rem; color: var(--accent); margin-top: 10px; font-weight: 600;">$888K</div>
+        </div>
+      </div>
+      <div style="padding: 16px 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div class="body-sm"><strong style="color: var(--text);">3-Year Total:</strong> $2.1M cumulative revenue</div>
+        <div class="body-sm"><strong style="color: var(--accent);">Valuation at 5× revenue:</strong> <strong style="color: var(--accent); font-size: 1.05rem;">$10M USD</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 07 — COMPETITIVE MOAT ═══ -->
+<section id="moat" class="sec">
+  <span class="sec-num">07</span>
+  <div class="wrap">
+    <div style="text-align: center; max-width: 640px; margin: 0 auto;">
+      <p class="lbl rv">The Moat</p>
+      <div class="rule rule-c rv d1"></div>
+      <h2 class="h-section rv d1">Why incumbents <em>can't follow.</em></h2>
+      <p class="body-lg rv d2" style="margin-top: 18px;">
+        Legacy skincare brands are structurally dependent on shelf inventory and multi-SKU portfolios.
+        Our model is their business-model kryptonite.
+      </p>
+    </div>
+    <div class="cmp-grid rv d3">
+      <div class="cmp-card">
+        <div class="cmp-lbl them">The Market</div>
+        <div class="cmp-item"><span class="dot"></span><span>5–7 separate products per routine</span></div>
+        <div class="cmp-item"><span class="dot"></span><span>6–18 months of shelf decay before first use</span></div>
+        <div class="cmp-item"><span class="dot"></span><span>Mass batch inventory, retail distribution</span></div>
+        <div class="cmp-item"><span class="dot"></span><span>One-time SKU subscriptions, no freshness intelligence</span></div>
+        <div class="cmp-item"><span class="dot"></span><span>Marketing-led positioning, opaque formulation</span></div>
+      </div>
+      <div class="cmp-card neo">
+        <div class="cmp-lbl us">NeolabCare</div>
+        <div class="cmp-item"><span class="dot"></span><span>One cream. Nine functions. One pump a day.</span></div>
+        <div class="cmp-item"><span class="dot"></span><span>7 days from lab to customer. Peak potency guarantee.</span></div>
+        <div class="cmp-item"><span class="dot"></span><span>Made to confirmed orders. Zero retail inventory.</span></div>
+        <div class="cmp-item"><span class="dot"></span><span>Batch-aware replenishment, built-in subscription loop</span></div>
+        <div class="cmp-item"><span class="dot"></span><span>Peer-reviewed actives, published ingredient roles</span></div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 40px;">
+      <div class="card rv d1"><h4 style="color: var(--accent);">IP</h4><p>Proprietary 9-in-1 formulation with liposomal NMN delivery.</p></div>
+      <div class="card rv d2"><h4 style="color: var(--accent);">Process</h4><p>Made-to-order manufacturing at GMP partner — non-trivial to replicate.</p></div>
+      <div class="card rv d3"><h4 style="color: var(--accent);">Channel</h4><p>Direct subscription with batch intelligence — owned customer relationship.</p></div>
+      <div class="card rv d4"><h4 style="color: var(--accent);">Science</h4><p>Peer-reviewed actives with citations. Credibility moat vs. marketing-led brands.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 08 — ROADMAP ═══ -->
+<section id="roadmap" class="sec" style="background: var(--bg-2);">
+  <span class="sec-num">08</span>
+  <div class="wrap">
+    <div style="text-align: center; max-width: 640px; margin: 0 auto;">
+      <p class="lbl rv">The Roadmap</p>
+      <div class="rule rule-c rv d1"></div>
+      <h2 class="h-section rv d1">From founding batch<br><em>to global platform.</em></h2>
+    </div>
+    <div class="ft-line">
+      <div class="ft-node rv d1">
+        <div class="ft-dot">▲</div>
+        <div class="ft-day">Q2 2026</div>
+        <div class="ft-title">Founding Batch</div>
+        <div class="ft-desc">Indiegogo campaign close. First production run. Supporter dispatch.</div>
+      </div>
+      <div class="ft-node rv d2">
+        <div class="ft-dot">◆</div>
+        <div class="ft-day">Q3 2026</div>
+        <div class="ft-title">Subscription Launch</div>
+        <div class="ft-desc">Platform live. 500 founding subscribers. First full recurring revenue cohort.</div>
+      </div>
+      <div class="ft-node rv d3">
+        <div class="ft-dot">●</div>
+        <div class="ft-day">Q4 2026</div>
+        <div class="ft-title">APAC Retail Pilots</div>
+        <div class="ft-desc">3 premium retail partnerships in Singapore, Hong Kong, Tokyo.</div>
+      </div>
+      <div class="ft-node rv d4">
+        <div class="ft-dot">★</div>
+        <div class="ft-day">2027</div>
+        <div class="ft-title">Series A &amp; Global</div>
+        <div class="ft-desc">Series A raise. US + EU launch. Platform expansion.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 09 — TEAM ═══ -->
+<section id="team" class="sec">
+  <span class="sec-num">09</span>
+  <div class="wrap">
+    <div style="text-align: center; max-width: 640px; margin: 0 auto;">
+      <p class="lbl rv">The Team</p>
+      <div class="rule rule-c rv d1"></div>
+      <h2 class="h-section rv d1">Operators, chemists,<br><em>and obsessives.</em></h2>
+      <p class="body-lg rv d2" style="margin-top: 18px;">
+        A team combining formulation chemistry, subscription-economy operating experience, and design
+        obsession. Full biographies available on request under NDA.
+      </p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2px; margin-top: 48px; background: var(--border); border: 1px solid var(--border);">
+      <div class="card rv d1" style="border: none; text-align: center; padding: 36px 28px;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(200,184,154,0.08); border: 1px solid var(--border-2); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-family: var(--f-serif); font-style: italic; font-size: 1.4rem;">F</div>
+        <h4>Founder &amp; CEO</h4>
+        <p style="margin-top: 8px;">Product &amp; brand leadership. Prior consumer subscription operating experience.</p>
+      </div>
+      <div class="card rv d2" style="border: none; text-align: center; padding: 36px 28px;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(200,184,154,0.08); border: 1px solid var(--border-2); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-family: var(--f-serif); font-style: italic; font-size: 1.4rem;">S</div>
+        <h4>Chief Scientist</h4>
+        <p style="margin-top: 8px;">Cosmetic chemistry &amp; formulation lead. Peer-reviewed actives specialist.</p>
+      </div>
+      <div class="card rv d3" style="border: none; text-align: center; padding: 36px 28px;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(200,184,154,0.08); border: 1px solid var(--border-2); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-family: var(--f-serif); font-style: italic; font-size: 1.4rem;">A</div>
+        <h4>Advisors</h4>
+        <p style="margin-top: 8px;">Industry veterans in prestige beauty, D2C commerce, and APAC retail.</p>
+      </div>
+    </div>
+    <div class="rv d4" style="display: flex; justify-content: center; gap: 32px; margin-top: 48px; flex-wrap: wrap;">
+      <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>GMP Certified</div>
+      <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>Peer-Reviewed Science</div>
+      <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>Indiegogo Backed</div>
+      <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>US Incorporated</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 10 — THE ASK ═══ -->
+<section id="contact" class="sec" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <span class="sec-num">10</span>
+  <div class="wrap">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
+      <div class="rvl">
+        <p class="lbl">The Ask</p>
+        <div class="rule"></div>
+        <h2 class="h-section">
+          Raising $500K–$1M<br><em>at a $10M valuation.</em>
+        </h2>
+        <p class="body-lg" style="margin-top: 18px;">
+          Pre-seed / angel round. Pre-money valuation: <strong style="color: var(--text);">$10M USD</strong> —
+          5× our 3-year revenue target of $2M across 1,200 subscribers by Year 3. Proceeds deployed against three priorities:
+        </p>
+        <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; gap: 16px; padding: 18px; border: 1px solid var(--border); background: var(--layer); border-radius: 2px;">
+            <div style="font-family: var(--f-serif); font-style: italic; color: var(--accent); font-size: 1.4rem; line-height: 1;">01</div>
+            <div>
+              <div style="font-weight: 500; color: var(--text); margin-bottom: 4px;">Production Scale</div>
+              <div class="body-sm">Finished-good inventory capital, batch automation, GMP expansion.</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; padding: 18px; border: 1px solid var(--border); background: var(--layer); border-radius: 2px;">
+            <div style="font-family: var(--f-serif); font-style: italic; color: var(--accent); font-size: 1.4rem; line-height: 1;">02</div>
+            <div>
+              <div style="font-weight: 500; color: var(--text); margin-bottom: 4px;">Subscription Platform</div>
+              <div class="body-sm">Batch-aware replenishment system, customer experience, churn intelligence.</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 16px; padding: 18px; border: 1px solid var(--border); background: var(--layer); border-radius: 2px;">
+            <div style="font-family: var(--f-serif); font-style: italic; color: var(--accent); font-size: 1.4rem; line-height: 1;">03</div>
+            <div>
+              <div style="font-weight: 500; color: var(--text); margin-bottom: 4px;">Digital Growth</div>
+              <div class="body-sm">D2C acquisition, creator partnerships, APAC launch activations.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rvr">
+        <form id="investorForm" style="background: var(--layer); border: 1px solid var(--border-2); border-radius: 2px; padding: 36px;">
+          <div style="margin-bottom: 24px;">
+            <div class="lbl" style="margin-bottom: 8px;">Request Investor Materials</div>
+            <p class="body-sm">Qualified investors receive the full deck, financial model, and a scheduled intro call.</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <label style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted);">Name</span>
+              <input type="text" name="name" required style="padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 2px; font-family: var(--f-body); font-size: 14px; transition: border-color 0.2s;">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted);">Firm / Company</span>
+              <input type="text" name="firm" style="padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 2px; font-family: var(--f-body); font-size: 14px; transition: border-color 0.2s;">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted);">Email</span>
+              <input type="email" name="email" required style="padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 2px; font-family: var(--f-body); font-size: 14px; transition: border-color 0.2s;">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted);">Check Size (optional)</span>
+              <select name="check_size" style="padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 2px; font-family: var(--f-body); font-size: 14px;">
+                <option value="">Select range</option>
+                <option>Angel &middot; $10K–$50K</option>
+                <option>Angel &middot; $50K–$250K</option>
+                <option>Fund &middot; $250K–$1M</option>
+                <option>Fund &middot; $1M+</option>
+              </select>
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted);">Message</span>
+              <textarea name="message" rows="3" placeholder="Tell us about your thesis / fit" style="padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 2px; font-family: var(--f-body); font-size: 14px; resize: vertical;"></textarea>
+            </label>
+            <button type="submit" id="invBtn" class="btn btn-fill" style="margin-top: 8px; width: 100%; padding: 16px;">Request Investor Deck</button>
+            <div id="invStatus" style="font-size: 12px; color: var(--muted); text-align: center; min-height: 16px;"></div>
+            <p style="font-size: 10px; color: var(--faint); text-align: center; letter-spacing: 1px; text-transform: uppercase;">Confidential &middot; NeolabCare LLC</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+// Investor form submission
+const invForm = document.getElementById('investorForm');
+if (invForm) {
+  invForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('invBtn');
+    const status = document.getElementById('invStatus');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.textContent = '';
+    status.style.color = 'var(--muted)';
+    try {
+      const formData = new FormData(e.target);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value; });
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: 'fe35df41-5c1c-4519-9513-f9a227fcffe4',
+          subject: 'NeolabCare Investor Inquiry — ' + (data.name || 'Anonymous'),
+          from_name: 'NeolabCare Investor Form',
+          ...data
+        })
+      });
+      const result = await res.json();
+      if (!result.success) throw new Error(result.message || 'Submission failed');
+      status.textContent = 'Received. We will respond within 48 hours.';
+      status.style.color = 'var(--accent)';
+      btn.textContent = 'Submitted';
+      invForm.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
+    } catch (err) {
+      status.textContent = 'Something went wrong. Please email investors@neolab.care directly.';
+      status.style.color = '#d88';
+      btn.disabled = false;
+      btn.textContent = 'Request Investor Deck';
+    }
+  });
+}
+</script>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div class="foot-txt">&copy; 2026 NeolabCare LLC. All rights reserved. &middot; Confidential investor materials.</div>
+    <div class="foot-lnks">
+      <a href="/">Home</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('sc', window.scrollY > 60));
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -32px 0px' });
+document.querySelectorAll('.rv, .rvl, .rvr').forEach(el => obs.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
