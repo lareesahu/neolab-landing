@@ -1740,7 +1740,8 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       box-shadow: 0 10px 40px rgba(0,0,0,0.8); pointer-events: none;
       line-height: 1.5;
     }
-    .bs-item:hover .bs-tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-5px); }
+    .bs-item:hover .bs-tooltip,
+    .bs-item.tooltip-open .bs-tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-5px); }
     .bs-info-icon {
       font-size: 10px; color: var(--accent); border: 1px solid var(--accent);
       width: 14px; height: 14px; display: inline-flex; align-items: center; justify-content: center;
@@ -2991,78 +2992,39 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <p class="body-lg rv d2" style="text-align:center;max-width:540px;margin:0 auto 16px;">
       Zero synthetic fragrance. Zero drying alcohol. Zero retinol. Zero AHAs. Every omission was deliberate &mdash; each one excluded because it did not align with our philosophy of barrier-safe, high-tolerance skincare.
     </p>
-    <div class="omit-list">
-      <div class="omit-item rv d1">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c0 0-4 3-4 7a4 4 0 0 0 8 0c0-4-4-7-4-7z"/><path d="M12 10v4"/><path d="M9 20h6"/><path d="M12 14v6"/></svg></span>
-          <span class="omit-name">Synthetic Fragrance</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Added to mask the smell of cheaper base ingredients. Common cause of contact dermatitis and long-term skin sensitisation.</p></div>
+    <p class="micro rv d3" style="text-align:center;color:var(--faint);letter-spacing:0.1em;margin:0 auto 28px;">Tap <span style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;border:1px solid var(--faint);font-size:9px;font-weight:600;">?</span> on each card to see what it does</p>
+    <div class="bs-grid">
+      <div class="bs-item rv d1">
+        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M12 3c0 0-4 3-4 7a4 4 0 0 0 8 0c0-4-4-7-4-7z"/><path d="M12 10v4"/><path d="M9 20h6"/><path d="M12 14v6"/></svg></div>
+        <div class="bs-name">Synthetic Fragrance <span class="bs-info-icon">?</span><div class="bs-tooltip">Added to mask the smell of cheaper base ingredients. Common cause of contact dermatitis and long-term skin sensitisation.</div></div>
       </div>
-      <div class="omit-item rv d2">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12h8"/></svg></span>
-          <span class="omit-name">Drying Alcohols</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Used as a carrier and to create a fast-drying texture. Disrupts the skin barrier with repeated use and accelerates transepidermal moisture loss.</p></div>
+      <div class="bs-item rv d2">
+        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M8 2h8l2 6H6L8 2z"/><path d="M6 8l2 14h8l2-14"/><path d="M10 12h4"/></svg></div>
+        <div class="bs-name">Drying Alcohol <span class="bs-info-icon">?</span><div class="bs-tooltip">Used to create a fast-dry, lightweight feel. Disrupts the skin barrier with repeated use and accelerates transepidermal water loss.</div></div>
       </div>
-      <div class="omit-item rv d3">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/></svg></span>
-          <span class="omit-name">Parabens</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Cheap, effective preservatives. Linked to endocrine disruption — they mimic oestrogen and accumulate in tissue with long-term use.</p></div>
+      <div class="bs-item rv d3">
+        <div class="bs-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
+        <div class="bs-name">Parabens <span class="bs-info-icon">?</span><div class="bs-tooltip">Cheap, effective preservatives. Linked to endocrine disruption — they mimic oestrogen and accumulate in tissue with long-term use.</div></div>
       </div>
-      <div class="omit-item rv d4">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L8 8H4l4 4-2 8 6-4 6 4-2-8 4-4h-4L12 2z"/></svg></span>
-          <span class="omit-name">Mineral Oil</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>A low-cost occlusive that locks in moisture by sitting on the skin surface. Clogs pores and prevents actives from penetrating.</p></div>
+      <div class="bs-item rv d4">
+        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M12 2L8 8H4l4 4-2 8 6-4 6 4-2-8 4-4h-4L12 2z"/></svg></div>
+        <div class="bs-name">Mineral Oil <span class="bs-info-icon">?</span><div class="bs-tooltip">A low-cost occlusive that locks in moisture by sitting on the skin surface. Clogs pores and prevents actives from penetrating.</div></div>
       </div>
-      <div class="omit-item rv" style="transition-delay:0.60s">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>
-          <span class="omit-name">Retinol <span style="font-size:9px;color:var(--muted);font-weight:400;">(by design)</span></span>
-          <span class="omit-tag">By Design</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Proven anti-aging effect — but causes sun sensitivity, peeling, and requires SPF. We achieve the anti-aging outcome through NMN and GHK-Cu without the downtime.</p></div>
+      <div class="bs-item rv d1">
+        <div class="bs-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></div>
+        <div class="bs-name">Retinol<br><span style="font-size:0.58rem;color:var(--muted);">by design</span> <span class="bs-info-icon">?</span><div class="bs-tooltip">Proven anti-aging effect — accelerates cell turnover and stimulates collagen. Causes sun sensitivity, peeling, and requires a separate SPF routine. We achieve the anti-aging outcome through NMN and GHK-Cu without the downtime.</div></div>
       </div>
-      <div class="omit-item rv" style="transition-delay:0.75s">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></span>
-          <span class="omit-name">AHAs / BHAs</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Effective exfoliants that resurface the skin. Increase photosensitivity and require sun protection — limiting when and how often you can use them.</p></div>
+      <div class="bs-item rv d2">
+        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
+        <div class="bs-name">AHAs / BHAs <span class="bs-info-icon">?</span><div class="bs-tooltip">Effective exfoliants that resurface the skin. Increase photosensitivity and require sun protection — limiting when and how often you can use them.</div></div>
       </div>
-      <div class="omit-item rv" style="transition-delay:0.90s">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
-          <span class="omit-name">Heavy Metals</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>Trace contaminants found in mass-produced cosmetic ingredients. We source pharmaceutical-grade actives and batch-test for purity.</p></div>
+      <div class="bs-item rv d3">
+        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div class="bs-name">Heavy Metals <span class="bs-info-icon">?</span><div class="bs-tooltip">Trace contaminants found in mass-produced cosmetic ingredients — lead, arsenic, cadmium. Accumulate in tissue over time. We source pharmaceutical-grade actives and batch-test for purity.</div></div>
       </div>
-      <div class="omit-item rv" style="transition-delay:1.05s">
-        <button class="omit-trigger" onclick="omitToggle(this)">
-          <span class="omit-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-          <span class="omit-name">Hormone Disruptors</span>
-          <span class="omit-tag">Excluded</span>
-          <svg class="omit-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </button>
-        <div class="omit-body"><p>A class of compounds — including some UV filters and preservatives — that interfere with hormonal signalling. Absorbed through the skin and detected in blood and urine after topical use.</p></div>
+      <div class="bs-item rv d4">
+        <div class="bs-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="bs-name">Hormone Disruptors <span class="bs-info-icon">?</span><div class="bs-tooltip">A class of compounds — including some UV filters and preservatives — that interfere with hormonal signalling. Absorbed through the skin and detected in blood and urine after topical use.</div></div>
       </div>
     </div>
   </div>
@@ -3678,6 +3640,23 @@ function omitToggle(btn) {
       });
     }, { threshold: 0.5 });
     steps.forEach(function(s) { obs.observe(s); });
+  })();
+</script>
+
+<!-- bs-item tooltip touch handler -->
+<script>
+  (function() {
+    document.querySelectorAll('.bs-item').forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        var isOpen = item.classList.contains('tooltip-open');
+        document.querySelectorAll('.bs-item.tooltip-open').forEach(function(el) { el.classList.remove('tooltip-open'); });
+        if (!isOpen) item.classList.add('tooltip-open');
+        e.stopPropagation();
+      });
+    });
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.bs-item.tooltip-open').forEach(function(el) { el.classList.remove('tooltip-open'); });
+    });
   })();
 </script>
 
