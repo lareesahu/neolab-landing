@@ -940,6 +940,62 @@
 </head>
 <body>
 
+<!-- ─── NDA GATE ─────────────────────────────────────────────── -->
+<div id="nda-gate" style="
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(10,10,10,0.97);
+  backdrop-filter:blur(12px);
+  z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+">
+  <div style="
+    max-width:520px;width:100%;
+    background:#141414;
+    border:1px solid rgba(200,184,154,0.18);
+    padding:48px 40px;
+    font-family:'Poppins',sans-serif;
+  ">
+    <p style="font-size:9px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:#C8B89A;margin-bottom:20px;">Confidential</p>
+    <h1 style="font-family:'Noto Serif Display',serif;font-size:clamp(22px,3vw,30px);font-weight:400;font-style:italic;color:rgba(245,245,240,.94);line-height:1.2;margin-bottom:20px;">Non-Disclosure Agreement</h1>
+    <p style="font-size:13px;line-height:1.8;color:rgba(245,245,240,.6);margin-bottom:28px;">This document contains confidential and proprietary information belonging to NeolabCare. By proceeding, you agree to treat all information contained herein as strictly confidential, not to disclose it to any third party without prior written consent, and not to use it for any purpose other than evaluating a potential investment in NeolabCare.</p>
+    <p style="font-size:13px;line-height:1.8;color:rgba(245,245,240,.6);margin-bottom:32px;">This is not a public document. If you have received this link in error, please close this page and notify <a href="mailto:hello@neolab.care" style="color:#C8B89A;">hello@neolab.care</a>.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button id="nda-accept" style="
+        flex:1;min-width:160px;
+        background:#C8B89A;color:#0A0A0A;
+        border:none;padding:14px 24px;
+        font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;
+        letter-spacing:0.16em;text-transform:uppercase;
+        cursor:pointer;
+      ">I Agree &mdash; Proceed</button>
+      <a href="/" style="
+        flex:1;min-width:160px;
+        border:1px solid rgba(200,184,154,0.3);color:rgba(245,245,240,.52);
+        padding:14px 24px;text-align:center;
+        font-size:10px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;
+        display:flex;align-items:center;justify-content:center;
+      ">Leave</a>
+    </div>
+  </div>
+</div>
+<script>
+  (function() {
+    var gate = document.getElementById('nda-gate');
+    var btn  = document.getElementById('nda-accept');
+    if (sessionStorage.getItem('nda_accepted') === '1') {
+      gate.style.display = 'none';
+      return;
+    }
+    document.body.style.overflow = 'hidden';
+    btn.addEventListener('click', function() {
+      sessionStorage.setItem('nda_accepted', '1');
+      gate.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+  })();
+</script>
+
   <!-- ─── NAV ────────────────────────────────────────────────── -->
   <nav class="navbar" id="nav" aria-label="Main navigation">
     <div class="nav-links">
