@@ -2035,6 +2035,10 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       .cookie-btns { width: 100%; flex-direction: column; gap: 8px; }
       .cookie-btn { width: 100%; text-align: center; padding: 12px; box-sizing: border-box; }
     }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
@@ -3049,63 +3053,64 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 </section>
 
 <!-- TESTER FEEDBACK -->
-<section id="feedback" class="sec" style="background:var(--bg-2);display:none;"><span class="sec-num" aria-hidden="true">12</span>
+<section id="feedback" class="sec" style="background:var(--bg-2);"><span class="sec-num" aria-hidden="true">12</span>
   <div class="wrap">
-    <p class="lbl rv" style="text-align:center;">The Beta Program</p>
+    <p class="lbl rv" style="text-align:center;">Beta Program</p>
     <div class="rule rule-c rv d1"></div>
     <h2 class="h-section rv d1" style="text-align:center;">
-      Tested by men.<br><em>In the real world.</em>
+      Tested by real men.<br><em>In the real world.</em>
     </h2>
-    <p class="body-lg rv d2" style="max-width:560px;margin:14px auto 48px;text-align:center;">
-      We ran a 30-day closed beta with men across different climates and skin types. We didn't ask for perfection — we asked for honesty.
-    </p>
 
-    <div class="feedback-grid">
-      <!-- Daniel -->
-      <div class="testimonial-card rv d1">
-        <div class="testimonial-text">"I liked the one pump—it measures out the quantity easily every time. It’s not greasy like some other creams I’ve tried. My skin felt smoother, and the area around my eyes looked a little less dark. Still monitoring long-term changes, but the daily feel is excellent."</div>
-        <div class="testimonial-meta">
-          <div class="testimonial-tag"><span>Tester:</span> Daniel, 45</div>
-          <div class="testimonial-tag"><span>Skin Type:</span> Combination</div>
-          <div class="testimonial-tag"><span>Window:</span> 30 Days</div>
-        </div>
-        <div class="tag-cloud" style="margin-top:16px;">
-          <div class="tag">Less irritation</div>
-          <div class="tag">Smooth texture</div>
-          <div class="tag">Effortless</div>
-        </div>
-      </div>
+    <!-- Featured quote: Daniel -->
+    <div class="feedback-featured rv d1" style="border:1px solid var(--border-2);background:var(--layer);padding:40px 48px;margin:48px 0 32px;max-width:720px;margin-left:auto;margin-right:auto;">
+      <div style="font-family:var(--f-serif);font-style:italic;font-size:clamp(1rem,2vw,1.2rem);line-height:1.85;color:var(--light);margin-bottom:28px;">&quot;I really liked the one pump—it measures out the quantity easily every time. It feels like a small amount, but it actually spreads across my whole face without any effort. I didn't have to think about using too much or too little, and it's not greasy like some other creams I've tried. After using it for a bit, my skin felt smoother, and the area around my eyes looked a little less dark. Just something that works well, with great ingredients and a fresh feel—exactly what we want out of life.&quot;</div>
+      <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:3px;">Daniel</div>
+      <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">Age 45 · Normal skin · Fine lines, sensitivity, dullness</div>
+    </div>
 
-      <!-- Cong Huang -->
-      <div class="testimonial-card rv d2">
-        <div class="testimonial-text">"Gentle and non-stinging, nourishing. Noticed more hydration and brighter skin with less oil control issues than my previous routine. It takes a minute to absorb fully after shaving, but the redness reduction is noticeable."</div>
-        <div class="testimonial-meta">
-          <div class="testimonial-tag"><span>Tester:</span> Cong Huang, 42</div>
-          <div class="testimonial-tag"><span>Skin Type:</span> Oily / Sensitive</div>
-          <div class="testimonial-tag"><span>Window:</span> 30 Days</div>
+    <!-- Marquee of other quotes -->
+    <div style="overflow:hidden;position:relative;margin:48px 0;">
+      <div style="position:absolute;top:0;bottom:0;left:0;right:0;width:80px;z-index:2;pointer-events:none;background:linear-gradient(to right,var(--bg-2),transparent);"></div>
+      <div style="position:absolute;top:0;bottom:0;left:0;right:0;width:80px;z-index:2;pointer-events:none;background:linear-gradient(to left,var(--bg-2),transparent);right:0;left:auto;"></div>
+      <div style="display:flex;gap:24px;animation:marquee 36s linear infinite;width:max-content;" onmouseover="this.style.animationPlayState='paused'" onmouseout="this.style.animationPlayState='running'">
+        <div style="background:var(--layer);border:1px solid var(--border);padding:28px 32px;width:340px;flex-shrink:0;">
+          <div style="font-size:0.88rem;line-height:1.8;color:var(--light);font-style:italic;margin-bottom:20px;">&quot;no need to worry about application order and it looks gorgeous&quot;</div>
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);"><strong style="color:var(--accent);">Steven</strong> · Age 35 · Oily skin</div>
         </div>
-        <div class="tag-cloud" style="margin-top:16px;">
-          <div class="tag">More hydration</div>
-          <div class="tag">Less oil</div>
-          <div class="tag">Skin tolerance</div>
+        <div style="background:var(--layer);border:1px solid var(--border);padding:28px 32px;width:340px;flex-shrink:0;">
+          <div style="font-size:0.88rem;line-height:1.8;color:var(--light);font-style:italic;margin-bottom:20px;">&quot;Cool and refreshing, rejuvenating&quot;</div>
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);"><strong style="color:var(--accent);">Murray</strong> · Age 40 · Normal skin</div>
         </div>
-      </div>
-
-      <!-- Murray -->
-      <div class="testimonial-card rv d3">
-        <div class="testimonial-text">"Cool and refreshing. I travel frequently and the single bottle format replaced three different products in my dopp kit. It kept my skin from drying out on long flights, which was my main requirement."</div>
-        <div class="testimonial-meta">
-          <div class="testimonial-tag"><span>Tester:</span> Murray, 40</div>
-          <div class="testimonial-tag"><span>Skin Type:</span> Dry / Travel-Stressed</div>
-          <div class="testimonial-tag"><span>Window:</span> 30 Days</div>
+        <div style="background:var(--layer);border:1px solid var(--border);padding:28px 32px;width:340px;flex-shrink:0;">
+          <div style="font-size:0.88rem;line-height:1.8;color:var(--light);font-style:italic;margin-bottom:20px;">&quot;Smooth feeling, easy application&quot;</div>
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);"><strong style="color:var(--accent);">Chris</strong> · Age 61 · Normal skin</div>
         </div>
-        <div class="tag-cloud" style="margin-top:16px;">
-          <div class="tag">Travel efficiency</div>
-          <div class="tag">Barrier protection</div>
-          <div class="tag">Hydration</div>
+        <!-- duplicate for seamless loop -->
+        <div style="background:var(--layer);border:1px solid var(--border);padding:28px 32px;width:340px;flex-shrink:0;">
+          <div style="font-size:0.88rem;line-height:1.8;color:var(--light);font-style:italic;margin-bottom:20px;">&quot;no need to worry about application order and it looks gorgeous&quot;</div>
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);"><strong style="color:var(--accent);">Steven</strong> · Age 35 · Oily skin</div>
+        </div>
+        <div style="background:var(--layer);border:1px solid var(--border);padding:28px 32px;width:340px;flex-shrink:0;">
+          <div style="font-size:0.88rem;line-height:1.8;color:var(--light);font-style:italic;margin-bottom:20px;">&quot;Cool and refreshing, rejuvenating&quot;</div>
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);"><strong style="color:var(--accent);">Murray</strong> · Age 40 · Normal skin</div>
+        </div>
+        <div style="background:var(--layer);border:1px solid var(--border);padding:28px 32px;width:340px;flex-shrink:0;">
+          <div style="font-size:0.88rem;line-height:1.8;color:var(--light);font-style:italic;margin-bottom:20px;">&quot;Smooth feeling, easy application&quot;</div>
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);"><strong style="color:var(--accent);">Chris</strong> · Age 61 · Normal skin</div>
         </div>
       </div>
     </div>
+
+    <!-- Aggregate bars (no numbers) -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px 32px;max-width:720px;margin:56px auto 0;">
+      <div><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Hydration</div><div style="height:3px;background:var(--border);border-radius:2px;overflow:hidden;"><div style="height:100%;background:var(--accent);border-radius:2px;width:96%;"></div></div></div>
+      <div><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Firmness</div><div style="height:3px;background:var(--border);border-radius:2px;overflow:hidden;"><div style="height:100%;background:var(--accent);border-radius:2px;width:94%;"></div></div></div>
+      <div><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Fine Lines</div><div style="height:3px;background:var(--border);border-radius:2px;overflow:hidden;"><div style="height:100%;background:var(--accent);border-radius:2px;width:94%;"></div></div></div>
+      <div><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Skin Tolerance</div><div style="height:3px;background:var(--border);border-radius:2px;overflow:hidden;"><div style="height:100%;background:var(--accent);border-radius:2px;width:96%;"></div></div></div>
+      <div><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Smoothness</div><div style="height:3px;background:var(--border);border-radius:2px;overflow:hidden;"><div style="height:100%;background:var(--accent);border-radius:2px;width:90%;"></div></div></div>
+      <div><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Post-Shave</div><div style="height:3px;background:var(--border);border-radius:2px;overflow:hidden;"><div style="height:100%;background:var(--accent);border-radius:2px;width:90%;"></div></div></div>
+    </div>
+    <p style="text-align:center;margin-top:28px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);">4 testers · Ages 31–61 · Normal &amp; oily skin</p>
   </div>
 </section>
 
