@@ -3314,7 +3314,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         annualNote.style.display = 'block';
         
         grid.innerHTML = `
-          <div class="perk rv">
+          <div class="perk" style="opacity:1; visibility:visible;">
             <div class="perk-tier">Annual Fresh Cycle</div>
             <div class="perk-name">Annual 30ml</div>
             <div class="perk-price">$792</div>
@@ -3331,7 +3331,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
             <a href="${links.annual30}" class="perk-btn">Reserve 30ml Fresh Cycle</a>
           </div>
           
-          <div class="perk rv" style="border-color:var(--accent);">
+          <div class="perk" style="border-color:var(--accent); opacity:1; visibility:visible;">
             <div class="perk-tier tag-popular" style="background:var(--accent); color:#000;">Best long-term value</div>
             <div class="perk-name">Annual 50ml</div>
             <div class="perk-price">$992</div>
@@ -3355,7 +3355,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         annualNote.style.display = 'none';
 
         let card30 = `
-          <div class="perk rv">
+          <div class="perk" style="opacity:1; visibility:visible;">
             <div class="perk-tier">Founding Edition</div>
             <div class="perk-name">Founding Edition 30ml</div>
             <div class="perk-price">$198</div>
@@ -3374,7 +3374,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 
         if (isReferral) {
           card30 = `
-            <div class="perk rv" style="border-color:var(--accent);">
+            <div class="perk" style="border-color:var(--accent); opacity:1; visibility:visible;">
               <div class="perk-tier" style="color:var(--accent);">Private Creator Access</div>
               <div class="perk-name">Founding Edition 30ml</div>
               <div class="perk-retail" style="margin-bottom:4px;">Retail <s>$198</s></div>
@@ -3394,7 +3394,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 
         grid.innerHTML = `
           ${card30}
-          <div class="perk rv">
+          <div class="perk" style="opacity:1; visibility:visible;">
             <div class="perk-tier">Founding Edition</div>
             <div class="perk-name">Founding Edition 50ml</div>
             <div class="perk-price">$248</div>
