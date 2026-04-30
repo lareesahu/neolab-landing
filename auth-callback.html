@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NeoLabCare | Shopify Authorization</title>
+    <style>
+        body { background: #0a0a0a; color: #f5f5f0; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .box { text-align: center; border: 1px solid #222; padding: 40px; border-radius: 8px; }
+        .code { color: #d4af37; font-family: monospace; font-size: 1.2rem; margin: 20px 0; padding: 10px; background: #111; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Shopify Authorization Received</h2>
+        <p>Please copy the code below and paste it back into the chat with Manus:</p>
+        <div id="code-display" class="code">Extracting code...</div>
+        <p style="font-size: 0.8rem; color: #666;">This is a temporary secure handshake.</p>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        if (code) {
+            document.getElementById('code-display').textContent = code;
+        } else {
+            document.getElementById('code-display').textContent = "No code found. Please try clicking 'Install' again.";
+        }
+    </script>
+</body>
+</html>
