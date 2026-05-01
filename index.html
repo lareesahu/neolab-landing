@@ -1108,11 +1108,18 @@ nav.sc {
 .promise-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: brightness(0.7) contrast(1.1); }
 
 /* ============================================================
-   REWARD TIERS
+   RESERVE / PRICING MODULE
 ============================================================ */
-#perks { background: #000; }
+#reserve { background: #000; }
 .perks-hd { text-align: center; margin-bottom: 44px; }
-.perks-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.perks-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; }
+/* Pricing toggle */
+.pricing-toggle { display:inline-flex; border:1px solid var(--border); border-radius:2px; overflow:hidden; margin-top:24px; }
+.toggle-btn { font-family:var(--f-body); font-size:11px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:11px 24px; background:transparent; border:none; color:var(--muted); cursor:pointer; transition:all 0.2s ease; }
+.toggle-btn.active { background:var(--accent); color:#000; }
+.toggle-btn:hover:not(.active) { color:var(--text); }
+/* Referral banner */
+.ref-banner { display:none; margin-bottom:36px; padding:22px 28px; background:rgba(200,184,154,0.06); border:1px solid rgba(200,184,154,0.28); border-radius:2px; }
 .perk {
   background: var(--charcoal); border: 1px solid var(--border);
   padding: 28px 22px; position: relative;
@@ -1710,7 +1717,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       <a href="#product" class="nav-link">Formula</a>
       <a href="#freshness" class="nav-link">Freshness</a>
       <a href="#science" class="nav-link">Science</a>
-      <a href="#perks" class="nav-link">Subscribe</a>
+      <a href="#reserve" class="nav-link">Reserve</a>
       <a href="#faq" class="nav-link">FAQ</a>
     </div>
     <!-- Center: logo -->
@@ -1721,7 +1728,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     </div>
     <!-- Right: CTA + hamburger -->
     <div class="nav-right">
-      <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="nav-cta" target="_blank" rel="noopener">Back the Campaign</a>
+      <a href="#reserve" class="nav-cta">Reserve Founding Edition</a>
       <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -1732,9 +1739,9 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <a href="#product" class="nav-drawer-link">The Formula</a>
     <a href="#freshness" class="nav-drawer-link">Freshness Cycle</a>
     <a href="#science" class="nav-drawer-link">The Science</a>
-    <a href="#perks" class="nav-drawer-link">Subscribe</a>
+    <a href="#reserve" class="nav-drawer-link">Reserve</a>
     <a href="#faq" class="nav-drawer-link">FAQ</a>
-    <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="nav-drawer-cta" target="_blank" rel="noopener">Back the Campaign</a>
+    <a href="#reserve" class="nav-drawer-cta">Reserve Founding Edition</a>
     <a href="/dashboard.html" class="nav-drawer-link" style="font-size:10px;opacity:0.4;letter-spacing:2px;">Internal Dashboard</a>
   </div>
 
@@ -2098,16 +2105,16 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       margin:0 0 0;
     ">
       <div style="max-width:560px;">
-        <p class="lbl rv" style="margin-bottom:10px;">The Subscription Difference</p>
+        <p class="lbl rv" style="margin-bottom:10px;">The Fresh Cycle Difference</p>
         <h3 class="rv d1" style="font-family:var(--f-body);font-size:clamp(1.1rem,2vw,1.5rem);font-weight:500;line-height:1.3;color:var(--text);margin-bottom:12px;">
           Your skin deserves peak potency — every time.
         </h3>
         <p class="rv d2" style="font-size:var(--t-md);color:var(--muted);line-height:1.65;max-width:480px;">
-          Subscription means you never have to track batch age or reorder windows. We handle the timing so your next bottle arrives fresh, before you run out — zero guesswork on your end.
+          The Annual Fresh Cycle means you never have to track batch age or reorder windows. We plan the timing so your next bottle arrives fresh, before you run out — zero guesswork on your end.
         </p>
       </div>
       <div class="rv d3" style="flex-shrink:0;">
-        <a href="#subscription" class="btn-primary" style="white-space:nowrap;font-size:var(--t-xs);background:var(--accent);color:#000 !important;border-color:var(--accent);font-weight:600;">How subscription works</a>
+        <a href="#reserve" class="btn-primary" style="white-space:nowrap;font-size:var(--t-xs);background:var(--accent);color:#000 !important;border-color:var(--accent);font-weight:600;">Reserve Your Bottle</a>
       </div>
     </div>
   </div>
@@ -2503,7 +2510,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       Each bottle is produced to order and dispatched from our GMP facility within 7 days of production. No retail shelf time. No mass inventory cycle. Just a fresher path from lab to customer.
     </div>
     <p class="body-sm rv d3">
-      Subscribers can choose a delivery rhythm that fits their usage, making fresh replenishment easier to stay on top of.
+      The Annual Fresh Cycle lets you plan a delivery rhythm that fits your usage, making fresh replenishment easier to stay on top of.
     </p>
   </div>
   <div class="promise-img rvr">
@@ -2572,138 +2579,108 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
   </div>
 </section>
 
-<!-- REWARD TIERS -->
-<section id="perks" class="sec"><span class="sec-num" aria-hidden="true">13</span>
+<!-- RESERVE THE FOUNDING EDITION -->
+<section id="reserve" class="sec"><span class="sec-num" aria-hidden="true">13</span>
   <div class="wrap">
+
+    <!-- Referral banner — shown via JS when ?ref= param present -->
+    <div class="ref-banner rv" id="ref-banner">
+      <p class="lbl" style="margin-bottom:8px;">Private Creator Access Unlocked</p>
+      <p style="font-size:0.92rem;color:var(--text);margin-bottom:6px;">You have access to the NeoLabCare Founding Price through <strong id="ref-creator-name" style="color:var(--accent);">—</strong>.</p>
+      <p style="font-size:0.82rem;color:var(--muted);">30ml Founding Edition: <s style="color:var(--muted);">$198 retail</s> &rarr; <strong style="color:var(--accent);">$99 creator price</strong> &middot; Use code <strong id="ref-code-display" style="color:var(--accent);">—</strong> at checkout.</p>
+    </div>
+
     <div class="perks-hd">
-      <p class="lbl rv">Founding Campaign</p>
+      <p class="lbl rv">Reserve the Founding Edition</p>
       <div class="rule rule-c rv d1"></div>
-      <h2 class="h-section rv d1">Early access pricing,<br><em>ahead of retail.</em></h2>
+      <h2 class="h-section rv d1">Choose your size,<br><em>reserve your bottle.</em></h2>
       <p class="body-lg rv d2" style="max-width:520px;margin:10px auto 0;">
-        Limited time offer, exclusively for early supporters before our official release.
+        Choose your bottle size, then reserve either one fresh-batch bottle or a planned annual fresh cycle.
       </p>
+      <p class="body-sm rv d3" style="margin-top:8px;color:var(--faint);">Produced after batch close. Dispatched within 7 days of production completion.</p>
+      <div class="pricing-toggle rv d3">
+        <button class="toggle-btn active" data-tab="single" onclick="switchPricingTab('single')">Single Bottle</button>
+        <button class="toggle-btn" data-tab="annual" onclick="switchPricingTab('annual')">Annual Fresh Cycle</button>
+      </div>
     </div>
-    <div class="perks-grid">
-      <!-- Tier 01 -->
-      <div class="perk rv d1" style="display:none;">
-        <div class="perk-tier">Tier 01</div>
-        <div class="perk-name">Your Skin, Decoded</div>
-        <div class="perk-price">$10</div>
-        <div class="perk-note">AI-personalised skin profile</div>
+
+    <!-- ─── SINGLE BOTTLE TAB ─── -->
+    <div id="tab-single" class="perks-grid">
+      <!-- 30ml — swapped to creator price by JS if ?ref= present -->
+      <div class="perk rv d1" id="card-30ml">
+        <div class="perk-tier">Founding Edition 30ml</div>
+        <div class="perk-price">$198</div>
+        <div class="perk-note">Daily 9-in-1 skin treatment &middot; approx. 90-day supply</div>
         <div class="perk-hr"></div>
         <div class="perk-inc">
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>10-question skin assessment</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Optional photo analysis</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Personalised skin profile PDF</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Delivered within 24 hours</span></div>
-        </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn">Get Your Report</a>
-      </div>
-      <!-- Tier 02 -->
-      <div class="perk rv d2" style="display:none;">
-        <div class="perk-tier">Tier 02</div>
-        <div class="perk-name">The Traveller</div>
-        <div class="perk-price">$59</div>
-        <div class="perk-note">5 &times; 1.5ml ampoules &middot; same formula</div>
-        <div class="perk-hr"></div>
-        <div class="perk-inc">
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 1.5ml NeolabCare ampoules</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Same formula. Same freshness.</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Carry-on compliant</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>10&ndash;15 applications</span></div>
-        </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn">Get The Traveller</a>
-      </div>
-      <!-- Tier 03 -->
-      <div class="perk rv d3" style="display:none;">
-        <div class="perk-tier">Tier 03 &middot; First 50 Only</div>
-        <div class="perk-name">Super Early Bird</div>
-        <div class="perk-retail">Retail <s>$349</s><span class="perk-save">Save $100</span></div>
-        <div class="perk-price">$249</div>
-        <div class="perk-note">30ml bottle + 5 &times; 1.5ml ampoules</div>
-        <div class="perk-hr"></div>
-        <div class="perk-inc">
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>1 &times; 30ml NeolabCare bottle</span></div>
+          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>1 &times; 30ml black vacuum pump bottle</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 1.5ml travel ampoules</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
+          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Fresh-batch production priority</span></div>
+          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Dispatched within 7 days of production</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn">Claim Super Early Bird</a>
+        <a href="#" class="perk-btn">Reserve 30ml</a>
       </div>
-      <!-- Tier 04 -->
-      <div class="perk rv d1" style="display:none;">
-        <div class="perk-tier">Tier 04 &middot; Next 100 Only</div>
-        <div class="perk-name">Early Bird</div>
-        <div class="perk-retail">Retail <s>$349</s><span class="perk-save">Save $70</span></div>
-        <div class="perk-price">$279</div>
-        <div class="perk-note">30ml bottle + 5 &times; 1.5ml ampoules</div>
-        <div class="perk-hr"></div>
-        <div class="perk-inc">
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>1 &times; 30ml NeolabCare bottle</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 1.5ml travel ampoules</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
-        </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn">Claim Early Bird</a>
-      </div>
-      <!-- Tier 05 -->
+      <!-- 50ml -->
       <div class="perk rv d2">
-        <div class="perk-tier">Most Popular</div>
-        <div class="perk-name">The Full Ritual</div>
-        <div class="perk-retail">Retail <s>$349</s><span class="perk-save">Save $50</span></div>
-        <div class="perk-price">$299</div>
-        <div class="perk-note">30ml bottle &middot; 90-day supply &middot; one pump per day</div>
+        <div class="perk-tier">Founding Edition 50ml</div>
+        <div class="perk-price">$248</div>
+        <div class="perk-note">Extended size for consistent daily use</div>
         <div class="perk-hr"></div>
         <div class="perk-inc">
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>1 &times; 30ml NeolabCare bottle</span></div>
+          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>1 &times; 50ml black vacuum pump bottle</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 1.5ml travel ampoules</span></div>
           <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>
+          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Fresh-batch production priority</span></div>
+          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Best value for daily users</span></div>
         </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn">Claim Your Bottle</a>
-      </div>
-      <!-- Tier 06 -->
-         <div class="perk rv d3" style="border-color:var(--accent);">
-        <div class="perk-tier tag-popular">Exclusive Offer</div>
-        <div class="perk-crowdfund" style="margin-top: 4px; margin-bottom: 12px;">&#9733; Exclusive crowdfunding price</div>
-        <div class="perk-name">Seasonal Founding Member</div>
-        <div class="perk-retail">4 bottles at retail <s>$1,396</s><span class="perk-save">Save $397</span></div>
-        <div class="perk-price">$999</div>
-        <div class="perk-note">4 quarterly deliveries &middot; auto-shipped fresh</div>
-        <div class="perk-hr"></div>
-        <div class="perk-inc">
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>4 &times; 30ml bottles per year</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 1.5ml ampoules per delivery</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Each batch auto-shipped fresh every 3 months</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Member engraving</span></div>
-        </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn" style="background:var(--accent); color:#000; border-color:var(--accent);">Become a Founding Member</a>
-      </div>
-      <!-- Tier 08 -->
-      <div class="perk rv d1" style="background:var(--mid);">
-        <div class="perk-tier">VVIP Founding Member</div>
-        <div class="perk-name">VVIP Founder Access</div>
-        <div class="perk-retail">Campaign price locked</div>
-        <div class="perk-price">$4,999</div>
-        <div class="perk-note">The complete experience.</div>
-        <div class="perk-hr"></div>
-        <div class="perk-inc">
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Everything in Bi-Monthly tier</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Customised neolab.care Cooler included</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Personalised packaging &amp; engraving</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Personalised skin report</span></div>
-          <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Name in the Founding Edition credits</span></div>
-        </div>
-        <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="perk-btn">Reserve Your Spot</a>
+        <a href="#" class="perk-btn">Reserve 50ml</a>
       </div>
     </div>
-    <div class="addon-bar rv" style="display:none;">
-      <div style="display:flex;align-items:center;gap:18px;">
-        <div class="addon-ico">&#10052;&#65039;</div>
-        <div>
-          <div class="addon-name">Customised neolab.care Cooler &mdash; Add-On</div>
-          <div class="addon-desc">3&ndash;8&deg;C &middot; Whisper-quiet &middot; Matte black &middot; Designed to sit on your counter, not hide under it.</div>
+
+    <!-- ─── ANNUAL FRESH CYCLE TAB ─── -->
+    <div id="tab-annual" style="display:none;">
+      <p class="body-sm rv" style="text-align:center;margin-bottom:24px;padding:14px 20px;background:rgba(200,184,154,0.04);border:1px solid var(--border);border-radius:2px;color:var(--muted);">
+        Annual Fresh Cycle is prepaid. Your bottles are produced and shipped in planned fresh-batch windows across the year.
+      </p>
+      <div class="perks-grid">
+        <!-- Annual 30ml -->
+        <div class="perk rv d1">
+          <div class="perk-tier">Annual Fresh Cycle 30ml</div>
+          <div class="perk-price">$792</div>
+          <div class="perk-note">4 &times; 30ml bottles across the year</div>
+          <p style="font-size:0.72rem;color:var(--accent);margin-bottom:14px;letter-spacing:0.5px;">Planned fresh-batch production every 3 months</p>
+          <div class="perk-hr"></div>
+          <div class="perk-inc">
+            <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>4 &times; 30ml black vacuum pump bottles</span></div>
+            <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 1.5ml travel ampoules with each delivery</span></div>
+            <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Fresh-batch planning every quarter</span></div>
+            <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Member engraving</span></div>
+            <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Priority production slot</span></div>
+          </div>
+          <a href="#" class="perk-btn">Reserve 30ml Fresh Cycle</a>
+        </div>
+        <!-- Annual 50ml -->
+        <div class="perk rv d2" style="border-color:var(--accent);">
+          <div class="perk-tier tag-popular">Best long-term value</div>
+          <div class="perk-name" style="margin-top:10px;">Annual Fresh Cycle 50ml</div>
+          <div class="perk-price">$992</div>
+          <div class="perk-note">4 &times; 50ml bottles across the year</div>
+          <p style="font-size:0.72rem;color:var(--accent);margin-bottom:14px;letter-spacing:0.5px;">Best for consistent daily users</p>
+          <div class="perk-hr"></div>
+          <div class="perk-inc">
+            <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>4 &times; 50ml black vacuum pump bottles</span></div>
+            <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 1.5ml travel ampoules with each delivery</span></div>
+            <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Fresh-batch planning every quarter</span></div>
+            <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Member engraving</span></div>
+            <div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Priority production slot</span></div>
+          </div>
+          <a href="#" class="perk-btn" style="background:var(--accent);color:#000;border-color:var(--accent);">Reserve 50ml Fresh Cycle</a>
         </div>
       </div>
-      <div class="addon-price">$199</div>
     </div>
+
+    <p class="body-sm rv" style="text-align:center;margin-top:28px;color:var(--faint);">Private founding prices may be available through selected creator partners.</p>
   </div>
 </section>
 
@@ -2748,7 +2725,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
         <div class="faq-item rv d2"><div class="faq-q" onclick="faq(this)">What is liposomal NMN and why does it matter?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">NMN (Nicotinamide Mononucleotide) is a NAD+ precursor &mdash; a compound that supports cellular energy production and is associated with skin aging research. Standard topical NMN is largely degraded by enzymes in the skin&rsquo;s surface layer before it can penetrate. Liposomal delivery encapsulates the NMN in a lipid shell that bypasses this enzymatic degradation, allowing deeper penetration. This is why we specified liposomal form specifically, at an effective concentration of 2&ndash;2.5%.</div></div></div>
         <div class="faq-item rv d3"><div class="faq-q" onclick="faq(this)">When will my order ship?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">Your order will be produced after the campaign closes. We dispatch within 7 days of production completion &mdash; this is our commitment. Delivery timelines vary by destination: typically 5&ndash;10 business days for most of Asia, 10&ndash;21 days for international destinations. You will receive your production date and tracking number by email.</div></div></div>
         <div class="faq-item rv d4"><div class="faq-q" onclick="faq(this)">Is this suitable for sensitive skin?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">The formula was designed to be gentle &mdash; no retinol, no AHAs, no fragrances, no known common irritants. However, individual sensitivities vary. This is exactly why we include travel ampoules with every full-bottle order: test it on a small area first. If you experience any reaction, you haven&rsquo;t opened the main bottle.</div></div></div>
-        <div class="faq-item rv d5"><div class="faq-q" onclick="faq(this)">How does the subscription work?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">Subscribers on Tier 06 and above receive their next batch automatically &mdash; every 3 months for Seasonal, every 2 months for Bi-Monthly. We time the production and dispatch so your new bottle arrives before your current one runs out. No reminders, no manual reorders. You can pause or cancel at any time.</div></div></div>
+        <div class="faq-item rv d5"><div class="faq-q" onclick="faq(this)">How does the Annual Fresh Cycle work?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">The Annual Fresh Cycle is prepaid. You reserve four bottles upfront and we produce and dispatch each one in planned fresh-batch windows every three months across the year. We time production and dispatch so your new bottle arrives before your current one runs out &mdash; no manual reorders, no tracking batch ages.</div></div></div>
         <div class="faq-item rv"><div class="faq-q" onclick="faq(this)">What does &ldquo;produced to order&rdquo; mean?<span class="faq-ico">+</span></div><div class="faq-a"><div class="faq-a-in">It means we do not manufacture stock in advance. Each batch is produced specifically for the orders received. This is what allows us to eliminate shelf time entirely &mdash; there is no warehouse, no retail chain, no product sitting in a distribution centre. Your bottle is made for you, then dispatched directly.</div></div></div>
       </div>
     </div>
@@ -2769,7 +2746,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
       Produced to order. Dispatched within 7 days of production. No retail chain. No shelf time.
     </p>
       <div class="closing-acts rv d4">
-      <a href="https://www.indiegogo.com/projects/neolabcare/skincare" class="btn btn-fill">Back This Project</a>
+      <a href="#reserve" class="btn btn-fill">Reserve Founding Edition</a>
     </div>
   </div>
 </section>
@@ -2805,12 +2782,12 @@ function cookieChoice(accepted) {
         <div class="ft-tag">9-in-1 skincare. One pump a day.<br>Freshly made to order, delivered at peak potency.</div>
       </div>
       <div>
-        <div class="ft-hd">Campaign</div>
+        <div class="ft-hd">Product</div>
         <a href="#product" class="ft-lnk">The Formula</a>
         <a href="#freshness" class="ft-lnk">Freshness Cycle</a>
         <a href="#science" class="ft-lnk">The Science</a>
-        <a href="#subscription" class="ft-lnk">The Subscription</a>
-        <a href="#perks" class="ft-lnk">Reward Tiers</a>
+        <a href="#reserve" class="ft-lnk">Reserve Your Bottle</a>
+        <a href="/creator-partner.html" class="ft-lnk">Creator Partners</a>
       </div>
       <div>
         <div class="ft-hd">Brand</div>
@@ -2866,6 +2843,54 @@ if (hamburger && drawer) {
 
 // Hero entrance
 window.addEventListener('load', () => document.getElementById('hero').classList.add('ld'));
+
+// ─── PRICING TOGGLE ───
+function switchPricingTab(tab) {
+  document.querySelectorAll('.toggle-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.tab === tab);
+  });
+  var single = document.getElementById('tab-single');
+  var annual = document.getElementById('tab-annual');
+  if (single) single.style.display = tab === 'single' ? 'grid' : 'none';
+  if (annual) annual.style.display = tab === 'annual' ? 'block' : 'none';
+}
+
+// ─── REFERRAL LOGIC ───
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var ref = params.get('ref');
+  if (!ref) return;
+  var code = ref.toUpperCase();
+  var coupon = code + '99';
+
+  var banner = document.getElementById('ref-banner');
+  if (banner) {
+    banner.style.display = 'block';
+    var nameEl = document.getElementById('ref-creator-name');
+    var codeEl = document.getElementById('ref-code-display');
+    if (nameEl) nameEl.textContent = code;
+    if (codeEl) codeEl.textContent = coupon;
+  }
+
+  var card = document.getElementById('card-30ml');
+  if (card) {
+    card.innerHTML =
+      '<div class="perk-tier">Founding Edition 30ml</div>' +
+      '<div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--muted);text-decoration:line-through;">$198 retail</span></div>' +
+      '<div class="perk-price" style="color:var(--accent);">$99</div>' +
+      '<div class="perk-note">Private creator price &middot; Save $99</div>' +
+      '<div style="margin-bottom:14px;font-size:0.78rem;color:var(--muted);">Unlocked with code: <strong style="color:var(--accent);">' + coupon + '</strong></div>' +
+      '<div class="perk-hr"></div>' +
+      '<div class="perk-inc">' +
+        '<div class="perk-ln"><span class="perk-ck">&#10003;</span><span>1 &times; 30ml black vacuum pump bottle</span></div>' +
+        '<div class="perk-ln"><span class="perk-ck">&#10003;</span><span>5 &times; 1.5ml travel ampoules</span></div>' +
+        '<div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Founding Edition engraving</span></div>' +
+        '<div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Fresh-batch production priority</span></div>' +
+        '<div class="perk-ln"><span class="perk-ck">&#10003;</span><span>Dispatched within 7 days of production</span></div>' +
+      '</div>' +
+      '<a href="#" class="perk-btn" style="background:var(--accent);color:#000;border-color:var(--accent);">Claim Creator Price</a>';
+  }
+})();
 
 // Scroll reveal — Apple-standard: fire once, earlier trigger, never re-hide
 const obs = new IntersectionObserver(entries => {
