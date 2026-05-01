@@ -1742,7 +1742,6 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     <a href="#reserve" class="nav-drawer-link">Reserve</a>
     <a href="#faq" class="nav-drawer-link">FAQ</a>
     <a href="#reserve" class="nav-drawer-cta">Reserve Founding Edition</a>
-    <a href="/dashboard.html" class="nav-drawer-link" style="font-size:10px;opacity:0.4;letter-spacing:2px;">Internal Dashboard</a>
   </div>
 
   <!-- ─── SPLINE SCENE (fixed, full-screen, fades on scroll) ─── -->
@@ -1843,11 +1842,13 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 <section id="product" class="sec"><span class="sec-num" aria-hidden="true" style="top: -20px; z-index: 0;">01</span>
     <div class="wrap">
        <div class="video-container rv d1">
-         <video 
+         <video
            class="product-video"
-           controls 
-           playsinline 
+           controls
+           muted
+           playsinline
            preload="metadata"
+           loop
          >
            <source src="assets/product_video.mp4" type="video/mp4">
            Your browser does not support the video tag.
@@ -2787,29 +2788,26 @@ function cookieChoice(accepted) {
         <a href="#freshness" class="ft-lnk">Freshness Cycle</a>
         <a href="#science" class="ft-lnk">The Science</a>
         <a href="#reserve" class="ft-lnk">Reserve Your Bottle</a>
-        <a href="/creator-partner.html" class="ft-lnk">Creator Partners</a>
       </div>
       <div>
-        <div class="ft-hd">Brand</div>
-        <a href="https://neolab.care" class="ft-lnk">neolab.care</a>
+        <div class="ft-hd">Company</div>
         <a href="#story" class="ft-lnk">Our Story</a>
         <a href="#faq" class="ft-lnk">FAQ</a>
+        <a href="/creator-partner.html" class="ft-lnk">Creator Partners</a>
+        <a href="/investors.html" class="ft-lnk">Investors</a>
       </div>
       <div>
         <div class="ft-hd">Contact</div>
         <a href="mailto:hello@neolab.care" class="ft-lnk">hello@neolab.care</a>
         <a href="#" class="ft-lnk">Instagram</a>
         <a href="#" class="ft-lnk">TikTok</a>
-        <a href="#" class="ft-lnk">小红书</a>
       </div>
     </div>
     <div class="ft-btm">
-      <span>&copy; 2026 NeolabCare. All rights reserved.</span>
+      <span>&copy; 2026 NeolabCare LLC. All rights reserved.</span>
       <span style="display:flex;gap:16px;flex-wrap:wrap;justify-content:flex-end;">
         <a href="privacy-policy.html" style="color:var(--muted);text-decoration:none;font-size:0.72rem;">Privacy Policy</a>
         <a href="cookie-policy.html" style="color:var(--muted);text-decoration:none;font-size:0.72rem;">Cookie Policy</a>
-        <a href="/feedback.html" style="color:var(--muted);text-decoration:none;font-size:0.72rem;">Feedback</a>
-        <span>Founding Edition &middot; Produced to Order</span>
       </span>
     </div>
   </div>
@@ -2819,6 +2817,18 @@ function cookieChoice(accepted) {
 // Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('sc', window.scrollY > 60));
+
+// Video autoplay on scroll into view
+(function() {
+  var vid = document.querySelector('.product-video');
+  if (!vid) return;
+  new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { vid.play().catch(function(){}); }
+      else { vid.pause(); }
+    });
+  }, { threshold: 0.4 }).observe(vid);
+})();
 
 // Hamburger menu toggle
 const hamburger = document.getElementById('navHamburger');
