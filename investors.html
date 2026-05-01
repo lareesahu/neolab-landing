@@ -1034,134 +1034,110 @@
           <div class="wrap">
             <div class="lbl rv d1">Unit Economics & Scalability</div>
             <div class="rule rv d2"></div>
-            <h2 class="h-section rv d3" style="margin-top:20px; max-width:640px;">
-              The numbers behind<br><em>our growth.</em>
+            <h2 class="h-section rv d3" style="margin-top:20px; max-width:720px;">
+              Precision metrics for<br><em>global scalability.</em>
             </h2>
-            <p class="body-lg rv d4" style="max-width:560px; margin-top:20px;">
-              A clear breakdown of our per-SKU unit economics, illustrating the cost structure and strategic implications for scalability.
+            <p class="body-lg rv d4" style="max-width:600px; margin-top:20px;">
+              A data-driven breakdown of our per-SKU unit economics, locked against real shipping costs, formula density, and production batch sizes.
             </p>
 
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">INPUTS USED (locked)</h3>
-              <ul class="list-unstyled">
-                <li>3kg batch cost (formula): ¥3700</li>
-                <li>30ml batch: 100 units</li>
-                <li>50ml batch: 60 units</li>
-                <li>Packaging: ¥2.7 bottle + ¥5 laser + ¥7 box = ¥14.7</li>
-                <li>Shipping (REAL):</li>
-                <ul>
-                  <li>30ml: ¥4020.26 per batch</li>
-                  <li>50ml: ¥2280.18 per batch</li>
-                </ul>
-                <li>Tax per unit (from $10 declared value): ¥2.5 avg</li>
-                <li>FX ignored (everything RMB consistent)</li>
-              </ul>
+            <!-- Economics Cards -->
+            <div class="economics-grid rv d5">
+              <div class="economics-card">
+                <span class="eco-label">SKU 1 — 30ML (100 Units/Batch)</span>
+                <div class="eco-val">¥94.40</div>
+                <p class="eco-sub">Total Cost Per Bottle (RMB)</p>
+                
+                <div class="eco-breakdown">
+                  <div class="eco-item"><span>Formula</span><span>¥37.00</span></div>
+                  <div class="eco-item"><span>Packaging</span><span>¥14.70</span></div>
+                  <div class="eco-item"><span>Shipping (Real)</span><span>¥40.20</span></div>
+                  <div class="eco-item"><span>Tax ($10 Declared)</span><span>¥2.50</span></div>
+                </div>
+              </div>
+              
+              <div class="economics-card highlight">
+                <span class="eco-label">SKU 2 — 50ML (60 Units/Batch)</span>
+                <div class="eco-val">¥116.90</div>
+                <p class="eco-sub">Total Cost Per Bottle (RMB)</p>
+                
+                <div class="eco-breakdown">
+                  <div class="eco-item"><span>Formula</span><span>¥61.70</span></div>
+                  <div class="eco-item"><span>Packaging</span><span>¥14.70</span></div>
+                  <div class="eco-item"><span>Shipping (Real)</span><span>¥38.00</span></div>
+                  <div class="eco-item"><span>Tax ($10 Declared)</span><span>¥2.50</span></div>
+                </div>
+              </div>
             </div>
 
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">🧴 SKU 1 — 30ml (100 units)</h3>
-              <h4 class="body-lg" style="margin-bottom:10px;">COST BREAKDOWN</h4>
-              <ul class="list-unstyled">
-                <li>1. Formula cost: ¥3700 ÷ 100 = ¥37.0</li>
-                <li>2. Packaging: ¥14.7</li>
-                <li>3. Shipping (real): ¥4020.26 ÷ 100 = ¥40.20</li>
-                <li>4. Tax: ¥2.5</li>
-              </ul>
-              <h4 class="lbl" style="margin-top:20px;">📊 TOTAL COST (30ml)</h4>
-              <p class="body-lg">👉 ¥94.4 per bottle</p>
-            </div>
-
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">🧴 SKU 2 — 50ml (60 units)</h3>
-              <h4 class="body-lg" style="margin-bottom:10px;">COST BREAKDOWN</h4>
-              <ul class="list-unstyled">
-                <li>1. Formula cost: ¥3700 ÷ 60 = ¥61.7</li>
-                <li>2. Packaging: ¥14.7</li>
-                <li>3. Shipping (real): ¥2280.18 ÷ 60 = ¥38.00</li>
-                <li>4. Tax: ¥2.5</li>
-              </ul>
-              <h4 class="lbl" style="margin-top:20px;">📊 TOTAL COST (50ml)</h4>
-              <p class="body-lg">👉 ¥116.9 per bottle</p>
-            </div>
-
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">📉 FINAL COMPARISON TABLE</h3>
+            <!-- Comparison Table -->
+            <div class="comparison-table-wrap rv d5">
               <table class="data-table">
                 <thead>
                   <tr>
                     <th>SKU</th>
                     <th>Formula</th>
                     <th>Packaging</th>
-                    <th>Shipping</th>
+                    <th>Logistics</th>
                     <th>Tax</th>
                     <th>Total Cost</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>30ml</td>
+                    <td>30ml Edition</td>
                     <td>¥37.0</td>
                     <td>¥14.7</td>
                     <td>¥40.2</td>
                     <td>¥2.5</td>
-                    <td>¥94.4</td>
+                    <td class="accent-cell">¥94.4</td>
                   </tr>
                   <tr>
-                    <td>50ml</td>
+                    <td>50ml Edition</td>
                     <td>¥61.7</td>
                     <td>¥14.7</td>
                     <td>¥38.0</td>
                     <td>¥2.5</td>
-                    <td>¥116.9</td>
+                    <td class="accent-cell">¥116.9</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">🔥 KEY INSIGHT (NO FLUFF)</h3>
-              <ul class="list-unstyled">
-                <li>1. Your previous assumption flipped</li>
-                <ul>
-                  <li>50ml is NOT cheaper per unit anymore</li>
-                  <li>because formula cost dominates</li>
-                </ul>
-                <li>2. Cost structure reality</li>
-                <ul>
-                  <li>30ml: shipping-heavy (~43%)</li>
-                  <li>50ml: formula-heavy (~53%)</li>
-                </ul>
-                <li>3. Strategic implication</li>
-                <ul>
-                  <li>30ml = logistics-driven product</li>
-                  <ul>
-                    <li>better for scaling</li>
-                    <li>more stable margin behavior</li>
-                  </ul>
-                  <li>50ml = chemistry-driven product</li>
-                  <ul>
-                    <li>more expensive to produce</li>
-                    <li>less efficient per batch</li>
-                    <li>premium positioning only</li>
-                  </ul>
-                </ul>
-              </ul>
+            <!-- Insights Section -->
+            <div class="origin-grid" style="margin-top: 60px;">
+              <div class="story-blocks">
+                <div class="story-block rv d1">
+                  <div class="story-num">01</div>
+                  <div class="story-content">
+                    <div class="story-title">Assumption Reversal</div>
+                    <p class="story-body">The 50ml edition is no longer cheaper per unit. As production matures, formula cost now dominates the structure, making the 30ml SKU the more efficient logistics-driven driver for scaling.</p>
+                  </div>
+                </div>
+                <div class="story-block rv d2">
+                  <div class="story-num">02</div>
+                  <div class="story-content">
+                    <div class="story-title">Strategic Positioning</div>
+                    <p class="story-body">30ml serves as our logistics-driven scaling product with stable margins, while 50ml transitions into a chemistry-driven premium SKU with higher production costs but superior positioning.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="principle-stack rv d3">
+                <div class="principle-card">
+                  <span class="principle-tag">Core Insight</span>
+                  <div class="principle-title">Cost Structure Reality</div>
+                  <p class="principle-body">30ml: Shipping-heavy (~43%)<br>50ml: Formula-heavy (~53%)</p>
+                </div>
+              </div>
             </div>
 
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">⚠️ BIG STRUCTURAL TRUTH</h3>
-              <p class="body-lg">
-                Your system is now clearly:
-              </p>
-              <ul class="list-unstyled">
-                <li>NOT a packaging business</li>
-                <li>NOT a shipping business</li>
-                <li>NOT a marketing problem</li>
-              </ul>
-              <p class="body-lg" style="margin-top:20px;">
-                It is:
-              </p>
-              <p class="body-lg">👉 “formula density vs logistics efficiency tradeoff system”</p>
+            <!-- Big Structural Truth -->
+            <div class="insight-box rv d4">
+              <p class="eco-label" style="margin-bottom: 16px;">Structural Thesis</p>
+              <div class="truth-statement">
+                "Our system is no longer a packaging or marketing challenge—it is a <strong>formula density vs. logistics efficiency</strong> tradeoff system."
+              </div>
             </div>
 
           </div>
@@ -1172,134 +1148,110 @@
           <div class="wrap">
             <div class="lbl rv d1">Unit Economics & Scalability</div>
             <div class="rule rv d2"></div>
-            <h2 class="h-section rv d3" style="margin-top:20px; max-width:640px;">
-              The numbers behind<br><em>our growth.</em>
+            <h2 class="h-section rv d3" style="margin-top:20px; max-width:720px;">
+              Precision metrics for<br><em>global scalability.</em>
             </h2>
-            <p class="body-lg rv d4" style="max-width:560px; margin-top:20px;">
-              A clear breakdown of our per-SKU unit economics, illustrating the cost structure and strategic implications for scalability.
+            <p class="body-lg rv d4" style="max-width:600px; margin-top:20px;">
+              A data-driven breakdown of our per-SKU unit economics, locked against real shipping costs, formula density, and production batch sizes.
             </p>
 
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">INPUTS USED (locked)</h3>
-              <ul class="list-unstyled">
-                <li>3kg batch cost (formula): ¥3700</li>
-                <li>30ml batch: 100 units</li>
-                <li>50ml batch: 60 units</li>
-                <li>Packaging: ¥2.7 bottle + ¥5 laser + ¥7 box = ¥14.7</li>
-                <li>Shipping (REAL):</li>
-                <ul>
-                  <li>30ml: ¥4020.26 per batch</li>
-                  <li>50ml: ¥2280.18 per batch</li>
-                </ul>
-                <li>Tax per unit (from $10 declared value): ¥2.5 avg</li>
-                <li>FX ignored (everything RMB consistent)</li>
-              </ul>
+            <!-- Economics Cards -->
+            <div class="economics-grid rv d5">
+              <div class="economics-card">
+                <span class="eco-label">SKU 1 — 30ML (100 Units/Batch)</span>
+                <div class="eco-val">¥94.40</div>
+                <p class="eco-sub">Total Cost Per Bottle (RMB)</p>
+                
+                <div class="eco-breakdown">
+                  <div class="eco-item"><span>Formula</span><span>¥37.00</span></div>
+                  <div class="eco-item"><span>Packaging</span><span>¥14.70</span></div>
+                  <div class="eco-item"><span>Shipping (Real)</span><span>¥40.20</span></div>
+                  <div class="eco-item"><span>Tax ($10 Declared)</span><span>¥2.50</span></div>
+                </div>
+              </div>
+              
+              <div class="economics-card highlight">
+                <span class="eco-label">SKU 2 — 50ML (60 Units/Batch)</span>
+                <div class="eco-val">¥116.90</div>
+                <p class="eco-sub">Total Cost Per Bottle (RMB)</p>
+                
+                <div class="eco-breakdown">
+                  <div class="eco-item"><span>Formula</span><span>¥61.70</span></div>
+                  <div class="eco-item"><span>Packaging</span><span>¥14.70</span></div>
+                  <div class="eco-item"><span>Shipping (Real)</span><span>¥38.00</span></div>
+                  <div class="eco-item"><span>Tax ($10 Declared)</span><span>¥2.50</span></div>
+                </div>
+              </div>
             </div>
 
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">🧴 SKU 1 — 30ml (100 units)</h3>
-              <h4 class="body-lg" style="margin-bottom:10px;">COST BREAKDOWN</h4>
-              <ul class="list-unstyled">
-                <li>1. Formula cost: ¥3700 ÷ 100 = ¥37.0</li>
-                <li>2. Packaging: ¥14.7</li>
-                <li>3. Shipping (real): ¥4020.26 ÷ 100 = ¥40.20</li>
-                <li>4. Tax: ¥2.5</li>
-              </ul>
-              <h4 class="lbl" style="margin-top:20px;">📊 TOTAL COST (30ml)</h4>
-              <p class="body-lg">👉 ¥94.4 per bottle</p>
-            </div>
-
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">🧴 SKU 2 — 50ml (60 units)</h3>
-              <h4 class="body-lg" style="margin-bottom:10px;">COST BREAKDOWN</h4>
-              <ul class="list-unstyled">
-                <li>1. Formula cost: ¥3700 ÷ 60 = ¥61.7</li>
-                <li>2. Packaging: ¥14.7</li>
-                <li>3. Shipping (real): ¥2280.18 ÷ 60 = ¥38.00</li>
-                <li>4. Tax: ¥2.5</li>
-              </ul>
-              <h4 class="lbl" style="margin-top:20px;">📊 TOTAL COST (50ml)</h4>
-              <p class="body-lg">👉 ¥116.9 per bottle</p>
-            </div>
-
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">📉 FINAL COMPARISON TABLE</h3>
+            <!-- Comparison Table -->
+            <div class="comparison-table-wrap rv d5">
               <table class="data-table">
                 <thead>
                   <tr>
                     <th>SKU</th>
                     <th>Formula</th>
                     <th>Packaging</th>
-                    <th>Shipping</th>
+                    <th>Logistics</th>
                     <th>Tax</th>
                     <th>Total Cost</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>30ml</td>
+                    <td>30ml Edition</td>
                     <td>¥37.0</td>
                     <td>¥14.7</td>
                     <td>¥40.2</td>
                     <td>¥2.5</td>
-                    <td>¥94.4</td>
+                    <td class="accent-cell">¥94.4</td>
                   </tr>
                   <tr>
-                    <td>50ml</td>
+                    <td>50ml Edition</td>
                     <td>¥61.7</td>
                     <td>¥14.7</td>
                     <td>¥38.0</td>
                     <td>¥2.5</td>
-                    <td>¥116.9</td>
+                    <td class="accent-cell">¥116.9</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">🔥 KEY INSIGHT (NO FLUFF)</h3>
-              <ul class="list-unstyled">
-                <li>1. Your previous assumption flipped</li>
-                <ul>
-                  <li>50ml is NOT cheaper per unit anymore</li>
-                  <li>because formula cost dominates</li>
-                </ul>
-                <li>2. Cost structure reality</li>
-                <ul>
-                  <li>30ml: shipping-heavy (~43%)</li>
-                  <li>50ml: formula-heavy (~53%)</li>
-                </ul>
-                <li>3. Strategic implication</li>
-                <ul>
-                  <li>30ml = logistics-driven product</li>
-                  <ul>
-                    <li>better for scaling</li>
-                    <li>more stable margin behavior</li>
-                  </ul>
-                  <li>50ml = chemistry-driven product</li>
-                  <ul>
-                    <li>more expensive to produce</li>
-                    <li>less efficient per batch</li>
-                    <li>premium positioning only</li>
-                  </ul>
-                </ul>
-              </ul>
+            <!-- Insights Section -->
+            <div class="origin-grid" style="margin-top: 60px;">
+              <div class="story-blocks">
+                <div class="story-block rv d1">
+                  <div class="story-num">01</div>
+                  <div class="story-content">
+                    <div class="story-title">Assumption Reversal</div>
+                    <p class="story-body">The 50ml edition is no longer cheaper per unit. As production matures, formula cost now dominates the structure, making the 30ml SKU the more efficient logistics-driven driver for scaling.</p>
+                  </div>
+                </div>
+                <div class="story-block rv d2">
+                  <div class="story-num">02</div>
+                  <div class="story-content">
+                    <div class="story-title">Strategic Positioning</div>
+                    <p class="story-body">30ml serves as our logistics-driven scaling product with stable margins, while 50ml transitions into a chemistry-driven premium SKU with higher production costs but superior positioning.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="principle-stack rv d3">
+                <div class="principle-card">
+                  <span class="principle-tag">Core Insight</span>
+                  <div class="principle-title">Cost Structure Reality</div>
+                  <p class="principle-body">30ml: Shipping-heavy (~43%)<br>50ml: Formula-heavy (~53%)</p>
+                </div>
+              </div>
             </div>
 
-            <div class="content-block rv d5" style="margin-top:60px;">
-              <h3 class="lbl" style="margin-bottom:20px;">⚠️ BIG STRUCTURAL TRUTH</h3>
-              <p class="body-lg">
-                Your system is now clearly:
-              </p>
-              <ul class="list-unstyled">
-                <li>NOT a packaging business</li>
-                <li>NOT a shipping business</li>
-                <li>NOT a marketing problem</li>
-              </ul>
-              <p class="body-lg" style="margin-top:20px;">
-                It is:
-              </p>
-              <p class="body-lg">👉 “formula density vs logistics efficiency tradeoff system”</p>
+            <!-- Big Structural Truth -->
+            <div class="insight-box rv d4">
+              <p class="eco-label" style="margin-bottom: 16px;">Structural Thesis</p>
+              <div class="truth-statement">
+                "Our system is no longer a packaging or marketing challenge—it is a <strong>formula density vs. logistics efficiency</strong> tradeoff system."
+              </div>
             </div>
 
           </div>
