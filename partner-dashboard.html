@@ -1,61 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partner Dashboard</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #1a1a1a;
-            color: #f5f5f0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #2a2a2a;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        h1 {
-            color: #c8b89a;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        p {
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-        .button-group {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #c8b89a;
-            color: #000;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .button:hover {
-            background-color: #b0a080;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Dashboard | NeoLabCare</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Noto+Serif+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0A; --layer: #141414; --text: rgba(245,245,240,.94);
+  --muted: rgba(245,245,240,.52); --faint: rgba(245,245,240,.22);
+  --accent: #C8B89A; --border: rgba(200,184,154,.10); --border-2: rgba(200,184,154,.18);
+  --f-body: 'Poppins', sans-serif; --f-serif: 'Noto Serif Display', serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+a { color: inherit; text-decoration: none; }
+body { background: var(--bg); color: var(--text); font-family: var(--f-body); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
+
+.card { background: var(--layer); border: 1px solid var(--border-2); border-radius: 2px; padding: 52px 48px; max-width: 520px; width: 100%; text-align: center; }
+.lbl { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.wordmark { display: inline-flex; align-items: baseline; gap: 0; font-family: var(--f-body); font-size: 20px; letter-spacing: -0.01em; margin-bottom: 32px; }
+.wordmark .neolab { font-weight: 500; }
+.wordmark .sep { font-size: 20px; font-weight: 500; color: var(--accent); margin: 0 0.5px; }
+.wordmark .care { font-size: 11px; font-weight: 300; letter-spacing: 0.14em; color: var(--muted); text-transform: lowercase; align-self: flex-end; padding-bottom: 1px; }
+h1 { font-family: var(--f-serif); font-style: italic; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; color: var(--text); margin-bottom: 16px; line-height: 1.2; }
+p { font-size: 0.84rem; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+.rule { width: 32px; height: 1px; background: var(--accent); margin: 20px auto; opacity: 0.5; }
+.stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 2px; margin: 28px 0; }
+.stat { background: var(--layer); padding: 18px 12px; }
+.stat-n { font-size: 1.4rem; font-weight: 600; color: var(--accent); line-height: 1; }
+.stat-l { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--faint); margin-top: 4px; }
+.coming { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--border-2); padding: 4px 12px; border-radius: 2px; margin-top: 4px; }
+.back { display: inline-block; margin-top: 28px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 10px 20px; border-radius: 2px; transition: all 0.2s; }
+.back:hover { color: var(--accent); border-color: var(--accent); }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Partner Dashboard</h1>
-        <p>Welcome to your Partner Dashboard. Here you will be able to track your referrals, earnings, and other important metrics related to your partnership with NeolabCare.</p>
-        <p>This page is currently under construction. Please check back soon for updates!</p>
-        <div class="button-group">
-            <a href="index.html" class="button">Back to Homepage</a>
-        </div>
+<div class="card">
+  <a href="/" style="display:flex;justify-content:center;margin-bottom:32px;">
+    <img src="assets/logo.svg" alt="neolab.care" style="height:30px;display:block;">
+  </a>
+  <p class="lbl">Creator Partner Dashboard</p>
+  <div class="rule"></div>
+  <h1>Your dashboard<br>is on its way.</h1>
+  <p>The full partner dashboard — showing your referral link, creator code, pending sales, confirmed commission, and sample credits — is under active development.</p>
+  <p>Once live, approved creators will log in here to track everything in real time.</p>
+
+  <div class="stat-row">
+    <div class="stat">
+      <div class="stat-n">15%</div>
+      <div class="stat-l">Commission</div>
     </div>
+    <div class="stat">
+      <div class="stat-n">1:1</div>
+      <div class="stat-l">Sample Credits</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">Monthly</div>
+      <div class="stat-l">Payouts</div>
+    </div>
+  </div>
+
+  <p style="font-size:0.78rem;">In the meantime, your commission summary and credited sales will be sent to your payout email monthly.</p>
+  <span class="coming">Dashboard — Coming Soon</span>
+  <br>
+  <a href="/creator-partner.html" class="back">&#8592; Creator Partner Program</a>
+</div>
 </body>
 </html>

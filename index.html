@@ -3292,12 +3292,13 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     let isReferral = false;
     let creatorName = "";
     
+    const SHOPIFY_URL = "https://neolab-care.myshopify.com/products/neolabcare-9-in-1-skincare";
     const links = {
-      single30: "{{SHOPIFY_30ML_LINK}}",
-      single50: "{{SHOPIFY_50ML_LINK}}",
-      annual30: "{{SHOPIFY_4X30ML_LINK}}",
-      annual50: "{{SHOPIFY_4X50ML_LINK}}",
-      referral30: "{{SHOPIFY_30ML_LINK_WITH_CREATOR_CODE}}"
+      single30: SHOPIFY_URL,
+      single50: SHOPIFY_URL,
+      annual30: SHOPIFY_URL,
+      annual50: SHOPIFY_URL,
+      referral30: SHOPIFY_URL
     };
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -3305,6 +3306,7 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
     if (ref) {
       isReferral = true;
       creatorName = ref.toUpperCase();
+      links.referral30 = SHOPIFY_URL + '?discount=' + creatorName + '99';
       const banner = document.getElementById('referralBanner');
       if (banner) {
         banner.style.display = 'block';
@@ -3343,7 +3345,8 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk" style="opacity:1; visibility:visible;">
             <div class="perk-tier">Annual Fresh Cycle</div>
             <div class="perk-name">Annual 30ml</div>
-            <div class="perk-price">$792</div>
+            <div class="perk-retail">4 bottles at retail <s>$792</s><span class="perk-save">Save $93</span></div>
+            <div class="perk-price">$699</div>
             <div class="perk-note">4 &times; 30ml bottles across the year</div>
             <p style="font-size:11px; color:var(--accent); margin-top:8px; text-transform:uppercase; letter-spacing:1px;">Planned fresh-batch production every 3 months</p>
             <div class="perk-hr"></div>
@@ -3360,7 +3363,8 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
           <div class="perk" style="border-color:var(--accent); opacity:1; visibility:visible;">
             <div class="perk-tier tag-popular" style="background:var(--accent); color:#000;">Best long-term value</div>
             <div class="perk-name">Annual 50ml</div>
-            <div class="perk-price">$992</div>
+            <div class="perk-retail">4 bottles at retail <s>$992</s><span class="perk-save">Save $113</span></div>
+            <div class="perk-price">$879</div>
             <div class="perk-note">4 &times; 50ml bottles across the year</div>
             <p style="font-size:11px; color:var(--accent); margin-top:8px; text-transform:uppercase; letter-spacing:1px;">Best for consistent daily users</p>
             <div class="perk-hr"></div>

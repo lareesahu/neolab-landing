@@ -1,309 +1,672 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator Partner Program | NeoLabCare</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Serif+Display:ital,wght@1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg:       #0A0A0A;
-            --layer:    #141414;
-            --layer-2:  #1A1A1A;
-            --text:     rgba(245,245,240,.94);
-            --muted:    rgba(245,245,240,.52);
-            --faint:    rgba(245,245,240,.26);
-            --accent:   #C8B89A;
-            --border:   rgba(200,184,154,.10);
-            --border-2: rgba(200,184,154,.18);
-            --f-body:   'Poppins', sans-serif;
-            --f-serif:  'Noto Serif Display', serif;
-        }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: var(--f-body);
-            -webkit-font-smoothing: antialiased;
-        }
-        .font-serif { font-family: var(--f-serif); }
-        .text-beige { color: var(--accent); }
-        .bg-beige { background-color: var(--accent); }
-        .border-beige { border-color: var(--accent); }
-        
-        .glass-panel {
-            background: var(--layer);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-        }
-        
-        input, textarea, select {
-            background: transparent !important;
-            border: 1px solid var(--border-2) !important;
-            color: var(--text) !important;
-            transition: all 0.3s ease;
-        }
-        input:focus, textarea:focus, select:focus {
-            border-color: var(--accent) !important;
-            outline: none;
-        }
-        
-        .btn-premium {
-            background-color: var(--accent);
-            color: #000;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-premium:hover {
-            background-color: #fff;
-            transform: translateY(-2px);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creator Partner Program | NeoLabCare</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Apply for the NeoLabCare Creator Partner Program. Private founding access for selected creators in men's grooming, skincare, biohacking, and high-performance routines.">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Noto+Serif+Display:ital,wght@1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+/* ─── BRAND TOKENS ─── */
+:root {
+  --f-body: 'Poppins', sans-serif;
+  --f-serif: 'Noto Serif Display', serif;
+  --bg: #0A0A0A;
+  --bg-2: #0D0D0D;
+  --layer: #141414;
+  --text: rgba(245,245,240,.94);
+  --muted: rgba(245,245,240,.52);
+  --faint: rgba(245,245,240,.26);
+  --accent: #C8B89A;
+  --accent-2: #DDD0B8;
+  --border: rgba(200,184,154,.10);
+  --border-2: rgba(200,184,154,.18);
+  --nav-h: 68px;
+  --pad-x: clamp(24px, 5vw, 80px);
+  --t-xs: clamp(10px,.75vw,12px);
+  --t-sm: clamp(12px,.9vw,14px);
+  --t-md: clamp(14px,1.05vw,16px);
+  --t-lg: clamp(17px,1.4vw,22px);
+  --t-xl: clamp(24px,2vw,32px);
+  --t-2xl: clamp(36px,3.5vw,56px);
+  --t-3xl: clamp(48px,5vw,76px);
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img, svg { display: block; }
+a { color: inherit; text-decoration: none; }
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025; mix-blend-mode: overlay;
+}
+
+/* ─── NAV ─── */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 0 clamp(24px,4vw,60px);
+  z-index: 200;
+  background: transparent;
+  transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+  border-bottom: 1px solid transparent;
+}
+.navbar.sc { background: rgba(10,10,10,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom-color: var(--border); }
+.nav-back { font-size: 10px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+.nav-back:hover { color: var(--accent); }
+.nav-wordmark { display: inline-flex; align-items: baseline; gap: 0; font-family: var(--f-body); font-size: 18px; letter-spacing: -0.01em; color: var(--text); justify-self: center; }
+.nav-wordmark .neolab { font-weight: 500; }
+.nav-wordmark .sep { font-size: 18px; font-weight: 500; color: var(--accent); line-height: 1; margin: 0 0.5px; }
+.nav-wordmark .care { font-size: 10.5px; font-weight: 300; letter-spacing: 0.14em; color: var(--muted); text-transform: lowercase; align-self: flex-end; padding-bottom: 1px; }
+.nav-cta {
+  font-family: var(--f-body); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); border: 1px solid var(--border-2);
+  padding: 9px 18px; border-radius: 2px;
+  transition: all 0.2s ease; white-space: nowrap; justify-self: end;
+}
+.nav-cta:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+/* ─── TYPOGRAPHY ─── */
+.lbl { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.rule { width: 32px; height: 1px; background: var(--accent); margin: 14px 0; opacity: 0.6; }
+.rule-c { margin-left: auto; margin-right: auto; }
+.h-hero { font-family: var(--f-body); font-size: var(--t-3xl); font-weight: 500; line-height: 1.03; letter-spacing: -0.02em; }
+.h-hero em { font-family: var(--f-serif); font-style: italic; color: var(--accent); }
+.h-section { font-family: var(--f-body); font-size: var(--t-2xl); font-weight: 500; line-height: 1.08; letter-spacing: -0.01em; }
+.h-section em { font-family: var(--f-serif); font-style: italic; font-weight: 400; color: var(--accent); }
+.body-lg { font-size: var(--t-md); color: var(--muted); line-height: 1.7; }
+.body-sm { font-size: var(--t-sm); color: var(--muted); line-height: 1.6; }
+
+/* ─── REVEAL ─── */
+.rv { opacity: 0; transform: translateY(20px); transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1); }
+.rv.in { opacity: 1; transform: none; }
+.d1 { transition-delay: 0s; }
+.d2 { transition-delay: 0.15s; }
+.d3 { transition-delay: 0.30s; }
+.d4 { transition-delay: 0.45s; }
+
+/* ─── LAYOUT ─── */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 10; }
+.sec { padding: 100px 0; position: relative; }
+.sec-num { position: absolute; top: 40px; right: 40px; font-family: var(--f-serif); font-style: italic; font-size: 120px; font-weight: 300; color: var(--accent); opacity: 0.05; line-height: 1; pointer-events: none; user-select: none; }
+
+/* ─── BUTTONS ─── */
+.btn { font-family: var(--f-body); font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 14px 28px; border-radius: 2px; cursor: pointer; transition: all 0.25s ease; display: inline-block; border: 1px solid transparent; }
+.btn-fill { background: var(--accent); color: #000; border-color: var(--accent); }
+.btn-fill:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.btn-outline { background: transparent; color: var(--accent); border-color: var(--border-2); }
+.btn-outline:hover { border-color: var(--accent); background: var(--accent); color: #000; }
+
+/* ─── STAT CARDS ─── */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; background: var(--border); border: 1px solid var(--border); margin-top: 40px; }
+.stat-card { background: var(--layer); padding: 28px 22px; }
+.stat-n { font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 600; color: var(--accent); line-height: 1; letter-spacing: -0.02em; }
+.stat-l { font-size: 10px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+.stat-sub { font-size: 11px; color: var(--faint); margin-top: 4px; line-height: 1.5; }
+
+/* ─── HOW IT WORKS ─── */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; margin-top: 40px; background: var(--border); border: 1px solid var(--border); }
+.step { background: var(--layer); padding: 28px 24px; display: flex; gap: 18px; align-items: flex-start; }
+.step-num { font-family: var(--f-serif); font-style: italic; font-size: 2rem; color: var(--accent); opacity: 0.6; line-height: 1; flex-shrink: 0; }
+.step-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.step-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+/* ─── EARNINGS TABLE ─── */
+.earn-table { margin-top: 32px; background: var(--layer); border: 1px solid var(--border-2); border-radius: 2px; overflow: hidden; }
+.earn-row { display: grid; grid-template-columns: 1fr 1fr; padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+.earn-row:last-child { border-bottom: none; }
+.earn-label { color: var(--muted); }
+.earn-val { color: var(--text); font-weight: 500; text-align: right; }
+.earn-val.accent { color: var(--accent); }
+
+/* ─── FORM ─── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.form-input, .form-select, .form-textarea {
+  background: transparent; border: 1px solid var(--border-2); color: var(--text);
+  font-family: var(--f-body); font-size: 14px; padding: 11px 14px; border-radius: 2px;
+  transition: border-color 0.2s ease; outline: none; width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: rgba(200,184,154,0.5); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--faint); }
+.form-select option { background: #1a1a1a; color: var(--text); }
+.form-textarea { resize: vertical; min-height: 90px; }
+.form-submit { margin-top: 8px; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 15px 32px; background: var(--accent); color: #000; border: 1px solid var(--accent); border-radius: 2px; cursor: pointer; transition: all 0.25s ease; font-family: var(--f-body); }
+.form-submit:hover { background: var(--accent-2); border-color: var(--accent-2); }
+#formStatus { font-size: 12px; color: var(--muted); margin-top: 10px; min-height: 18px; text-align: center; }
+
+/* ─── RULES LIST ─── */
+.rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 40px; margin-top: 32px; }
+.rule-item { font-size: 0.78rem; color: var(--muted); line-height: 1.6; padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; }
+.rule-n { color: var(--accent); font-weight: 600; flex-shrink: 0; }
+
+/* ─── HERO ─── */
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: calc(var(--nav-h) + 80px) 0 100px; background: var(--bg); }
+
+/* ─── NICHE CHIPS ─── */
+.niche-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.niche-chip { font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 5px 12px; border-radius: 2px; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid.cols-3 { grid-template-columns: 1fr; }
+  .rules-grid { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .wrap { padding: 0 20px; }
+}
+</style>
 </head>
-<body class="overflow-x-hidden">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 px-6 py-8 flex justify-between items-center mix-blend-difference">
-        <a href="/" class="text-xl tracking-[0.2em] font-light uppercase">NeoLabCare</a>
-        <div class="hidden md:flex space-x-12 text-[10px] tracking-[0.3em] uppercase font-medium">
-            <a href="/#science" class="hover:text-beige transition-colors">Science</a>
-            <a href="/#philosophy" class="hover:text-beige transition-colors">Philosophy</a>
-            <a href="/#batch" class="hover:text-beige transition-colors">Fresh Batch</a>
-        </div>
-    </nav>
+<body>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-32 pb-20">
-        <div class="max-w-4xl w-full text-center space-y-8">
-            <h1 class="text-4xl md:text-6xl font-serif italic tracking-tight leading-tight">
-                Creator Partner Program
-            </h1>
-            <p class="text-beige text-lg md:text-xl font-light tracking-wide max-w-2xl mx-auto leading-relaxed">
-                Private founding access for selected creators in men’s grooming, skincare, biohacking, and high-performance routines.
-            </p>
-            <div class="pt-8">
-                <a href="#apply" class="btn-premium px-10 py-4 text-[11px] tracking-[0.3em] uppercase font-bold inline-block">
-                    Apply for Access
-                </a>
-            </div>
-        </div>
-    </section>
+<!-- ─── NAV ─── -->
+<nav class="navbar" id="nav">
+  <a href="/" class="nav-back">&#8592; neolab.care</a>
+  <a href="/" style="justify-self:center;display:flex;align-items:center;">
+    <img src="assets/logo.svg" alt="neolab.care" style="height:28px;display:block;">
+  </a>
+  <a href="#apply" class="nav-cta">Apply for Access</a>
+</nav>
 
-    <!-- Objective Section -->
-    <section class="py-32 px-6 glass-panel border-y border-beige/10">
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-            <div class="space-y-6">
-                <h2 class="text-xs tracking-[0.4em] uppercase text-beige font-bold">The Mission</h2>
-                <p class="text-2xl font-serif italic leading-relaxed">
-                    NeoLabCare is a lab-fresh 9-in-1 skin treatment produced through small fresh-batch reservation windows. 
-                </p>
-                <p class="text-gray-400 font-light leading-relaxed">
-                    We don't do "affiliates." We build partnerships with creators whose audience trusts their taste. Selected partners receive private audience codes, performance-based commissions, and sample credits for their community.
-                </p>
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="glass-panel p-8 space-y-2">
-                    <span class="text-beige text-2xl font-serif italic">15-20%</span>
-                    <p class="text-[10px] tracking-widest uppercase text-gray-500">Commission</p>
-                </div>
-                <div class="glass-panel p-8 space-y-2">
-                    <span class="text-beige text-2xl font-serif italic">$99 Off</span>
-                    <p class="text-[10px] tracking-widest uppercase text-gray-500">Audience Savings</p>
-                </div>
-                <div class="glass-panel p-8 space-y-2">
-                    <span class="text-beige text-2xl font-serif italic">1:1</span>
-                    <p class="text-[10px] tracking-widest uppercase text-gray-500">Sample Credits</p>
-                </div>
-                <div class="glass-panel p-8 space-y-2">
-                    <span class="text-beige text-2xl font-serif italic">Private</span>
-                    <p class="text-[10px] tracking-widest uppercase text-gray-500">Access Codes</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="wrap">
+    <p class="lbl rv">Creator Partner Program</p>
+    <div class="rule rv d1"></div>
+    <h1 class="h-hero rv d1" style="margin-top:12px;max-width:820px;">
+      Private founding access<br>for <em>selected creators.</em>
+    </h1>
+    <p class="body-lg rv d2" style="margin-top:22px;max-width:580px;">
+      NeoLabCare is a lab-fresh 9-in-1 men's skin treatment produced through small fresh-batch reservation windows. Selected creators receive a private audience code, commission on confirmed sales, and sample credits based on performance.
+    </p>
+    <div class="niche-chips rv d3">
+      <span class="niche-chip">Men's Grooming</span>
+      <span class="niche-chip">Skincare</span>
+      <span class="niche-chip">Biohacking</span>
+      <span class="niche-chip">Luxury Lifestyle</span>
+      <span class="niche-chip">Fitness</span>
+      <span class="niche-chip">High-Performance Routines</span>
+      <span class="niche-chip">Executive Lifestyle</span>
+    </div>
+    <div style="margin-top:36px;" class="rv d4">
+      <a href="#apply" class="btn btn-fill">Apply to Become a Creator Partner</a>
+    </div>
+  </div>
+</section>
 
-    <!-- Details Section -->
-    <section class="py-32 px-6">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-16">
-            <!-- Audience -->
-            <div class="space-y-6">
-                <h3 class="text-xs tracking-[0.4em] uppercase text-beige font-bold">Audience Benefit</h3>
-                <p class="text-gray-300 font-light leading-relaxed">
-                    Your audience receives private access to the NeoLabCare Founding Price.
-                </p>
-                <div class="border-l border-beige/20 pl-6 py-2 space-y-4">
-                    <div>
-                        <p class="text-[10px] uppercase tracking-widest text-gray-500">30ml Founding Edition</p>
-                        <p class="text-xl font-serif italic">$198 <span class="text-beige">→ $99</span></p>
-                    </div>
-                    <p class="text-[11px] italic text-beige">Total Savings: $99</p>
-                </div>
-            </div>
-
-            <!-- Earnings -->
-            <div class="space-y-6">
-                <h3 class="text-xs tracking-[0.4em] uppercase text-beige font-bold">What You Earn</h3>
-                <p class="text-gray-300 font-light leading-relaxed">
-                    Earn commission on every confirmed sale made through your unique code or link.
-                </p>
-                <ul class="space-y-4 text-sm font-light text-gray-400">
-                    <li class="flex items-start">
-                        <span class="text-beige mr-3">—</span>
-                        <span>15% Standard commission on net sales.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-beige mr-3">—</span>
-                        <span>Up to 20% for high-performing partners.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-beige mr-3">—</span>
-                        <span>Monthly payouts via PayPal.</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Credits -->
-            <div class="space-y-6">
-                <h3 class="text-xs tracking-[0.4em] uppercase text-beige font-bold">Sample Credits</h3>
-                <p class="text-gray-300 font-light leading-relaxed">
-                    Every confirmed sale earns 1 sample credit for your creator account.
-                </p>
-                <p class="text-sm font-light text-gray-400 italic">
-                    Redeemable after production for future audience giveaways, VIP rewards, or product testing.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Application Form -->
-    <section id="apply" class="py-32 px-6 bg-void-gray/30">
-        <div class="max-w-3xl mx-auto space-y-16">
-            <div class="text-center space-y-4">
-                <h2 class="text-xs tracking-[0.4em] uppercase text-beige font-bold">Application</h2>
-                <p class="text-3xl font-serif italic">Apply for Creator Access</p>
-            </div>
-
-            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-8">
-                <input type="hidden" name="access_key" value="8d2960cb-71cc-4f8d-b53c-0f86ab589665">
-                <input type="hidden" name="subject" value="New Creator Partner Application">
-                <input type="hidden" name="from_name" value="NeoLabCare Creator Portal">
-                <input type="hidden" name="redirect" value="https://neolab.care/?application=success">
-                
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Full Name</label>
-                        <input type="text" name="name" required class="w-full px-4 py-3 text-sm">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Email Address</label>
-                        <input type="email" name="email" required class="w-full px-4 py-3 text-sm">
-                    </div>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Main Platform</label>
-                        <select name="platform" class="w-full px-4 py-3 text-sm">
-                            <option value="instagram">Instagram</option>
-                            <option value="youtube">YouTube</option>
-                            <option value="tiktok">TikTok</option>
-                            <option value="twitter">Twitter / X</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Profile Link</label>
-                        <input type="url" name="profile_url" required class="w-full px-4 py-3 text-sm" placeholder="https://...">
-                    </div>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Audience Size</label>
-                        <input type="text" name="audience_size" required class="w-full px-4 py-3 text-sm">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Avg Views / Post</label>
-                        <input type="text" name="avg_views" required class="w-full px-4 py-3 text-sm">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Audience Niche</label>
-                        <input type="text" name="niche" required class="w-full px-4 py-3 text-sm">
-                    </div>
-                </div>
-
-                <div class="space-y-2">
-                    <label class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Why does NeoLabCare fit your audience?</label>
-                    <textarea name="reason" required rows="4" class="w-full px-4 py-3 text-sm"></textarea>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Preferred Payout Method</label>
-                        <input type="text" name="payout_method" placeholder="PayPal, etc." class="w-full px-4 py-3 text-sm">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Payout Email</label>
-                        <input type="email" name="payout_email" required class="w-full px-4 py-3 text-sm">
-                    </div>
-                </div>
-
-                <div class="pt-8 text-center">
-                    <button type="submit" class="btn-premium px-12 py-4 text-[11px] tracking-[0.3em] uppercase font-bold w-full md:w-auto">
-                        Submit Application
-                    </button>
-                    <p class="text-[10px] text-gray-500 mt-6 tracking-widest uppercase">
-                        Review takes 48-72 hours.
-                    </p>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <!-- Rules Section -->
-    <section class="py-32 px-6 border-t border-beige/10">
-        <div class="max-w-4xl mx-auto space-y-12">
-            <h2 class="text-xs tracking-[0.4em] uppercase text-beige font-bold text-center">Program Rules</h2>
-            <div class="grid md:grid-cols-2 gap-x-16 gap-y-6 text-[11px] leading-relaxed text-gray-500 uppercase tracking-widest">
-                <p>1. Approved creators receive unique referral links and codes.</p>
-                <p>2. Codes unlock private founding pricing for eligible products.</p>
-                <p>3. Commission is calculated on net paid sales (excl. tax/shipping).</p>
-                <p>4. Standard commission is 15% unless otherwise agreed.</p>
-                <p>5. High-performing creators may be upgraded to 20%.</p>
-                <p>6. Payouts eligible after the 7-day no-refund period ends.</p>
-                <p>7. Sample credits are earned 1:1 with confirmed sales.</p>
-                <p>8. Sample credits are redeemable after production completion.</p>
-                <p>9. Coupon site leakage or unauthorized deal forums are prohibited.</p>
-                <p>10. Disclosure of affiliate relationships is mandatory per regulations.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-20 px-6 border-t border-beige/10 text-center">
-        <p class="text-[10px] tracking-[0.5em] uppercase text-gray-600">
-            &copy; 2026 NeoLabCare. Private Founding Access.
+<!-- ─── 01 WHAT YOUR AUDIENCE GETS ─── -->
+<section class="sec" style="background:var(--bg-2);">
+  <span class="sec-num">01</span>
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+      <div>
+        <p class="lbl rv">What your audience gets</p>
+        <div class="rule rv d1"></div>
+        <h2 class="h-section rv d1">Private access<br>to the <em>Founding Price.</em></h2>
+        <p class="body-lg rv d2" style="margin-top:18px;">
+          Your audience receives private access to the NeoLabCare Founding Price — unlocked exclusively through your creator code. Not available publicly on the homepage.
         </p>
-    </footer>
+        <div class="rv d3" style="margin-top:28px;padding:24px;background:rgba(200,184,154,0.05);border:1px solid rgba(200,184,154,0.2);border-radius:2px;">
+          <div class="lbl" style="margin-bottom:12px;">30ml Founding Edition</div>
+          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:6px;">
+            <span style="font-size:0.85rem;color:var(--muted);text-decoration:line-through;">$198 retail</span>
+            <span style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);">&#8594;</span>
+            <span style="font-size:2rem;font-weight:600;color:var(--accent);line-height:1;">$99</span>
+            <span style="font-size:0.72rem;color:var(--muted);">creator price</span>
+          </div>
+          <p class="body-sm">Each creator receives a unique code so every sale is tracked to their account.</p>
+        </div>
+      </div>
+      <div>
+        <div class="stat-grid" style="margin-top:0;">
+          <div class="stat-card">
+            <div class="stat-n">$99</div>
+            <div class="stat-l">Creator Price</div>
+            <div class="stat-sub">vs. $198 retail — $99 saved</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-n">15%</div>
+            <div class="stat-l">Commission</div>
+            <div class="stat-sub">of net paid sales · up to 20%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-n">1:1</div>
+            <div class="stat-l">Sample Credits</div>
+            <div class="stat-sub">per confirmed sale</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-n">Private</div>
+            <div class="stat-l">Access</div>
+            <div class="stat-sub">unique code + referral link</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Simple scroll reveal for sections
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
-                }
-            });
-        }, observerOptions);
+<!-- ─── 02 WHAT CREATORS EARN ─── -->
+<section class="sec">
+  <span class="sec-num">02</span>
+  <div class="wrap">
+    <p class="lbl rv">What you earn</p>
+    <div class="rule rv d1"></div>
+    <h2 class="h-section rv d1" style="max-width:600px;">Commission on every<br><em>confirmed sale.</em></h2>
+    <p class="body-lg rv d2" style="margin-top:18px;max-width:540px;">
+      Creators earn commission on every confirmed sale made through their unique code or referral link. Standard commission is 15% of net paid sales.
+    </p>
+    <div class="earn-table rv d3" style="max-width:540px;">
+      <div class="earn-row">
+        <span class="earn-label">Standard commission</span>
+        <span class="earn-val accent">15% of net paid sales</span>
+      </div>
+      <div class="earn-row">
+        <span class="earn-label">High-performing partners</span>
+        <span class="earn-val accent">Up to 20%</span>
+      </div>
+      <div class="earn-row">
+        <span class="earn-label">Example: 30ml at $99 (15%)</span>
+        <span class="earn-val">$14.85 per confirmed order</span>
+      </div>
+      <div class="earn-row">
+        <span class="earn-label">Payout method</span>
+        <span class="earn-val">Bank transfer</span>
+      </div>
+      <div class="earn-row">
+        <span class="earn-label">Payout timing</span>
+        <span class="earn-val">Monthly · after no-refund clearance</span>
+      </div>
+    </div>
+    <p class="body-sm rv d4" style="margin-top:14px;max-width:540px;">
+      Commissions become eligible for payout 7 days after the customer receives the package, provided the order is not refunded, cancelled, disputed, or charged back.
+    </p>
+  </div>
+</section>
 
-        document.querySelectorAll('section').forEach(section => {
-            section.style.opacity = "0";
-            section.style.transform = "translateY(20px)";
-            section.style.transition = "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
-            observer.observe(section);
-        });
-    </script>
+<!-- ─── 03 SAMPLE CREDITS ─── -->
+<section class="sec" style="background:var(--bg-2);">
+  <span class="sec-num">03</span>
+  <div class="wrap">
+    <p class="lbl rv">Sample credits</p>
+    <div class="rule rv d1"></div>
+    <h2 class="h-section rv d1"><em>One credit</em><br>per confirmed sale.</h2>
+    <p class="body-lg rv d2" style="margin-top:18px;max-width:560px;">
+      Every confirmed sale earns 1 sample credit for your creator account. Sample credits can be used after production for future audience giveaways, VIP follower rewards, or product testing.
+    </p>
+    <div style="margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);" class="rv d3">
+      <div style="background:var(--layer);padding:24px 20px;">
+        <div style="color:var(--accent);font-size:1.4rem;font-family:var(--f-serif);font-style:italic;margin-bottom:8px;">Earn</div>
+        <div class="body-sm">1 credit per confirmed, non-refunded sale.</div>
+      </div>
+      <div style="background:var(--layer);padding:24px 20px;">
+        <div style="color:var(--accent);font-size:1.4rem;font-family:var(--f-serif);font-style:italic;margin-bottom:8px;">Redeem</div>
+        <div class="body-sm">After production batch is completed. Not before.</div>
+      </div>
+      <div style="background:var(--layer);padding:24px 20px;">
+        <div style="color:var(--accent);font-size:1.4rem;font-family:var(--f-serif);font-style:italic;margin-bottom:8px;">Use</div>
+        <div class="body-sm">Audience giveaways, VIP follower rewards, or product testing.</div>
+      </div>
+    </div>
+    <p class="body-sm rv d4" style="margin-top:14px;color:var(--faint);">Sample credits are not cash equivalents and cannot be exchanged for payout.</p>
+  </div>
+</section>
+
+<!-- ─── 04 HOW IT WORKS ─── -->
+<section class="sec">
+  <span class="sec-num">04</span>
+  <div class="wrap">
+    <p class="lbl rv">How it works</p>
+    <div class="rule rv d1"></div>
+    <h2 class="h-section rv d1">Six steps<br>from <em>application to payout.</em></h2>
+    <div class="steps rv d2">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Apply through the form below</div>
+          <div class="step-desc">Tell us about your audience, platform, and why NeoLabCare fits.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Receive your private access</div>
+          <div class="step-desc">Approved creators receive a unique referral link and creator code by email.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Your audience unlocks $99</div>
+          <div class="step-desc">They use your code at checkout to access the private Founding Price.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Earn commission per sale</div>
+          <div class="step-desc">Every confirmed sale earns you 15% of net paid sales.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div>
+          <div class="step-title">Commission clears after 7 days</div>
+          <div class="step-desc">7 days after the customer receives the package, commission becomes eligible — if no refund or dispute.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div>
+          <div class="step-title">Paid monthly via bank transfer</div>
+          <div class="step-desc">Eligible commissions are paid monthly. Sample credits become redeemable after production batch is completed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 05 WHY FRESH-BATCH ─── -->
+<section class="sec" style="background:var(--bg-2);">
+  <span class="sec-num">05</span>
+  <div class="wrap">
+    <div style="max-width:680px;margin:0 auto;text-align:center;">
+      <p class="lbl rv">Why fresh-batch reservation</p>
+      <div class="rule rule-c rv d1"></div>
+      <h2 class="h-section rv d1">Produced after<br><em>batch close.</em></h2>
+      <p class="body-lg rv d2" style="margin-top:18px;">
+        Most skincare products are produced, warehoused, shipped, stored, and opened long after manufacturing. NeoLabCare collects reservations first, then produces in a controlled fresh batch — so customers receive product closer to production completion and with reduced unnecessary shelf time.
+      </p>
+      <div class="rv d3" style="margin-top:32px;padding:22px 28px;border:1px solid var(--border);text-align:left;background:rgba(200,184,154,0.03);border-radius:2px;">
+        <p class="lbl" style="margin-bottom:10px;">What to say. What not to say.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Use</div>
+            <p class="body-sm" style="line-height:1.8;">Fresh-batch reservation<br>Produced after batch close<br>Dispatched within 7 days of production<br>Reduced unnecessary shelf time<br>Closer to production completion</p>
+          </div>
+          <div>
+            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Avoid</div>
+            <p class="body-sm" style="line-height:1.8;">Guaranteed maximum potency<br>Clinical freshness<br>Pharmaceutical grade<br>Guaranteed results<br>Better than dermatology</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 06 WHO WE'RE LOOKING FOR ─── -->
+<section class="sec">
+  <span class="sec-num">06</span>
+  <div class="wrap">
+    <p class="lbl rv">Who we are looking for</p>
+    <div class="rule rv d1"></div>
+    <h2 class="h-section rv d1" style="max-width:600px;">Creators whose<br>audience <em>trusts their taste.</em></h2>
+    <p class="body-lg rv d2" style="margin-top:18px;max-width:560px;">
+      You do not need to be a skincare creator. You need to have an audience that trusts your taste — in men's performance, appearance, grooming, longevity, fitness, shaving, luxury lifestyle, or efficient routines.
+    </p>
+    <div style="margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;background:var(--border);border:1px solid var(--border);" class="rv d3">
+      <div style="background:var(--layer);padding:22px;">
+        <div class="lbl" style="margin-bottom:10px;color:var(--accent);">Tier 1 — Best Fit</div>
+        <ul style="list-style:none;font-size:0.78rem;color:var(--muted);line-height:2;">
+          <li>Men's grooming</li><li>Men's skincare</li><li>Shaving / beard care</li>
+          <li>Biohacking / longevity</li><li>Executive lifestyle</li><li>Minimalist routines</li>
+          <li>Fitness lifestyle</li><li>Looksmaxxing</li>
+        </ul>
+      </div>
+      <div style="background:var(--layer);padding:22px;">
+        <div class="lbl" style="margin-bottom:10px;color:var(--muted);">Tier 2 — Good Fit</div>
+        <ul style="list-style:none;font-size:0.78rem;color:var(--muted);line-height:2;">
+          <li>Men's fashion</li><li>Premium fragrance</li><li>Luxury lifestyle</li>
+          <li>Founders / productivity</li><li>Travel grooming</li><li>Dating / confidence</li>
+          <li>Finance / professional</li><li>Watch / accessories</li>
+        </ul>
+      </div>
+      <div style="background:var(--layer);padding:22px;">
+        <div class="lbl" style="margin-bottom:10px;color:var(--faint);">Not a Fit</div>
+        <ul style="list-style:none;font-size:0.78rem;color:var(--faint);line-height:2;">
+          <li>Coupon / deal creators</li><li>Mass giveaway accounts</li><li>Medical claim-heavy</li>
+          <li>Fake luxury accounts</li><li>Aggressive alpha content</li><li>Bought followers</li>
+          <li>Thirst-trap only</li><li>Crypto / betting</li>
+        </ul>
+      </div>
+    </div>
+    <p class="body-sm rv d4" style="margin-top:14px;">Priority audience demographics: 65%+ male · ages 25–44 · US, UK, Canada, Australia, UAE.</p>
+  </div>
+</section>
+
+<!-- ─── 07 APPLICATION FORM ─── -->
+<section class="sec" id="apply" style="background:var(--bg-2);">
+  <span class="sec-num">07</span>
+  <div class="wrap">
+    <div style="max-width:760px;margin:0 auto;">
+      <p class="lbl rv">Application</p>
+      <div class="rule rv d1"></div>
+      <h2 class="h-section rv d1">Apply for<br><em>Creator Access.</em></h2>
+      <p class="body-lg rv d2" style="margin-top:14px;margin-bottom:36px;">
+        Review takes 48–72 hours. We contact selected creators with their private referral link, creator code, and launch details.
+      </p>
+
+      <form id="creatorForm" action="https://api.web3forms.com/submit" method="POST" class="rv d2">
+        <input type="hidden" name="access_key" value="fe35df41-5c1c-4519-9513-f9a227fcffe4">
+        <input type="hidden" name="subject" value="New Creator Partner Application — NeoLabCare">
+        <input type="hidden" name="from_name" value="NeoLabCare Creator Partner Portal">
+        <input type="hidden" name="redirect" value="">
+        <input type="checkbox" name="botcheck" style="display:none;">
+
+        <div class="form-grid" style="margin-bottom:18px;">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input class="form-input" type="text" name="full_name" required placeholder="Your full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input class="form-input" type="email" name="email" required placeholder="your@email.com">
+          </div>
+        </div>
+
+        <div class="form-grid" style="margin-bottom:18px;">
+          <div class="form-group">
+            <label class="form-label">Country *</label>
+            <input class="form-input" type="text" name="country" required placeholder="e.g. United States">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Main Platform *</label>
+            <select class="form-select" name="platform" required>
+              <option value="" disabled selected>Select platform</option>
+              <option>TikTok</option>
+              <option>Instagram</option>
+              <option>YouTube</option>
+              <option>YouTube Shorts</option>
+              <option>X / Twitter</option>
+              <option>Newsletter</option>
+              <option>Podcast</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group full" style="margin-bottom:18px;">
+          <label class="form-label">Profile Link *</label>
+          <input class="form-input" type="url" name="profile_url" required placeholder="https://...">
+        </div>
+
+        <div class="form-grid cols-3" style="margin-bottom:18px;">
+          <div class="form-group">
+            <label class="form-label">Audience Size *</label>
+            <input class="form-input" type="text" name="audience_size" required placeholder="e.g. 45,000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Audience Niche *</label>
+            <input class="form-input" type="text" name="niche" required placeholder="e.g. men's grooming">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Avg Views / Post *</label>
+            <input class="form-input" type="text" name="avg_views" required placeholder="e.g. 8,000">
+          </div>
+        </div>
+
+        <div class="form-group full" style="margin-bottom:18px;">
+          <label class="form-label">Audience Country Split (if known)</label>
+          <input class="form-input" type="text" name="audience_countries" placeholder="e.g. 60% US · 20% UK · 20% AU">
+        </div>
+
+        <div class="form-group full" style="margin-bottom:18px;">
+          <label class="form-label">Have you promoted skincare, grooming, wellness, or lifestyle products before? *</label>
+          <select class="form-select" name="prior_promotions" required>
+            <option value="" disabled selected>Select</option>
+            <option>Yes — regularly</option>
+            <option>Yes — occasionally</option>
+            <option>No — but my audience is a strong fit</option>
+          </select>
+        </div>
+
+        <div class="form-group full" style="margin-bottom:18px;">
+          <label class="form-label">Why do you think NeoLabCare fits your audience? *</label>
+          <textarea class="form-textarea" name="fit_reason" required placeholder="Tell us about your audience and why this product would resonate with them." rows="4"></textarea>
+        </div>
+
+        <div class="form-grid" style="margin-bottom:18px;">
+          <div class="form-group">
+            <label class="form-label">Preferred Payout Method *</label>
+            <select class="form-select" name="payout_method" required>
+              <option value="" disabled selected>Select</option>
+              <option>Bank Transfer (domestic)</option>
+              <option>Bank Transfer (international / SWIFT)</option>
+              <option>Wise</option>
+              <option>PayPal</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Payout Email / Bank Contact *</label>
+            <input class="form-input" type="email" name="payout_email" required placeholder="payout@youremail.com">
+          </div>
+        </div>
+
+        <div class="form-group full" style="margin-bottom:28px;">
+          <label class="form-label">Shipping Address for Future Sample Credit Redemption (optional)</label>
+          <textarea class="form-textarea" name="shipping_address" placeholder="Street, City, State / Province, Postal Code, Country" rows="3"></textarea>
+        </div>
+
+        <div style="text-align:center;">
+          <button type="submit" class="form-submit" id="submitBtn">Apply for Creator Access</button>
+          <div id="formStatus"></div>
+          <p class="body-sm" style="margin-top:12px;color:var(--faint);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;">Review takes 48–72 hours &middot; Selected creators contacted directly</p>
+        </div>
+      </form>
+
+      <div id="formSuccess" style="display:none;text-align:center;padding:40px 0;">
+        <p class="lbl" style="margin-bottom:12px;">Application Received</p>
+        <p class="body-lg">Thank you. We&rsquo;ll review your application and contact selected creators with their private code, referral link, and launch details.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 08 PROGRAM RULES ─── -->
+<section class="sec">
+  <span class="sec-num">08</span>
+  <div class="wrap">
+    <div style="max-width:880px;margin:0 auto;">
+      <p class="lbl rv" style="text-align:center;">Program Rules</p>
+      <div class="rule rule-c rv d1"></div>
+      <h2 class="h-section rv d1" style="text-align:center;margin-bottom:8px;">Creator Partner<br><em>Program Rules.</em></h2>
+      <div class="rules-grid rv d2">
+        <div class="rule-item"><span class="rule-n">1.</span><span>Each approved creator receives a unique referral link and discount code.</span></div>
+        <div class="rule-item"><span class="rule-n">2.</span><span>The creator code unlocks private founding pricing for eligible products only.</span></div>
+        <div class="rule-item"><span class="rule-n">3.</span><span>Commission is calculated on net paid sales, excluding taxes, shipping, refunds, chargebacks, and cancelled orders.</span></div>
+        <div class="rule-item"><span class="rule-n">4.</span><span>Standard commission is 15% of net paid sales unless otherwise agreed in writing.</span></div>
+        <div class="rule-item"><span class="rule-n">5.</span><span>High-performing creators may be upgraded to 20% commission.</span></div>
+        <div class="rule-item"><span class="rule-n">6.</span><span>Commission becomes eligible for payout 7 days after the customer receives the package.</span></div>
+        <div class="rule-item"><span class="rule-n">7.</span><span>Orders refunded, cancelled, disputed, charged back, or flagged as fraudulent are not commissionable.</span></div>
+        <div class="rule-item"><span class="rule-n">8.</span><span>Payouts are processed monthly via bank transfer once commissions become eligible.</span></div>
+        <div class="rule-item"><span class="rule-n">9.</span><span>Self-referrals, fake orders, coupon site leakage, and paid search on NeoLabCare brand terms are not allowed.</span></div>
+        <div class="rule-item"><span class="rule-n">10.</span><span>Creator codes may not be posted on coupon sites, deal forums, or browser extension deal networks.</span></div>
+        <div class="rule-item"><span class="rule-n">11.</span><span>Creators must disclose affiliate relationships according to platform rules and local advertising regulations.</span></div>
+        <div class="rule-item"><span class="rule-n">12.</span><span>NeoLabCare may pause, revoke, or update creator codes if misuse is detected.</span></div>
+        <div class="rule-item"><span class="rule-n">13.</span><span>Sample credits are earned only from confirmed, non-refunded sales.</span></div>
+        <div class="rule-item"><span class="rule-n">14.</span><span>Sample credits become redeemable after production completion for audience giveaways, VIP follower rewards, or product testing.</span></div>
+        <div class="rule-item"><span class="rule-n">15.</span><span>Sample credits are not cash equivalents and cannot be exchanged for payout.</span></div>
+        <div class="rule-item"><span class="rule-n">16.</span><span>NeoLabCare may reject or remove creators whose content, audience, claims, or promotional methods do not fit the brand.</span></div>
+        <div class="rule-item"><span class="rule-n">17.</span><span>Creators must not make medical claims, guaranteed results claims, or claims not supported by published research.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer style="padding:48px 40px 36px;border-top:1px solid var(--border);position:relative;z-index:10;">
+  <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+    <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--faint);">&copy; 2026 NeolabCare LLC. All rights reserved.</span>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;">
+      <a href="/" style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);">neolab.care</a>
+      <a href="/privacy-policy.html" style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);">Privacy Policy</a>
+      <a href="/cookie-policy.html" style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() { nav.classList.toggle('sc', window.scrollY > 60); });
+
+// Scroll reveal
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.rv').forEach(function(el) { observer.observe(el); });
+
+// Form submission
+document.getElementById('creatorForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submitBtn');
+  var status = document.getElementById('formStatus');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+  status.textContent = '';
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    body: new FormData(this)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.success) {
+      document.getElementById('creatorForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      status.textContent = 'Something went wrong. Please try again or email hello@neolab.care.';
+      btn.disabled = false;
+      btn.textContent = 'Apply for Creator Access';
+    }
+  })
+  .catch(function() {
+    status.textContent = 'Network error. Please try again.';
+    btn.disabled = false;
+    btn.textContent = 'Apply for Creator Access';
+  });
+});
+</script>
 </body>
 </html>
