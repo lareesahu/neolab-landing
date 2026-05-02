@@ -230,6 +230,9 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
   .ft-node { width: 100%; align-items: flex-start; text-align: left; padding: 0; }
   .nav-wordmark { font-size: 15px; }
   .sec-num { font-size: 80px; top: 20px; right: 20px; }
+  .two-col { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .fin-table { overflow-x: auto; }
+  .fin-table-inner { min-width: 480px; }
 }
 </style>
 </head>
@@ -239,7 +242,7 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
 <nav class="navbar" id="nav" aria-label="Investor page navigation">
   <a href="/" class="nav-back">← neolab.care</a>
   <a href="/" class="nav-wordmark" aria-label="neolab.care home">
-    <span class="neolab">neolab</span><span class="sep">.</span><span class="care">care</span>
+    <img src="assets/logo.svg" alt="neolab.care" style="height:28px; display:block;">
   </a>
   <a href="#contact" class="nav-cta">Request Info</a>
 </nav>
@@ -309,7 +312,7 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
       <div style="background: var(--layer); padding: 24px 22px;">
         <div class="lbl" style="margin-bottom: 8px;">Stage</div>
         <div style="font-size: 0.9rem; font-weight: 500; color: var(--text);">Pre-revenue</div>
-        <div class="body-sm" style="margin-top: 4px;">Beta validated · Indiegogo live · GMP-ready</div>
+        <div class="body-sm" style="margin-top: 4px;">Beta validated · Pre-order live · GMP-ready</div>
       </div>
       <div style="background: var(--layer); padding: 24px 22px;">
         <div class="lbl" style="margin-bottom: 8px;">Raise</div>
@@ -362,7 +365,7 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
 <section id="solution" class="sec">
   <span class="sec-num">03</span>
   <div class="wrap">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
+    <div class="two-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
       <div class="rvl">
         <p class="lbl">The Solution &amp; Business Logic</p>
         <div class="rule"></div>
@@ -451,14 +454,16 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
       </h2>
       <p class="body-lg rv d2" style="margin-top: 18px;">
         We have not taken external capital. Everything below was achieved on founder capital:
-        formula development, GMP partner qualification, beta cohort, and a live crowdfunding campaign.
-        This de-risks the core question investors ask first — does the product actually work?
+        formula development, GMP partner qualification, beta cohort, and a live pre-order campaign.
+        GTM is influencer-first — a structured affiliate program with mass creator outreach, 15% commission,
+        and 1:1 sample credits. This de-risks the core question investors ask first — does the product
+        actually work, and is there a channel to sell it?
       </p>
     </div>
     <div class="stat-grid rv d3" style="margin-top: 48px;">
       <div class="stat-card"><div class="stat-n">100%</div><div class="stat-l">5-Star Beta Ratings</div><div class="stat-sub">Independent testers · 30-day use · unsolicited repeat-purchase intent</div></div>
       <div class="stat-card"><div class="stat-n">$0</div><div class="stat-l">External Capital Raised</div><div class="stat-sub">Formula, GMP partner, and beta validated on founder capital</div></div>
-      <div class="stat-card"><div class="stat-n">Live</div><div class="stat-l">Crowdfunding Campaign</div><div class="stat-sub">Indiegogo · public demand signal · conversion data in-flight</div></div>
+      <div class="stat-card"><div class="stat-n">15%</div><div class="stat-l">Creator Commission</div><div class="stat-sub">Influencer affiliate GTM · 1:1 sample credits · mass outreach in progress</div></div>
     </div>
     <div class="t-grid rv d4">
       <div class="t-card">
@@ -571,7 +576,7 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
         <div class="ft-dot">▲</div>
         <div class="ft-day">Q2 2026</div>
         <div class="ft-title">Founding Batch</div>
-        <div class="ft-desc">Indiegogo campaign close. First production run. Supporter dispatch.</div>
+        <div class="ft-desc">Pre-order batch close. First production run. Founding customer dispatch.</div>
       </div>
       <div class="ft-node rv d2">
         <div class="ft-dot">◆</div>
@@ -630,7 +635,7 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
     <div class="rv d4" style="display: flex; justify-content: center; gap: 32px; margin-top: 48px; flex-wrap: wrap;">
       <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>GMP Certified</div>
       <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>Peer-Reviewed Science</div>
-      <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>Indiegogo Backed</div>
+      <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>Pre-Order Live</div>
       <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>US Incorporated</div>
     </div>
   </div>
@@ -667,7 +672,7 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
         <!-- 3-Year Projection -->
         <div>
           <p class="lbl" style="margin-bottom: 20px;">3-Year Customer &amp; Revenue Projection</p>
-          <div style="border: 1px solid var(--border); border-radius: 2px; overflow: hidden;">
+          <div class="fin-table"><div class="fin-table-inner" style="border: 1px solid var(--border); border-radius: 2px; overflow: hidden;">
             <!-- Header row -->
             <div style="display: grid; grid-template-columns: 64px repeat(4, 1fr); gap: 2px; background: var(--border);">
               <div style="background: rgba(200,184,154,0.06); padding: 12px 16px;"><div class="stat-l" style="margin-top:0; color:var(--faint);">Year</div></div>
@@ -700,7 +705,7 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
               <div style="background: rgba(200,184,154,0.04); padding: 16px;"><span style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">$2.1M</span></div>
               <div style="background: rgba(200,184,154,0.04); padding: 16px;"><span style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">$1.95M</span></div>
             </div>
-          </div>
+          </div></div>
           <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
             <span class="body-sm">3-year cumulative: ~$2.9M revenue · 93% gross margin · Zero-churn base case. Churn-adjusted model available on request.</span>
             <span class="body-sm"><strong style="color: var(--accent);">5× Y3 ARR = ~$10.5M implied valuation</strong></span>
@@ -716,7 +721,7 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
 <section id="contact" class="sec" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
   <span class="sec-num">10</span>
   <div class="wrap">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
+    <div class="two-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
       <div class="rvl">
         <p class="lbl">The Ask</p>
         <div class="rule"></div>
@@ -725,7 +730,7 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
         </h2>
         <p class="body-lg" style="margin-top: 18px;">
           Pre-seed / angel round. Pre-money valuation: <strong style="color: var(--text);">$10M USD</strong> —
-          supported by 5× projected Year 3 ARR of $2.1M across 2,100 active customers.
+          supported by 5× projected Year 3 ARR of $2.1M across 3,000 active customers.
           $250K implies <strong style="color: var(--text);">2.44% equity</strong> at pre-money, or 2.50% post-money. Proceeds deployed against three priorities:
         </p>
         <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 14px;">
