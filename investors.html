@@ -203,6 +203,14 @@ body::before {
 .t-tag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
 .t-tag span { color: var(--accent); margin-right: 3px; }
 
+/* ─── FINANCIAL APPENDIX ─── */
+.fin-toggle { width: 100%; background: var(--layer); border: 1px solid var(--border-2); padding: 28px 32px; cursor: pointer; border-radius: 2px; color: var(--text); font-family: var(--f-body); transition: border-color 0.25s ease; text-align: left; display: block; }
+.fin-toggle:hover { border-color: rgba(200,184,154,0.35); }
+.fin-toggle[aria-expanded="true"] { border-radius: 2px 2px 0 0; border-bottom-color: transparent; }
+.fin-panel { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease; background: var(--layer); border: 1px solid var(--border-2); border-top: none; border-radius: 0 0 2px 2px; }
+.fin-panel.open { opacity: 1; }
+.fin-chevron { font-size: 1.5rem; color: var(--accent); line-height: 1; transition: transform 0.3s ease; display: inline-block; font-family: monospace; font-weight: 300; }
+
 /* ─── FOOTER ─── */
 footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); background: var(--bg-2); position: relative; z-index: 10; }
 .foot { max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
@@ -485,61 +493,25 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
         subscription trigger — and the product physically cannot be stockpiled, making churn structurally low.
       </p>
     </div>
-    <div class="rv d3" style="margin-top: 48px; background: var(--layer); border: 1px solid var(--border); border-radius: 2px; overflow: hidden;">
-      <div style="padding: 20px 28px; background: rgba(200,184,154,0.04); border-bottom: 1px solid var(--border);">
-        <div class="lbl" style="margin-bottom: 0;">Unit Economics &middot; Subscription Customer</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 48px;">
+      <div class="card rv d1">
+        <div class="stat-n" style="font-size: 1.8rem;">$1,000</div>
+        <div class="stat-l">Revenue / Customer / Year</div>
+        <p style="font-size: 0.78rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">4× 90-day supply cycles · ~$260 COGS · 74% gross margin at scale</p>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; background: var(--border);">
-        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">Annual Revenue/Sub</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">$1,000</div><div class="stat-sub">4× 90-day bottles per year</div></div>
-        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">COGS/Year</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">~$260</div><div class="stat-sub">4 bottles × ~$65 at scale</div></div>
-        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">Gross Margin</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">74%</div><div class="stat-sub">Target at 1,200 subscribers</div></div>
-        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">LTV (3yr)</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">$3,000</div><div class="stat-sub">$1,000 × 3 subscription years</div></div>
-        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">Target CAC</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">&lt;$80</div><div class="stat-sub">D2C digital + creator</div></div>
-        <div style="background: var(--layer); padding: 26px;"><div class="stat-l" style="margin-top: 0;">LTV / CAC</div><div class="stat-n" style="font-size: 1.8rem; margin-top: 8px;">37×</div><div class="stat-sub">Well above 3× VC benchmark</div></div>
+      <div class="card rv d2">
+        <div class="stat-n" style="font-size: 1.8rem;">37×</div>
+        <div class="stat-l">LTV / CAC Ratio</div>
+        <p style="font-size: 0.78rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">$3,000 LTV (3yr) · &lt;$80 target CAC · well above the 3× VC benchmark</p>
+      </div>
+      <div class="card rv d3">
+        <div class="stat-n" style="font-size: 1.8rem;">$2.1M</div>
+        <div class="stat-l">Year 3 ARR Target</div>
+        <p style="font-size: 0.78rem; color: var(--muted); margin-top: 8px; line-height: 1.5;">2,100 subscribers × $1,000 · 5× = ~$10.5M implied valuation</p>
       </div>
     </div>
-
-    <!-- 3-Year Revenue Projection -->
-    <div class="rv d4" style="margin-top: 2px; background: var(--layer); border: 1px solid var(--border-2); overflow: hidden;">
-      <div style="padding: 18px 28px; border-bottom: 1px solid var(--border); background: rgba(200,184,154,0.04);">
-        <div class="lbl" style="margin-bottom: 0;">3-Year Customer Acquisition &amp; Revenue Model</div>
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(5, 1fr); background: var(--border); gap: 2px;">
-        <div style="background: var(--layer); padding: 22px 18px;">
-          <div class="stat-l" style="margin-top: 0; color: var(--muted);">Year</div>
-          <div style="font-size: 0.82rem; color: var(--muted); margin-top: 12px; font-weight: 600; letter-spacing: 1px;">Y1</div>
-          <div style="font-size: 0.82rem; color: var(--muted); margin-top: 14px; font-weight: 600; letter-spacing: 1px;">Y2</div>
-          <div style="font-size: 0.82rem; color: var(--accent); margin-top: 14px; font-weight: 600; letter-spacing: 1px;">Y3</div>
-        </div>
-        <div style="background: var(--layer); padding: 22px 18px;">
-          <div class="stat-l" style="margin-top: 0; color: var(--muted);">New Customers</div>
-          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 12px; font-weight: 600;">100</div>
-          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 14px; font-weight: 600;">800</div>
-          <div style="font-size: 1.05rem; color: var(--accent); margin-top: 14px; font-weight: 600;">1,200</div>
-        </div>
-        <div style="background: var(--layer); padding: 22px 18px;">
-          <div class="stat-l" style="margin-top: 0; color: var(--muted);">Active Customers</div>
-          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 12px; font-weight: 600;">100</div>
-          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 14px; font-weight: 600;">900</div>
-          <div style="font-size: 1.05rem; color: var(--accent); margin-top: 14px; font-weight: 600;">2,100</div>
-        </div>
-        <div style="background: var(--layer); padding: 22px 18px;">
-          <div class="stat-l" style="margin-top: 0; color: var(--muted);">Revenue</div>
-          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 12px; font-weight: 600;">$100K</div>
-          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 14px; font-weight: 600;">$900K</div>
-          <div style="font-size: 1.05rem; color: var(--accent); margin-top: 14px; font-weight: 600;">$2.1M</div>
-        </div>
-        <div style="background: var(--layer); padding: 22px 18px;">
-          <div class="stat-l" style="margin-top: 0; color: var(--muted);">Gross Profit</div>
-          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 12px; font-weight: 600;">$74K</div>
-          <div style="font-size: 1.05rem; color: var(--muted); margin-top: 14px; font-weight: 600;">$666K</div>
-          <div style="font-size: 1.05rem; color: var(--accent); margin-top: 14px; font-weight: 600;">$1.55M</div>
-        </div>
-      </div>
-      <div style="padding: 16px 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--border);">
-        <div class="body-sm"><strong style="color: var(--text);">3-Year Cumulative:</strong> $3.1M revenue &middot; Zero-churn base case. Churn-adjusted model available on request.</div>
-        <div class="body-sm"><strong style="color: var(--accent);">5× Y3 ARR ($2.1M):</strong> <strong style="color: var(--accent); font-size: 1.05rem;">~$10.5M implied valuation</strong></div>
-      </div>
+    <div class="rv d4" style="margin-top: 28px; text-align: right;">
+      <a href="#financials" onclick="openFinancials(event)" style="font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid rgba(200,184,154,0.3); padding-bottom: 2px;">Detailed financial model ↓</a>
     </div>
   </div>
 </section>
@@ -660,6 +632,82 @@ footer { padding: 60px 40px 40px; border-top: 1px solid var(--border); backgroun
       <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>Peer-Reviewed Science</div>
       <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>Indiegogo Backed</div>
       <div style="padding: 8px 16px; border: 1px solid var(--border-2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);"><span style="color: var(--accent); margin-right: 6px;">◈</span>US Incorporated</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPENDIX — FINANCIAL MODEL (collapsible) ═══ -->
+<section id="financials" style="background: var(--bg); padding: 60px 0; position: relative; z-index: 10;">
+  <div class="wrap">
+    <button class="fin-toggle rv" id="finToggle" onclick="toggleFinancials()" aria-expanded="false" aria-controls="finPanel">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+        <div>
+          <p class="lbl" style="margin-bottom: 6px;">Appendix</p>
+          <span style="font-size: 1rem; font-weight: 500; color: var(--text); letter-spacing: -0.01em;">Financial Model &amp; Unit Economics</span>
+        </div>
+        <span class="fin-chevron" id="finChevron" aria-hidden="true">+</span>
+      </div>
+    </button>
+    <div class="fin-panel" id="finPanel">
+      <div style="padding: 40px 32px; display: flex; flex-direction: column; gap: 40px;">
+
+        <!-- Unit Economics -->
+        <div>
+          <p class="lbl" style="margin-bottom: 20px;">Unit Economics · Per Subscription Customer</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2px; background: var(--border); border: 1px solid var(--border);">
+            <div style="background: var(--bg); padding: 22px 18px;"><div class="stat-l" style="margin-top:0;">Annual Revenue</div><div class="stat-n" style="font-size:1.5rem; margin-top:8px;">$1,000</div><div class="stat-sub">4× 90-day bottles/year</div></div>
+            <div style="background: var(--bg); padding: 22px 18px;"><div class="stat-l" style="margin-top:0;">COGS / Year</div><div class="stat-n" style="font-size:1.5rem; margin-top:8px;">~$260</div><div class="stat-sub">4 bottles × ~$65 at scale</div></div>
+            <div style="background: var(--bg); padding: 22px 18px;"><div class="stat-l" style="margin-top:0;">Gross Margin</div><div class="stat-n" style="font-size:1.5rem; margin-top:8px;">74%</div><div class="stat-sub">Target at 1,200 subscribers</div></div>
+            <div style="background: var(--bg); padding: 22px 18px;"><div class="stat-l" style="margin-top:0;">LTV (3yr)</div><div class="stat-n" style="font-size:1.5rem; margin-top:8px;">$3,000</div><div class="stat-sub">$1,000 × 3 sub years</div></div>
+            <div style="background: var(--bg); padding: 22px 18px;"><div class="stat-l" style="margin-top:0;">Target CAC</div><div class="stat-n" style="font-size:1.5rem; margin-top:8px;">&lt;$80</div><div class="stat-sub">D2C digital + creator</div></div>
+            <div style="background: var(--bg); padding: 22px 18px;"><div class="stat-l" style="margin-top:0;">LTV / CAC</div><div class="stat-n" style="font-size:1.5rem; margin-top:8px;">37×</div><div class="stat-sub">Well above 3× VC benchmark</div></div>
+          </div>
+        </div>
+
+        <!-- 3-Year Projection -->
+        <div>
+          <p class="lbl" style="margin-bottom: 20px;">3-Year Customer &amp; Revenue Projection</p>
+          <div style="border: 1px solid var(--border); border-radius: 2px; overflow: hidden;">
+            <!-- Header row -->
+            <div style="display: grid; grid-template-columns: 64px repeat(4, 1fr); gap: 2px; background: var(--border);">
+              <div style="background: rgba(200,184,154,0.06); padding: 12px 16px;"><div class="stat-l" style="margin-top:0; color:var(--faint);">Year</div></div>
+              <div style="background: rgba(200,184,154,0.06); padding: 12px 16px;"><div class="stat-l" style="margin-top:0; color:var(--faint);">New Customers</div></div>
+              <div style="background: rgba(200,184,154,0.06); padding: 12px 16px;"><div class="stat-l" style="margin-top:0; color:var(--faint);">Active Customers</div></div>
+              <div style="background: rgba(200,184,154,0.06); padding: 12px 16px;"><div class="stat-l" style="margin-top:0; color:var(--faint);">Revenue</div></div>
+              <div style="background: rgba(200,184,154,0.06); padding: 12px 16px;"><div class="stat-l" style="margin-top:0; color:var(--faint);">Gross Profit</div></div>
+            </div>
+            <!-- Y1 -->
+            <div style="display: grid; grid-template-columns: 64px repeat(4, 1fr); gap: 2px; background: var(--border); border-top: 2px solid var(--bg);">
+              <div style="background: var(--bg); padding: 16px;"><span style="font-size: 0.78rem; font-weight: 600; color: var(--muted); letter-spacing: 1px;">Y1</span></div>
+              <div style="background: var(--bg); padding: 16px;"><span style="font-size: 0.9rem; color: var(--muted); font-weight: 500;">100</span></div>
+              <div style="background: var(--bg); padding: 16px;"><span style="font-size: 0.9rem; color: var(--muted); font-weight: 500;">100</span></div>
+              <div style="background: var(--bg); padding: 16px;"><span style="font-size: 0.9rem; color: var(--muted); font-weight: 500;">$100K</span></div>
+              <div style="background: var(--bg); padding: 16px;"><span style="font-size: 0.9rem; color: var(--muted); font-weight: 500;">$74K</span></div>
+            </div>
+            <!-- Y2 -->
+            <div style="display: grid; grid-template-columns: 64px repeat(4, 1fr); gap: 2px; background: var(--border); border-top: 2px solid var(--bg);">
+              <div style="background: var(--bg); padding: 16px;"><span style="font-size: 0.78rem; font-weight: 600; color: var(--muted); letter-spacing: 1px;">Y2</span></div>
+              <div style="background: var(--bg); padding: 16px;"><span style="font-size: 0.9rem; color: var(--muted); font-weight: 500;">800</span></div>
+              <div style="background: var(--bg); padding: 16px;"><span style="font-size: 0.9rem; color: var(--muted); font-weight: 500;">900</span></div>
+              <div style="background: var(--bg); padding: 16px;"><span style="font-size: 0.9rem; color: var(--muted); font-weight: 500;">$900K</span></div>
+              <div style="background: var(--bg); padding: 16px;"><span style="font-size: 0.9rem; color: var(--muted); font-weight: 500;">$666K</span></div>
+            </div>
+            <!-- Y3 — highlighted -->
+            <div style="display: grid; grid-template-columns: 64px repeat(4, 1fr); gap: 2px; background: rgba(200,184,154,0.12); border-top: 2px solid var(--bg);">
+              <div style="background: rgba(200,184,154,0.06); padding: 16px;"><span style="font-size: 0.78rem; font-weight: 700; color: var(--accent); letter-spacing: 1px;">Y3</span></div>
+              <div style="background: rgba(200,184,154,0.04); padding: 16px;"><span style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">1,200</span></div>
+              <div style="background: rgba(200,184,154,0.04); padding: 16px;"><span style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">2,100</span></div>
+              <div style="background: rgba(200,184,154,0.04); padding: 16px;"><span style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">$2.1M</span></div>
+              <div style="background: rgba(200,184,154,0.04); padding: 16px;"><span style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">$1.55M</span></div>
+            </div>
+          </div>
+          <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <span class="body-sm">3-year cumulative: $3.1M revenue · Zero-churn base case. Churn-adjusted model available on request.</span>
+            <span class="body-sm"><strong style="color: var(--accent);">5× Y3 ARR = ~$10.5M implied valuation</strong></span>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -808,6 +856,38 @@ if (invForm) {
 </footer>
 
 <script>
+// Financial appendix toggle
+function toggleFinancials() {
+  const panel = document.getElementById('finPanel');
+  const toggle = document.getElementById('finToggle');
+  const chevron = document.getElementById('finChevron');
+  const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+  if (isOpen) {
+    panel.style.maxHeight = '0';
+    panel.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    chevron.style.transform = '';
+  } else {
+    panel.classList.add('open');
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+    toggle.setAttribute('aria-expanded', 'true');
+    chevron.style.transform = 'rotate(45deg)';
+  }
+}
+function openFinancials(e) {
+  if (e) e.preventDefault();
+  const panel = document.getElementById('finPanel');
+  const toggle = document.getElementById('finToggle');
+  const chevron = document.getElementById('finChevron');
+  if (toggle.getAttribute('aria-expanded') !== 'true') {
+    panel.classList.add('open');
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+    toggle.setAttribute('aria-expanded', 'true');
+    chevron.style.transform = 'rotate(45deg)';
+  }
+  setTimeout(() => document.getElementById('financials').scrollIntoView({ behavior: 'smooth' }), 50);
+}
+
 // Nav scroll effect
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('sc', window.scrollY > 60));
