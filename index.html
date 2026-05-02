@@ -1,3 +1,45 @@
+<!--
+  Developer Handover for index.html
+
+  Purpose:
+  This is the main landing page for NeolabCare, designed for the Phase 1: Creator-Led Private Launch.
+  It features a "Void" luxury aesthetic and is referral-aware, dynamically adjusting content based on URL parameters.
+
+  Key Features:
+  - Referral Logic: Detects `?ref=` parameter in the URL to trigger a "Private Creator Access" banner and dynamic pricing display.
+  - Call-to-Action (CTA): All primary CTAs are routed to a waitlist modal (currently frontend-only).
+  - Visual Consistency: Adheres to the established "Void" design system (color tokens, typography, spacing, animations).
+
+  Integration Points:
+  - Shopify: The `?ref=` parameter is intended to integrate with Shopify's discount links for automatic discount application at checkout.
+  - Waitlist System: The `openWaitlistModal()` function needs to be connected to a backend waitlist management system (e.g., CRM, email marketing).
+
+  Next Steps for Developers:
+  - Implement backend logic for dynamic pricing based on referral codes.
+  - Connect the waitlist modal to a functional backend.
+  - Ensure all form submissions are securely handled and routed.
+-->
+<!--
+  Developer Handover for index.html
+
+  Purpose:
+  This is the main landing page for NeolabCare, designed for the Phase 1: Creator-Led Private Launch.
+  It features a "Void" luxury aesthetic and is referral-aware, dynamically adjusting content based on URL parameters.
+
+  Key Features:
+  - Referral Logic: Detects `?ref=` parameter in the URL to trigger a "Private Creator Access" banner and dynamic pricing display.
+  - Call-to-Action (CTA): All primary CTAs are routed to a waitlist modal (currently frontend-only).
+  - Visual Consistency: Adheres to the established "Void" design system (color tokens, typography, spacing, animations).
+
+  Integration Points:
+  - Shopify: The `?ref=` parameter is intended to integrate with Shopify\'s discount links for automatic discount application at checkout.
+  - Waitlist System: The `openWaitlistModal()` function needs to be connected to a backend waitlist management system (e.g., CRM, email marketing).
+
+  Next Steps for Developers:
+  - Implement backend logic for dynamic pricing based on referral codes.
+  - Connect the waitlist modal to a functional backend.
+  - Ensure all form submissions are securely handled and routed.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2184,7 +2226,24 @@ footer { background: #000; border-top: 1px solid var(--border); padding: 56px 0 
 </head>
 <body>
 
-  <!-- ─── NAV ────────────────────────────────────────────────── -->
+              <!-- ─── FOOTER ────────────────────────────────────────────── -->
+    <!--
+      Footer Section:
+      - Contains navigation links, legal information, and social media links.
+      - Includes links to `creator-partner.html` (Partner Program) and `partner-dashboard.html` (Partner Dashboard).
+      - These links are crucial for the Creator-Led Private Launch.
+    -->
+    <!--
+      Hero Section:
+      - Primary visual and textual introduction to NeolabCare.
+      - Features a main Call-to-Action (CTA) button that triggers the waitlist modal.
+    -->>
+    <!--
+      Navigation Bar:
+      - Responsive design with desktop and mobile states.
+      - Contains links to various sections of the page and external resources.
+      - The "Partner Program" link in the footer navigates to `creator-partner.html`.
+    -->
   <nav class="navbar" id="nav" aria-label="Main navigation">
     <!-- Left: section links -->
     <div class="nav-links">
