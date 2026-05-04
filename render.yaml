@@ -28,4 +28,16 @@ services:
   - key: WEB3FORMS_KEY
     value: fe35df41-5c1c-4519-9513-f9a227fcffe4
   - key: GOOGLE_SA_KEY
-    sync: false   # Set this manually in Render dashboard — paste the service account JSON
+    sync: false   # Set manually in Render dashboard — paste the full service account JSON
+  - key: APPROVAL_SECRET
+    sync: false   # Set manually — any long random string (used to sign creator approval tokens)
+  - key: WEBHOOK_BASE_URL
+    value: https://neolabcare-webhook.onrender.com
+  - key: FOUNDER_EMAIL
+    value: lareesa@neolab.care
+  - key: SHOPIFY_STORE
+    sync: false   # Set when ready — e.g. neolab-care.myshopify.com
+  - key: SHOPIFY_ADMIN_TOKEN
+    sync: false   # Set when ready — shpat_... (enables auto discount code creation)
+  - key: SHOPIFY_WEBHOOK_SECRET
+    sync: false   # Set when ready — from Shopify webhook settings (validates order events)

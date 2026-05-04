@@ -1,95 +1,509 @@
-<!--
-  Developer Handover for partner-dashboard.html
-
-  Purpose:
-  This is a placeholder page for the Creator Partner dashboard. It is intended to allow Creator Partners to track their referrals, sales, and earnings.
-
-  Key Features:
-  - Placeholder Content: Currently contains minimal HTML structure.
-  - Visual Consistency: Should adhere to the established "Void" design system.
-
-  Integration Points:
-  - Shopify API: Requires integration with the Shopify API to fetch sales data attributed to specific referral codes.
-  - User Authentication: Needs a robust authentication system to ensure creators can only access their own data.
-  - Data Visualization: Will require frontend development to display referral data, commission earnings, and other relevant metrics in a user-friendly format.
-
-  Next Steps for Developers:
-  - Implement user authentication and authorization.
-  - Integrate with Shopify API to retrieve and display partner-specific sales and referral data.
-  - Develop the frontend UI for data visualization and reporting.
-  - Ensure data security and privacy compliance.
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Partner Dashboard | NeoLabCare</title>
+<title>Creator Dashboard | NeoLabCare</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-<link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Noto+Serif+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&family=Noto+Serif+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0A0A0A; --layer: #141414; --text: rgba(245,245,240,.94);
-  --muted: rgba(245,245,240,.52); --faint: rgba(245,245,240,.22);
-  --accent: #C8B89A; --border: rgba(200,184,154,.10); --border-2: rgba(200,184,154,.18);
+  --bg: #0A0A0A; --bg2: #0D0D0D; --layer: #141414; --layer2: #191919;
+  --text: rgba(245,245,240,.94); --muted: rgba(245,245,240,.52); --faint: rgba(245,245,240,.24);
+  --accent: #C8B89A; --accent2: #DDD0B8;
+  --border: rgba(200,184,154,.10); --border2: rgba(200,184,154,.18);
+  --green: #6fcf8a; --amber: #e6b96a;
   --f-body: 'Poppins', sans-serif; --f-serif: 'Noto Serif Display', serif;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 a { color: inherit; text-decoration: none; }
-body { background: var(--bg); color: var(--text); font-family: var(--f-body); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
+button { cursor: pointer; font-family: var(--f-body); border: none; background: none; }
+input { font-family: var(--f-body); }
+body {
+  background: var(--bg); color: var(--text); font-family: var(--f-body);
+  font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
 
-.card { background: var(--layer); border: 1px solid var(--border-2); border-radius: 2px; padding: 52px 48px; max-width: 520px; width: 100%; text-align: center; }
-.lbl { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-.wordmark { display: inline-flex; align-items: baseline; gap: 0; font-family: var(--f-body); font-size: 20px; letter-spacing: -0.01em; margin-bottom: 32px; }
-.wordmark .neolab { font-weight: 500; }
-.wordmark .sep { font-size: 20px; font-weight: 500; color: var(--accent); margin: 0 0.5px; }
-.wordmark .care { font-size: 11px; font-weight: 300; letter-spacing: 0.14em; color: var(--muted); text-transform: lowercase; align-self: flex-end; padding-bottom: 1px; }
-h1 { font-family: var(--f-serif); font-style: italic; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; color: var(--text); margin-bottom: 16px; line-height: 1.2; }
-p { font-size: 0.84rem; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
-.rule { width: 32px; height: 1px; background: var(--accent); margin: 20px auto; opacity: 0.5; }
-.stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 2px; margin: 28px 0; }
-.stat { background: var(--layer); padding: 18px 12px; }
-.stat-n { font-size: 1.4rem; font-weight: 600; color: var(--accent); line-height: 1; }
-.stat-l { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--faint); margin-top: 4px; }
-.coming { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--border-2); padding: 4px 12px; border-radius: 2px; margin-top: 4px; }
-.back { display: inline-block; margin-top: 28px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 10px 20px; border-radius: 2px; transition: all 0.2s; }
-.back:hover { color: var(--accent); border-color: var(--accent); }
+/* ── Nav ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 64px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10,10,10,.92); backdrop-filter: blur(12px);
+}
+.nav-logo { display: flex; align-items: center; gap: 0; font-size: 18px; letter-spacing: -0.01em; font-weight: 500; }
+.nav-logo .sep { color: var(--accent); margin: 0 0.5px; }
+.nav-logo .care { font-size: 10px; font-weight: 300; letter-spacing: 0.14em; color: var(--muted); text-transform: lowercase; align-self: flex-end; padding-bottom: 1px; }
+.nav-back { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); transition: color .2s; }
+.nav-back:hover { color: var(--accent); }
+
+/* ── Page wrapper ── */
+.page { max-width: 940px; margin: 0 auto; padding: 60px 32px 100px; }
+
+/* ── State screens ── */
+.state { display: none; }
+.state.active { display: block; }
+
+/* Enter-code state */
+.enter-wrap {
+  display: flex; align-items: center; justify-content: center;
+  min-height: calc(100vh - 64px);
+}
+.enter-card {
+  background: var(--layer); border: 1px solid var(--border2);
+  border-radius: 2px; padding: 52px 48px; max-width: 440px; width: 100%;
+  text-align: center;
+}
+.enter-lbl { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+.enter-card h1 { font-family: var(--f-serif); font-style: italic; font-size: 1.8rem; font-weight: 400; margin-bottom: 10px; }
+.enter-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+.code-input {
+  width: 100%; background: transparent; border: 1px solid var(--border2);
+  border-radius: 2px; padding: 14px 16px; color: var(--text);
+  font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;
+  text-align: center; margin-bottom: 12px; outline: none;
+  transition: border-color .2s;
+}
+.code-input:focus { border-color: var(--accent); }
+.code-input::placeholder { text-transform: none; letter-spacing: normal; color: var(--faint); font-size: 0.85rem; }
+.enter-btn {
+  width: 100%; background: var(--accent); color: #0A0A0A;
+  padding: 14px 24px; border-radius: 2px;
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+  transition: background .2s; margin-bottom: 16px;
+}
+.enter-btn:hover { background: var(--accent2); }
+.enter-btn:disabled { opacity: .5; cursor: not-allowed; }
+.enter-note { font-size: 11px; color: var(--faint); }
+#enterError { font-size: 12px; color: #cc4444; margin-top: 8px; display: none; }
+
+/* Loading state */
+.loading-wrap {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  min-height: calc(100vh - 64px);
+  color: var(--muted); font-size: 13px; letter-spacing: 1px;
+}
+.spinner {
+  width: 20px; height: 20px; border: 2px solid var(--border2);
+  border-top-color: var(--accent); border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Dashboard ── */
+.dash-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  flex-wrap: wrap; gap: 24px; margin-bottom: 48px; padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+.dash-identity {}
+.dash-lbl { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.dash-name { font-family: var(--f-serif); font-style: italic; font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 400; margin-bottom: 8px; }
+.status-badge {
+  display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 2px; font-weight: 600;
+}
+.status-badge.Approved { background: rgba(111,207,138,.12); color: var(--green); border: 1px solid rgba(111,207,138,.3); }
+.status-badge.Pending  { background: rgba(230,185,106,.10); color: var(--amber); border: 1px solid rgba(230,185,106,.25); }
+
+.ref-box {
+  background: var(--layer); border: 1px solid var(--border2); border-radius: 2px;
+  padding: 20px 24px; min-width: 280px;
+}
+.ref-box-lbl { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+.ref-link { font-size: 13px; color: var(--accent); word-break: break-all; margin-bottom: 14px; display: block; }
+.ref-code-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.ref-code { font-size: 11px; letter-spacing: 2px; background: rgba(200,184,154,.08); border: 1px solid var(--border2); padding: 5px 12px; border-radius: 2px; color: var(--accent); }
+.copy-btn {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted);
+  border: 1px solid var(--border); padding: 6px 14px; border-radius: 2px;
+  transition: all .2s;
+}
+.copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Stats grid */
+.stat-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  background: var(--border); border: 1px solid var(--border); border-radius: 2px;
+  margin-bottom: 48px;
+}
+.stat-card { background: var(--layer); padding: 28px 20px; }
+.stat-n { font-size: 1.6rem; font-weight: 600; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+.stat-l { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--faint); }
+
+/* Section */
+.section { margin-bottom: 52px; }
+.section-lbl { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+
+/* Orders table */
+.orders-table { width: 100%; border-collapse: collapse; }
+.orders-table th {
+  text-align: left; font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--faint); font-weight: 400; padding: 10px 0; border-bottom: 1px solid var(--border);
+}
+.orders-table td { padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--muted); vertical-align: middle; }
+.orders-table td:first-child { color: var(--text); }
+.orders-table td:nth-child(2),
+.orders-table td:nth-child(3) { font-variant-numeric: tabular-nums; }
+.order-badge {
+  display: inline-block; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 2px; font-weight: 600;
+}
+.order-badge.confirmed { background: rgba(111,207,138,.12); color: var(--green); }
+.order-badge.pending   { background: rgba(230,185,106,.10); color: var(--amber); }
+.no-orders { font-size: 13px; color: var(--faint); padding: 32px 0; text-align: center; line-height: 1.8; }
+
+/* How it works */
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step {
+  display: flex; align-items: flex-start; gap: 20px;
+  padding: 20px 0; border-bottom: 1px solid var(--border);
+}
+.step:last-child { border-bottom: none; }
+.step-num { font-family: var(--f-serif); font-style: italic; font-size: 2rem; color: var(--accent); opacity: .4; min-width: 32px; line-height: 1; padding-top: 2px; }
+.step-body { flex: 1; }
+.step-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.step-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* Settings card */
+.settings-card {
+  background: var(--layer); border: 1px solid var(--border2); border-radius: 2px;
+  padding: 36px 40px; margin-bottom: 0;
+}
+.settings-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.settings-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); }
+.pending-badge {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--amber);
+  border: 1px solid rgba(230,185,106,.3); padding: 3px 10px; border-radius: 2px;
+}
+.settings-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; max-width: 520px; }
+.settings-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.field-group label { display: block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+.field-group input {
+  width: 100%; background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 2px; padding: 12px 14px; color: var(--faint);
+  font-size: 13px; cursor: not-allowed;
+}
+.save-btn {
+  background: var(--border); color: var(--faint); padding: 12px 28px;
+  border-radius: 2px; font-size: 11px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; cursor: not-allowed; margin-bottom: 16px;
+}
+.settings-note { font-size: 11px; color: var(--faint); line-height: 1.7; max-width: 520px; }
+.settings-note strong { color: var(--muted); }
+
+/* Responsive */
+@media (max-width: 700px) {
+  nav { padding: 0 20px; }
+  .page { padding: 40px 20px 80px; }
+  .enter-card { padding: 40px 24px; }
+  .dash-header { flex-direction: column; }
+  .ref-box { min-width: 0; width: 100%; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .settings-fields { grid-template-columns: 1fr; }
+  .settings-card { padding: 28px 24px; }
+}
+@media (max-width: 460px) {
+  .stat-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
-<div class="card">
-  <a href="/" style="display:flex;justify-content:center;margin-bottom:32px;">
-    <img src="assets/logo.svg" alt="neolab.care" style="height:30px;display:block;">
-  </a>
-  <p class="lbl">Creator Partner Dashboard</p>
-  <div class="rule"></div>
-  <h1>Your dashboard<br>is on its way.</h1>
-  <p>The full partner dashboard — showing your referral link, creator code, pending sales, confirmed commission, and sample credits — is under active development.</p>
-  <p>Once live, approved creators will log in here to track everything in real time.</p>
 
-  <div class="stat-row">
-    <div class="stat">
-      <div class="stat-n">15%</div>
-      <div class="stat-l">Commission</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n">1:1</div>
-      <div class="stat-l">Sample Credits</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n">Monthly</div>
-      <div class="stat-l">Payouts</div>
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="neolab">neolab</span><span class="sep">.</span><span class="care">care</span>
+  </a>
+  <a href="/creator-partner.html" class="nav-back">&#8592; Creator Program</a>
+</nav>
+
+<!-- ── Enter code state ── -->
+<div id="enterState" class="state active">
+  <div class="enter-wrap">
+    <div class="enter-card">
+      <p class="enter-lbl">Creator Partner Dashboard</p>
+      <h1>View your stats</h1>
+      <p>Enter your creator code to see your referral stats, commission, and recent orders.</p>
+      <input id="codeInput" class="code-input" type="text" placeholder="e.g. SARAH99" maxlength="20" autocomplete="off" spellcheck="false">
+      <button id="viewBtn" class="enter-btn" onclick="loadStats()">View Dashboard</button>
+      <div id="enterError"></div>
+      <p class="enter-note">Your code was sent in your approval email.<br>Need help? Email hello@neolab.care</p>
     </div>
   </div>
-
-  <p style="font-size:0.78rem;">In the meantime, your commission summary and credited sales will be sent to your payout email monthly.</p>
-  <span class="coming">Dashboard — Coming Soon</span>
-  <br>
-  <a href="/creator-partner.html" class="back">&#8592; Creator Partner Program</a>
 </div>
+
+<!-- ── Loading state ── -->
+<div id="loadingState" class="state">
+  <div class="loading-wrap">
+    <div class="spinner"></div>
+    <span>Loading your dashboard&hellip;</span>
+  </div>
+</div>
+
+<!-- ── Dashboard state ── -->
+<div id="dashState" class="state">
+  <div class="page">
+
+    <!-- Creator header -->
+    <div class="dash-header">
+      <div class="dash-identity">
+        <div class="dash-lbl">Creator Partner Dashboard</div>
+        <div class="dash-name" id="dashName"></div>
+        <span id="statusBadge" class="status-badge"></span>
+      </div>
+      <div class="ref-box">
+        <div class="ref-box-lbl">Your referral link</div>
+        <a id="refLinkDisplay" class="ref-link" href="#" target="_blank"></a>
+        <div class="ref-code-row">
+          <span id="refCodeDisplay" class="ref-code"></span>
+          <button id="copyBtn" class="copy-btn" onclick="copyLink()">Copy link</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-n" id="statOrders">—</div>
+        <div class="stat-l">Total Orders</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-n" id="statRevenue">—</div>
+        <div class="stat-l">Total Revenue</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-n" id="statConfirmed">—</div>
+        <div class="stat-l">Confirmed Commission</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-n" id="statPending">—</div>
+        <div class="stat-l">Pending Commission</div>
+      </div>
+    </div>
+
+    <!-- Orders -->
+    <div class="section">
+      <div class="section-lbl">Recent Orders</div>
+      <div id="noOrders" class="no-orders" style="display:none;">
+        No orders yet.<br>Share your referral link to start earning commission.
+      </div>
+      <table id="ordersTable" class="orders-table" style="display:none;">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Order Amount</th>
+            <th>Commission</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="ordersBody"></tbody>
+      </table>
+    </div>
+
+    <!-- How it works -->
+    <div class="section">
+      <div class="section-lbl">How It Works</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Share your referral link</div>
+            <div class="step-desc">Post your unique link across your platform. Fans who visit get a private access banner and 50% off their first bottle at checkout.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">They purchase using your code</div>
+            <div class="step-desc">Your creator code is automatically applied at checkout. Each confirmed order is attributed to you.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Commission clears after 7 days</div>
+            <div class="step-desc">7 days after the customer receives their order (with no refund or dispute), your commission status updates from Pending to Confirmed.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Monthly payout</div>
+            <div class="step-desc">Confirmed commission is paid out monthly to your nominated account. You'll receive a payout summary by email.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shopify API Settings (placeholder — wire up when token is available) -->
+    <div class="section">
+      <div class="section-lbl">Settings</div>
+      <div class="settings-card">
+        <div class="settings-header">
+          <span class="settings-title">Shopify Integration</span>
+          <span class="pending-badge">Pending Setup</span>
+        </div>
+        <p class="settings-desc">
+          These fields enable automatic discount code generation and real-time order sync
+          directly from Shopify. Add your Shopify Admin API token in the Render dashboard to activate.
+        </p>
+        <div class="settings-fields">
+          <div class="field-group">
+            <label>Store URL</label>
+            <input type="text" value="neolab-care.myshopify.com" disabled>
+          </div>
+          <div class="field-group">
+            <label>Admin API Token</label>
+            <input type="password" placeholder="shpat_••••••••••••••••••••" disabled>
+          </div>
+        </div>
+        <button class="save-btn" disabled>Save Integration</button>
+        <p class="settings-note">
+          <strong>Until connected:</strong> discount codes are created manually in Shopify Admin
+          after each creator is approved, and orders are logged via Shopify webhooks.
+          Once the API token is added to Render environment variables, both steps become fully automatic.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var WEBHOOK_URL = 'https://neolabcare-webhook.onrender.com';
+var _currentCode = '';
+var _referralLink = '';
+
+function showState(name) {
+  ['enter','loading','dash'].forEach(function(s) {
+    var el = document.getElementById(s + 'State');
+    el.classList.remove('active');
+  });
+  var target = document.getElementById(name + 'State');
+  if (target) target.classList.add('active');
+}
+
+function init() {
+  var params = new URLSearchParams(window.location.search);
+  var code = params.get('code');
+  if (code) {
+    _currentCode = code.toUpperCase();
+    loadStats(_currentCode);
+  } else {
+    showState('enter');
+  }
+
+  // Allow Enter key in code input
+  document.getElementById('codeInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') loadStats();
+  });
+}
+
+function loadStats(code) {
+  var inputEl = document.getElementById('codeInput');
+  var errEl   = document.getElementById('enterError');
+  if (!code) code = inputEl.value.trim().toUpperCase();
+  if (!code) {
+    errEl.textContent = 'Please enter your creator code.';
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  _currentCode = code;
+
+  var viewBtn = document.getElementById('viewBtn');
+  if (viewBtn) viewBtn.disabled = true;
+  showState('loading');
+
+  fetch(WEBHOOK_URL + '/creator-stats?code=' + encodeURIComponent(code))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (!data.found) {
+        if (viewBtn) viewBtn.disabled = false;
+        showState('enter');
+        var errEl2 = document.getElementById('enterError');
+        errEl2.textContent = 'Code not found. Check your approval email or contact hello@neolab.care.';
+        errEl2.style.display = 'block';
+        return;
+      }
+      renderDashboard(data);
+      showState('dash');
+      history.replaceState(null, '', '?code=' + code);
+    })
+    .catch(function() {
+      if (viewBtn) viewBtn.disabled = false;
+      showState('enter');
+      var errEl3 = document.getElementById('enterError');
+      errEl3.textContent = 'Could not connect. Please try again.';
+      errEl3.style.display = 'block';
+    });
+}
+
+function renderDashboard(data) {
+  _referralLink = data.referral_link;
+
+  document.getElementById('dashName').textContent = 'Hi, ' + data.name;
+
+  var badge = document.getElementById('statusBadge');
+  badge.textContent = data.status;
+  badge.className   = 'status-badge ' + data.status;
+
+  var linkEl = document.getElementById('refLinkDisplay');
+  linkEl.textContent = data.referral_link.replace('https://', '');
+  linkEl.href        = data.referral_link;
+
+  document.getElementById('refCodeDisplay').textContent = data.code;
+
+  document.getElementById('statOrders').textContent    = data.total_orders;
+  document.getElementById('statRevenue').textContent   = '$' + data.total_revenue.toFixed(2);
+  document.getElementById('statConfirmed').textContent = '$' + data.confirmed_commission.toFixed(2);
+  document.getElementById('statPending').textContent   = '$' + data.pending_commission.toFixed(2);
+
+  var tbody   = document.getElementById('ordersBody');
+  var table   = document.getElementById('ordersTable');
+  var noOrds  = document.getElementById('noOrders');
+
+  if (!data.orders || data.orders.length === 0) {
+    table.style.display  = 'none';
+    noOrds.style.display = '';
+  } else {
+    noOrds.style.display = 'none';
+    table.style.display  = '';
+    tbody.innerHTML = data.orders.map(function(o) {
+      return '<tr>'
+        + '<td>' + formatDate(o.date) + '</td>'
+        + '<td>$' + o.amount.toFixed(2) + '</td>'
+        + '<td>$' + o.commission.toFixed(2) + '</td>'
+        + '<td><span class="order-badge ' + o.status + '">' + o.status + '</span></td>'
+        + '</tr>';
+    }).join('');
+  }
+}
+
+function formatDate(str) {
+  try {
+    var d = new Date(str.replace(' UTC', 'Z').replace(' ', 'T'));
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch(e) { return str; }
+}
+
+function copyLink() {
+  var btn = document.getElementById('copyBtn');
+  if (!_referralLink) return;
+  navigator.clipboard.writeText(_referralLink).then(function() {
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = 'Copy link'; }, 2000);
+  }).catch(function() {
+    btn.textContent = 'Copy link';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
 </body>
 </html>

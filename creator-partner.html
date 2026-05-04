@@ -659,6 +659,8 @@ var observer = new IntersectionObserver(function(entries) {
 document.querySelectorAll('.rv').forEach(function(el) { observer.observe(el); });
 
 // Form submission
+var WEBHOOK_URL = 'https://neolabcare-webhook.onrender.com';
+
 document.getElementById('creatorForm').addEventListener('submit', function(e) {
   e.preventDefault();
   var btn = document.getElementById('submitBtn');
@@ -667,9 +669,14 @@ document.getElementById('creatorForm').addEventListener('submit', function(e) {
   btn.textContent = 'Submitting...';
   status.textContent = '';
 
-  fetch('https://api.web3forms.com/submit', {
+  var fd = new FormData(this);
+  var payload = {};
+  fd.forEach(function(v, k) { payload[k] = v; });
+
+  fetch(WEBHOOK_URL + '/creator-application', {
     method: 'POST',
-    body: new FormData(this)
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
   })
   .then(function(r) { return r.json(); })
   .then(function(data) {
