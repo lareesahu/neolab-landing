@@ -142,8 +142,10 @@ def _sheet_update(range_name: str, values: list) -> bool:
 
 
 # ── Email (Gmail SMTP) ──────────────────────────────────────────────────────────
+CC_EMAIL = "lareesahu@gmail.com"  # Always CC this address on every email
+
 def _send_email(subject: str, recipient_email: str, html_content: str) -> bool:
-    """Send professional HTML emails via Gmail SMTP."""
+    """Send professional HTML emails via Gmail SMTP, always CC lareesahu@gmail.com."""
     import smtplib
     from email.mime.text import MIMEText
     from email.mime.multipart import MIMEMultipart
@@ -156,14 +158,16 @@ def _send_email(subject: str, recipient_email: str, html_content: str) -> bool:
     msg["Subject"] = subject
     msg["From"] = f"NeoLabCare <{GMAIL_USER}>"
     msg["To"] = recipient_email
+    msg["Cc"] = CC_EMAIL
 
     msg.attach(MIMEText(html_content, "html"))
 
+    recipients = list({recipient_email, CC_EMAIL})  # deduplicate in case they're the same
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
-            server.sendmail(GMAIL_USER, recipient_email, msg.as_string())
-        print(f"[EMAIL] Sent: '{subject}' to {recipient_email}")
+            server.sendmail(GMAIL_USER, recipients, msg.as_string())
+        print(f"[EMAIL] Sent: '{subject}' to {recipient_email} (CC: {CC_EMAIL})")
         return True
     except Exception as e:
         print(f"[EMAIL] Error sending to {recipient_email}: {e}")
