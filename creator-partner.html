@@ -677,13 +677,14 @@ document.getElementById('creatorForm').addEventListener('submit', function(e) {
   .then(function(data) {
     if (data.success) {
       var W3F_KEY = 'fe35df41-5c1c-4519-9513-f9a227fcffe4';
+      var firstName = data.name ? data.name.split(' ')[0] : 'there';
 
-      // Email 1 → founder: full application details + one-click approve link
-      var founderBody = [
-        'New creator application from ' + data.name + ' (' + data.email + ').',
+      // Single email: founder gets application details + approve link; creator is CC'd
+      var body = [
+        '=== NEW CREATOR APPLICATION ===',
         '',
-        'APPROVE: ' + data.approve_url,
-        '',
+        'Name:      ' + data.name,
+        'Email:     ' + data.email,
         'Platform:  ' + (data.platform    || '—'),
         'Profile:   ' + (data.profile_url || '—'),
         'Audience:  ' + (data.audience    || '—'),
@@ -695,38 +696,23 @@ document.getElementById('creatorForm').addEventListener('submit', function(e) {
         (data.fit_reason || '—'),
         '',
         'Discount code (once approved): ' + data.code,
+        '',
+        '--- ONE-CLICK APPROVE ---',
+        data.approve_url,
+        '-------------------------',
+        '',
+        '---',
+        'Hi ' + firstName + ', your application has been received. We review within 48–72 hours and will contact you directly with your creator code and referral link. — NeoLabCare',
       ].join('\n');
+
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: W3F_KEY,
           subject: 'New Creator Application — ' + data.name,
-          message: founderBody
-        })
-      });
-
-      // Email 2 → creator (via ccemail): application confirmation
-      var firstName = data.name ? data.name.split(' ')[0] : 'there';
-      var creatorBody = [
-        'Hi ' + firstName + ',',
-        '',
-        'We received your application to the NeoLabCare Creator Partner Program.',
-        '',
-        'We review applications within 48–72 hours. Selected creators are contacted directly with their private referral link, creator code, and launch details.',
-        '',
-        'If you have questions before then, reply to this email.',
-        '',
-        '— NeoLabCare',
-      ].join('\n');
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: W3F_KEY,
-          subject: 'Application received — NeoLabCare Creator Partner Program',
           ccemail: data.email,
-          message: creatorBody
+          message: body
         })
       });
 
