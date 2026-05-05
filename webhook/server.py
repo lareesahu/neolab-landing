@@ -164,7 +164,9 @@ def _send_email(subject: str, recipient_email: str, html_content: str) -> bool:
 
     recipients = list({recipient_email, CC_EMAIL})  # deduplicate in case they're the same
     try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        # Use port 587 with STARTTLS and a timeout to prevent hanging on Render
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as server:
+            server.starttls()
             server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
             server.sendmail(GMAIL_USER, recipients, msg.as_string())
         print(f"[EMAIL] Sent: '{subject}' to {recipient_email} (CC: {CC_EMAIL})")
