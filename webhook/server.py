@@ -132,17 +132,19 @@ def _sheet_update(range_name: str, values: list) -> bool:
 
 
 # ── Email (Web3Forms) ─────────────────────────────────────────────────────────
-def _send_email(subject: str, body: str, cc: str = "") -> bool:
-    """Send via Web3Forms — always delivers to FOUNDER_EMAIL; cc gets a copy."""
+def _send_email(subject: str, body: str, recipient_email: str = None) -> bool:
+    """Send via Web3Forms — always delivers to FOUNDER_EMAIL or specified email."""
+    # Note: Web3Forms free plan only sends to the email associated with the access_key.
+    # To send to the creator, we would need a Pro plan or a different service.
+    # For now, we send everything to the founder.
     payload = {
         "access_key": WEB3FORMS_KEY,
         "subject": subject,
         "from_name": "NeoLabCare",
-        "email": FOUNDER_EMAIL,
-        "message": body,
+        "name": "NeoLabCare System",
+        "email": FOUNDER_EMAIL, # This is the "reply-to"
+        "message": f"Recipient: {recipient_email}\n\n{body}" if recipient_email else body,
     }
-    if cc:
-        payload["ccemail"] = cc
     data = urllib.parse.urlencode(payload).encode()
     req = urllib.request.Request("https://api.web3forms.com/submit", data=data, method="POST",
                                   headers={
@@ -442,16 +444,53 @@ class Handler(BaseHTTPRequestHandler):
 
         # ── Shopify discount code creation ────────────────────────────────────
         if SHOPIFY_ADMIN_TOKEN and SHOPIFY_STORE:
-            # TODO: Shopify Admin API auto-creation (plug in when token is available)
-            # Step 1: POST https://{SHOPIFY_STORE}/admin/api/2024-01/price_rules.json
-            #   body: {"price_rule": {"title": discount_code, "value_type": "percentage",
-            #          "value": "-50.0", "customer_selection": "all", "target_type": "line_item",
-            #          "target_selection": "all", "allocation_method": "across",
-            #          "starts_at": "2024-01-01T00:00:00Z"}}
-            # Step 2: POST https://{SHOPIFY_STORE}/admin/api/2024-01/price_rules/{id}/discount_codes.json
-            #   body: {"discount_code": {"code": discount_code}}
-            print(f"[SHOPIFY] Token present — auto-creation not yet implemented. "
-                  f"Create '{discount_code}' manually.")
+            try:
+                # Step 1: Create Price Rule
+                price_rule_payload = {
+                    "price_rule": {
+                        "title": f"Creator Code: {discount_code}",
+                        "target_type": "line_item",
+                        "target_selection": "all",
+                        "allocation_method": "across",
+                        "value_type": "percentage",
+                        "value": "-50.0",
+                        "customer_selection": "all",
+                        "starts_at": _utcnow().isoformat(),
+                        "usage_limit": None
+                    }
+                }
+                pr_req = urllib.request.Request(
+                    f"https://{SHOPIFY_STORE}/admin/api/2024-01/price_rules.json",
+                    data=json.dumps(price_rule_payload).encode(),
+                    method="POST",
+                    headers={
+                        "X-Shopify-Access-Token": SHOPIFY_ADMIN_TOKEN,
+                        "Content-Type": "application/json"
+                    }
+                )
+                with urllib.request.urlopen(pr_req, timeout=15) as pr_res:
+                    pr_data = json.loads(pr_res.read())
+                    price_rule_id = pr_data["price_rule"]["id"]
+                
+                # Step 2: Create Discount Code
+                discount_payload = {
+                    "discount_code": {
+                        "code": discount_code
+                    }
+                }
+                dc_req = urllib.request.Request(
+                    f"https://{SHOPIFY_STORE}/admin/api/2024-01/price_rules/{price_rule_id}/discount_codes.json",
+                    data=json.dumps(discount_payload).encode(),
+                    method="POST",
+                    headers={
+                        "X-Shopify-Access-Token": SHOPIFY_ADMIN_TOKEN,
+                        "Content-Type": "application/json"
+                    }
+                )
+                with urllib.request.urlopen(dc_req, timeout=15) as dc_res:
+                    print(f"[SHOPIFY] Auto-created discount code '{discount_code}' (ID: {price_rule_id})")
+            except Exception as e:
+                print(f"[SHOPIFY] Error auto-creating code '{discount_code}': {e}")
         else:
             print(f"[SHOPIFY] No token — create code '{discount_code}' manually in Shopify Admin "
                   f"(50% off all products, unlimited uses, no expiry)")
@@ -491,17 +530,26 @@ class Handler(BaseHTTPRequestHandler):
         script = f"""<script>
 (function(){{
   var key={w3f_key};
+  // Send approval notification to founder (who will then forward to creator)
   fetch('https://api.web3forms.com/submit',{{method:'POST',
     headers:{{'Content-Type':'application/json'}},
-    body:JSON.stringify({{access_key:key,
-      subject:"You're approved — NeoLabCare Creator Partner Program",
-      ccemail:{json.dumps(email)},message:{creator_msg}}})
+    body:JSON.stringify({{
+      access_key:key,
+      subject:"[APPROVED] " + {json.dumps(name)} + " is now a Creator Partner",
+      name: "NeoLabCare System",
+      email: {json.dumps(email)},
+      message: "CREATOR EMAIL CONTENT BELOW (Forward this to the creator):\n\n" + {creator_msg}
+    }})
   }});
+  // Send action item to founder for Shopify
   fetch('https://api.web3forms.com/submit',{{method:'POST',
     headers:{{'Content-Type':'application/json'}},
-    body:JSON.stringify({{access_key:key,
+    body:JSON.stringify({{
+      access_key:key,
       subject:{json.dumps(f"[ACTION] Create Shopify code {discount_code} for {name}")},
-      message:{shopify_msg}}})
+      name: "NeoLabCare System",
+      message:{shopify_msg}
+    }})
   }});
 }})();
 </script>"""
