@@ -138,6 +138,7 @@ def _send_email(subject: str, body: str, cc: str = "") -> bool:
         "access_key": WEB3FORMS_KEY,
         "subject": subject,
         "from_name": "NeoLabCare",
+        "email": FOUNDER_EMAIL,
         "message": body,
     }
     if cc:
@@ -281,11 +282,19 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_creator_stats(params.get("code", ""))
 
         elif path == "/test-email":
-            result = _send_email(
-                subject="NeoLabCare — test email",
-                body="This is a test email from the NeoLabCare webhook server.",
-            )
-            self._json(200, {"email_success": result, "web3forms_key_set": bool(WEB3FORMS_KEY)})
+            import urllib.request as _ur
+            payload = {"access_key": WEB3FORMS_KEY, "subject": "NeoLabCare test",
+                       "from_name": "NeoLabCare", "email": FOUNDER_EMAIL,
+                       "message": "Test from webhook server."}
+            _req = _ur.Request("https://api.web3forms.com/submit",
+                               data=json.dumps(payload).encode(), method="POST",
+                               headers={"Content-Type": "application/json"})
+            try:
+                with _ur.urlopen(_req, timeout=15) as _r:
+                    _resp = json.loads(_r.read())
+                self._json(200, {"email_success": _resp.get("success"), "w3f_response": _resp})
+            except Exception as _e:
+                self._json(200, {"email_success": False, "error": str(_e)})
 
         elif path == "/test-sheet":
             rows = _sheet_read(CREATORS_RANGE)
