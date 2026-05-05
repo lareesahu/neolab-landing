@@ -1,134 +1,256 @@
-# NeoLabCare Luxury Email Templates (Void Aesthetic)
+# NeoLabCare Luxury Email Templates
+# Logo: https://files.manuscdn.com/user_upload_by_module/session_file/310519663379624584/YdRBXUpuMceVgsRG.png
+
+LOGO_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663379624584/YdRBXUpuMceVgsRG.png"
 
 FOUNDER_NOTIFICATION_HTML = """
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-  body { background-color: #0A0A0A; color: #F5F5F0; font-family: 'Inter', -apple-system, sans-serif; margin: 0; padding: 0; }
-  .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
-  .header { border-bottom: 1px solid #2E2E2E; padding-bottom: 20px; margin-bottom: 30px; }
-  .logo { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: #F5F5F0; font-weight: 300; }
-  .badge { background: #C8B89A; color: #0A0A0A; padding: 4px 12px; font-size: 10px; font-weight: 600; text-transform: uppercase; border-radius: 2px; margin-bottom: 10px; display: inline-block; }
-  h1 { font-size: 24px; font-weight: 300; margin: 0 0 20px; color: #F5F5F0; }
-  .card { background: #141414; border: 1px solid #2E2E2E; padding: 30px; border-radius: 4px; margin-bottom: 30px; }
-  .field { margin-bottom: 15px; }
-  .label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-  .value { font-size: 14px; color: #F5F5F0; }
-  .btn { display: inline-block; background: #F5F5F0; color: #0A0A0A; padding: 16px 32px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; border-radius: 2px; margin-top: 20px; }
-  .footer { font-size: 10px; color: #444; margin-top: 40px; text-align: center; letter-spacing: 1px; }
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Creator Application</title>
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">NEOLABCARE</div>
-    </div>
-    <div class="badge">New Application</div>
-    <h1>Creator Partnership Request</h1>
-    <div class="card">
-      <div class="field">
-        <div class="label">Creator Name</div>
-        <div class="value">{{name}}</div>
-      </div>
-      <div class="field">
-        <div class="label">Email</div>
-        <div class="value">{{email}}</div>
-      </div>
-      <div class="field">
-        <div class="label">Platform & Reach</div>
-        <div class="value">{{platform}} — {{audience_size}} followers</div>
-      </div>
-      <div class="field">
-        <div class="label">Niche</div>
-        <div class="value">{{niche}}</div>
-      </div>
-      <div class="field">
-        <div class="label">Reason for Fit</div>
-        <div class="value">{{fit_reason}}</div>
-      </div>
-    </div>
-    <a href="{{approve_url}}" class="btn">Approve Application</a>
-    <div class="footer">
-      NEOLABCARE INTERNAL SYSTEM &copy; 2026
-    </div>
-  </div>
+<body style="margin:0;padding:0;background-color:#0A0A0A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0A0A0A;">
+    <tr>
+      <td align="center" style="padding:48px 20px;">
+        <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+
+          <!-- Logo Header -->
+          <tr>
+            <td align="center" style="padding-bottom:40px;border-bottom:1px solid #1E1E1E;">
+              <img src="{LOGO_URL}" alt="NeolabCare" width="56" height="auto" style="display:block;margin:0 auto 16px;" />
+              <div style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:#666;font-weight:400;">Creator Partner Program</div>
+            </td>
+          </tr>
+
+          <!-- Badge + Title -->
+          <tr>
+            <td style="padding:36px 0 24px;">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="background:#C8B89A;padding:5px 14px;border-radius:2px;">
+                    <span style="font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0A0A0A;">New Application</span>
+                  </td>
+                </tr>
+              </table>
+              <div style="font-size:26px;font-weight:300;color:#F5F5F0;margin-top:16px;letter-spacing:-0.5px;line-height:1.3;">Creator Partnership Request</div>
+            </td>
+          </tr>
+
+          <!-- Info Card -->
+          <tr>
+            <td style="background:#111111;border:1px solid #222222;border-radius:4px;padding:32px;">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding-bottom:20px;border-bottom:1px solid #1A1A1A;">
+                    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:6px;">Creator Name</div>
+                    <div style="font-size:16px;color:#F5F5F0;font-weight:500;">{{name}}</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:20px 0;border-bottom:1px solid #1A1A1A;">
+                    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:6px;">Email</div>
+                    <div style="font-size:14px;color:#C8B89A;">{{email}}</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:20px 0;border-bottom:1px solid #1A1A1A;">
+                    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:6px;">Platform &amp; Reach</div>
+                    <div style="font-size:14px;color:#F5F5F0;">{{platform}} &mdash; <strong style="color:#F5F5F0;">{{audience_size}}</strong> followers</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:20px 0;border-bottom:1px solid #1A1A1A;">
+                    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:6px;">Niche / Content Type</div>
+                    <div style="font-size:14px;color:#F5F5F0;">{{niche}}</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:20px 0 0;">
+                    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:6px;">Why NeolabCare</div>
+                    <div style="font-size:14px;color:#F5F5F0;line-height:1.7;">{{fit_reason}}</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- CTA Button -->
+          <tr>
+            <td style="padding:32px 0 0;">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="background:#F5F5F0;border-radius:3px;">
+                    <a href="{{approve_url}}" style="display:block;padding:18px 32px;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0A0A0A;text-decoration:none;">Approve Application</a>
+                  </td>
+                </tr>
+              </table>
+              <div style="font-size:11px;color:#444;text-align:center;margin-top:12px;">Clicking this link will approve the creator and trigger their welcome email.</div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:48px 0 0;border-top:1px solid #1A1A1A;margin-top:40px;">
+              <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#333;text-align:center;">NeolabCare Internal &mdash; Founder Access Only &mdash; 2026</div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
-"""
+""".replace("{LOGO_URL}", LOGO_URL)
+
 
 CREATOR_RECEIVED_HTML = """
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-  body { background-color: #0A0A0A; color: #F5F5F0; font-family: 'Inter', -apple-system, sans-serif; margin: 0; padding: 0; }
-  .container { max-width: 600px; margin: 0 auto; padding: 60px 20px; text-align: center; }
-  .header { margin-bottom: 50px; }
-  .logo { font-size: 16px; letter-spacing: 6px; text-transform: uppercase; color: #F5F5F0; font-weight: 300; }
-  h1 { font-size: 28px; font-weight: 300; margin: 0 0 20px; color: #F5F5F0; letter-spacing: -0.5px; }
-  p { font-size: 16px; color: #999; line-height: 1.6; margin-bottom: 30px; }
-  .divider { width: 40px; height: 1px; background: #C8B89A; margin: 40px auto; }
-  .footer { font-size: 10px; color: #444; margin-top: 60px; letter-spacing: 2px; text-transform: uppercase; }
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Application Received</title>
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">NEOLABCARE</div>
-    </div>
-    <h1>Application Received.</h1>
-    <p>Hi {{first_name}}, thank you for your interest in the NeoLabCare Creator Partner Program. We have received your application and our team is currently reviewing your profile.</p>
-    <p>We review applications within 48–72 hours. If your audience is a fit for our Founding Batch, we will reach out with your private creator code and referral link.</p>
-    <div class="divider"></div>
-    <div class="footer">
-      Lab-Fresh. Made to Order. Dispatched within 7 days.
-    </div>
-  </div>
+<body style="margin:0;padding:0;background-color:#0A0A0A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0A0A0A;">
+    <tr>
+      <td align="center" style="padding:64px 20px;">
+        <table width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%;">
+
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding-bottom:56px;">
+              <img src="{LOGO_URL}" alt="NeolabCare" width="64" height="auto" style="display:block;margin:0 auto;" />
+            </td>
+          </tr>
+
+          <!-- Headline -->
+          <tr>
+            <td align="center" style="padding-bottom:24px;">
+              <div style="font-size:32px;font-weight:300;color:#F5F5F0;letter-spacing:-1px;line-height:1.2;">Application Received.</div>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td align="center" style="padding-bottom:40px;">
+              <div style="font-size:15px;color:#777;line-height:1.8;max-width:420px;margin:0 auto;">
+                Hi {{first_name}}, thank you for applying to the NeolabCare Creator Partner Program. We have received your application and are reviewing your profile.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td align="center" style="padding-bottom:40px;">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width="40" height="1" style="background:#C8B89A;font-size:0;line-height:0;">&nbsp;</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Timeline -->
+          <tr>
+            <td style="background:#111111;border:1px solid #1E1E1E;border-radius:4px;padding:32px 36px;">
+              <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#C8B89A;margin-bottom:16px;">What Happens Next</div>
+              <div style="font-size:13px;color:#888;line-height:2;">
+                &rarr;&nbsp; We review applications within <strong style="color:#F5F5F0;">48–72 hours</strong><br>
+                &rarr;&nbsp; Founding Batch is <strong style="color:#F5F5F0;">limited to 50 creators</strong><br>
+                &rarr;&nbsp; If approved, you receive your <strong style="color:#F5F5F0;">private creator code + 15% commission</strong>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding-top:56px;">
+              <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#333;">Lab-Fresh &nbsp;&middot;&nbsp; Made to Order &nbsp;&middot;&nbsp; Dispatched within 7 days</div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
-"""
+""".replace("{LOGO_URL}", LOGO_URL)
+
 
 CREATOR_APPROVED_HTML = """
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-  body { background-color: #0A0A0A; color: #F5F5F0; font-family: 'Inter', -apple-system, sans-serif; margin: 0; padding: 0; }
-  .container { max-width: 600px; margin: 0 auto; padding: 60px 20px; }
-  .header { border-bottom: 1px solid #2E2E2E; padding-bottom: 30px; margin-bottom: 40px; text-align: center; }
-  .logo { font-size: 16px; letter-spacing: 6px; text-transform: uppercase; color: #F5F5F0; font-weight: 300; }
-  h1 { font-size: 32px; font-weight: 300; margin: 0 0 20px; color: #F5F5F0; text-align: center; }
-  .card { background: #141414; border: 1px solid #C8B89A; padding: 40px; border-radius: 4px; margin-bottom: 40px; text-align: center; }
-  .code-label { font-size: 10px; color: #C8B89A; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; }
-  .code-value { font-size: 36px; font-weight: 600; color: #F5F5F0; letter-spacing: 4px; margin-bottom: 20px; }
-  .details { font-size: 14px; color: #999; line-height: 1.8; margin-bottom: 30px; }
-  .btn { display: inline-block; background: #F5F5F0; color: #0A0A0A; padding: 18px 36px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; border-radius: 2px; width: 100%; box-sizing: border-box; text-align: center; }
-  .footer { font-size: 10px; color: #444; margin-top: 60px; text-align: center; letter-spacing: 2px; text-transform: uppercase; }
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're Approved</title>
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">NEOLABCARE</div>
-    </div>
-    <h1>You're Approved.</h1>
-    <div class="card">
-      <div class="code-label">Your Creator Code</div>
-      <div class="code-value">{{discount_code}}</div>
-      <div class="details">
-        Your code unlocks the <strong>Founding Price ($99)</strong> for your audience and tracks your <strong>15% commission</strong> on every confirmed sale.
-      </div>
-      <a href="{{dashboard_url}}" class="btn">Access Partner Dashboard</a>
-    </div>
-    <div class="details" style="text-align: center;">
-      <strong>Your Referral Link:</strong><br>
-      <span style="color: #C8B89A;">{{referral_link}}</span>
-    </div>
-    <div class="footer">
-      NEOLABCARE &copy; 2026 — Private Partner Access
-    </div>
-  </div>
+<body style="margin:0;padding:0;background-color:#0A0A0A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0A0A0A;">
+    <tr>
+      <td align="center" style="padding:64px 20px;">
+        <table width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%;">
+
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding-bottom:48px;border-bottom:1px solid #1A1A1A;">
+              <img src="{LOGO_URL}" alt="NeolabCare" width="64" height="auto" style="display:block;margin:0 auto 16px;" />
+              <div style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:#555;">Creator Partner Program</div>
+            </td>
+          </tr>
+
+          <!-- Headline -->
+          <tr>
+            <td align="center" style="padding:48px 0 36px;">
+              <div style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#C8B89A;margin-bottom:16px;">Founding Batch</div>
+              <div style="font-size:36px;font-weight:300;color:#F5F5F0;letter-spacing:-1px;">You're Approved.</div>
+            </td>
+          </tr>
+
+          <!-- Code Card -->
+          <tr>
+            <td style="background:#111111;border:1px solid #C8B89A;border-radius:4px;padding:40px;text-align:center;">
+              <div style="font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#C8B89A;margin-bottom:16px;">Your Creator Code</div>
+              <div style="font-size:42px;font-weight:700;color:#F5F5F0;letter-spacing:6px;margin-bottom:24px;font-variant-numeric:tabular-nums;">{{discount_code}}</div>
+              <div style="font-size:13px;color:#666;line-height:1.9;margin-bottom:32px;">
+                Share this code with your audience.<br>
+                They get the <strong style="color:#F5F5F0;">Founding Price ($99)</strong> &nbsp;&middot;&nbsp; You earn <strong style="color:#F5F5F0;">15% commission</strong> on every confirmed sale.
+              </div>
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="background:#F5F5F0;border-radius:3px;">
+                    <a href="{{dashboard_url}}" style="display:block;padding:18px 32px;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0A0A0A;text-decoration:none;">Access Partner Dashboard</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Referral Link -->
+          <tr>
+            <td style="padding:32px 0 0;text-align:center;">
+              <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#555;margin-bottom:10px;">Your Referral Link</div>
+              <div style="font-size:13px;color:#C8B89A;word-break:break-all;">{{referral_link}}</div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding-top:56px;border-top:1px solid #1A1A1A;margin-top:40px;">
+              <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#333;">NeolabCare &mdash; Private Partner Access &mdash; 2026</div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
-"""
+""".replace("{LOGO_URL}", LOGO_URL)
