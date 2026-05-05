@@ -10,6 +10,7 @@ Routes:
   GET  /creator-stats?code=    dashboard data endpoint (JSON)
 """
 import os, json, time, datetime, hmac, hashlib, urllib.request, urllib.parse
+_utcnow = lambda: datetime.datetime.now(datetime.timezone.utc)
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 # ── Config ────────────────────────────────────────────────────────────────────
@@ -216,7 +217,7 @@ strong{{color:var(--text);}}
 # ── Legacy: tester feedback sheet append ─────────────────────────────────────
 def append_to_sheet(data: dict) -> bool:
     row = [
-        datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
+        _utcnow().strftime("%Y-%m-%d %H:%M UTC"),
         data.get("name", ""), data.get("age", ""), data.get("gender", ""),
         data.get("skinType", ""), data.get("routine", ""), data.get("concern", ""),
         data.get("firstImpression", ""), data.get("fineLines", ""), data.get("firmness", ""),
@@ -317,7 +318,7 @@ class Handler(BaseHTTPRequestHandler):
             self._json(400, {"success": False, "message": "Name and email are required"})
             return
 
-        ts            = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+        ts            = _utcnow().strftime("%Y-%m-%d %H:%M UTC")
         discount_code = _derive_code(name)
         token         = _make_token(email, ts)
         approve_url   = f"{WEBHOOK_BASE_URL}/approve-creator?token={token}"
@@ -536,7 +537,7 @@ class Handler(BaseHTTPRequestHandler):
         order_id    = str(data.get("id", ""))
         order_total = float(data.get("total_price", 0))
         commission  = round(order_total * COMMISSION_RATE, 2)
-        ts          = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+        ts          = _utcnow().strftime("%Y-%m-%d %H:%M UTC")
 
         _sheet_append(COMMISSIONS_RANGE, [
             ts, order_id, order_code, creator_email,
@@ -575,7 +576,7 @@ class Handler(BaseHTTPRequestHandler):
         total_revenue      = 0.0
         confirmed_comm     = 0.0
         pending_comm       = 0.0
-        now                = datetime.datetime.utcnow()
+        now                = _utcnow()
 
         for row in comm_rows:
             while len(row) < 7:
