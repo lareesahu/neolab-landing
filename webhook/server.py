@@ -280,6 +280,21 @@ class Handler(BaseHTTPRequestHandler):
         elif path == "/creator-stats":
             self._handle_creator_stats(params.get("code", ""))
 
+        elif path == "/test-email":
+            result = _send_email(
+                subject="NeoLabCare — test email",
+                body="This is a test email from the NeoLabCare webhook server.",
+            )
+            self._json(200, {"email_success": result, "web3forms_key_set": bool(WEB3FORMS_KEY)})
+
+        elif path == "/test-sheet":
+            rows = _sheet_read(CREATORS_RANGE)
+            self._json(200, {
+                "sheet_reachable": True,
+                "creators_count": len(rows),
+                "google_sa_key_set": bool(GOOGLE_SA_KEY),
+            })
+
         else:
             self.send_response(404)
             self.end_headers()
