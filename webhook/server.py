@@ -182,9 +182,14 @@ def _send_email(subject: str, recipient_email: str, html_content: str) -> bool:
         return False
 
 
-def _render_template(template: str, context: dict) -> str:
-    """Simple string replacement for templates (replaces {{key}} with value)."""
-    res = template
+def _render_template(template, context: dict) -> str:
+    """Render a template. Accepts either a _T shim (routes to templates.render)
+    or a legacy HTML string (does {{key}} substitution)."""
+    # New-style: template is a _T shim object with a .name attribute
+    if hasattr(template, 'name'):
+        return templates.render(template.name, context)
+    # Legacy-style: template is an HTML string with {{placeholders}}
+    res = str(template)
     for k, v in context.items():
         res = res.replace("{{" + k + "}}", str(v))
     return res
@@ -374,11 +379,11 @@ class Handler(BaseHTTPRequestHandler):
         # ── Email notifications (Gmail Server-side) ──────────────────────────
         # 1. Notify Founder
         founder_html = _render_template(templates.FOUNDER_NOTIFICATION_HTML, {
-            "name": name, "email": email, 
-            "platform": data.get("platform", ""), 
-            "audience_size": data.get("audience_size", ""), 
-            "niche": data.get("niche", ""), 
-            "fit_reason": data.get("fit_reason", ""), 
+            "name": name, "email": email,
+            "platform": data.get("platform", ""),
+            "followers": data.get("audience_size", ""),
+            "niche": data.get("niche", ""),
+            "reason": data.get("fit_reason", ""),
             "approve_url": approve_url
         })
         s1 = _send_email(f"New Creator Application — {name}", FOUNDER_EMAIL, founder_html)
