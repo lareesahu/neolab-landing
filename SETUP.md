@@ -36,8 +36,16 @@ Example: `https://neolabcare-webhook.onrender.com`
 ### `FOUNDER_EMAIL`
 Already defaults to `lareesa@neolab.care` — only add this if you want a different address.
 
+### `GMAIL_USER`
+The Gmail address used to send notifications (e.g., `neolabcare@gmail.com`).
+
+### `GMAIL_APP_PASSWORD`
+A Gmail App Password (NOT your regular password). [Generate one here](https://myaccount.google.com/apppasswords).
+
 - [ ] `APPROVAL_SECRET` set in Render
 - [ ] `WEBHOOK_BASE_URL` confirmed and set in Render
+- [ ] `GMAIL_USER` set in Render
+- [ ] `GMAIL_APP_PASSWORD` set in Render
 - [ ] **Save Changes** clicked in Render (service redeploys automatically, ~2 min)
 
 ---
@@ -86,11 +94,11 @@ This tells the server when a creator's discount code is used at checkout.
 2. Fill out the form with a test name (e.g. "Test Creator") and your own email
 3. Submit — you should receive two emails:
    - One to `lareesa@neolab.care` with all application details + an **approve link**
-   - One "application received" confirmation CC'd to the test email
-4. Click the approve link in the founder email
-5. You should see a green confirmation page and receive two more emails:
-   - One reminding you to create the Shopify discount code
-   - One approval email CC'd to the creator with their code and dashboard link
+ 89. One "application received" confirmation email sent to the test email via Gmail
+90. Click the approve link in the founder email
+91. You should see a green confirmation page
+92. One approval email sent to the creator with their code and dashboard link via Gmail
+93. (Optional) If Shopify API is not set up, you'll see a reminder to create the code manually on the confirmation page.
 
 - [ ] Test application submitted
 - [ ] Founder email received with approve link

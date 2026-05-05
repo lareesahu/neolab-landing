@@ -16,15 +16,25 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 # ── Config ────────────────────────────────────────────────────────────────────
 SHEET_ID             = os.environ.get("SHEET_ID", "1sBoEdScXkdI4mzO422qB1viAqnuemh7XeRJDuOF8ZnA")
 GOOGLE_SA_KEY        = os.environ.get("GOOGLE_SA_KEY", "")
-WEB3FORMS_KEY        = os.environ.get("WEB3FORMS_KEY", "fe35df41-5c1c-4519-9513-f9a227fcffe4")
 APPROVAL_SECRET      = os.environ.get("APPROVAL_SECRET", "change-me-in-render")
 WEBHOOK_BASE_URL     = os.environ.get("WEBHOOK_BASE_URL", "https://neolabcare-webhook.onrender.com")
 FOUNDER_EMAIL        = os.environ.get("FOUNDER_EMAIL", "lareesa@neolab.care")
+GMAIL_USER           = os.environ.get("GMAIL_USER", "neolabcare@gmail.com")
+GMAIL_APP_PASSWORD   = os.environ.get("GMAIL_APP_PASSWORD", "")  # Set in Render
 SHOPIFY_STORE        = os.environ.get("SHOPIFY_STORE", "")        # e.g. neolab-care.myshopify.com
 SHOPIFY_ADMIN_TOKEN  = os.environ.get("SHOPIFY_ADMIN_TOKEN", "")  # shpat_... — set in Render dashboard
 SHOPIFY_WEBHOOK_SECRET = os.environ.get("SHOPIFY_WEBHOOK_SECRET", "")
 PORT                 = int(os.environ.get("PORT", 8080))
 COMMISSION_RATE      = 0.15
+
+# Load templates
+try:
+    import templates
+except ImportError:
+    class templates:
+        FOUNDER_NOTIFICATION_HTML = "Name: {{name}}<br>Email: {{email}}<br><a href='{{approve_url}}'>Approve</a>"
+        CREATOR_RECEIVED_HTML = "Hi {{first_name}}, application received."
+        CREATOR_APPROVED_HTML = "Hi, you're approved. Code: {{discount_code}}"
 
 # Sheet ranges
 RESPONSES_RANGE   = "Responses!A:U"
@@ -131,57 +141,41 @@ def _sheet_update(range_name: str, values: list) -> bool:
         return False
 
 
-# ── Email (Web3Forms) ─────────────────────────────────────────────────────────
-def _send_email(subject: str, body: str, recipient_email: str = None) -> bool:
-    """Send via Web3Forms — always delivers to FOUNDER_EMAIL or specified email."""
-    # Note: Web3Forms free plan only sends to the email associated with the access_key.
-    # To send to the creator, we would need a Pro plan or a different service.
-    # For now, we send everything to the founder.
-    payload = {
-        "access_key": WEB3FORMS_KEY,
-        "subject": subject,
-        "from_name": "NeoLabCare",
-        "name": "NeoLabCare System",
-        "email": FOUNDER_EMAIL, # This is the "reply-to"
-        "message": f"Recipient: {recipient_email}\n\n{body}" if recipient_email else body,
-    }
-    data = urllib.parse.urlencode(payload).encode()
-    req = urllib.request.Request("https://api.web3forms.com/submit", data=data, method="POST",
-                                  headers={
-                                      "Content-Type": "application/x-www-form-urlencoded",
-                                      "Origin": "https://neolab.care",
-                                      "Referer": "https://neolab.care/",
-                                      "User-Agent": "Mozilla/5.0",
-                                  })
+# ── Email (Gmail SMTP) ──────────────────────────────────────────────────────────
+def _send_email(subject: str, recipient_email: str, html_content: str) -> bool:
+    """Send professional HTML emails via Gmail SMTP."""
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+
+    if not GMAIL_APP_PASSWORD:
+        print("[EMAIL] GMAIL_APP_PASSWORD not set. Cannot send email.")
+        return False
+
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = f"NeoLabCare <{GMAIL_USER}>"
+    msg["To"] = recipient_email
+
+    msg.attach(MIMEText(html_content, "html"))
+
     try:
-        with urllib.request.urlopen(req, timeout=15) as r:
-            resp = json.loads(r.read())
-            print(f"Email sent: {subject[:60]} → {resp.get('success')}")
-            return resp.get("success", False)
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
+            server.sendmail(GMAIL_USER, recipient_email, msg.as_string())
+        print(f"[EMAIL] Sent: '{subject}' to {recipient_email}")
+        return True
     except Exception as e:
-        print(f"Email error: {e}")
+        print(f"[EMAIL] Error sending to {recipient_email}: {e}")
         return False
 
 
-def forward_to_web3forms(data: dict) -> bool:
-    """Forward tester feedback to Web3Forms (legacy, keeps existing /submit route working)."""
-    payload = {
-        "access_key": WEB3FORMS_KEY,
-        "subject": "NeolabCare Tester Feedback — " + data.get("name", "Anonymous"),
-        "from_name": "NeolabCare Feedback Form",
-        "ccemail": FOUNDER_EMAIL,
-        **data,
-    }
-    body = json.dumps(payload).encode()
-    req = urllib.request.Request("https://api.web3forms.com/submit", data=body, method="POST",
-                                  headers={"Content-Type": "application/json"})
-    try:
-        with urllib.request.urlopen(req, timeout=15) as r:
-            resp = json.loads(r.read())
-            return resp.get("success", False)
-    except Exception as e:
-        print(f"Web3Forms error: {e}")
-        return False
+def _render_template(template: str, context: dict) -> str:
+    """Simple string replacement for templates (replaces {{key}} with value)."""
+    res = template
+    for k, v in context.items():
+        res = res.replace("{{" + k + "}}", str(v))
+    return res
 
 
 # ── Token + code helpers ──────────────────────────────────────────────────────
@@ -378,21 +372,26 @@ class Handler(BaseHTTPRequestHandler):
         ]
         _sheet_append(CREATORS_RANGE, row)
 
-        # Return data to browser — browser fires Web3Forms directly (avoids server-to-server 403)
-        self._json(200, {
-            "success":     True,
-            "approve_url": approve_url,
-            "code":        discount_code,
-            "name":        name,
-            "email":       email,
-            "platform":    data.get("platform", ""),
-            "profile_url": data.get("profile_url", ""),
-            "audience":    data.get("audience_size", ""),
-            "niche":       data.get("niche", ""),
-            "avg_views":   data.get("avg_views", ""),
-            "fit_reason":  data.get("fit_reason", ""),
-            "country":     data.get("country", ""),
+        # ── Email notifications (Gmail Server-side) ──────────────────────────
+        # 1. Notify Founder
+        founder_html = _render_template(templates.FOUNDER_NOTIFICATION_HTML, {
+            "name": name, "email": email, 
+            "platform": data.get("platform", ""), 
+            "audience_size": data.get("audience_size", ""), 
+            "niche": data.get("niche", ""), 
+            "fit_reason": data.get("fit_reason", ""), 
+            "approve_url": approve_url
         })
+        _send_email(f"New Creator Application — {name}", FOUNDER_EMAIL, founder_html)
+
+        # 2. Notify Creator
+        creator_html = _render_template(templates.CREATOR_RECEIVED_HTML, {
+            "first_name": name.split()[0] if name.strip() else "there"
+        })
+        _send_email("Application Received — NeoLabCare", email, creator_html)
+
+        # Return success to browser (frontend no longer needs to fire Web3Forms)
+        self._json(200, {"success": True})
 
     # ── Route: GET /approve-creator ───────────────────────────────────────────
     def _handle_approve_creator(self, token: str):
@@ -509,13 +508,14 @@ class Handler(BaseHTTPRequestHandler):
             f"(no refund or dispute). Payouts sent monthly.\n\n"
             f"Questions? Reply to this email.\n\n— NeoLabCare"
         )
-        shopify_msg = json.dumps(
-            f"You approved {name} ({email}).\n\n"
-            f"Please create discount code '{discount_code}' in Shopify Admin:\n"
-            f"Discounts → Create discount → Code → '{discount_code}' → 50% off all products "
-            f"→ One use per customer → No expiry → Save.\n\n"
-            f"Creator has been emailed their code and dashboard link."
-        )
+          # Send Approval Email to Creator via Gmail (Server-side)
+        creator_approved_html = _render_template(templates.CREATOR_APPROVED_HTML, {
+            "discount_code": discount_code,
+            "referral_link": referral_link,
+            "dashboard_url": dashboard_link
+        })
+        _send_email("You're Approved — NeoLabCare Creator Partner Program", email, creator_approved_html)
+
         shopify_note = (
             f" Please create discount code <strong>{discount_code}</strong> in Shopify Admin."
         ) if not (SHOPIFY_ADMIN_TOKEN and SHOPIFY_STORE) else ""
@@ -525,35 +525,7 @@ class Handler(BaseHTTPRequestHandler):
             f"{name} has been approved and emailed their creator code, "
             f"referral link, and dashboard.{shopify_note}",
         )
-        # Inject script — fires Web3Forms from founder's browser (browser requests work, server requests don't)
-        w3f_key = json.dumps(WEB3FORMS_KEY)
-        script = f"""<script>
-(function(){{
-  var key={w3f_key};
-  // Send approval notification to founder (who will then forward to creator)
-  fetch('https://api.web3forms.com/submit',{{method:'POST',
-    headers:{{'Content-Type':'application/json'}},
-    body:JSON.stringify({{
-      access_key:key,
-      subject:"[APPROVED] " + {json.dumps(name)} + " is now a Creator Partner",
-      name: "NeoLabCare System",
-      email: {json.dumps(email)},
-      message: "CREATOR EMAIL CONTENT BELOW (Forward this to the creator):\n\n" + {creator_msg}
-    }})
-  }});
-  // Send action item to founder for Shopify
-  fetch('https://api.web3forms.com/submit',{{method:'POST',
-    headers:{{'Content-Type':'application/json'}},
-    body:JSON.stringify({{
-      access_key:key,
-      subject:{json.dumps(f"[ACTION] Create Shopify code {discount_code} for {name}")},
-      name: "NeoLabCare System",
-      message:{shopify_msg}
-    }})
-  }});
-}})();
-</script>"""
-        self._html(200, page_html.replace("</body>", script + "</body>"))
+        self._html(200, page_html)
 
     # ── Route: POST /shopify-order ────────────────────────────────────────────
     def _handle_shopify_order(self, raw: bytes, data: dict):
