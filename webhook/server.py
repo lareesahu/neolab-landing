@@ -388,16 +388,16 @@ class Handler(BaseHTTPRequestHandler):
             "fit_reason": data.get("fit_reason", ""), 
             "approve_url": approve_url
         })
-        _send_email(f"New Creator Application — {name}", FOUNDER_EMAIL, founder_html)
-
+        s1 = _send_email(f"New Creator Application — {name}", FOUNDER_EMAIL, founder_html)
+        
         # 2. Notify Creator
         creator_html = _render_template(templates.CREATOR_RECEIVED_HTML, {
             "first_name": name.split()[0] if name.strip() else "there"
         })
-        _send_email("Application Received — NeoLabCare", email, creator_html)
+        s2 = _send_email("Application Received — NeoLabCare", email, creator_html)
 
-        # Return success to browser (frontend no longer needs to fire Web3Forms)
-        self._json(200, {"success": True})
+        # Return status
+        self._json(200, {"success": True, "emails_sent": s1 and s2, "debug": {"founder": s1, "creator": s2}})
 
     # ── Route: GET /approve-creator ───────────────────────────────────────────
     def _handle_approve_creator(self, token: str):
