@@ -164,15 +164,20 @@ def _send_email(subject: str, recipient_email: str, html_content: str) -> bool:
 
     recipients = list({recipient_email, CC_EMAIL})  # deduplicate in case they're the same
     try:
-        # Use port 587 with STARTTLS and a timeout to prevent hanging on Render
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as server:
-            server.starttls()
-            server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
-            server.sendmail(GMAIL_USER, recipients, msg.as_string())
-        print(f"[EMAIL] Sent: '{subject}' to {recipient_email} (CC: {CC_EMAIL})")
+        # Debugging: log the connection attempt
+        print(f"[EMAIL] Connecting to smtp.gmail.com:587 for {recipient_email}...")
+        
+        server = smtplib.SMTP("smtp.gmail.com", 587, timeout=20)
+        server.set_debuglevel(1) # Enable verbose SMTP logging in Render console
+        server.starttls()
+        server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
+        server.sendmail(GMAIL_USER, recipients, msg.as_string())
+        server.quit()
+        
+        print(f"[EMAIL] SUCCESS: '{subject}' to {recipient_email}")
         return True
     except Exception as e:
-        print(f"[EMAIL] Error sending to {recipient_email}: {e}")
+        print(f"[EMAIL] FAILED: {type(e).__name__}: {e}")
         return False
 
 
