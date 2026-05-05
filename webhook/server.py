@@ -501,16 +501,21 @@ class Handler(BaseHTTPRequestHandler):
         })
         _send_email("You're Approved — NeoLabCare Creator Partner Program", email, creator_approved_html)
 
-        shopify_note = (
-            f" Please create discount code <strong>{discount_code}</strong> in Shopify Admin."
-        ) if not (SHOPIFY_ADMIN_TOKEN and SHOPIFY_STORE) else ""
-
-        page_html = _html_page(
-            "Creator Approved",
-            f"{name} has been approved and emailed their creator code, "
-            f"referral link, and dashboard.{shopify_note}",
+        # Redirect to Shopify discount creation page with code pre-filled
+        shopify_discount_url = (
+            f"https://admin.shopify.com/store/neolab-care/discounts/new"
+            f"?discount[title]={urllib.parse.quote(discount_code)}"
+            f"&discount[code]={urllib.parse.quote(discount_code)}"
+            f"&discount[value_type]=percentage"
+            f"&discount[value]=50"
+            f"&discount[target_type]=line_item"
+            f"&discount[target_selection]=all"
+            f"&discount[allocation_method]=across"
+            f"&discount[customer_selection]=all"
         )
-        self._html(200, page_html)
+        self.send_response(302)
+        self.send_header("Location", shopify_discount_url)
+        self.end_headers()
 
     # ── Route: POST /shopify-order ────────────────────────────────────────────
     def _handle_shopify_order(self, raw: bytes, data: dict):
