@@ -239,9 +239,14 @@ nav {
 
 <!-- ── Loading state ── -->
 <div id="loadingState" class="state">
-  <div class="loading-wrap">
-    <div class="spinner"></div>
-    <span>Loading your dashboard&hellip;</span>
+  <div class="loading-wrap" style="flex-direction:column;gap:20px;text-align:center;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="spinner"></div>
+      <span id="loadingMsg">Loading your dashboard&hellip;</span>
+    </div>
+    <p id="loadingHint" style="display:none;font-size:11px;color:var(--faint);max-width:280px;line-height:1.7;">
+      The server is waking up — this takes up to 30 seconds on first load. Hang tight.
+    </p>
   </div>
 </div>
 
@@ -420,9 +425,16 @@ function loadStats(code) {
   if (viewBtn) viewBtn.disabled = true;
   showState('loading');
 
+  // Show cold-start hint after 6s
+  var hintTimer = setTimeout(function() {
+    var hint = document.getElementById('loadingHint');
+    if (hint) hint.style.display = 'block';
+  }, 6000);
+
   fetch(WEBHOOK_URL + '/creator-stats?code=' + encodeURIComponent(code))
     .then(function(r) { return r.json(); })
     .then(function(data) {
+      clearTimeout(hintTimer);
       if (!data.found) {
         if (viewBtn) viewBtn.disabled = false;
         showState('enter');
@@ -436,6 +448,7 @@ function loadStats(code) {
       history.replaceState(null, '', '?code=' + code);
     })
     .catch(function() {
+      clearTimeout(hintTimer);
       if (viewBtn) viewBtn.disabled = false;
       showState('enter');
       var errEl3 = document.getElementById('enterError');
