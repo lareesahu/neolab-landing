@@ -145,7 +145,11 @@ def _send_email(subject: str, body: str, cc: str = "") -> bool:
         payload["ccemail"] = cc
     data = json.dumps(payload).encode()
     req = urllib.request.Request("https://api.web3forms.com/submit", data=data, method="POST",
-                                  headers={"Content-Type": "application/json"})
+                                  headers={
+                                      "Content-Type": "application/json",
+                                      "Origin": "https://neolab.care",
+                                      "Referer": "https://neolab.care/",
+                                  })
     try:
         with urllib.request.urlopen(req, timeout=15) as r:
             resp = json.loads(r.read())
@@ -288,7 +292,9 @@ class Handler(BaseHTTPRequestHandler):
                        "message": "Test from webhook server."}
             _req = _ur.Request("https://api.web3forms.com/submit",
                                data=json.dumps(payload).encode(), method="POST",
-                               headers={"Content-Type": "application/json"})
+                               headers={"Content-Type": "application/json",
+                                        "Origin": "https://neolab.care",
+                                        "Referer": "https://neolab.care/"})
             try:
                 with _ur.urlopen(_req, timeout=15) as _r:
                     _resp = json.loads(_r.read())
