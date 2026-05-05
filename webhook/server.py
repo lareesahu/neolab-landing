@@ -376,46 +376,21 @@ class Handler(BaseHTTPRequestHandler):
         ]
         _sheet_append(CREATORS_RANGE, row)
 
-        # Notify founder with application summary + one-click approve link
-        _send_email(
-            subject=f"New Creator Partner Application — {name}",
-            body=(
-                f"A new creator has applied to the NeoLabCare Creator Partner Program.\n\n"
-                f"Name:            {name}\n"
-                f"Email:           {email}\n"
-                f"Country:         {data.get('country', '')}\n"
-                f"Platform:        {data.get('platform', '')}\n"
-                f"Profile:         {data.get('profile_url', '')}\n"
-                f"Audience size:   {data.get('audience_size', '')}\n"
-                f"Niche:           {data.get('niche', '')}\n"
-                f"Avg views/post:  {data.get('avg_views', '')}\n"
-                f"Audience split:  {data.get('audience_countries', '')}\n"
-                f"Prior promos:    {data.get('prior_promotions', '')}\n"
-                f"Why NeoLabCare:  {data.get('fit_reason', '')}\n"
-                f"Payout method:   {data.get('payout_method', '')}\n"
-                f"Payout email:    {data.get('payout_email', '')}\n\n"
-                f"{'─'*48}\n"
-                f"Assigned code: {discount_code}\n\n"
-                f"► APPROVE (one click):\n{approve_url}\n\n"
-                f"Clicking approve will email {email} their code, referral link,\n"
-                f"and dashboard — and remind you to create the Shopify discount.\n"
-                f"{'─'*48}"
-            ),
-        )
-
-        # Confirmation to creator (CC copy so they receive it)
-        _send_email(
-            subject="Your NeoLabCare Creator Partner Application",
-            body=(
-                f"Hi {name},\n\n"
-                f"We've received your application to the NeoLabCare Creator Partner Program.\n\n"
-                f"We review each application personally and will be in touch within 48 hours.\n\n"
-                f"— NeoLabCare"
-            ),
-            cc=email,
-        )
-
-        self._json(200, {"success": True})
+        # Return data to browser — browser fires Web3Forms directly (avoids server-to-server 403)
+        self._json(200, {
+            "success":     True,
+            "approve_url": approve_url,
+            "code":        discount_code,
+            "name":        name,
+            "email":       email,
+            "platform":    data.get("platform", ""),
+            "profile_url": data.get("profile_url", ""),
+            "audience":    data.get("audience_size", ""),
+            "niche":       data.get("niche", ""),
+            "avg_views":   data.get("avg_views", ""),
+            "fit_reason":  data.get("fit_reason", ""),
+            "country":     data.get("country", ""),
+        })
 
     # ── Route: GET /approve-creator ───────────────────────────────────────────
     def _handle_approve_creator(self, token: str):
@@ -481,58 +456,56 @@ class Handler(BaseHTTPRequestHandler):
             print(f"[SHOPIFY] No token — create code '{discount_code}' manually in Shopify Admin "
                   f"(50% off all products, unlimited uses, no expiry)")
 
-        # Remind founder to create Shopify code (if not automated)
-        if not (SHOPIFY_ADMIN_TOKEN and SHOPIFY_STORE):
-            _send_email(
-                subject=f"[ACTION] Create Shopify code {discount_code} for {name}",
-                body=(
-                    f"You approved {name} ({email}). Their approval email has been sent.\n\n"
-                    f"Please create discount code '{discount_code}' in Shopify Admin now:\n\n"
-                    f"1. Shopify Admin → Discounts → Create discount\n"
-                    f"2. Select 'Amount off products' → 'Discount code'\n"
-                    f"3. Code: {discount_code}\n"
-                    f"4. Value: 50% off all products\n"
-                    f"5. Eligibility: All customers\n"
-                    f"6. Usage limit: One use per customer\n"
-                    f"7. No expiry date\n"
-                    f"8. Save\n\n"
-                    f"Once the Shopify Admin API token is added to Render, "
-                    f"this step happens automatically."
-                ),
-            )
-
-        # Send creator their approval email (CC delivers to creator)
-        _send_email(
-            subject="You're approved — NeoLabCare Creator Partner Program",
-            body=(
-                f"Hi {name},\n\n"
-                f"You're in. Welcome to the NeoLabCare Creator Partner Program.\n\n"
-                f"Your creator code:  {discount_code}\n"
-                f"Your referral link: {referral_link}\n\n"
-                f"Share your link with your audience. When they use code {discount_code} "
-                f"at checkout, they save 50% on their first bottle. "
-                f"You earn 15% commission on every confirmed sale.\n\n"
-                f"Track your stats anytime:\n"
-                f"{dashboard_link}\n\n"
-                f"Commission clears 7 days after the customer receives their order "
-                f"(provided no refund or dispute is raised). "
-                f"Payouts are sent monthly to your nominated account.\n\n"
-                f"Questions? Reply to this email.\n\n"
-                f"— NeoLabCare"
-            ),
-            cc=email,
+        # Build email bodies — browser will fire these via Web3Forms (avoids server 403)
+        creator_msg = json.dumps(
+            f"Hi {name},\n\n"
+            f"You're in. Welcome to the NeoLabCare Creator Partner Program.\n\n"
+            f"Your creator code:  {discount_code}\n"
+            f"Your referral link: {referral_link}\n\n"
+            f"Share your link with your audience. When they use code {discount_code} "
+            f"at checkout, they save 50% on their first bottle. "
+            f"You earn 15% commission on every confirmed sale.\n\n"
+            f"Track your stats:\n{dashboard_link}\n\n"
+            f"Commission clears 7 days after the customer receives their order "
+            f"(no refund or dispute). Payouts sent monthly.\n\n"
+            f"Questions? Reply to this email.\n\n— NeoLabCare"
         )
-
+        shopify_msg = json.dumps(
+            f"You approved {name} ({email}).\n\n"
+            f"Please create discount code '{discount_code}' in Shopify Admin:\n"
+            f"Discounts → Create discount → Code → '{discount_code}' → 50% off all products "
+            f"→ One use per customer → No expiry → Save.\n\n"
+            f"Creator has been emailed their code and dashboard link."
+        )
         shopify_note = (
-            f" Please create discount code <strong>{discount_code}</strong> in Shopify Admin — "
-            f"a reminder email has been sent to you."
+            f" Please create discount code <strong>{discount_code}</strong> in Shopify Admin."
         ) if not (SHOPIFY_ADMIN_TOKEN and SHOPIFY_STORE) else ""
 
-        self._html(200, _html_page(
+        page_html = _html_page(
             "Creator Approved",
             f"{name} has been approved and emailed their creator code, "
             f"referral link, and dashboard.{shopify_note}",
-        ))
+        )
+        # Inject script — fires Web3Forms from founder's browser (browser requests work, server requests don't)
+        w3f_key = json.dumps(WEB3FORMS_KEY)
+        script = f"""<script>
+(function(){{
+  var key={w3f_key};
+  fetch('https://api.web3forms.com/submit',{{method:'POST',
+    headers:{{'Content-Type':'application/json'}},
+    body:JSON.stringify({{access_key:key,
+      subject:"You're approved — NeoLabCare Creator Partner Program",
+      ccemail:{json.dumps(email)},message:{creator_msg}}})
+  }});
+  fetch('https://api.web3forms.com/submit',{{method:'POST',
+    headers:{{'Content-Type':'application/json'}},
+    body:JSON.stringify({{access_key:key,
+      subject:{json.dumps(f"[ACTION] Create Shopify code {discount_code} for {name}")},
+      message:{shopify_msg}}})
+  }});
+}})();
+</script>"""
+        self._html(200, page_html.replace("</body>", script + "</body>"))
 
     # ── Route: POST /shopify-order ────────────────────────────────────────────
     def _handle_shopify_order(self, raw: bytes, data: dict):
