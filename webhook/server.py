@@ -21,6 +21,7 @@ WEBHOOK_BASE_URL     = os.environ.get("WEBHOOK_BASE_URL", "https://neolabcare-we
 FOUNDER_EMAIL        = os.environ.get("FOUNDER_EMAIL", "lareesa@neolab.care")
 GMAIL_USER           = os.environ.get("GMAIL_USER", "neolabcare@gmail.com")
 GMAIL_APP_PASSWORD   = os.environ.get("GMAIL_APP_PASSWORD", "")
+SITE_BASE_URL        = os.environ.get("SITE_BASE_URL", "https://neolabcare.com")
 SHOPIFY_STORE        = os.environ.get("SHOPIFY_STORE", "")        # e.g. neolab-care.myshopify.com
 SHOPIFY_ADMIN_TOKEN  = os.environ.get("SHOPIFY_ADMIN_TOKEN", "")  # shpat_... — set in Render dashboard
 SHOPIFY_WEBHOOK_SECRET = os.environ.get("SHOPIFY_WEBHOOK_SECRET", "")
@@ -168,7 +169,7 @@ def _send_email(subject: str, recipient_email: str, html_content: str) -> bool:
         print(f"[EMAIL] Connecting to smtp.gmail.com:587 for {recipient_email}...")
         
         server = smtplib.SMTP("smtp.gmail.com", 587, timeout=20)
-        server.set_debuglevel(1) # Enable verbose SMTP logging in Render console
+        server.set_debuglevel(0)
         server.starttls()
         server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
         server.sendmail(GMAIL_USER, recipients, msg.as_string())
@@ -294,22 +295,10 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_creator_stats(params.get("code", ""))
 
         elif path == "/test-email":
-            import urllib.request as _ur
-            payload = {"access_key": WEB3FORMS_KEY, "subject": "NeoLabCare test",
-                       "from_name": "NeoLabCare", "email": FOUNDER_EMAIL,
-                       "message": "Test from webhook server."}
-            _req = _ur.Request("https://api.web3forms.com/submit",
-                               data=urllib.parse.urlencode(payload).encode(), method="POST",
-                               headers={"Content-Type": "application/x-www-form-urlencoded",
-                                        "Origin": "https://neolab.care",
-                                        "Referer": "https://neolab.care/",
-                                        "User-Agent": "Mozilla/5.0"})
-            try:
-                with _ur.urlopen(_req, timeout=15) as _r:
-                    _resp = json.loads(_r.read())
-                self._json(200, {"email_success": _resp.get("success"), "w3f_response": _resp})
-            except Exception as _e:
-                self._json(200, {"email_success": False, "error": str(_e)})
+            ok = _send_email("NeoLabCare test email", FOUNDER_EMAIL,
+                             "<p>Test from webhook server. Gmail SMTP is working.</p>")
+            self._json(200, {"email_success": ok, "gmail_user_set": bool(GMAIL_USER),
+                             "gmail_pass_set": bool(GMAIL_APP_PASSWORD)})
 
         elif path == "/test-sheet":
             rows = _sheet_read(CREATORS_RANGE)
@@ -337,8 +326,7 @@ class Handler(BaseHTTPRequestHandler):
 
         if path == "/submit":
             sheet_ok = append_to_sheet(data)
-            w3f_ok   = forward_to_web3forms(data)
-            self._json(200, {"success": sheet_ok or w3f_ok, "sheet": sheet_ok, "email": w3f_ok})
+            self._json(200, {"success": sheet_ok, "sheet": sheet_ok})
 
         elif path == "/creator-application":
             self._handle_creator_application(data)
@@ -449,8 +437,8 @@ class Handler(BaseHTTPRequestHandler):
         _sheet_update(f"Creators!P{sheet_row}", [["Approved"]])
 
         ref_slug       = discount_code[:-2].lower()   # SARAH99 → sarah
-        referral_link  = f"https://neolab.care/?ref={ref_slug}"
-        dashboard_link = f"https://neolab.care/partner-dashboard.html?code={discount_code}"
+        referral_link  = f"{SITE_BASE_URL}/?ref={ref_slug}"
+        dashboard_link = f"{SITE_BASE_URL}/partner-dashboard.html?code={discount_code}"
 
         # ── Shopify discount code creation ────────────────────────────────────
         if SHOPIFY_ADMIN_TOKEN and SHOPIFY_STORE:
@@ -505,21 +493,7 @@ class Handler(BaseHTTPRequestHandler):
             print(f"[SHOPIFY] No token — create code '{discount_code}' manually in Shopify Admin "
                   f"(50% off all products, unlimited uses, no expiry)")
 
-        # Build email bodies — browser will fire these via Web3Forms (avoids server 403)
-        creator_msg = json.dumps(
-            f"Hi {name},\n\n"
-            f"You're in. Welcome to the NeoLabCare Creator Partner Program.\n\n"
-            f"Your creator code:  {discount_code}\n"
-            f"Your referral link: {referral_link}\n\n"
-            f"Share your link with your audience. When they use code {discount_code} "
-            f"at checkout, they save 50% on their first bottle. "
-            f"You earn 15% commission on every confirmed sale.\n\n"
-            f"Track your stats:\n{dashboard_link}\n\n"
-            f"Commission clears 7 days after the customer receives their order "
-            f"(no refund or dispute). Payouts sent monthly.\n\n"
-            f"Questions? Reply to this email.\n\n— NeoLabCare"
-        )
-          # Send Approval Email to Creator via Gmail (Server-side)
+        # Send Approval Email to Creator via Gmail
         creator_approved_html = _render_template(templates.CREATOR_APPROVED_HTML, {
             "discount_code": discount_code,
             "referral_link": referral_link,
@@ -650,8 +624,8 @@ class Handler(BaseHTTPRequestHandler):
             "found":               True,
             "name":                name,
             "code":                code,
-            "referral_link":       f"https://neolab.care/?ref={ref_slug}",
-            "dashboard_link":      f"https://neolab.care/partner-dashboard.html?code={code}",
+            "referral_link":       f"{SITE_BASE_URL}/?ref={ref_slug}",
+            "dashboard_link":      f"{SITE_BASE_URL}/partner-dashboard.html?code={code}",
             "status":              status,
             "total_orders":        len(orders),
             "total_revenue":       round(total_revenue, 2),

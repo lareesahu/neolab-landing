@@ -35,6 +35,12 @@ services:
     value: https://neolabcare-webhook.onrender.com
   - key: FOUNDER_EMAIL
     value: lareesa@neolab.care
+  - key: GMAIL_USER
+    sync: false   # Set in Render dashboard — Gmail address used for sending (e.g. neolabcare@gmail.com)
+  - key: GMAIL_APP_PASSWORD
+    sync: false   # Set in Render dashboard — 16-char Google App Password (NOT your Gmail password)
+  - key: SITE_BASE_URL
+    value: https://neolabcare.com
   - key: SHOPIFY_STORE
     sync: false   # Set when ready — e.g. neolab-care.myshopify.com
   - key: SHOPIFY_ADMIN_TOKEN

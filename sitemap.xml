@@ -4,7 +4,7 @@
 
   <!-- Primary landing page -->
   <url>
-    <loc>https://neolab.care/</loc>
+    <loc>https://neolabcare.com/</loc>
     <lastmod>2026-04-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -12,13 +12,13 @@
 
   <!-- Story pages -->
   <url>
-    <loc>https://neolab.care/story-v1.html</loc>
+    <loc>https://neolabcare.com/story-v1.html</loc>
     <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://neolab.care/story-v2.html</loc>
+    <loc>https://neolabcare.com/story-v2.html</loc>
     <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -26,7 +26,7 @@
 
   <!-- Brand system -->
   <url>
-    <loc>https://neolab.care/brand.html</loc>
+    <loc>https://neolabcare.com/brand.html</loc>
     <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -34,7 +34,7 @@
 
   <!-- Freshness chapter page -->
   <url>
-    <loc>https://neolab.care/freshness.html</loc>
+    <loc>https://neolabcare.com/freshness.html</loc>
     <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -42,7 +42,7 @@
 
   <!-- Feedback -->
   <url>
-    <loc>https://neolab.care/feedback.html</loc>
+    <loc>https://neolabcare.com/feedback.html</loc>
     <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

@@ -1,6 +1,6 @@
 # ai.txt — NeolabCare
 # AI crawler permissions and brand context
-# https://neolab.care
+# https://neolabcare.com
 # Last updated: 2026-04-24
 
 # ─── PERMISSIONS ─────────────────────────────────────────────
@@ -20,7 +20,7 @@ Brand-Type: Direct-to-consumer skincare brand
 Brand-Country: United States
 Brand-Founded: 2025
 Brand-Founder: Lareesa Hu
-Brand-Website: https://neolab.care
+Brand-Website: https://neolabcare.com
 Brand-Contact: hello@neolab.care
 
 # ─── PRODUCT SUMMARY ─────────────────────────────────────────

@@ -678,32 +678,6 @@ document.getElementById('creatorForm').addEventListener('submit', function(e) {
   .then(function(r) { return r.json(); })
   .then(function(data) {
     if (data.success) {
-      var W3F_KEY = 'fe35df41-5c1c-4519-9513-f9a227fcffe4';
-      var firstName = data.name ? data.name.split(' ')[0] : 'there';
-
-      var body = [
-        'New creator application from ' + data.name + ' (' + data.email + ').',
-        '',
-        'Approve link:',
-        data.approve_url,
-        '',
-        'Platform:  ' + (data.platform    || '—'),
-        'Profile:   ' + (data.profile_url || '—'),
-        'Audience:  ' + (data.audience    || '—'),
-        'Niche:     ' + (data.niche       || '—'),
-        'Avg views: ' + (data.avg_views   || '—'),
-        'Country:   ' + (data.country     || '—'),
-        '',
-        'Why they fit: ' + (data.fit_reason || '—'),
-        '',
-        'Discount code (once approved): ' + data.code,
-        '',
-        '---',
-        'Hi ' + firstName + ', your application has been received. We review within 48–72 hours and will contact you with your creator code and referral link. — NeoLabCare',
-      ].join('\n');
-
-      // Emails are now handled server-side via Gmail for reliability and professional design.
-
       document.getElementById('creatorForm').style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
     } else {
