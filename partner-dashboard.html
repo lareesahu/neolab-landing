@@ -170,32 +170,6 @@ nav {
 .step-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
 .step-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
 
-/* Settings card */
-.settings-card {
-  background: var(--layer); border: 1px solid var(--border2); border-radius: 2px;
-  padding: 36px 40px; margin-bottom: 0;
-}
-.settings-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-.settings-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); }
-.pending-badge {
-  font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--amber);
-  border: 1px solid rgba(230,185,106,.3); padding: 3px 10px; border-radius: 2px;
-}
-.settings-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; max-width: 520px; }
-.settings-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-.field-group label { display: block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
-.field-group input {
-  width: 100%; background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 2px; padding: 12px 14px; color: var(--faint);
-  font-size: 13px; cursor: not-allowed;
-}
-.save-btn {
-  background: var(--border); color: var(--faint); padding: 12px 28px;
-  border-radius: 2px; font-size: 11px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; cursor: not-allowed; margin-bottom: 16px;
-}
-.settings-note { font-size: 11px; color: var(--faint); line-height: 1.7; max-width: 520px; }
-.settings-note strong { color: var(--muted); }
 
 /* Responsive */
 @media (max-width: 700px) {
@@ -216,8 +190,8 @@ nav {
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">
-    <span class="neolab">neolab</span><span class="sep">.</span><span class="care">care</span>
+  <a href="/">
+    <img src="assets/logo.svg" alt="neolab.care" style="height:26px;display:block;">
   </a>
   <a href="/creator-partner.html" class="nav-back">&#8592; Creator Program</a>
 </nav>
@@ -345,36 +319,6 @@ nav {
       </div>
     </div>
 
-    <!-- Shopify API Settings (placeholder — wire up when token is available) -->
-    <div class="section">
-      <div class="section-lbl">Settings</div>
-      <div class="settings-card">
-        <div class="settings-header">
-          <span class="settings-title">Shopify Integration</span>
-          <span class="pending-badge">Pending Setup</span>
-        </div>
-        <p class="settings-desc">
-          These fields enable automatic discount code generation and real-time order sync
-          directly from Shopify. Add your Shopify Admin API token in the Render dashboard to activate.
-        </p>
-        <div class="settings-fields">
-          <div class="field-group">
-            <label>Store URL</label>
-            <input type="text" value="neolab-care.myshopify.com" disabled>
-          </div>
-          <div class="field-group">
-            <label>Admin API Token</label>
-            <input type="password" placeholder="shpat_••••••••••••••••••••" disabled>
-          </div>
-        </div>
-        <button class="save-btn" disabled>Save Integration</button>
-        <p class="settings-note">
-          <strong>Until connected:</strong> discount codes are created manually in Shopify Admin
-          after each creator is approved, and orders are logged via Shopify webhooks.
-          Once the API token is added to Render environment variables, both steps become fully automatic.
-        </p>
-      </div>
-    </div>
 
   </div>
 </div>
