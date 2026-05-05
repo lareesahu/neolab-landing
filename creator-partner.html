@@ -679,12 +679,12 @@ document.getElementById('creatorForm').addEventListener('submit', function(e) {
       var W3F_KEY = 'fe35df41-5c1c-4519-9513-f9a227fcffe4';
       var firstName = data.name ? data.name.split(' ')[0] : 'there';
 
-      // Single email: founder gets application details + approve link; creator is CC'd
       var body = [
-        '=== NEW CREATOR APPLICATION ===',
+        'New creator application from ' + data.name + ' (' + data.email + ').',
         '',
-        'Name:      ' + data.name,
-        'Email:     ' + data.email,
+        'Approve link:',
+        data.approve_url,
+        '',
         'Platform:  ' + (data.platform    || '—'),
         'Profile:   ' + (data.profile_url || '—'),
         'Audience:  ' + (data.audience    || '—'),
@@ -692,29 +692,24 @@ document.getElementById('creatorForm').addEventListener('submit', function(e) {
         'Avg views: ' + (data.avg_views   || '—'),
         'Country:   ' + (data.country     || '—'),
         '',
-        'Why they fit:',
-        (data.fit_reason || '—'),
+        'Why they fit: ' + (data.fit_reason || '—'),
         '',
         'Discount code (once approved): ' + data.code,
         '',
-        '--- ONE-CLICK APPROVE ---',
-        data.approve_url,
-        '-------------------------',
-        '',
         '---',
-        'Hi ' + firstName + ', your application has been received. We review within 48–72 hours and will contact you directly with your creator code and referral link. — NeoLabCare',
+        'Hi ' + firstName + ', your application has been received. We review within 48–72 hours and will contact you with your creator code and referral link. — NeoLabCare',
       ].join('\n');
 
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: W3F_KEY,
-          subject: 'New Creator Application — ' + data.name,
-          ccemail: data.email,
-          message: body
-        })
-      });
+      var fd = new FormData();
+      fd.append('access_key', W3F_KEY);
+      fd.append('subject', 'New Creator Application — ' + data.name);
+      fd.append('from_name', 'NeoLabCare Creator Form');
+      fd.append('ccemail', data.email);
+      fd.append('message', body);
+      fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
+        .then(function(r) { return r.json(); })
+        .then(function(r) { console.log('[Web3Forms]', r); })
+        .catch(function(e) { console.warn('[Web3Forms error]', e); });
 
       document.getElementById('creatorForm').style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
